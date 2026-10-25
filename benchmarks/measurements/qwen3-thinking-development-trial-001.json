@@ -69,7 +69,13 @@
     "identical_raw_model_output": false,
     "raw_candidate_sha256_control": "1d2d275951d73ba8cf77517e217c1769f494c580f9046092f37797ba06d6d1e4",
     "raw_candidate_sha256_development": "854fee7ff88648794d1a830c60a6745e20a05dafd680f71ce8db6a49377918f4",
-    "hash_source": "User-provided Termux sha256sum of two local thinking candidate text files"
+    "hash_source": "User-provided Termux sha256sum of two local thinking candidate text files",
+    "line_level_diff_observed": {
+      "method": "User ran difflib.unified_diff on splitlines() of each JSON-parsed feed.mjs/feed.css field",
+      "feed_mjs": "no line differences",
+      "feed_css": "no line differences",
+      "limitation": "splitlines() suppresses line-ending differences; byte-for-byte string equality and JSON object equality have not yet been checked"
+    }
   },
   "limitations": [
     "One bounded Thinking trial per variant; a repeatable skills effect has not been measured.",
@@ -77,6 +83,7 @@
     "Neither bounded Thinking candidate has undergone Node.js runtime tests.",
     "The user's local server reasoning-budget setting was reported as 128; actual per-request reasoning tokens were not reported.",
     "DDS system instructions increase prompt tokens, so unadjusted wall-time ratios are not pure runtime model speed ratios.",
-    "Different SHA-256 proves raw candidate file difference but not which requirement improved; user has not shared full files."
+    "Different SHA-256 proves raw candidate file difference but not which requirement improved; user has not shared full files.",
+    "Later user-run difflib on JSON-parsed candidate files found no line-level differences in either feed.mjs or feed.css; distinct raw JSON SHA-256 alone does not indicate a code change."
   ]
 }
