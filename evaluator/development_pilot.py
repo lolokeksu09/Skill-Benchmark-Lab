@@ -99,13 +99,17 @@ def run_once(messages, archive_sha, skills, output_dir, output_file, trial_id, m
             handle.write(answer)
         good, candidate = parse_candidate(answer)
         usage = result.get("usage") or {}
+        try:
+            recorded_path = str(candidate_file.relative_to(ROOT))
+        except ValueError:
+            recorded_path = str(candidate_file)
         record.update(
             status="candidate_saved" if good else "invalid_candidate",
             model=result.get("model"), total_tokens=usage.get("total_tokens"),
             prompt_tokens=usage.get("prompt_tokens"),
             completion_tokens=usage.get("completion_tokens"),
             finish_reason=result["choices"][0].get("finish_reason"),
-            candidate_path=str(candidate_file.relative_to(ROOT)),
+            candidate_path=recorded_path,
             candidate_valid_json=good,
             static_preflight=check_candidate(candidate) if good else None,
             error=None if good else str(candidate),
