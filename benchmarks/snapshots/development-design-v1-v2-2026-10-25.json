@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-25",
+  "scope": "Local uploaded ZIP intake; packages NOT redistributed in public repository",
+  "baseline": {
+    "role": "development-v1",
+    "filename": "plugin.zip",
+    "manifest_name": "development-design-skills",
+    "manifest_version": "1.6.0",
+    "sha256": "8c2bdf43c6180149b14d128a4d878eab8c9c79556d1c2af17ad33de9737d7953",
+    "zip_size_bytes": 5651368,
+    "zip_file_count": 1108,
+    "skill_count": 115,
+    "active_skill_md_bytes": 901206
+  },
+  "candidate": {
+    "role": "development-v2",
+    "filename": "Development-Design-Skills-2.0.1.zip",
+    "manifest_name": "development-design-skills-v2",
+    "manifest_version": "2.0.1",
+    "sha256": "aa1e00e755e070898d9ab252c306ff31df7782b0d6c8f8a60b9e3cc65e2aff1e",
+    "zip_size_bytes": 6100079,
+    "zip_file_count": 1200,
+    "skill_count": 116,
+    "active_skill_md_bytes": 614884
+  },
+  "delta": {
+    "existing_file_count_preserved_byte_identical": 1047,
+    "existing_file_count_changed": 61,
+    "added_files": 92,
+    "removed_files": 0,
+    "changed_skill_md": 59,
+    "changed_skill_md_with_exact_v1_reference": 59,
+    "active_skill_md_bytes_reduction_percent": 31.77
+  },
+  "reproduced_checks": {
+    "v2_packaged_router_regression": {
+      "passed": 56,
+      "total": 56,
+      "source": "docs/evaluation/{development,holdout,holdout-final}.json",
+      "limitations": "In-sample and previously examined test sets; not independent unseen accuracy"
+    }
+  },
+  "limitations": [
+    "Byte count is not model-token measurement",
+    "v1 has no comparable Python router; do not report invented v1 router performance",
+    "ZIP integrity and static structure do not confirm installation or production effectiveness",
+    "Uploaded binary archives remain outside this public repository"
+  ]
+}
