@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-25",
+  "artifact": {
+    "archive_filename": "Development-Design-Skills-2.0.5-Full-Patched.zip",
+    "sha256": "c6fe56e96644ae30b8ba07c35cd6a52a5a7ad34920558923ea1c947023db3439",
+    "size_bytes": 6117907,
+    "zip_entries": 1215,
+    "plugin_version": "2.0.5",
+    "skill_files": 116
+  },
+  "lineage": {
+    "base_archive": "Development-Design-Skills-2.0.5.zip",
+    "base_sha256": "e674343b54567eea94b90871089a6d77c07021ef7063d756f84ad5126d867567",
+    "audit_patch_archive": "Development-Design-Skills-2.0.5_Security-Audit-Patch.zip",
+    "audit_patch_sha256": "f4d704d4db30626a45c5e68d9b2a532963b54fd0b73c4ba0dafd2894c96d7fad",
+    "api_patch_archive": "Development-Design-Skills-2.0.5_API-Object-Access-Patch.zip",
+    "api_patch_sha256": "9ef028ed084f116255853012027ec05297d04dbfb55438cab76e8c5024cc06b1"
+  },
+  "changes_from_base": {
+    "modified": [
+      "development-design-skills/skills/skill-router/scripts/route.py",
+      "development-design-skills/skills/skill-router/scripts/test_router_context.py"
+    ],
+    "added": [
+      "development-design-skills/docs/evaluation/context-cases-2.0.5-security-audit-hotfix.json",
+      "development-design-skills/docs/evaluation/context-cases-2.0.5-api-object-access-hotfix.json"
+    ],
+    "removed": [],
+    "unchanged_skill_files": 116
+  },
+  "locally_reproduced": {
+    "zip_crc_valid": true,
+    "extraction_success": true,
+    "router_test_command": "python3 skills/skill-router/scripts/test_router_context.py",
+    "router_tests_passed": 153,
+    "router_tests_total": 153,
+    "redirected_test_output_to_file": true
+  },
+  "limitations": [
+    "ZIP is a conversation artifact and is intentionally not committed to public GitHub.",
+    "CI checks consistency of recorded metadata; it cannot re-execute the 153 cases without the private external ZIP.",
+    "No paid model runs, generated-code evaluation, model-token usage or relative model quality measurement has been performed.",
+    "The 153 cases are scripted router assertions and must not be described as 153 autonomous software-development trials."
+  ]
+}
