@@ -42,7 +42,12 @@ function drawPost(post) {
     if (response.ok) {
       const body = await response.json();
       post.version = body.version;
-    } else throw new Error('save failed');
+    } else {
+      post.saved = previous;
+      button.setAttribute('aria-pressed', String(previous));
+      button.setAttribute('aria-label', previous ? 'Remove saved post' : 'Save post');
+      throw new Error('save failed');
+    }
     } catch {
       post.saved = previous;
       button.setAttribute('aria-pressed', String(previous));
