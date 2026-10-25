@@ -115,8 +115,12 @@ await observe('rapid_double_load_more', async () => {
   if (c.more.hidden) throw new Error('Load more not visible');
   c.more.click();
   c.more.click();
-  return { additionalFeedRequests: c.queue.filter(r => r.url.startsWith('/api/feed')).length - 1,
-    expectation: 'one request while first Load more is pending' };
+  const subsequent = c.queue.filter(r => r.url.startsWith('/api/feed')).slice(1);
+  for (const request of subsequent) request.done(ok({ items: [{ ...post, id: 'p02' }], nextCursor: null }));
+  await c.flush();
+  return { additionalFeedRequests: subsequent.length,
+    renderedP02Cards: c.board.children.filter(card => card.dataset.id === 'p02').length,
+    expectation: 'one request and one rendered p02 card after competing Load more clicks' };
 });
 await observe('malformed_200_bookmark', async () => {
   const c = await mockClient();
