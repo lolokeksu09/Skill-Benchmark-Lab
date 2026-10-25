@@ -9,3 +9,5 @@ Avoid providing this branch or its results to Codex tasks. Each new V4 trial mus
 V4 test head used for this repeat audit: `98245ac84bf3ff2f1a432f00e2e08097d4587b59`. The workflow checks out the live V4 baseline by branch; recording the SHA makes the rerun traceable.
 
 Reference smoke rerun after correcting Alice's expected complete page count to 31. Frozen V4 baseline head at this checkpoint: `056eb40042403d6de82eee92810b764ef8e72457`.
+
+Final known-good reference check: V4 head `efca49e75711b40a9fcdb2549434d810c8d35fd0` has both total and unique visible-card assertions set to 31.
