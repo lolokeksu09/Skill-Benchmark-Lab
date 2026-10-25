@@ -1,38 +1,38 @@
 {
   "description": "V5 independent observations; raw values, not scores",
-  "run_url": "https://github.com/lolokeksu09/Skill-Benchmark-Lab/actions/runs/40244462068",
-  "run_id": 40244462068,
-  "probe_revision": "bdcf0365258095bd0eb4e7c4fc02ae697d445a00",
+  "run_url": "https://github.com/lolokeksu09/Skill-Benchmark-Lab/actions/runs/40244706188",
+  "run_id": 40244706188,
+  "probe_revision": "e8125411ba9c72e22e55e112554fdb952cec82cd",
   "base_sha": "efca49e75711b40a9fcdb2549434d810c8d35fd0",
   "aliases": {
     "A": {
       "sha": "4fbceb661fc56828eabf35650f0f96372572f48c",
       "pr": 21,
-      "job_id": 121322983520,
+      "job_id": 121323705086,
       "node": "v22.23.3"
     },
     "B": {
       "sha": "9239a91ccb1776a21834ba6167c9672b838bac68",
       "pr": 22,
-      "job_id": 121322983596,
+      "job_id": 121323705048,
       "node": "v22.23.3"
     },
     "C": {
       "sha": "f5b1906825982c6e11bb308eb14c04ff2dc3c357",
       "pr": 23,
-      "job_id": 121322983531,
+      "job_id": 121323705142,
       "node": "v22.23.3"
     },
     "D": {
       "sha": "54fddf9bd264286b785c199cf0144c389b108841",
       "pr": 24,
-      "job_id": 121322983570,
+      "job_id": 121323704931,
       "node": "v22.23.3"
     },
     "E": {
       "sha": "619af95a236fe5d180ba5bdfbc5485a200c2140c",
       "pr": 25,
-      "job_id": 121322983403,
+      "job_id": 121323705101,
       "node": "v22.23.3"
     }
   },
@@ -66,7 +66,8 @@
       },
       "rapid_double_load_more": {
         "additionalFeedRequests": 2,
-        "expectation": "one request while first Load more is pending"
+        "renderedP02Cards": 2,
+        "expectation": "one request and one rendered p02 card after competing Load more clicks"
       },
       "malformed_200_bookmark": {
         "ariaAfterMalformedResponse": "invalid",
@@ -110,7 +111,8 @@
       },
       "rapid_double_load_more": {
         "additionalFeedRequests": 1,
-        "expectation": "one request while first Load more is pending"
+        "renderedP02Cards": 1,
+        "expectation": "one request and one rendered p02 card after competing Load more clicks"
       },
       "malformed_200_bookmark": {
         "ariaAfterMalformedResponse": "false",
@@ -154,7 +156,8 @@
       },
       "rapid_double_load_more": {
         "additionalFeedRequests": 1,
-        "expectation": "one request while first Load more is pending"
+        "renderedP02Cards": 1,
+        "expectation": "one request and one rendered p02 card after competing Load more clicks"
       },
       "malformed_200_bookmark": {
         "ariaAfterMalformedResponse": "false",
@@ -198,7 +201,8 @@
       },
       "rapid_double_load_more": {
         "additionalFeedRequests": 1,
-        "expectation": "one request while first Load more is pending"
+        "renderedP02Cards": 1,
+        "expectation": "one request and one rendered p02 card after competing Load more clicks"
       },
       "malformed_200_bookmark": {
         "ariaAfterMalformedResponse": "true",
@@ -242,7 +246,8 @@
       },
       "rapid_double_load_more": {
         "additionalFeedRequests": 2,
-        "expectation": "one request while first Load more is pending"
+        "renderedP02Cards": 1,
+        "expectation": "one request and one rendered p02 card after competing Load more clicks"
       },
       "malformed_200_bookmark": {
         "ariaAfterMalformedResponse": "true",
