@@ -1,0 +1,40 @@
+name: Skill Benchmark V2 — frozen fixture
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify frozen task and test definitions
+        shell: bash
+        run: |
+          echo '73b63e4ba826d2990fd4183514ad2107503b65a87a4f41baa48991047f4d9c81  TASK.md' | sha256sum -c -
+          echo '16c059ce3646027efdfc8f3411a29fb195730d139d28681acc9f3f9ddb65d3bc  tests/board.test.mjs' | sha256sum -c -
+          echo '8fa5d6315ab8a68770f2f941c02c5f5e87a60ccd7958f25aaac786f54e52ed6f  package.json' | sha256sum -c -
+      - name: Verify baseline sensitivity or candidate correctness
+        shell: bash
+        env:
+          BENCH_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          if [[ "$BENCH_BRANCH" == 'bench/v2-strong-base' ]]; then
+            set +e
+            npm test > /tmp/bench-v2-baseline.log 2>&1
+            status=$?
+            set -e
+            if [[ "$status" == 0 ]]; then cat /tmp/bench-v2-baseline.log; echo 'Unexpected baseline pass'; exit 1; fi
+            grep -Eq '^# tests 8$' /tmp/bench-v2-baseline.log || { cat /tmp/bench-v2-baseline.log; exit 1; }
+            grep -Eq '^# pass 1$' /tmp/bench-v2-baseline.log || { cat /tmp/bench-v2-baseline.log; exit 1; }
+            grep -Eq '^# fail 7$' /tmp/bench-v2-baseline.log || { cat /tmp/bench-v2-baseline.log; exit 1; }
+            echo 'Baseline confirmed: 1 passed, 7 failed as seeded'
+          else
+            npm test
+          fi
