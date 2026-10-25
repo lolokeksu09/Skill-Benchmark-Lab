@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="demo-token" content="demo-alice-key">
+  <title>Community Board | Local benchmark</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">Community / Board</p>
+      <h1>Latest discussions</h1>
+      <p>Browse conversations and save what matters.</p>
+    </header>
+    <div class="toolbar">
+      <label for="search">Search discussions</label>
+      <input id="search" type="search" autocomplete="off" placeholder="Search posts">
+    </div>
+    <p id="status" role="status" aria-live="polite">Loading discussions…</p>
+    <section id="board" class="board" aria-label="Community discussions"></section>
+    <button id="more" type="button" hidden>Load more</button>
+  </main>
+</body>
+</html>

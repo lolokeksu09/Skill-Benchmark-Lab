@@ -1,0 +1,11 @@
+# Skill Benchmark Lab — hard fixture V3, frozen protocol
+
+- One **strong model** for all variants: **GPT-6.1 Sol**, reasoning **Medium** in Codex Cloud, no paid API. Lock configuration via the actual UI for each attempt; Codex's generated summary alone does not independently prove model identity.
+- Exactly identical frozen start commit for all candidates (`bench/v3-hard-base`), fresh independent session/working area, identical access to tools and elapsed-time budget.
+- Five intended arms: `control`, `p2p-original`, `p2p-improved`, `development` (DDS 2.0.5 Full Patched), `combined` (P2P Improved + DDS). Ideally 3 independent attempts/arm. Do NOT infer skill use from the arm label: log specific SKILL.md files actually read, archive SHA, and how they were mounted.
+- **No paid API** and no cross-arm access to previous patches, solutions or pull requests. No merging trial PRs.
+- Permitted edits: `src/engine.mjs`, `src/server.mjs`, `web/app.mjs`, `web/styles.css`; all other repo content is frozen. The CI verifies fingerprints of task/tests/package/docs/static HTML. Report violations as invalid attempts, not high scores.
+- Metrics: number of passing Node tests (26), number of passing Chromium tests (7), CI execution status, security authorization invariants, duplicate/cursor handling, keyboard and phone viewport, mutation scope, diff size, and blinded maintainability/code-quality review. No invented token/time statistics.
+- **Scoring:** Node 26 pts + Chromium 7 pts = 33 visible test points; security failures flagged as material independent of totals. This is an **open-test benchmark**, not a hidden holdout; a passing suite is not proof of complete security or production readiness. Audit further edge cases separately after freezing.
+- The original baseline intentionally has bugs. A *local, unpublished reference-only* API repair passed 26/26 prior to publication. Browser testing against the reference was unavailable locally due to Chromium administrator networking restrictions; only claim browser validation after GitHub CI runs successfully in the correct environment.
+- Keep V2 Control 001 and DDS 001 as separate archived infrastructure pilot; never modify V2 frozen baseline to inflate v3 comparison.
