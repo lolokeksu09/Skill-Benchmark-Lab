@@ -55,7 +55,12 @@ function drawPost(post) {
       post.saved = previous;
       button.setAttribute('aria-pressed', String(previous));
       button.setAttribute('aria-label', previous ? 'Remove saved post' : 'Save post');
-      status.textContent = 'Could not save post';
+      setTimeout(() => {
+        post.saved = previous;
+        button.setAttribute('aria-pressed', String(previous));
+        button.setAttribute('aria-label', previous ? 'Remove saved post' : 'Save post');
+        status.textContent = 'Could not save post';
+      }, 0);
     } finally { button.disabled = false; }
   });
   card.append(button);
