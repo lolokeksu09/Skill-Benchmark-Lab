@@ -1,0 +1,366 @@
+[
+  {
+    "id": "en-short-without",
+    "prompt": "Build an Android Compose screen without React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en-rather-than",
+    "prompt": "Use Kotlin Compose rather than React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "ru-short-without",
+    "prompt": "Сделай Android Compose экран без React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "ru-without-use",
+    "prompt": "Создай Compose экран без использования React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en-is-not-allowed",
+    "prompt": "React Native is not allowed. Build an Android Compose screen.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en-stop-using",
+    "prompt": "Stop using React Native and build a Kotlin Compose UI.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en-no-rn",
+    "prompt": "Build Compose Android UI, no React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en-without-two",
+    "prompt": "Build a Compose Android screen without React Native or Expo.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en-inverse",
+    "prompt": "Implement React Native UI without using Compose.",
+    "required": [
+      "vercel-react-native-skills"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [
+      "react-native"
+    ],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "en-but-construct",
+    "prompt": "Do not use React Native but build an Android Compose screen.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en-not-abandon",
+    "prompt": "We are not abandoning React Native. Fix FlatList crashes.",
+    "required": [
+      "vercel-react-native-skills"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [
+      "react-native"
+    ],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "ru-not-abandon",
+    "prompt": "Мы не отказываемся от React Native. Исправь FlatList.",
+    "required": [
+      "vercel-react-native-skills"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [
+      "react-native"
+    ],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "en-rn-broken",
+    "prompt": "React Native is broken. Fix FlatList scrolling.",
+    "required": [
+      "vercel-react-native-skills"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [
+      "react-native"
+    ],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "ru-rn-broken",
+    "prompt": "React Native не работает: исправь FlatList.",
+    "required": [
+      "vercel-react-native-skills"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [
+      "react-native"
+    ],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "en-dual-active",
+    "prompt": "Improve the React Native FlatList and the Compose screen in different modules.",
+    "required": [
+      "vercel-react-native-skills",
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [],
+    "expected_stack": [
+      "react-native",
+      "compose"
+    ],
+    "forbidden_stack": []
+  },
+  {
+    "id": "en-positive-unless",
+    "prompt": "Use React Native instead of Compose for this feature.",
+    "required": [
+      "vercel-react-native-skills"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [
+      "react-native"
+    ],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "en-exclude-no-react",
+    "prompt": "Create an HTML CSS web page without React Native.",
+    "required": [],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "web"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "ru-no-rn-allowed",
+    "prompt": "React Native запрещён, теперь нужен экран Compose для Android.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en-no-longer",
+    "prompt": "React Native is no longer needed. Build Compose Android UI.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "ru-instead",
+    "prompt": "Нужен Compose Android экран вместо React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en-without-current-compat",
+    "prompt": "Build an Android Compose page without using React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en-not-use-and-build",
+    "prompt": "Do not use React Native and build an Android Compose screen.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "ru-no-rn-and-create",
+    "prompt": "Не используй React Native и сделай экран на Kotlin Compose.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  }
+]
