@@ -1,0 +1,61 @@
+name: Skill Benchmark V3 — API and browser
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Enforce frozen fixture fingerprints
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'f50bd4cf20dc1233f51982adf17e77ab458097a1892f57e24108f2f899ab83e4  TASK.md' | sha256sum -c -
+          echo '581af010c1edd2bdd79d2f3e25dd579c0cd06baad1398d9a902e9e3aa24ddf77  package.json' | sha256sum -c -
+          echo 'a71b509bc837f6916e07e2bd34b9429fde86a429eabd20633c06182ac8a175d6  tests/api.test.mjs' | sha256sum -c -
+          echo '86ce69cb2fde727512a1f26ff552213c250dd1a7ea2cc4e96edcbbbb97d5171d  tests/browser_board.py' | sha256sum -c -
+          echo 'f7c296e247bd79e1286fc749d44adb1b1fabadc93fe1c473d9c573eb669f6ac1  web/index.html' | sha256sum -c -
+          echo '4295137ab4552d0edb5357e38abce64fc3fb02b3f6ae38f6c64e9f7b0e701dd8  docs/PROTOCOL.md' | sha256sum -c -
+      - name: Set up Chromium E2E
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Run API and browser checks
+        shell: bash
+        env:
+          BENCH_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          set -uo pipefail
+          if [[ "$BENCH_BRANCH" == 'bench/v3-hard-base' ]]; then
+            echo 'Running deliberately broken BASELINE (Node expected: 26 tests, 12 pass, 14 fail)'
+            npm test > /tmp/v3-api.txt 2>&1
+            node_result=$?
+            cat /tmp/v3-api.txt
+            if [[ $node_result -eq 0 ]] || ! grep -q '^# tests 26$' /tmp/v3-api.txt || ! grep -q '^# pass 12$' /tmp/v3-api.txt || ! grep -q '^# fail 14$' /tmp/v3-api.txt; then
+              echo 'Unexpected V3 baseline: possible fixture/test regression'
+              exit 1
+            fi
+            echo 'BASELINE API SENSITIVITY VERIFIED'
+            npm run test:browser > /tmp/v3-browser.txt 2>&1
+            browser_result=$?
+            cat /tmp/v3-browser.txt
+            if [[ $browser_result -eq 0 ]] || ! grep -q 'Ran 7 tests' /tmp/v3-browser.txt || grep -q 'ERR_BLOCKED_BY_ADMINISTRATOR' /tmp/v3-browser.txt; then
+              echo 'Browser baseline did not prove useful failure detection'
+              exit 1
+            fi
+            echo 'BASELINE BROWSER SENSITIVITY VERIFIED (expected failures detected)'
+          else
+            npm test && npm run test:browser
+          fi

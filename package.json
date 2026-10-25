@@ -1,0 +1,12 @@
+{
+  "name": "skill-benchmark-lab-v3-community-feed",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "python -m unittest discover -s tests -p 'browser_*.py' -v"
+  }
+}

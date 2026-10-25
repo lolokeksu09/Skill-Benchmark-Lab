@@ -1,11 +1,24 @@
-# Skill Benchmark Lab
+# Skill Benchmark Lab — V3 hard coding fixture
 
-An isolated, reproducible workspace for comparing prompt-design and engineering skill workflows.
+A real Node HTTP server, shared state, a browser-facing client, 26 API tests and 7 Chromium E2E tests. This branch intentionally contains security, state-concurrency, pagination, and UX defects. It is a benchmark fixture, **not deployable production software**. Never use the `demo-*` tokens for real authentication.
 
-**Planned variants:** no-skill control, P2P Original, P2P Improved, Development & Design Skills, and combined P2P + Development.
+## Run
 
-**Current status:** initial setup. The benchmark harness is being prepared separately; no AI runs or performance claims are available yet.
+Node.js >=22, no npm dependencies:
 
-**Safety:** public repository. No credentials, private project code, personal data or unreviewed third-party distributions will be committed. AI execution and its potential costs require separate opt-in.
+```sh
+npm test
+npm start
+```
 
-See the proposed v1 infrastructure in the setup pull request. NOX and WrCommunity remain unchanged.
+Browser E2E (Python 3.11+ and Chromium):
+
+```sh
+python -m pip install playwright==1.56.0
+python -m playwright install chromium
+npm run test:browser
+```
+
+If Chromium is installed at a custom path, set `CHROME_BIN` before the browser command. The GitHub Actions workflow runs both suites. The baseline intentionally fails; see the workflow for how baseline failures are distinguished from candidate failures.
+
+**Main task:** [`TASK.md`](TASK.md). **Protocol:** [`docs/PROTOCOL.md`](docs/PROTOCOL.md).
