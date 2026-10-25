@@ -1,0 +1,49 @@
+name: V5 independent candidate probes
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "audit/v5/**"
+      - ".github/workflows/v5-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent:
+    name: Candidate ${{ matrix.alias }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { alias: A, sha: "4fbceb661fc56828eabf35650f0f96372572f48c" }
+          - { alias: B, sha: "9239a91ccb1776a21834ba6167c9672b838bac68" }
+          - { alias: C, sha: "f5b1906825982c6e11bb308eb14c04ff2dc3c357" }
+          - { alias: D, sha: "54fddf9bd264286b785c199cf0144c389b108841" }
+          - { alias: E, sha: "619af95a236fe5d180ba5bdfbc5485a200c2140c" }
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.sha }}
+          path: candidate
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check immutable candidate SHA and run targeted observations
+        env:
+          V5_ALIAS: ${{ matrix.alias }}
+          V5_SHA: ${{ matrix.sha }}
+        run: node audit/v5/probes.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v5-observations-${{ matrix.alias }}
+          path: audit/v5/results/${{ matrix.alias }}.json
+          if-no-files-found: ignore
