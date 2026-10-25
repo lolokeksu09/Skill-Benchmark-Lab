@@ -73,6 +73,8 @@ def run_once(root, output_dir, results_path, base_url, max_tokens, timeout, run_
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     raw_path = output_dir / (run_id + ".txt")
+    if raw_path.exists():
+        raise FileExistsError("candidate already exists, refusing to overwrite: " + str(raw_path))
     try:
         data, output = request_completion(base_url, prompt, max_tokens, timeout)
         raw_path.write_text(output, encoding="utf-8")
@@ -106,15 +108,23 @@ def main():
     parser.add_argument("--max-tokens", type=int, default=400)
     parser.add_argument("--timeout", type=int, default=600)
     parser.add_argument("--repeats", type=int, default=1)
+    parser.add_argument("--start-index", type=int, default=1,
+                        help="First trial index, e.g. 2 to follow an existing trial-001")
     parser.add_argument("--output", default="results/raw/local-qwen-web-pilot.jsonl")
     args = parser.parse_args()
     if not 1 <= args.repeats <= 3 or not 16 <= args.max_tokens <= 1024:
         parser.error("--repeats must be 1-3, --max-tokens must be 16-1024")
+    if not 1 <= args.start_index <= 1000 or args.start_index + args.repeats > 1001:
+        parser.error("--start-index must be 1-1000 and all trial IDs must fit 1-1000")
     output_file = ROOT / args.output
     if output_file.exists():
         parser.error("output exists, will not overwrite: " + str(output_file))
     run_dir = ROOT / "results/raw/local-qwen-web-candidates"
-    for number in range(1, args.repeats + 1):
+    trial_ids = ["trial-%03d" % i for i in range(args.start_index, args.start_index + args.repeats)]
+    collisions = [name for name in trial_ids if (run_dir / (name + ".txt")).exists()]
+    if collisions:
+        parser.error("candidate outputs already exist: " + ", ".join(collisions))
+    for number in range(args.start_index, args.start_index + args.repeats):
         rec = run_once(ROOT, run_dir, output_file, args.base_url,
                        args.max_tokens, args.timeout, "trial-%03d" % number)
         print(json.dumps({key: rec.get(key) for key in

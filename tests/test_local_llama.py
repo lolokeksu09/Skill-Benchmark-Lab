@@ -18,6 +18,17 @@ class LocalLLMTests(unittest.TestCase):
     def test_nonlocal_endpoint_rejected_before_network(self):
         with self.assertRaisesRegex(ValueError, "Only a local"):
             request_completion("https://example.com", "hello", 16, 2)
+    def test_existing_candidate_wont_be_overwritten(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            candidate_dir = Path(tmp) / "candidates"
+            candidate_dir.mkdir()
+            old_candidate = candidate_dir / "trial-001.txt"
+            old_candidate.write_text("KEEP THIS CONTENT", encoding="utf-8")
+            with self.assertRaises(FileExistsError):
+                run_once(ROOT, candidate_dir, Path(tmp) / "measurements.jsonl",
+                         "http://127.0.0.1:8080", 100, 5, "trial-001")
+            self.assertEqual(old_candidate.read_text(encoding="utf-8"), "KEEP THIS CONTENT")
+            self.assertFalse((Path(tmp) / "measurements.jsonl").exists())
     def test_records_real_usage_and_candidate_without_executing(self):
         with tempfile.TemporaryDirectory() as tmp:
             previous = mod.request_completion
