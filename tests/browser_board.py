@@ -20,40 +20,38 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 
 class BrowserBoardTests(unittest.IsolatedAsyncioTestCase):
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         with socket.socket() as sock:
             sock.bind(("127.0.0.1", 0))
-            cls.port = sock.getsockname()[1]
-        cls.base = f"http://127.0.0.1:{cls.port}"
-        cls.proc = subprocess.Popen(
+            self.port = sock.getsockname()[1]
+        self.base = f"http://127.0.0.1:{self.port}"
+        self.proc = subprocess.Popen(
             ["node", "src/server.mjs"], cwd=ROOT,
-            env={**os.environ, "PORT": str(cls.port)},
+            env={**os.environ, "PORT": str(self.port)},
             stdout=subprocess.DEVNULL, stderr=subprocess.PIPE,
         )
         import urllib.request
         deadline = time.monotonic() + 10
         while time.monotonic() < deadline:
-            if cls.proc.poll() is not None:
+            if self.proc.poll() is not None:
                 raise RuntimeError("Benchmark Node server exited during setup")
             try:
-                with urllib.request.urlopen(cls.base, timeout=.25) as resp:
+                with urllib.request.urlopen(self.base, timeout=.25) as resp:
                     if resp.status == 200:
                         return
             except Exception:
                 time.sleep(.1)
         raise RuntimeError("Timed out starting Node fixture server")
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.proc.terminate()
+    def tearDown(self):
+        self.proc.terminate()
         try:
-            cls.proc.wait(timeout=5)
+            self.proc.wait(timeout=5)
         except subprocess.TimeoutExpired:
-            cls.proc.kill()
-            cls.proc.wait()
-        if cls.proc.stderr:
-            cls.proc.stderr.close()
+            self.proc.kill()
+            self.proc.wait()
+        if self.proc.stderr:
+            self.proc.stderr.close()
 
     async def asyncSetUp(self):
         self.play = await async_playwright().start()
@@ -132,6 +130,78 @@ class BrowserBoardTests(unittest.IsolatedAsyncioTestCase):
         await asyncio.sleep(1.0)
         ids = await self.page.locator(".card").evaluate_all("els => els.map(e => e.dataset.id)")
         self.assertEqual(ids, ["p-xss"])
+
+    async def test_failed_unsave_restores_previous_saved_state(self):
+        """Failed un-save must preserve previously saved=true; each test has a fresh server."""
+        await self.open_board()
+        button = self.page.locator(".card .bookmark").first
+        self.assertEqual(await button.get_attribute("aria-pressed"), "false")
+        await button.click()
+        await self.page.wait_for_function(
+            "document.querySelector('.bookmark').getAttribute('aria-pressed') === 'true' "
+            "&& !document.querySelector('.bookmark').disabled"
+        )
+        await self.page.route("**/api/bookmarks/**", lambda route: route.fulfill(
+            status=412, content_type="application/json", body='{"error":"stale version"}'
+        ))
+        await button.click()
+        await self.page.get_by_role("status").filter(has_text="Could not save").wait_for(timeout=5000)
+        self.assertEqual(await button.get_attribute("aria-pressed"), "true")
+        self.assertEqual(await button.get_attribute("aria-label"), "Remove saved post")
+
+    async def test_keyboard_enter_and_space_activate_bookmark(self):
+        await self.open_board()
+        button = self.page.locator(".card .bookmark").first
+        await button.focus()
+        await self.page.keyboard.press("Enter")
+        await self.page.wait_for_function(
+            "document.querySelector('.bookmark').getAttribute('aria-pressed') === 'true' "
+            "&& !document.querySelector('.bookmark').disabled"
+        )
+        # A temporarily disabled button can lose keyboard focus in Chromium.
+        # Explicitly refocus before asserting independent Space activation.
+        await button.focus()
+        await self.page.keyboard.press("Space")
+        await self.page.wait_for_function(
+            "document.querySelector('.bookmark').getAttribute('aria-pressed') === 'false' "
+            "&& !document.querySelector('.bookmark').disabled"
+        )
+        self.assertEqual(await button.get_attribute("aria-label"), "Save post")
+
+    async def test_loading_all_pages_does_not_duplicate_cards(self):
+        await self.open_board()
+        previous = await self.page.locator(".card").count()
+        self.assertEqual(previous, 8)
+        load_button = self.page.get_by_role("button", name="Load more")
+        for _ in range(10):
+            if await load_button.is_hidden():
+                break
+            await load_button.click()
+            await self.page.wait_for_function(
+                "(n) => document.querySelectorAll('.card').length > n", arg=previous, timeout=5000
+            )
+            current = await self.page.locator(".card").count()
+            self.assertGreater(current, previous)
+            await self.page.get_by_role("status").filter(
+                has_text=f"{current} discussions"
+            ).wait_for(timeout=5000)
+            previous = current
+        ids = await self.page.locator(".card").evaluate_all("els => els.map(e => e.dataset.id)")
+        # Alice owns every tenth (private) post, plus sees the public XSS fixture.
+        # Exactly 31 records are visible, not 30.
+        self.assertEqual(len(ids), 31)
+        self.assertEqual(len(set(ids)), 31)
+        self.assertTrue(await load_button.is_hidden())
+
+    async def test_failed_search_keeps_previous_cards_and_announces_error(self):
+        await self.open_board()
+        self.assertEqual(await self.page.locator(".card").count(), 8)
+        await self.page.route("**/api/feed?**", lambda route: route.fulfill(
+            status=500, content_type="application/json", body='{"error":"temporary issue"}'
+        ))
+        await self.page.get_by_role("searchbox", name="Search discussions").fill("danger")
+        await self.page.get_by_role("status").filter(has_text="Could not load").wait_for(timeout=5000)
+        self.assertEqual(await self.page.locator(".card").count(), 8)
 
     async def test_keyboard_focus_on_bookmark_is_visible(self):
         await self.open_board()

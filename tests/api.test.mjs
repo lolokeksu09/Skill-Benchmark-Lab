@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { spawn } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { createEngine, seedPosts } from '../src/engine.mjs';
 import { startServer } from '../src/server.mjs';
@@ -229,4 +230,137 @@ test('Seeded fixture includes a malicious title for browser XSS verification', (
   const post = posts.find(x => x.id === 'p-xss');
   assert.match(post.title, /<img.*onerror=/);
   assert.match(post.summary, /<svg.*onload=/);
+});
+
+
+// V4 regressions: each withApi call creates an independent HTTP server.
+test('All keyset pages enumerate the full authorized feed without overlaps or gaps', async () => {
+  await withApi(async call => {
+    const expected = seedPosts().filter(p => p.visibility === 'public' || p.owner === 'alice');
+    let cursor = null;
+    const items = [];
+    for (let iteration = 0; iteration < 20; iteration++) {
+      const path = '/api/feed?limit=3' + (cursor ? '&cursor=' + encodeURIComponent(cursor) : '');
+      const r = await call(path);
+      assert.equal(r.status, 200);
+      items.push(...r.body.items);
+      cursor = r.body.nextCursor;
+      if (cursor === null) break;
+      assert.ok(iteration < 19, 'cursor must eventually terminate');
+    }
+    const ids = items.map(p => p.id);
+    assert.equal(ids.length, expected.length);
+    assert.equal(new Set(ids).size, expected.length);
+    assert.deepEqual([...ids].sort(), expected.map(p => p.id).sort());
+    for (let i = 1; i < items.length; i++) {
+      const prev = items[i - 1], curr = items[i];
+      assert.ok(prev.createdAt > curr.createdAt || (
+        prev.createdAt === curr.createdAt && prev.id.localeCompare(curr.id) < 0
+      ), 'stable descending timestamp and ascending tied ID');
+    }
+  });
+});
+
+test('Bob can bookmark his private post, Alice cannot mutate it or infer its state', async () => {
+  await withApi(async call => {
+    const allowed = await bookmark(call, 'secret-bob', true, '"0"', 'bob');
+    assert.equal(allowed.status, 200);
+    assert.equal(allowed.body.saved, true);
+    const denied = await bookmark(call, 'secret-bob', false, '"1"', 'alice');
+    assert.equal(denied.status, 404);
+    const own = await call('/api/feed?q=confidential', { user: 'bob' });
+    assert.equal(own.body.items[0].saved, true);
+    assert.equal(own.body.items[0].version, 1);
+  });
+});
+
+test('Bookmark payload containing extra properties is rejected without mutation', async () => {
+  await withApi(async call => {
+    const r = await call('/api/bookmarks/p01', {
+      method: 'PUT', payload: { saved: true, elevated: true },
+      headers: { 'if-match': '"0"' },
+    });
+    assert.equal(r.status, 400);
+    const feed = await call('/api/feed?q=discussion%201%3A');
+    assert.equal(feed.body.items[0].saved, false);
+    assert.equal(feed.body.items[0].version, 0);
+  });
+});
+
+test('A stale no-op bookmark write is rejected rather than bypassing If-Match', async () => {
+  await withApi(async call => {
+    assert.equal((await bookmark(call, 'p01', true, '"0"')).status, 200);
+    const stale = await bookmark(call, 'p01', true, '"0"');
+    assert.equal(stale.status, 412);
+    const feed = await call('/api/feed?q=discussion%201%3A');
+    assert.equal(feed.body.items[0].version, 1);
+  });
+});
+
+test('Malformed If-Match values return 400 and do not mutate data', async () => {
+  await withApi(async call => {
+    for (const value of ['W/"0"', '0', '"nope"', '"0" and more', '"-1"']) {
+      const r = await bookmark(call, 'p01', true, value);
+      assert.equal(r.status, 400, value);
+    }
+    const feed = await call('/api/feed?q=discussion%201%3A');
+    assert.equal(feed.body.items[0].saved, false);
+    assert.equal(feed.body.items[0].version, 0);
+  });
+});
+
+test('Two same-state simultaneous writes at one version admit exactly one winner', async () => {
+  await withApi(async call => {
+    const responses = await Promise.all([
+      bookmark(call, 'p01', true, '"0"'),
+      bookmark(call, 'p01', true, '"0"'),
+    ]);
+    assert.deepEqual(responses.map(r => r.status).sort(), [200, 412]);
+    const feed = await call('/api/feed?q=discussion%201%3A');
+    assert.equal(feed.body.items[0].saved, true);
+    assert.equal(feed.body.items[0].version, 1);
+  });
+});
+
+test('Malformed percent-encoding in bookmark ID is a 400 JSON response, not a server crash', async () => {
+  // An intentionally broken async HTTP handler can leave a socket hanging.
+  // Exercise it in a child process with a bounded request so baseline
+  // sensitivity can finish without hanging the whole Node test runner.
+  const child = spawn(process.execPath, ['src/server.mjs'], {
+    cwd: process.cwd(), env: { ...process.env, PORT: '0' },
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+  try {
+    const base = await new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('server startup timed out')), 5000);
+      child.stdout.once('data', chunk => {
+        const m = String(chunk).match(/http:\/\/127\.0\.0\.1:\d+/);
+        clearTimeout(timeout);
+        if (m) resolve(m[0]);
+        else reject(new Error('server did not report listening URL'));
+      });
+      child.once('error', error => { clearTimeout(timeout); reject(error); });
+      child.once('exit', code => { clearTimeout(timeout); reject(new Error('server exited early: ' + code)); });
+    });
+    const response = await fetch(base + '/api/bookmarks/%E0%A4%A', {
+      method: 'PUT',
+      headers: {
+        authorization: 'Bearer demo-alice-key',
+        'content-type': 'application/json',
+        'if-match': '"0"',
+      },
+      body: JSON.stringify({ saved: true }),
+      signal: AbortSignal.timeout(2500),
+    });
+    assert.equal(response.status, 400);
+    const body = await response.json();
+    assert.match(String(body.error), /invalid/i);
+    const healthy = await fetch(base + '/api/feed', {
+      headers: { authorization: 'Bearer demo-alice-key' },
+      signal: AbortSignal.timeout(2500),
+    });
+    assert.equal(healthy.status, 200, 'server must remain available');
+  } finally {
+    child.kill();
+  }
 });
