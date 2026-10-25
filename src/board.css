@@ -1,4 +1,5 @@
-.board { width: 960px; margin: 0 auto; padding: 20px; }
+.board { width: 100%; max-width: 960px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
 .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; }
 .bookmark { border: 1px solid #999; background: white; }
 .bookmark:hover { background: #eee; }
+.bookmark:focus-visible { outline: 3px solid #005fcc; outline-offset: 2px; }
