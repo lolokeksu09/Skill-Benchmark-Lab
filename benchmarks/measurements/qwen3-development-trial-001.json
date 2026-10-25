@@ -49,6 +49,14 @@
     "A single DDS trial cannot establish a repeatable skills effect.",
     "The baseline figures are three control trials at different prompt lengths: a fair full performance comparison requires separating prompt processing and output generation, and repeating DDS trials.",
     "No Node execution or manual candidate inspection yet; static outcome is not runtime test pass count.",
-    "No generated code has been imported into a production project."
-  ]
+    "No generated code has been imported into a production project.",
+    "Four raw response text files are byte-identical according to user-run SHA-256; no improvement in this one Qwen3-8B Web scenario."
+  ],
+  "raw_output_sha256_reported_by_user": "13249e973a22a75a0982379849e1b20932629495f8b240e974c999943438ca02",
+  "comparison_with_control": {
+    "comparison_kind": "sha256_of_raw_model_output",
+    "identical_to_all_three_control_trials": true,
+    "hash": "13249e973a22a75a0982379849e1b20932629495f8b240e974c999943438ca02",
+    "confirmed_by": "User-provided Termux sha256sum on 2026-10-25"
+  }
 }
