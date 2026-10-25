@@ -40,16 +40,20 @@ jobs:
           set -uo pipefail
           if [[ "$BENCH_BRANCH" == 'bench/v3-hard-base' ]]; then
             echo 'Running deliberately broken BASELINE (Node expected: 26 tests, 12 pass, 14 fail)'
+            set +e
             npm test > /tmp/v3-api.txt 2>&1
             node_result=$?
+            set -e
             cat /tmp/v3-api.txt
             if [[ $node_result -eq 0 ]] || ! grep -q '^# tests 26$' /tmp/v3-api.txt || ! grep -q '^# pass 12$' /tmp/v3-api.txt || ! grep -q '^# fail 14$' /tmp/v3-api.txt; then
               echo 'Unexpected V3 baseline: possible fixture/test regression'
               exit 1
             fi
             echo 'BASELINE API SENSITIVITY VERIFIED'
+            set +e
             npm run test:browser > /tmp/v3-browser.txt 2>&1
             browser_result=$?
+            set -e
             cat /tmp/v3-browser.txt
             if [[ $browser_result -eq 0 ]] || ! grep -q 'Ran 7 tests' /tmp/v3-browser.txt || grep -q 'ERR_BLOCKED_BY_ADMINISTRATOR' /tmp/v3-browser.txt; then
               echo 'Browser baseline did not prove useful failure detection'
