@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const variant = process.env.FIXTURE_VARIANT ?? 'baseline';
-if (!['baseline', 'reference'].includes(variant)) throw new Error('Unknown variant: ' + variant);
+if (!['baseline', 'reference', 'candidate-qwen3-control-001'].includes(variant)) throw new Error('Unknown variant: ' + variant);
 const { renderPost } = await import('../' + variant + '/feed.mjs');
 const css = readFileSync(new URL('../' + variant + '/feed.css', import.meta.url), 'utf8');
 

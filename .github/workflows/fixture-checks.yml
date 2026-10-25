@@ -27,6 +27,21 @@ jobs:
           if [ "$status" -eq 0 ]; then echo "Seeded web fixture unexpectedly passed"; exit 1; fi
           grep -q "not ok" web-baseline.log || { cat web-baseline.log; exit 1; }
           echo "Expected web fixture failure confirmed"
+      - name: Qwen3 control trial 001 must have exactly 1 pass and 2 known failures
+        shell: bash
+        run: |
+          set +e
+          FIXTURE_VARIANT=candidate-qwen3-control-001 node --test benchmarks/fixtures/web/tests/feed.test.mjs > qwen-control-001.log 2>&1
+          status=$?
+          set -e
+          if [ "$status" -eq 0 ]; then cat qwen-control-001.log; echo "Unexpectedly all tests passed"; exit 1; fi
+          grep -Fq '# tests 3' qwen-control-001.log || { cat qwen-control-001.log; exit 1; }
+          grep -Fq '# pass 1' qwen-control-001.log || { cat qwen-control-001.log; exit 1; }
+          grep -Fq '# fail 2' qwen-control-001.log || { cat qwen-control-001.log; exit 1; }
+          grep -Fq 'not ok 1 - escapes user-controlled title markup' qwen-control-001.log || { cat qwen-control-001.log; exit 1; }
+          grep -Fq 'not ok 2 - icon-only save button has an accessible name' qwen-control-001.log || { cat qwen-control-001.log; exit 1; }
+          grep -Fq 'ok 3 - feed width is responsive rather than fixed to desktop pixels' qwen-control-001.log || { cat qwen-control-001.log; exit 1; }
+          echo "Verified real Qwen control candidate: 1 pass, 2 known failures"
   android-kotlin:
     runs-on: ubuntu-latest
     steps:

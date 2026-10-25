@@ -36,6 +36,18 @@ FIXTURE_VARIANT=baseline node --test benchmarks/fixtures/web/tests/feed.test.mjs
 gradle -p benchmarks/fixtures/android run -PfixtureVariant=baseline
 ```
 
+## First measured control trial (Termux, Qwen3-8B)
+
+One real phone-generated Web candidate is archived as a **synthetic public fixture**, with no skills loaded. The user-observed inference was **51.518 seconds, 365 tokens**. Node 22 executed the three fixture tests on the saved code: **1 passed, 2 failed** (HTML escaping, save-button accessible name). See [recorded measurement](benchmarks/measurements/qwen3-control-trial-001.json). This is a single observation, not a model or skills ranking. Candidate code was inspected before local Node execution; the temp directory is not a hardened sandbox.
+
+To re-run the deterministic candidate checks:
+
+```bash
+FIXTURE_VARIANT=candidate-qwen3-control-001 node --test benchmarks/fixtures/web/tests/feed.test.mjs
+```
+
+This command **intentionally exits nonzero** with the two recorded defects. GitHub Actions asserts that exact fail/pass pattern.
+
 ## Next missing capability: real model-execution trials
 
 **No controlled model-vs-model or skills-vs-no-skills coding experiment has been executed.** GitHub CI tests only offline evaluator and seeded fixture sensitivity. Do not rank the five variants from the router's 153 passing checks.
