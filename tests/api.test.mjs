@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { spawn } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { createEngine, seedPosts } from '../src/engine.mjs';
 import { startServer } from '../src/server.mjs';
@@ -322,13 +323,44 @@ test('Two same-state simultaneous writes at one version admit exactly one winner
 });
 
 test('Malformed percent-encoding in bookmark ID is a 400 JSON response, not a server crash', async () => {
-  await withApi(async call => {
-    const r = await call('/api/bookmarks/%E0%A4%A', {
-      method: 'PUT', payload: { saved: true },
-      headers: { 'if-match': '"0"' },
-    });
-    assert.equal(r.status, 400);
-    assert.match(String(r.body.error), /invalid/i);
-    assert.equal((await call('/api/feed')).status, 200, 'server must remain available');
+  // An intentionally broken async HTTP handler can leave a socket hanging.
+  // Exercise it in a child process with a bounded request so baseline
+  // sensitivity can finish without hanging the whole Node test runner.
+  const child = spawn(process.execPath, ['src/server.mjs'], {
+    cwd: process.cwd(), env: { ...process.env, PORT: '0' },
+    stdio: ['ignore', 'pipe', 'pipe'],
   });
+  try {
+    const base = await new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('server startup timed out')), 5000);
+      child.stdout.once('data', chunk => {
+        const m = String(chunk).match(/http:\/\/127\.0\.0\.1:\d+/);
+        clearTimeout(timeout);
+        if (m) resolve(m[0]);
+        else reject(new Error('server did not report listening URL'));
+      });
+      child.once('error', error => { clearTimeout(timeout); reject(error); });
+      child.once('exit', code => { clearTimeout(timeout); reject(new Error('server exited early: ' + code)); });
+    });
+    const response = await fetch(base + '/api/bookmarks/%E0%A4%A', {
+      method: 'PUT',
+      headers: {
+        authorization: 'Bearer demo-alice-key',
+        'content-type': 'application/json',
+        'if-match': '"0"',
+      },
+      body: JSON.stringify({ saved: true }),
+      signal: AbortSignal.timeout(2500),
+    });
+    assert.equal(response.status, 400);
+    const body = await response.json();
+    assert.match(String(body.error), /invalid/i);
+    const healthy = await fetch(base + '/api/feed', {
+      headers: { authorization: 'Bearer demo-alice-key' },
+      signal: AbortSignal.timeout(2500),
+    });
+    assert.equal(healthy.status, 200, 'server must remain available');
+  } finally {
+    child.kill();
+  }
 });
