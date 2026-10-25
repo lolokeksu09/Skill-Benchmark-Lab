@@ -136,6 +136,24 @@ await observe('malformed_200_bookmark', async () => {
     retryIfMatch: calls.at(-1)?.options?.headers?.['if-match'] ?? null,
     reportedError: announced, expectation: 'aria false, retry If-Match "0", error announcement' };
 });
+await observe('mismatched_200_bookmark_id', async () => {
+  const c = await mockClient();
+  c.queue[0].done(ok({ items: [{ ...post }], nextCursor: null }));
+  await c.flush();
+  const button = c.board.children[0]?.children?.at(-1);
+  if (!button) throw new Error('Bookmark button missing');
+  button.click();
+  const first = c.queue.find(r => r.url.startsWith('/api/bookmarks/'));
+  if (!first) throw new Error('Bookmark fetch missing');
+  first.done(ok({ id: 'wrong-post', saved: true, version: 1 }));
+  await c.flush();
+  const aria = button.getAttribute('aria-pressed'), announced = c.status.textContent.includes('Could not');
+  button.click();
+  const calls = c.queue.filter(r => r.url.startsWith('/api/bookmarks/'));
+  return { ariaAfterMismatchedId: aria,
+    retryIfMatch: calls.at(-1)?.options?.headers?.['if-match'] ?? null,
+    reportedError: announced, expectation: 'reject mismatched post id; aria false and retry If-Match "0"' };
+});
 const result = {
   schema: 'v5-observations-v1', alias, sha, actualSha, node: process.version,
   semantics: 'observations are evidence, not pass counts; assess relevance in report', cases,
