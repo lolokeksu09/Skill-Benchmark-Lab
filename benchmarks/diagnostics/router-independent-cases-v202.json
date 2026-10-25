@@ -1,0 +1,249 @@
+[
+  {
+    "id": "neg_ru_no_longer",
+    "prompt": "React Native больше не используем. Сейчас разрабатываем экран на Kotlin Compose.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "neg_en_out_scope",
+    "prompt": "React Native is out of scope. Create an Android Kotlin Compose screen.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "neg_ru_discuss",
+    "prompt": "Мы вчера работали с Compose, но сейчас нужно поправить CSS сетку на веб-сайте.",
+    "required": [],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "neg_en_switch",
+    "prompt": "We were using Compose before, but now fix the CSS grid on the web page.",
+    "required": [],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "inverse_switch",
+    "prompt": "Вчера обсуждали CSS, но теперь сделай нативный экран Kotlin Compose для Android.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "web"
+    ]
+  },
+  {
+    "id": "negated_but_not_abandoned",
+    "prompt": "Мы не отказываемся от React Native. Нужно обновить FlatList на React Native.",
+    "required": [
+      "vercel-react-native-skills"
+    ],
+    "forbidden": [],
+    "expected_stack": [
+      "react-native"
+    ],
+    "forbidden_stack": []
+  },
+  {
+    "id": "rn_failure",
+    "prompt": "React Native не работает: FlatList падает. Исправь ошибку.",
+    "required": [
+      "vercel-react-native-skills",
+      "systematic-debugging"
+    ],
+    "forbidden": [],
+    "expected_stack": [
+      "react-native"
+    ],
+    "forbidden_stack": []
+  },
+  {
+    "id": "both_targets",
+    "prompt": "Нужно обновить и React Native экран, и Compose экран для Android в одном релизе.",
+    "required": [
+      "vercel-react-native-skills",
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [],
+    "expected_stack": [
+      "react-native",
+      "compose"
+    ],
+    "forbidden_stack": []
+  },
+  {
+    "id": "neg_then_permission",
+    "prompt": "Не используем React Native, но проверить авторизацию API для Kotlin Compose нужно.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": []
+  },
+  {
+    "id": "scope_css_no_deploy",
+    "prompt": "Мы обсуждали Compose, но теперь исправь CSS сетку сайта, не публикуй релиз.",
+    "required": [
+      "systematic-debugging"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert",
+      "deployment-procedures",
+      "deploy-to-vercel"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "not_compose_despite_label",
+    "prompt": "Не нужен Compose. Исправь HTML/CSS шапку сайта.",
+    "required": [
+      "systematic-debugging"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "no_rn_and_expo",
+    "prompt": "Мы больше не используем React Native и Expo. Реализуй Android экран на Compose.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "two_time_clauses",
+    "prompt": "Сначала был React Native. Потом обсуждали Compose, но теперь занимаемся только CSS сеткой веб страницы.",
+    "required": [],
+    "forbidden": [
+      "vercel-react-native-skills",
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "react-native",
+      "compose"
+    ]
+  },
+  {
+    "id": "unrelated_android_background",
+    "prompt": "Android-клиент не трогаем. Сейчас исправь CSS сетку сайта.",
+    "required": [
+      "systematic-debugging"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "neg_no_conflict_explicit",
+    "prompt": "Отказались от React Native, делаем Kotlin Compose. Используй /android-jetpack-compose-expert.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "new_context_rn",
+    "prompt": "Ранее обсуждали Compose, но теперь исправь экран React Native FlatList.",
+    "required": [
+      "vercel-react-native-skills"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "en_outscope_negative",
+    "prompt": "Do not use React Native. Build the Compose UI in Kotlin Android.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "en_without_rn",
+    "prompt": "Build an Android Compose page without using React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  }
+]

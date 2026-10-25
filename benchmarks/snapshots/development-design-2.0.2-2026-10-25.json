@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-10-25",
+  "baseline": {
+    "version": "2.0.1",
+    "filename": "Development-Design-Skills-2.0.1.zip",
+    "sha256": "aa1e00e755e070898d9ab252c306ff31df7782b0d6c8f8a60b9e3cc65e2aff1e",
+    "files": 1200,
+    "skill_count": 116,
+    "active_skill_md_bytes": 614884,
+    "plugin_name": "development-design-skills-v2"
+  },
+  "candidate": {
+    "version": "2.0.2",
+    "filename": "Development-Design-Skills-2.0.2 (1).zip",
+    "sha256": "aee782bb5aefe35a5462a67c82646313010b2b263bf46369470a18930e205221",
+    "files": 1205,
+    "skill_count": 116,
+    "active_skill_md_bytes": 614884,
+    "plugin_name": "development-design-skills"
+  },
+  "diff": {
+    "unchanged_skill_md": 116,
+    "changed_files": [
+      ".codex-plugin/plugin.json",
+      "docs/README_RU.md",
+      "docs/reproduce/reproduce.py",
+      "plugin.json",
+      "skills/skill-router/scripts/route.py"
+    ],
+    "added_files": [
+      "docs/ROUTER_FIX_2.0.2_RU.md",
+      "docs/evaluation/context-cases-2.0.2.json",
+      "docs/evaluation/context-results-after-2.0.2.json",
+      "docs/evaluation/context-results-before-2.0.2.json",
+      "skills/skill-router/scripts/test_router_context.py"
+    ],
+    "removed_files": 0
+  },
+  "reproduced": {
+    "v202_packaged_router_suite": {
+      "passed": 76,
+      "total": 76
+    },
+    "v202_reproduce_script": {
+      "exit_code": 0
+    },
+    "independent_probes": {
+      "count": 18,
+      "passes_201": 6,
+      "passes_202": 17,
+      "failures_202": [
+        "en_without_rn"
+      ]
+    }
+  },
+  "limitations": [
+    "The 18 cases were written for this review after seeing the routing implementation; this is not a blinded generalization score.",
+    "No actual LLM development or billed token benchmarking was performed.",
+    "The packages themselves are not redistributed in this public repository.",
+    "The plugin name changed from development-design-skills-v2 to development-design-skills. Verify installation collision/update semantics separately."
+  ]
+}
