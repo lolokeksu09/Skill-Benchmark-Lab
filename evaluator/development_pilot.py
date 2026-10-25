@@ -21,7 +21,10 @@ SKILLS = (
     "accessibility-compliance-accessibility-audit",
 )
 SKILL_PREFIX = "development-design-skills/skills/"
-DEFAULT_ARCHIVE = Path.home() / "storage/downloads/Development-Design-Skills-2.0.5-Full-Patched.zip"
+ARCHIVE_NAME = "Development-Design-Skills-2.0.5-Full-Patched.zip"
+ARCHIVE_PATHS = (Path.home() / "storage/downloads" / ARCHIVE_NAME,
+                 Path("/storage/emulated/0/Download") / ARCHIVE_NAME)
+DEFAULT_ARCHIVE = next((path for path in ARCHIVE_PATHS if path.is_file()), ARCHIVE_PATHS[0])
 DEFAULT_OUTPUT = ROOT / "results/raw/local-qwen-web-development.jsonl"
 BASE_SYSTEM = "You are a code editor. Return only the requested JSON. Never claim tests have run."
 
@@ -87,6 +90,7 @@ def run_once(messages, archive_sha, skills, output_dir, output_file, trial_id, m
         "run_id": trial_id, "status": "error", "duration_seconds": None,
         "total_tokens": None, "review": None,
         "model": None, "prompt_sha256": fingerprint(json.dumps(messages, ensure_ascii=False)),
+        "base_prompt_sha256": fingerprint(messages[1]["content"]),
         "skill_archive_sha256": archive_sha,
         "active_skills": [{"name": s["name"], "path": s["path"], "sha256": s["sha256"]} for s in skills],
         "candidate_path": None, "candidate_valid_json": False,

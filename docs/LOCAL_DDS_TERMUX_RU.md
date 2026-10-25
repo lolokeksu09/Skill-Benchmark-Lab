@@ -17,7 +17,7 @@
 cd "$HOME/Skill-Benchmark-Lab" && git pull --ff-only && python -m evaluator.development_pilot --preview
 ```
 
-Предпросмотр только подтверждает ZIP и показывает выбранные навыки, не обращаясь к нейросети. Путь по умолчанию `~/storage/downloads/Development-Design-Skills-2.0.5-Full-Patched.zip`. Если Termux не имеет доступа к Downloads, сначала нужно разрешить доступ через `termux-setup-storage`. Можно указать альтернативное местоположение `--archive /путь/к/файлу.zip`.
+Предпросмотр только подтверждает ZIP и показывает выбранные навыки, не обращаясь к нейросети. Программа автоматически проверяет оба стандартных пути: `~/storage/downloads/Development-Design-Skills-2.0.5-Full-Patched.zip` и `/storage/emulated/0/Download/Development-Design-Skills-2.0.5-Full-Patched.zip`. Если Termux не имеет доступа к Downloads, сначала нужно разрешить доступ через `termux-setup-storage`. Можно указать альтернативное местоположение `--archive /путь/к/файлу.zip`.
 
 Следующий запуск после успешной проверки:
 
