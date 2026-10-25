@@ -12,9 +12,11 @@
     {
       "id": "p2p-original",
       "mode": "prompt_generation",
-      "source": "https://github.com/sanic732/P2P/releases/download/v9.0/P2P_9_plugin_chatgpt.zip",
+      "source": "https://github.com/sanic732/P2P",
+      "archive_filename": "P2P_9_plugin_chatgpt.zip",
       "sha256": "daee2df26f09c7b9bd0b11a5af4675c738dd119a7c8da0744c1e55c226bd23a8",
-      "status": "pinned_not_imported"
+      "status": "pinned_not_imported",
+      "notes": "Repository URL is verified; exact ZIP comes from user upload, not a verified v9.0 release URL."
     },
     {
       "id": "p2p-improved",
@@ -26,17 +28,24 @@
     {
       "id": "development",
       "mode": "engineering_workflow",
-      "source": "installed:development-design-skills",
-      "sha256": null,
-      "status": "requires_export_and_pin",
-      "notes": "115 installed skills; do not claim exact revision until snapshot is recorded"
+      "source": "conversation_artifact:Development-Design-Skills-2.0.5-Full-Patched.zip",
+      "sha256": "c6fe56e96644ae30b8ba07c35cd6a52a5a7ad34920558923ea1c947023db3439",
+      "status": "pinned_not_imported",
+      "plugin_version": "2.0.5",
+      "skill_count": 116,
+      "notes": "Includes both Security Audit and API Object Access fixes; tested on 153 offline lexical-router cases; actual model runs not performed."
     },
     {
       "id": "combined",
       "mode": "sequential",
       "source": "p2p-improved + development",
       "sha256": null,
-      "status": "blocked_until_development_pinned"
+      "status": "pinned_components_not_executed",
+      "components": [
+        "p2p-improved",
+        "development"
+      ],
+      "notes": "No combined ZIP or combined SHA-256 exists. Both independent component SHA-256 values are frozen above. No model runs."
     }
   ]
 }
