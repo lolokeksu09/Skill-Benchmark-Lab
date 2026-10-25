@@ -19,8 +19,8 @@ function json(res, status, body, extra = {}) {
 async function readJson(req) {
   let text = '';
   for await (const chunk of req) text += chunk;
-  try { return JSON.parse(text); }
-  catch { return null; }
+  try { return { ok: true, value: JSON.parse(text) }; }
+  catch { return { ok: false, value: undefined }; }
 }
 
 export async function startServer({ port = 0, engine = createEngine() } = {}) {
@@ -47,9 +47,13 @@ export async function startServer({ port = 0, engine = createEngine() } = {}) {
       return;
     }
     if (req.method === 'PUT' && /^\/api\/bookmarks\/[^/]+$/.test(url.pathname)) {
-      const id = decodeURIComponent(url.pathname.split('/').at(-1));
-      const body = await readJson(req);
-      const result = engine.bookmark(viewer, id, body, req.headers['if-match']);
+      let id;
+      try { id = decodeURIComponent(url.pathname.split('/').at(-1)); }
+      catch { json(res, 400, { error: 'invalid bookmark id' }); return; }
+      const parsed = await readJson(req);
+      const result = parsed.ok
+        ? engine.bookmark(viewer, id, parsed.value, req.headers['if-match'])
+        : { status: 400, body: { error: 'invalid JSON' } };
       json(res, result.status, result.body, result.headers);
       return;
     }
