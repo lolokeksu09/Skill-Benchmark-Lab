@@ -50,8 +50,8 @@ function drawPost(post) {
     } catch {
     } finally {
       if (!saved) {
-        post.saved = previous;
-        setBookmarkState(previous);
+        post.saved = false;
+        setBookmarkState(false);
         status.textContent = 'Could not save bookmark.';
       }
       button.disabled = false;
