@@ -44,6 +44,11 @@ function drawPost(post) {
       button.setAttribute('aria-pressed', String(previous));
       button.setAttribute('aria-label', previous ? 'Remove saved post' : 'Save post');
       status.textContent = 'Could not save bookmark';
+      // Repeat the rollback after announcing the error so any live-region update
+      // cannot expose the optimistic state to assistive technology or automation.
+      button.textContent = previous ? '★' : '☆';
+      button.setAttribute('aria-pressed', String(previous));
+      button.setAttribute('aria-label', previous ? 'Remove saved post' : 'Save post');
     } finally { button.disabled = false; }
   });
   card.append(button);
