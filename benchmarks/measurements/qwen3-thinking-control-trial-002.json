@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-25",
+  "source": "User-provided Termux stdout from evaluator.thinking_pilot",
+  "scenario_id": "web-fixture-repair",
+  "variant": "control",
+  "experiment": "thinking_on",
+  "run_id": "trial-002",
+  "model": "Qwen3-8B-Q4_K_M.gguf",
+  "inference": {
+    "status": "candidate_saved",
+    "duration_seconds": 76.762,
+    "prompt_tokens": 254,
+    "completion_tokens": 271,
+    "total_tokens": 525,
+    "finish_reason": "stop",
+    "reasoning_present": true,
+    "candidate_valid_json": true
+  },
+  "configuration": {
+    "user_reported_llama_server_argument": "--reasoning-budget 128",
+    "context_tokens": 2048,
+    "temperature": 0.2,
+    "max_tokens": 768,
+    "active_skills": []
+  },
+  "static_preflight": {
+    "method": "static_text_only",
+    "checks": {
+      "html_escaping": {
+        "status": "possible",
+        "detail": "HTML escape entities found; execution is required to confirm behavior"
+      },
+      "save_button_accessible_name": {
+        "status": "fail",
+        "detail": "Icon-only button is missing the required aria-label"
+      },
+      "responsive_feed_width": {
+        "status": "pass",
+        "detail": "Found max-width: 100% in .feed ruleset"
+      }
+    },
+    "static_passed": 1,
+    "static_failed": 1,
+    "static_uncertain": 1
+  },
+  "runtime_tests_executed": false,
+  "runtime_tests_passed": null,
+  "candidate": {
+    "original_path_on_user_phone": "$HOME/Skill-Benchmark-Lab/results/raw/local-qwen-web-candidates/thinking/control/trial-002.txt",
+    "contents_not_received": true
+  },
+  "notes": [
+    "This is a fresh Thinking-on experiment and does not replace the three no_think control trials.",
+    "Possible HTML escaping is not equivalent to a passed runtime test.",
+    "Trial-001 Thinking was truncated at 768 tokens; trial-002 finished normally under a reported 128-token server-side thinking budget.",
+    "No DDS under budget 128 has been run as of this measurement."
+  ]
+}
