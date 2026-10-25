@@ -1,0 +1,153 @@
+[
+  {
+    "id": "no-deploy-css-vercel",
+    "prompt": "Fix CSS on Vercel website, but do not deploy or publish yet.",
+    "required": [
+      "systematic-debugging"
+    ],
+    "forbidden": [
+      "deploy-to-vercel",
+      "deployment-procedures",
+      "vercel-cli-with-tokens"
+    ],
+    "stack_required": [
+      "web"
+    ]
+  },
+  {
+    "id": "no-deploy-layout",
+    "prompt": "Fix mobile layout on Vercel; do not deploy anything now.",
+    "required": [
+      "systematic-debugging"
+    ],
+    "forbidden": [
+      "deploy-to-vercel",
+      "deployment-procedures"
+    ],
+    "stack_required": [
+      "vercel"
+    ]
+  },
+  {
+    "id": "no-deploy-ru",
+    "prompt": "Исправь CSS на сайте Vercel, не деплой и не публикуй.",
+    "required": [
+      "systematic-debugging"
+    ],
+    "forbidden": [
+      "deploy-to-vercel",
+      "deployment-procedures"
+    ],
+    "stack_required": [
+      "web"
+    ]
+  },
+  {
+    "id": "deploy-allowed",
+    "prompt": "Deploy the updated website to Vercel.",
+    "required": [
+      "deploy-to-vercel",
+      "deployment-procedures"
+    ],
+    "stack_required": [
+      "vercel"
+    ]
+  },
+  {
+    "id": "publish-allowed",
+    "prompt": "Publish the website on Vercel.",
+    "required": [
+      "deploy-to-vercel"
+    ],
+    "stack_required": [
+      "vercel"
+    ]
+  },
+  {
+    "id": "design-system",
+    "prompt": "Create visual design system typography and palette for the website.",
+    "required": [
+      "ui-ux-pro-max"
+    ],
+    "stack_required": [
+      "web"
+    ]
+  },
+  {
+    "id": "design-system-ru",
+    "prompt": "Создай дизайн-систему, палитру и типографику для сайта.",
+    "required": [
+      "ui-ux-pro-max"
+    ],
+    "stack_required": [
+      "web"
+    ]
+  },
+  {
+    "id": "typo-really-trivial",
+    "prompt": "Fix typo in CSS header text.",
+    "required": [],
+    "forbidden": [
+      "ui-ux-pro-max"
+    ],
+    "stack_required": [
+      "web"
+    ]
+  },
+  {
+    "id": "compose-unneeded-auth",
+    "prompt": "Android Compose is not required; fix SQL auth API backend.",
+    "required": [
+      "auth-implementation-patterns"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "stack_forbidden": [
+      "compose"
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "compose-not-needed-auth",
+    "prompt": "Compose is not needed; fix auth API token refresh bug.",
+    "required": [
+      "auth-implementation-patterns"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "stack_forbidden": [
+      "compose"
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "react-native-unneeded-auth",
+    "prompt": "React Native is not required; fix the auth API backend.",
+    "required": [
+      "auth-implementation-patterns"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "stack_forbidden": [
+      "react-native"
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "compose-not-required-ru",
+    "prompt": "Compose не требуется; исправь SQL API авторизации.",
+    "required": [
+      "auth-implementation-patterns"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "stack_forbidden": [
+      "compose"
+    ],
+    "risk": "high"
+  }
+]

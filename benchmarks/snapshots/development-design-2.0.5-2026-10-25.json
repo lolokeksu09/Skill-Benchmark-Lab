@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "artifact": {
+    "version": "2.0.5",
+    "filename": "Development-Design-Skills-2.0.5.zip",
+    "sha256": "e674343b54567eea94b90871089a6d77c07021ef7063d756f84ad5126d867567",
+    "size_bytes": 6097424,
+    "archive_entries": 1213,
+    "skills_preserved": 116
+  },
+  "base": {
+    "version": "2.0.4",
+    "filename": "Development-Design-Skills-2.0.4.zip",
+    "sha256": "f9df305963c4d9554cdd467b2973d5f2d5c0b99cd1463158406d0cf15ad8b642"
+  },
+  "diff": {
+    "unchanged_files": 1205,
+    "modified_files": 6,
+    "added_files": 2,
+    "removed_files": 0
+  },
+  "results": {
+    "v204_frozen_multidomain_40": {
+      "passed": 35,
+      "total": 40
+    },
+    "v205_frozen_multidomain_40": {
+      "passed": 38,
+      "total": 40
+    },
+    "v205_router_suite": {
+      "passed": 112,
+      "total": 112
+    },
+    "v205_fresh_archive_reextraction": true,
+    "v205_reproduce_script_exit_code": 0,
+    "red_green": {
+      "before": {
+        "passed": 106,
+        "total": 112
+      },
+      "after": {
+        "passed": 112,
+        "total": 112
+      }
+    }
+  },
+  "remaining_failed_criteria": [
+    "read-only-security: expected security-auditor in addition to auth pattern",
+    "chat-authorization: expected api-security-best-practices in addition to auth pattern"
+  ],
+  "limitations": [
+    "Frozen 40 checks only expected/forbidden names, modes, stack and risk—not an LLM coding benchmark.",
+    "No token measurement, no paid inference.",
+    "The public repository does not include the skill ZIPs."
+  ]
+}
