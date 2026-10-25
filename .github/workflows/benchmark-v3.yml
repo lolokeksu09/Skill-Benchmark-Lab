@@ -28,6 +28,27 @@ jobs:
           echo '86ce69cb2fde727512a1f26ff552213c250dd1a7ea2cc4e96edcbbbb97d5171d  tests/browser_board.py' | sha256sum -c -
           echo 'f7c296e247bd79e1286fc749d44adb1b1fabadc93fe1c473d9c573eb669f6ac1  web/index.html' | sha256sum -c -
           echo '4295137ab4552d0edb5357e38abce64fc3fb02b3f6ae38f6c64e9f7b0e701dd8  docs/PROTOCOL.md' | sha256sum -c -
+      - name: Enforce allowed source changes and PR base
+        if: ${{ github.head_ref != 'bench/v3-hard-base' && github.ref_name != 'bench/v3-hard-base' }}
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE: ${{ github.base_ref }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == 'pull_request' && "$PR_BASE" != 'bench/v3-hard-base' ]]; then
+            echo 'Experiment PR must target bench/v3-hard-base'
+            exit 1
+          fi
+          git fetch --no-tags --depth=1 origin bench/v3-hard-base:refs/remotes/origin/bench/v3-hard-base
+          git diff --name-only origin/bench/v3-hard-base HEAD > /tmp/v3-changed.txt
+          while IFS= read -r path; do
+            case "$path" in
+              src/engine.mjs|src/server.mjs|web/app.mjs|web/styles.css) ;;
+              *) echo "Forbidden changed path: $path"; exit 1 ;;
+            esac
+          done < /tmp/v3-changed.txt
+          echo 'Candidate edit scope verified'
       - name: Set up Chromium E2E
         run: |
           python -m pip install playwright==1.56.0
