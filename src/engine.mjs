@@ -35,8 +35,20 @@ export function seedPosts() {
   return posts;
 }
 
-function encodeCursor(offset) {
-  return Buffer.from(JSON.stringify({ offset }), 'utf8').toString('base64url');
+function encodeCursor(cursor) {
+  return Buffer.from(JSON.stringify(cursor), 'utf8').toString('base64url');
+}
+
+function decodeCursor(value) {
+  if (!/^[A-Za-z0-9_-]+$/.test(value)) return null;
+  try {
+    const decoded = Buffer.from(value, 'base64url').toString('utf8');
+    const parsed = JSON.parse(decoded);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return null;
+    if (typeof parsed.viewer !== 'string' || typeof parsed.search !== 'string' ||
+        typeof parsed.createdAt !== 'string' || typeof parsed.id !== 'string') return null;
+    return parsed;
+  } catch { return null; }
 }
 
 export function createEngine(posts = seedPosts()) {
@@ -45,35 +57,50 @@ export function createEngine(posts = seedPosts()) {
 
   function feed(viewer, { q = '', limit = '8', cursor = '' } = {}) {
     if (!viewer) return { status: 401, body: { error: 'unauthorized' } };
+    if (typeof limit !== 'string' || !/^(?:0|[1-9]\d*)$/.test(limit)) return { status: 400, body: { error: 'invalid limit' } };
     const size = Number(limit);
     if (!Number.isInteger(size) || size < 1 || size > 15) return { status: 400, body: { error: 'invalid limit' } };
-    let offset = 0;
-    if (cursor) {
-      try { offset = JSON.parse(Buffer.from(cursor, 'base64url').toString()).offset; }
-      catch { return { status: 400, body: { error: 'invalid cursor' } }; }
-    }
     const search = String(q).trim().toLowerCase();
+    let cursorState = null;
+    if (cursor) {
+      cursorState = decodeCursor(cursor);
+      if (!cursorState || cursorState.viewer !== viewer || cursorState.search !== search) {
+        return { status: 400, body: { error: 'invalid cursor' } };
+      }
+    }
     const visible = items
-      .filter(post => post.visibility === 'public' || post.owner === viewer || post.visibility === 'private')
+      .filter(post => post.visibility === 'public' || post.owner === viewer)
       .filter(post => `${post.title} ${post.summary}`.toLowerCase().includes(search))
-      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-    const page = visible.slice(offset, offset + size).map(post => {
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt) || a.id.localeCompare(b.id));
+    const start = cursorState
+      ? visible.findIndex(post => post.createdAt === cursorState.createdAt && post.id === cursorState.id) + 1
+      : 0;
+    if (cursorState && start === 0) return { status: 400, body: { error: 'invalid cursor' } };
+    const page = visible.slice(start, start + size).map(post => {
       const state = bookmarks.get(`${viewer}:${post.id}`) ?? { saved: false, version: 0 };
       return { ...post, saved: state.saved, version: state.version };
     });
     return {
       status: 200,
-      body: { items: page, nextCursor: offset + size < visible.length ? encodeCursor(offset + size) : null },
+      body: { items: page, nextCursor: start + size < visible.length && page.length
+        ? encodeCursor({ viewer, search, createdAt: page.at(-1).createdAt, id: page.at(-1).id }) : null },
     };
   }
 
   function bookmark(viewer, id, payload, ifMatch) {
     if (!viewer) return { status: 401, body: { error: 'unauthorized' } };
     const post = items.find(entry => entry.id === id);
-    if (!post) return { status: 404, body: { error: 'not found' } };
+    if (!post || (post.visibility === 'private' && post.owner !== viewer)) return { status: 404, body: { error: 'not found' } };
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload) || typeof payload.saved !== 'boolean') {
+      return { status: 400, body: { error: 'invalid payload' } };
+    }
+    if (ifMatch === undefined) return { status: 428, body: { error: 'if-match required' } };
     const key = `${viewer}:${id}`;
     const old = bookmarks.get(key) ?? { saved: false, version: 0 };
-    const newState = { saved: Boolean(payload?.saved), version: old.version };
+    if (!/^"\d+"$/.test(ifMatch)) return { status: 400, body: { error: 'invalid if-match' } };
+    const expected = Number(ifMatch.slice(1, -1));
+    if (!Number.isSafeInteger(expected) || expected !== old.version) return { status: 412, body: { error: 'stale version' } };
+    const newState = { saved: payload.saved, version: old.version + (payload.saved === old.saved ? 0 : 1) };
     bookmarks.set(key, newState);
     return { status: 200, headers: { ETag: `"${newState.version}"` }, body: { id, ...newState } };
   }
