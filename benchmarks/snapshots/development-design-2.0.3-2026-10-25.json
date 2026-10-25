@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-10-25",
+  "prior_version": "2.0.2",
+  "prior_sha256": "aee782bb5aefe35a5462a67c82646313010b2b263bf46369470a18930e205221",
+  "candidate": {
+    "version": "2.0.3",
+    "uploaded_filename": "Development-Design-Skills-2.0.3.zip",
+    "sha256": "42d5a5b060ebdb2e89645ce63f88f94c148babde4b69d60e1efff8c14ab984cb",
+    "size_bytes": 6105837,
+    "zip_files": 1208,
+    "skills": 116,
+    "active_skill_md_bytes": 614884,
+    "plugin_name": "development-design-skills"
+  },
+  "diff": {
+    "unchanged_files": 1201,
+    "changed_files": [
+      ".codex-plugin/plugin.json",
+      "plugin.json",
+      "skills/skill-router/scripts/route.py",
+      "skills/skill-router/scripts/test_router_context.py"
+    ],
+    "added_files": [
+      "docs/ROUTER_FIX_2.0.3_RU.md",
+      "docs/evaluation/context-cases-2.0.3.json",
+      "docs/evaluation/context-results-2.0.3.json"
+    ],
+    "removed_files": 0,
+    "unchanged_skill_md": 116
+  },
+  "local_verification": {
+    "zip_crc": "passed",
+    "bundled_202": {
+      "pass": 76,
+      "total": 76
+    },
+    "bundled_203": {
+      "pass": 77,
+      "total": 77
+    },
+    "reproduction_script_203": {
+      "exit_code": 0
+    },
+    "previous_independent_18": {
+      "v202_passed": 17,
+      "v203_passed": 18,
+      "total": 18
+    },
+    "new_targeted_negations": {
+      "v202_passed": 2,
+      "v203_passed": 4,
+      "total": 11
+    }
+  },
+  "limits": [
+    "A passing bundled test does not imply general English/Russian negation coverage.",
+    "The 11 newly constructed prompts are targeted adversarial probes, not a representative blind evaluation.",
+    "The model execution and billed-token benchmarks have not run.",
+    "The public repository does not host ZIP archives."
+  ]
+}

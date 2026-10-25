@@ -1,0 +1,178 @@
+[
+  {
+    "id": "without_short",
+    "prompt": "Build an Android Compose screen without React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "not_allowed",
+    "prompt": "Create a Compose Android screen; React Native is not allowed.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "rather_than",
+    "prompt": "Use Kotlin Compose rather than React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "no_rn",
+    "prompt": "Build Compose Android UI, no React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "inverse",
+    "prompt": "Implement React Native UI without using Compose.",
+    "required": [
+      "vercel-react-native-skills"
+    ],
+    "forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_stack": [
+      "react-native"
+    ],
+    "forbidden_stack": [
+      "compose"
+    ]
+  },
+  {
+    "id": "without_rn_expo",
+    "prompt": "Make Android Compose UI without React Native or Expo.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "ru_without_using",
+    "prompt": "Исправь Compose UI без использования React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "ru_without",
+    "prompt": "Сделай Android Compose экран без React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "but_do_not",
+    "prompt": "Build Jetpack Compose screen but do not use React Native.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "stop_using",
+    "prompt": "Stop using React Native and build Compose UI.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  },
+  {
+    "id": "without_using_and_expo",
+    "prompt": "Build Android Compose page without using React Native or Expo.",
+    "required": [
+      "android-jetpack-compose-expert"
+    ],
+    "forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "expected_stack": [
+      "compose"
+    ],
+    "forbidden_stack": [
+      "react-native"
+    ]
+  }
+]

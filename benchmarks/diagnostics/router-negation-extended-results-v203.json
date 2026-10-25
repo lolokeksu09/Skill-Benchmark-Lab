@@ -1,0 +1,57 @@
+[
+  {
+    "id": "without_short",
+    "2.0.2": "fail",
+    "2.0.3": "fail"
+  },
+  {
+    "id": "not_allowed",
+    "2.0.2": "fail",
+    "2.0.3": "fail"
+  },
+  {
+    "id": "rather_than",
+    "2.0.2": "fail",
+    "2.0.3": "fail"
+  },
+  {
+    "id": "no_rn",
+    "2.0.2": "pass",
+    "2.0.3": "pass"
+  },
+  {
+    "id": "inverse",
+    "2.0.2": "fail",
+    "2.0.3": "pass"
+  },
+  {
+    "id": "without_rn_expo",
+    "2.0.2": "fail",
+    "2.0.3": "fail"
+  },
+  {
+    "id": "ru_without_using",
+    "2.0.2": "fail",
+    "2.0.3": "fail"
+  },
+  {
+    "id": "ru_without",
+    "2.0.2": "fail",
+    "2.0.3": "fail"
+  },
+  {
+    "id": "but_do_not",
+    "2.0.2": "pass",
+    "2.0.3": "pass"
+  },
+  {
+    "id": "stop_using",
+    "2.0.2": "fail",
+    "2.0.3": "fail"
+  },
+  {
+    "id": "without_using_and_expo",
+    "2.0.2": "fail",
+    "2.0.3": "pass"
+  }
+]
