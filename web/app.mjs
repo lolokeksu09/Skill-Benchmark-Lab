@@ -29,8 +29,6 @@ function drawPost(post) {
   button.addEventListener('click', async () => {
     const previous = post.saved;
     const next = !previous;
-    post.saved = next;
-    setBookmarkState(next);
     button.disabled = true;
     let saved = false;
     try {
@@ -46,6 +44,8 @@ function drawPost(post) {
       if (!response.ok) throw new Error('bookmark write failed');
       const body = await response.json();
       post.version = body.version;
+      post.saved = next;
+      setBookmarkState(next);
       saved = true;
     } catch {
     } finally {
