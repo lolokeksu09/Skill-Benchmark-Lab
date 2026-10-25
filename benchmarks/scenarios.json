@@ -42,5 +42,16 @@
       "Acceptance checks included",
       "No unsupported repository claims"
     ]
+  },
+  {
+    "id": "web-fixture-repair",
+    "category": "web",
+    "task": "Repair the frozen Web feed using only the two provided JavaScript/CSS files.",
+    "acceptance_criteria": [
+      "Post title is escaped and does not permit raw markup injection",
+      "Icon-only save button has aria-label Save post",
+      "Responsive .feed max-width 100% retained",
+      "Only feed.mjs and feed.css changed; Node tests pass when independently verified"
+    ]
   }
 ]
