@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from evaluator.candidate_checks import check_candidate
 import time
 import urllib.error
 import urllib.request
@@ -87,6 +88,8 @@ def run_once(root, output_dir, results_path, base_url, max_tokens, timeout, run_
             finish_reason=data["choices"][0].get("finish_reason"),
             candidate_valid_json=ok, status="candidate_saved" if ok else "invalid_candidate",
             candidate_path=relative, error=None if ok else candidate,
+            static_preflight=check_candidate(candidate) if ok else None,
+            runtime_tests_executed=False, runtime_tests_passed=None,
         )
     except (ValueError, OSError, urllib.error.URLError, json.JSONDecodeError) as error:
         record["error"] = str(error)[:500]
@@ -115,7 +118,7 @@ def main():
         rec = run_once(ROOT, run_dir, output_file, args.base_url,
                        args.max_tokens, args.timeout, "trial-%03d" % number)
         print(json.dumps({key: rec.get(key) for key in
-              ("run_id", "status", "duration_seconds", "total_tokens", "finish_reason", "error")},
+              ("run_id", "status", "duration_seconds", "total_tokens", "finish_reason", "static_preflight", "error")},
               ensure_ascii=False))
     print("Local results: " + str(output_file))
     print("Generated JavaScript NOT executed. Inspect candidates before isolated tests.")
