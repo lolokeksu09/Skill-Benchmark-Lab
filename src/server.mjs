@@ -47,7 +47,10 @@ export async function startServer({ port = 0, engine = createEngine() } = {}) {
       return;
     }
     if (req.method === 'PUT' && /^\/api\/bookmarks\/[^/]+$/.test(url.pathname)) {
-      const id = decodeURIComponent(url.pathname.split('/').at(-1));
+      if (!viewer) { json(res, 401, { error: 'unauthorized' }); return; }
+      let id;
+      try { id = decodeURIComponent(url.pathname.split('/').at(-1)); }
+      catch { json(res, 400, { error: 'invalid id' }); return; }
       const body = await readJson(req);
       const result = engine.bookmark(viewer, id, body, req.headers['if-match']);
       json(res, result.status, result.body, result.headers);
