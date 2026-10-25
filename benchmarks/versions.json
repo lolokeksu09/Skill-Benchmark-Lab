@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "source_date": "2026-10-25",
+  "entries": [
+    {
+      "id": "control",
+      "mode": "no_external_skills",
+      "source": null,
+      "sha256": null,
+      "status": "ready"
+    },
+    {
+      "id": "p2p-original",
+      "mode": "prompt_generation",
+      "source": "https://github.com/sanic732/P2P/releases/download/v9.0/P2P_9_plugin_chatgpt.zip",
+      "sha256": "daee2df26f09c7b9bd0b11a5af4675c738dd119a7c8da0744c1e55c226bd23a8",
+      "status": "pinned_not_imported"
+    },
+    {
+      "id": "p2p-improved",
+      "mode": "prompt_generation",
+      "source": "conversation_artifact:P2P_9_ChatGPT_Improved_Skill.zip",
+      "sha256": "b4162a2c6118a4f12bbbd1bcc0d6acd5311c671cce56e3ff58f158722ef0f1d5",
+      "status": "pinned_not_imported"
+    },
+    {
+      "id": "development",
+      "mode": "engineering_workflow",
+      "source": "installed:development-design-skills",
+      "sha256": null,
+      "status": "requires_export_and_pin",
+      "notes": "115 installed skills; do not claim exact revision until snapshot is recorded"
+    },
+    {
+      "id": "combined",
+      "mode": "sequential",
+      "source": "p2p-improved + development",
+      "sha256": null,
+      "status": "blocked_until_development_pinned"
+    }
+  ]
+}
