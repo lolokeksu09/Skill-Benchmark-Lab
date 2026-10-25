@@ -1,0 +1,46 @@
+[
+  {
+    "id": "android-compose-ui",
+    "category": "android",
+    "task": "Improve a frozen Jetpack Compose screen without changing navigation, behavior or architecture.",
+    "acceptance_criteria": [
+      "Existing navigation still works",
+      "UI accessibility is checked",
+      "Unrelated dependencies unchanged",
+      "Build and relevant tests pass"
+    ]
+  },
+  {
+    "id": "web-responsive-audit",
+    "category": "web",
+    "task": "Review a frozen web interface for responsive layout and accessibility defects. Give code-grounded fixes.",
+    "acceptance_criteria": [
+      "Each issue includes file and reproducible symptom",
+      "Avoid unsupported security claims",
+      "Keep original design intent",
+      "State regression checks"
+    ]
+  },
+  {
+    "id": "debugging-regression",
+    "category": "debugging",
+    "task": "Reproduce and fix a seeded state-management bug in a frozen minimal codebase.",
+    "acceptance_criteria": [
+      "Test reproduces before fix",
+      "New test passes after fix",
+      "Existing tests pass",
+      "No unrelated modifications"
+    ]
+  },
+  {
+    "id": "large-patch-plan",
+    "category": "planning",
+    "task": "Produce a staged plan for an Android/Web update respecting documented architecture and release constraints.",
+    "acceptance_criteria": [
+      "Dependencies explicit",
+      "Risks and rollback described",
+      "Acceptance checks included",
+      "No unsupported repository claims"
+    ]
+  }
+]
