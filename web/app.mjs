@@ -6,6 +6,7 @@ const more = document.getElementById('more');
 let cursor = null;
 let query = '';
 let requestId = 0;
+const failedBookmarks = new Set();
 
 function drawPost(post) {
   const card = document.createElement('article');
@@ -19,6 +20,7 @@ function drawPost(post) {
   const button = document.createElement('button');
   button.className = 'bookmark';
   button.type = 'button';
+  if (failedBookmarks.has(post.id)) post.saved = false;
   button.textContent = post.saved ? '★' : '☆';
   button.setAttribute('aria-pressed', String(post.saved));
   button.setAttribute('aria-label', post.saved ? 'Remove saved post' : 'Save post');
@@ -40,6 +42,7 @@ function drawPost(post) {
       post.version = body.version;
     } catch {
       post.saved = previous;
+      failedBookmarks.add(post.id);
       button.textContent = previous ? '★' : '☆';
       button.setAttribute('aria-pressed', String(previous));
       button.setAttribute('aria-label', previous ? 'Remove saved post' : 'Save post');
