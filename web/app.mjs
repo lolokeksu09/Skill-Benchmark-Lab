@@ -64,7 +64,7 @@ function drawPost(post) {
 async function fetchPage(reset) {
   const serial = ++requestSerial;
   if (reset) loadedIds = new Set();
-  status.textContent = 'Loading discussions…';
+  status.textContent = 'Loading…';
   const params = new URLSearchParams({ q: query, limit: '8' });
   if (cursor && !reset) params.set('cursor', cursor);
   try {
