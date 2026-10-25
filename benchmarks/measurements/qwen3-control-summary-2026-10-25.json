@@ -53,6 +53,19 @@
     "Only trial-001 output was shared and archived; trial-002 and trial-003 source code remains on user's Android device.",
     "Static check patterns can match different candidates; identical tokens/static scores do not prove byte-for-byte identity or equal runtime quality.",
     "Runtime Node test results for trial-001 are archived and independently reproducible.",
-    "No DDS or P2P inference performed at snapshot time; no skill comparison available."
-  ]
+    "No DDS or P2P inference performed at snapshot time; no skill comparison available.",
+    "User-provided sha256sum demonstrated byte-identical raw response text in all three control trials and DDS trial-001. This does not imply other scenario performance."
+  ],
+  "raw_output_sha256_reported_by_user": "13249e973a22a75a0982379849e1b20932629495f8b240e974c999943438ca02",
+  "hash_verification": {
+    "algorithm": "SHA-256",
+    "method": "Termux sha256sum over saved raw candidate .txt files",
+    "trial_ids": [
+      "trial-001",
+      "trial-002",
+      "trial-003"
+    ],
+    "identical_raw_output": true,
+    "source": "user-shared terminal output on 2026-10-25"
+  }
 }
