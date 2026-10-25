@@ -52,6 +52,13 @@ function drawPost(post) {
       button.textContent = previous ? '★' : '☆';
       button.setAttribute('aria-pressed', String(previous));
       button.setAttribute('aria-label', previous ? 'Remove saved post' : 'Save post');
+      board.querySelectorAll('.bookmark').forEach(control => {
+        if (control === button || control.closest('.card')?.dataset.id === post.id) {
+          control.textContent = previous ? '★' : '☆';
+          control.setAttribute('aria-pressed', String(previous));
+          control.setAttribute('aria-label', previous ? 'Remove saved post' : 'Save post');
+        }
+      });
     } finally { button.disabled = false; }
   });
   card.append(button);
