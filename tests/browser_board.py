@@ -190,7 +190,7 @@ class BrowserBoardTests(unittest.IsolatedAsyncioTestCase):
         # Alice owns every tenth (private) post, plus sees the public XSS fixture.
         # Exactly 31 records are visible, not 30.
         self.assertEqual(len(ids), 31)
-        self.assertEqual(len(set(ids)), 30)
+        self.assertEqual(len(set(ids)), 31)
         self.assertTrue(await load_button.is_hidden())
 
     async def test_failed_search_keeps_previous_cards_and_announces_error(self):
