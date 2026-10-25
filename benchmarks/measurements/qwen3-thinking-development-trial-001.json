@@ -66,13 +66,17 @@
     "additional_input_tokens": 752,
     "additional_output_tokens": 6,
     "equal_static_profile": true,
-    "identical_raw_model_output": null
+    "identical_raw_model_output": false,
+    "raw_candidate_sha256_control": "1d2d275951d73ba8cf77517e217c1769f494c580f9046092f37797ba06d6d1e4",
+    "raw_candidate_sha256_development": "854fee7ff88648794d1a830c60a6745e20a05dafd680f71ce8db6a49377918f4",
+    "hash_source": "User-provided Termux sha256sum of two local thinking candidate text files"
   },
   "limitations": [
     "One bounded Thinking trial per variant; a repeatable skills effect has not been measured.",
     "Identical static profiles do not imply identical candidate code.",
     "Neither bounded Thinking candidate has undergone Node.js runtime tests.",
     "The user's local server reasoning-budget setting was reported as 128; actual per-request reasoning tokens were not reported.",
-    "DDS system instructions increase prompt tokens, so unadjusted wall-time ratios are not pure runtime model speed ratios."
+    "DDS system instructions increase prompt tokens, so unadjusted wall-time ratios are not pure runtime model speed ratios.",
+    "Different SHA-256 proves raw candidate file difference but not which requirement improved; user has not shared full files."
   ]
 }
