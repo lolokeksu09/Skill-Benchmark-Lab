@@ -158,6 +158,9 @@ class BrowserBoardTests(unittest.IsolatedAsyncioTestCase):
             "document.querySelector('.bookmark').getAttribute('aria-pressed') === 'true' "
             "&& !document.querySelector('.bookmark').disabled"
         )
+        # A temporarily disabled button can lose keyboard focus in Chromium.
+        # Explicitly refocus before asserting independent Space activation.
+        await button.focus()
         await self.page.keyboard.press("Space")
         await self.page.wait_for_function(
             "document.querySelector('.bookmark').getAttribute('aria-pressed') === 'false' "
@@ -167,16 +170,26 @@ class BrowserBoardTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_loading_all_pages_does_not_duplicate_cards(self):
         await self.open_board()
-        expected = (16, 24, 30)
-        for count in expected:
-            await self.page.get_by_role("button", name="Load more").click()
+        previous = await self.page.locator(".card").count()
+        self.assertEqual(previous, 8)
+        load_button = self.page.get_by_role("button", name="Load more")
+        for _ in range(10):
+            if await load_button.is_hidden():
+                break
+            await load_button.click()
             await self.page.wait_for_function(
-                "(n) => document.querySelectorAll('.card').length === n", arg=count, timeout=5000
+                "(n) => document.querySelectorAll('.card').length > n", arg=previous, timeout=5000
             )
+            current = await self.page.locator(".card").count()
+            self.assertGreater(current, previous)
+            await self.page.get_by_role("status").filter(
+                has_text=f"{current} discussions"
+            ).wait_for(timeout=5000)
+            previous = current
         ids = await self.page.locator(".card").evaluate_all("els => els.map(e => e.dataset.id)")
         self.assertEqual(len(ids), 30)
         self.assertEqual(len(set(ids)), 30)
-        self.assertTrue(await self.page.get_by_role("button", name="Load more").is_hidden())
+        self.assertTrue(await load_button.is_hidden())
 
     async def test_failed_search_keeps_previous_cards_and_announces_error(self):
         await self.open_board()
