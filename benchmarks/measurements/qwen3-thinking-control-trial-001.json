@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-25",
+  "source": "User-reported Termux stdout from evaluator.thinking_pilot (Qwen3-8B local llama-server)",
+  "scenario_id": "web-fixture-repair",
+  "variant": "control",
+  "experiment": "thinking_on",
+  "run_id": "trial-001",
+  "status": "truncated",
+  "duration_seconds": 205.495,
+  "prompt_tokens": 254,
+  "completion_tokens": 768,
+  "total_tokens": 1022,
+  "finish_reason": "length",
+  "reasoning_present": true,
+  "candidate_valid_json": false,
+  "static_preflight": null,
+  "runtime_tests_executed": false,
+  "runtime_tests_passed": null,
+  "error": "output is not a JSON object",
+  "model": "Qwen3-8B-Q4_K_M.gguf",
+  "protocol": {
+    "temperature": 0.2,
+    "max_tokens": 768,
+    "context_tokens": 2048,
+    "skill_instructions": "none"
+  },
+  "limits": [
+    "No candidate code produced. A truncated reasoning-only attempt is not a quality comparison.",
+    "This result must not be treated as one of three earlier no_think control trials.",
+    "Actual reasoning text has not been inspected by the assistant. Reasoning present flag indicates a trace, not its contents.",
+    "Do not increase max_tokens for control only and compare against DDS without matching settings."
+  ]
+}
