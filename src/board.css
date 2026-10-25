@@ -1,4 +1,14 @@
-.board { width: 960px; margin: 0 auto; padding: 20px; }
-.card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; }
+.board {
+  width: 100%;
+  max-width: 960px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+.card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; min-width: 0; }
 .bookmark { border: 1px solid #999; background: white; }
 .bookmark:hover { background: #eee; }
+.bookmark:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
