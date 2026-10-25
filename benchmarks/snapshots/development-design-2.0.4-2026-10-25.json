@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-25",
+  "archive": {
+    "filename": "Development-Design-Skills-2.0.4.zip",
+    "version": "2.0.4",
+    "sha256": "f9df305963c4d9554cdd467b2973d5f2d5c0b99cd1463158406d0cf15ad8b642",
+    "zip_size_bytes": 6110377,
+    "zip_file_count": 1211,
+    "skill_count": 116,
+    "plugin_name": "development-design-skills"
+  },
+  "diff_vs_203": {
+    "modified_files": 6,
+    "added_files": 3,
+    "removed_files": 0,
+    "skill_md_preserved_byte_identical": 116
+  },
+  "offline_verification": {
+    "zip_crc": "passed",
+    "fresh_archive_extracted_tests": {
+      "passed": 100,
+      "total": 100
+    },
+    "previous_released_suite_preserved": 77,
+    "added_scenarios": 23,
+    "added_scenarios_203_pass": 9,
+    "added_scenarios_204_pass": 23,
+    "lab_previous_11": {
+      "v203_passed": 4,
+      "v204_passed": 11
+    },
+    "legacy_reproduce_script": {
+      "exit_code": 0,
+      "limitation": "Rebuilds original 2.0.1 skill reference; not a byte-for-byte reproduction of modified 2.0.4 router"
+    }
+  },
+  "limitations": [
+    "Tests verify lexical candidate selection, not model effectiveness or token costs.",
+    "User-supplied binaries are not redistributed on public GitHub.",
+    "21 new plus 2 additional phrases are regression tests, not a blind holdout."
+  ]
+}

@@ -1,0 +1,117 @@
+[
+  {
+    "id": "en-short-without",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-rather-than",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "ru-short-without",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "ru-without-use",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-is-not-allowed",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-stop-using",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-no-rn",
+    "2.0.3": "pass",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-without-two",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-inverse",
+    "2.0.3": "pass",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-but-construct",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-not-abandon",
+    "2.0.3": "pass",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "ru-not-abandon",
+    "2.0.3": "pass",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-rn-broken",
+    "2.0.3": "pass",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "ru-rn-broken",
+    "2.0.3": "pass",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-dual-active",
+    "2.0.3": "pass",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-positive-unless",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-exclude-no-react",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "ru-no-rn-allowed",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-no-longer",
+    "2.0.3": "pass",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "ru-instead",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-without-current-compat",
+    "2.0.3": "pass",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "en-not-use-and-build",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  },
+  {
+    "id": "ru-no-rn-and-create",
+    "2.0.3": "fail",
+    "2.0.4": "pass"
+  }
+]
