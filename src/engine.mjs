@@ -35,8 +35,8 @@ export function seedPosts() {
   return posts;
 }
 
-function encodeCursor(offset) {
-  return Buffer.from(JSON.stringify({ offset }), 'utf8').toString('base64url');
+function encodeCursor(cursor) {
+  return Buffer.from(JSON.stringify(cursor), 'utf8').toString('base64url');
 }
 
 export function createEngine(posts = seedPosts()) {
@@ -45,35 +45,49 @@ export function createEngine(posts = seedPosts()) {
 
   function feed(viewer, { q = '', limit = '8', cursor = '' } = {}) {
     if (!viewer) return { status: 401, body: { error: 'unauthorized' } };
+    if (typeof limit !== 'string' || !/^(?:[1-9]|1[0-5])$/.test(limit)) return { status: 400, body: { error: 'invalid limit' } };
     const size = Number(limit);
-    if (!Number.isInteger(size) || size < 1 || size > 15) return { status: 400, body: { error: 'invalid limit' } };
-    let offset = 0;
-    if (cursor) {
-      try { offset = JSON.parse(Buffer.from(cursor, 'base64url').toString()).offset; }
-      catch { return { status: 400, body: { error: 'invalid cursor' } }; }
-    }
     const search = String(q).trim().toLowerCase();
+    let after = null;
+    if (cursor) {
+      try {
+        const decoded = JSON.parse(Buffer.from(cursor, 'base64url').toString('utf8'));
+        if (!decoded || decoded.v !== 1 || decoded.viewer !== viewer || decoded.search !== search
+          || typeof decoded.createdAt !== 'string' || typeof decoded.id !== 'string') throw new Error('invalid cursor');
+        after = { createdAt: decoded.createdAt, id: decoded.id };
+      } catch { return { status: 400, body: { error: 'invalid cursor' } }; }
+    }
     const visible = items
-      .filter(post => post.visibility === 'public' || post.owner === viewer || post.visibility === 'private')
+      .filter(post => post.visibility === 'public' || post.owner === viewer)
       .filter(post => `${post.title} ${post.summary}`.toLowerCase().includes(search))
-      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-    const page = visible.slice(offset, offset + size).map(post => {
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt) || a.id.localeCompare(b.id));
+    const start = after ? visible.findIndex(post => post.createdAt === after.createdAt && post.id === after.id) + 1 : 0;
+    if (after && start === 0) return { status: 400, body: { error: 'invalid cursor' } };
+    const page = visible.slice(start, start + size).map(post => {
       const state = bookmarks.get(`${viewer}:${post.id}`) ?? { saved: false, version: 0 };
       return { ...post, saved: state.saved, version: state.version };
     });
+    const last = page.at(-1);
     return {
       status: 200,
-      body: { items: page, nextCursor: offset + size < visible.length ? encodeCursor(offset + size) : null },
+      body: { items: page, nextCursor: last && start + page.length < visible.length
+        ? encodeCursor({ v: 1, viewer, search, createdAt: last.createdAt, id: last.id }) : null },
     };
   }
 
   function bookmark(viewer, id, payload, ifMatch) {
     if (!viewer) return { status: 401, body: { error: 'unauthorized' } };
     const post = items.find(entry => entry.id === id);
-    if (!post) return { status: 404, body: { error: 'not found' } };
+    if (!post || (post.visibility === 'private' && post.owner !== viewer)) return { status: 404, body: { error: 'not found' } };
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload) || typeof payload.saved !== 'boolean'
+      || Object.keys(payload).some(key => key !== 'saved')) return { status: 400, body: { error: 'invalid body' } };
+    if (typeof ifMatch !== 'string') return { status: 428, body: { error: 'if-match required' } };
+    const match = /^"(\d+)"$/.exec(ifMatch);
+    if (!match) return { status: 400, body: { error: 'invalid if-match' } };
     const key = `${viewer}:${id}`;
     const old = bookmarks.get(key) ?? { saved: false, version: 0 };
-    const newState = { saved: Boolean(payload?.saved), version: old.version };
+    if (Number(match[1]) !== old.version) return { status: 412, body: { error: 'stale version' } };
+    const newState = { saved: payload.saved, version: old.version + (payload.saved === old.saved ? 0 : 1) };
     bookmarks.set(key, newState);
     return { status: 200, headers: { ETag: `"${newState.version}"` }, body: { id, ...newState } };
   }
