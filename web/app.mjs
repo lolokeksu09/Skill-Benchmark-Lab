@@ -25,9 +25,7 @@ function drawPost(post) {
   button.setAttribute('aria-pressed', String(post.saved));
   button.addEventListener('click', async () => {
     const previous = post.saved;
-    post.saved = !previous;
-    button.setAttribute('aria-pressed', String(post.saved));
-    button.setAttribute('aria-label', post.saved ? 'Remove saved post' : 'Save post');
+    const desired = !previous;
     button.disabled = true;
     try {
     const response = await fetch(`/api/bookmarks/${encodeURIComponent(post.id)}`, {
@@ -37,11 +35,14 @@ function drawPost(post) {
         'content-type': 'application/json',
         'if-match': `"${post.version}"`,
       },
-      body: JSON.stringify({ saved: post.saved }),
+      body: JSON.stringify({ saved: desired }),
     });
     if (response.ok) {
       const body = await response.json();
+      post.saved = desired;
       post.version = body.version;
+      button.setAttribute('aria-pressed', String(desired));
+      button.setAttribute('aria-label', desired ? 'Remove saved post' : 'Save post');
     } else {
       post.saved = previous;
       button.setAttribute('aria-pressed', String(previous));
