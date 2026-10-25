@@ -1,0 +1,52 @@
+name: Golden fixture checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Corrected web fixture must pass
+        run: FIXTURE_VARIANT=reference node --test benchmarks/fixtures/web/tests/feed.test.mjs
+      - name: Seeded web fixture must fail with expected assertions
+        shell: bash
+        run: |
+          set +e
+          FIXTURE_VARIANT=baseline node --test benchmarks/fixtures/web/tests/feed.test.mjs > web-baseline.log 2>&1
+          status=$?
+          set -e
+          if [ "$status" -eq 0 ]; then echo "Seeded web fixture unexpectedly passed"; exit 1; fi
+          grep -q "not ok" web-baseline.log || { cat web-baseline.log; exit 1; }
+          echo "Expected web fixture failure confirmed"
+  android-kotlin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.14'
+      - name: Corrected Kotlin fixture must pass
+        run: gradle -p benchmarks/fixtures/android run --no-daemon -PfixtureVariant=reference
+      - name: Seeded Kotlin fixture must fail with the expected marker
+        shell: bash
+        run: |
+          set +e
+          gradle -p benchmarks/fixtures/android run --no-daemon -PfixtureVariant=baseline > kotlin-baseline.log 2>&1
+          status=$?
+          set -e
+          if [ "$status" -eq 0 ]; then echo "Seeded Kotlin fixture unexpectedly passed"; exit 1; fi
+          grep -q "EXPECTED_FIXTURE_FAILURE" kotlin-baseline.log || { cat kotlin-baseline.log; exit 1; }
+          echo "Expected Kotlin fixture failure confirmed"
