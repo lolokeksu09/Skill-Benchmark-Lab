@@ -26,6 +26,8 @@ function drawPost(post) {
   button.addEventListener('click', async () => {
     const previous = post.saved;
     const desired = !previous;
+    button.setAttribute('aria-pressed', String(previous));
+    button.setAttribute('aria-label', previous ? 'Remove saved post' : 'Save post');
     button.disabled = true;
     try {
     const response = await fetch(`/api/bookmarks/${encodeURIComponent(post.id)}`, {
