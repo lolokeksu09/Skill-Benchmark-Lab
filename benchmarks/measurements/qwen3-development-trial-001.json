@@ -9,7 +9,7 @@
   "status": "candidate_saved",
   "duration_seconds": 194.332,
   "total_tokens": 1117,
-  "finish_reason": null,
+  "finish_reason": "stop",
   "model_context_tokens_reported": 2048,
   "protocol": {
     "active_skills": [
@@ -57,6 +57,10 @@
     "comparison_kind": "sha256_of_raw_model_output",
     "identical_to_all_three_control_trials": true,
     "hash": "13249e973a22a75a0982379849e1b20932629495f8b240e974c999943438ca02",
-    "confirmed_by": "User-provided Termux sha256sum on 2026-10-25"
-  }
+    "confirmed_by": "User-provided Termux sha256sum on 2026-10-25",
+    "extra_input_tokens": 752,
+    "same_output_tokens": true
+  },
+  "prompt_tokens": 1007,
+  "completion_tokens": 110
 }
