@@ -25,8 +25,8 @@ def prompt_for_fixture(root):
         "(3) CSS .feed has max-width: 100% for responsive layout. "
         "Return ONLY a JSON object with exactly two string keys feed.mjs and feed.css; "
         "each value must contain the complete corrected file. No markdown fences. "
-        "No third-party packages or other files. End the reply after JSON. /no_think\n\n"
-        "--- feed.mjs ---\n" + js + "\n--- feed.css ---\n" + css
+        "No third-party packages or other files. End the reply after JSON.\n\n"
+        "--- feed.mjs ---\n" + js + "\n--- feed.css ---\n" + css + "\n/no_think"
     )
 
 def request_completion(base_url, prompt, max_tokens, timeout):
