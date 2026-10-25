@@ -1,0 +1,82 @@
+name: Skill Benchmark V4 — isolated API and Chromium
+on:
+  push:
+    branches:
+      - bench/v4-hard-base
+  pull_request:
+    branches:
+      - bench/v4-hard-base
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify allowed candidate paths vs frozen baseline
+        if: ${{ github.head_ref != 'bench/v4-hard-base' && github.ref_name != 'bench/v4-hard-base' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin bench/v4-hard-base:refs/remotes/origin/bench/v4-hard-base
+          git diff --name-only origin/bench/v4-hard-base HEAD > /tmp/changed.txt
+          while IFS= read -r path; do
+            case "$path" in
+              src/engine.mjs|src/server.mjs|web/app.mjs|web/styles.css) ;;
+              *) echo "Forbidden change: $path"; exit 1 ;;
+            esac
+          done < /tmp/changed.txt
+          echo "PASS: candidate changed allowed paths only"
+      - name: Install browser dependencies
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Run baseline sensitivity or candidate checks
+        shell: bash
+        env:
+          BENCH_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          set -uo pipefail
+          if [[ "$BENCH_BRANCH" == 'bench/v4-hard-base' ]]; then
+            set +e
+            npm test > /tmp/v4-api.log 2>&1
+            a=$?
+            npm run test:browser > /tmp/v4-browser.log 2>&1
+            b=$?
+            set -e
+            cat /tmp/v4-api.log
+            cat /tmp/v4-browser.log
+            if [[ "$a" == 0 || "$b" == 0 ]]; then
+              echo "Baseline unexpectedly succeeded; inspect seeded failures"
+              exit 1
+            fi
+            grep -q '^# tests 33$' /tmp/v4-api.log || exit 1
+            grep -q '^# pass 12$' /tmp/v4-api.log || exit 1
+            grep -q '^# fail 21$' /tmp/v4-api.log || exit 1
+            grep -q 'Ran 11 tests' /tmp/v4-browser.log || exit 1
+            if grep -q 'ERR_BLOCKED_BY_ADMINISTRATOR' /tmp/v4-browser.log; then
+              echo "Browser network blocked, not a valid sensitivity run"
+              exit 1
+            fi
+            echo 'Baseline sensitivity verified: 12/33 API and browser has expected functional failures'
+          else
+            set +e
+            npm test
+            a=$?
+            npm run test:browser
+            b=$?
+            set -e
+            if [[ "$a" != 0 || "$b" != 0 ]]; then
+              echo "Candidate failed: npm test=$a, browser=$b"
+              exit 1
+            fi
+          fi

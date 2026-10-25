@@ -230,3 +230,105 @@ test('Seeded fixture includes a malicious title for browser XSS verification', (
   assert.match(post.title, /<img.*onerror=/);
   assert.match(post.summary, /<svg.*onload=/);
 });
+
+
+// V4 regressions: each withApi call creates an independent HTTP server.
+test('All keyset pages enumerate the full authorized feed without overlaps or gaps', async () => {
+  await withApi(async call => {
+    const expected = seedPosts().filter(p => p.visibility === 'public' || p.owner === 'alice');
+    let cursor = null;
+    const items = [];
+    for (let iteration = 0; iteration < 20; iteration++) {
+      const path = '/api/feed?limit=3' + (cursor ? '&cursor=' + encodeURIComponent(cursor) : '');
+      const r = await call(path);
+      assert.equal(r.status, 200);
+      items.push(...r.body.items);
+      cursor = r.body.nextCursor;
+      if (cursor === null) break;
+      assert.ok(iteration < 19, 'cursor must eventually terminate');
+    }
+    const ids = items.map(p => p.id);
+    assert.equal(ids.length, expected.length);
+    assert.equal(new Set(ids).size, expected.length);
+    assert.deepEqual([...ids].sort(), expected.map(p => p.id).sort());
+    for (let i = 1; i < items.length; i++) {
+      const prev = items[i - 1], curr = items[i];
+      assert.ok(prev.createdAt > curr.createdAt || (
+        prev.createdAt === curr.createdAt && prev.id.localeCompare(curr.id) < 0
+      ), 'stable descending timestamp and ascending tied ID');
+    }
+  });
+});
+
+test('Bob can bookmark his private post, Alice cannot mutate it or infer its state', async () => {
+  await withApi(async call => {
+    const allowed = await bookmark(call, 'secret-bob', true, '"0"', 'bob');
+    assert.equal(allowed.status, 200);
+    assert.equal(allowed.body.saved, true);
+    const denied = await bookmark(call, 'secret-bob', false, '"1"', 'alice');
+    assert.equal(denied.status, 404);
+    const own = await call('/api/feed?q=confidential', { user: 'bob' });
+    assert.equal(own.body.items[0].saved, true);
+    assert.equal(own.body.items[0].version, 1);
+  });
+});
+
+test('Bookmark payload containing extra properties is rejected without mutation', async () => {
+  await withApi(async call => {
+    const r = await call('/api/bookmarks/p01', {
+      method: 'PUT', payload: { saved: true, elevated: true },
+      headers: { 'if-match': '"0"' },
+    });
+    assert.equal(r.status, 400);
+    const feed = await call('/api/feed?q=discussion%201%3A');
+    assert.equal(feed.body.items[0].saved, false);
+    assert.equal(feed.body.items[0].version, 0);
+  });
+});
+
+test('A stale no-op bookmark write is rejected rather than bypassing If-Match', async () => {
+  await withApi(async call => {
+    assert.equal((await bookmark(call, 'p01', true, '"0"')).status, 200);
+    const stale = await bookmark(call, 'p01', true, '"0"');
+    assert.equal(stale.status, 412);
+    const feed = await call('/api/feed?q=discussion%201%3A');
+    assert.equal(feed.body.items[0].version, 1);
+  });
+});
+
+test('Malformed If-Match values return 400 and do not mutate data', async () => {
+  await withApi(async call => {
+    for (const value of ['W/"0"', '0', '"nope"', '"0" and more', '"-1"']) {
+      const r = await bookmark(call, 'p01', true, value);
+      assert.equal(r.status, 400, value);
+    }
+    const feed = await call('/api/feed?q=discussion%201%3A');
+    assert.equal(feed.body.items[0].saved, false);
+    assert.equal(feed.body.items[0].version, 0);
+  });
+});
+
+test('Two same-state simultaneous writes at one version admit exactly one winner', async () => {
+  await withApi(async call => {
+    const responses = await Promise.all([
+      bookmark(call, 'p01', true, '"0"'),
+      bookmark(call, 'p01', true, '"0"'),
+    ]);
+    assert.deepEqual(responses.map(r => r.status).sort(), [200, 412]);
+    const feed = await call('/api/feed?q=discussion%201%3A');
+    assert.equal(feed.body.items[0].saved, true);
+    assert.equal(feed.body.items[0].version, 1);
+  });
+});
+
+test('Malformed percent-encoding in bookmark ID is a 400 JSON response, not a server crash', async () => {
+  await withApi(async call => {
+    const r = await call('/api/bookmarks/%E0%A4%A', {
+      method: 'PUT', payload: { saved: true },
+      headers: { 'if-match': '"0"' },
+    });
+    assert.equal(r.status, 400);
+    assert.match(String(r.body.error), /invalid/i);
+    assert.equal((await call('/api/feed')).status, 200, 'server must remain available');
+  });
+});
