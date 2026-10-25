@@ -1,0 +1,92 @@
+[
+  {
+    "id": "neg_ru_no_longer",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "neg_en_out_scope",
+    "2.0.1": "pass",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "neg_ru_discuss",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "neg_en_switch",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "inverse_switch",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "negated_but_not_abandoned",
+    "2.0.1": "pass",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "rn_failure",
+    "2.0.1": "pass",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "both_targets",
+    "2.0.1": "pass",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "neg_then_permission",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "scope_css_no_deploy",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "not_compose_despite_label",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "no_rn_and_expo",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "two_time_clauses",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "unrelated_android_background",
+    "2.0.1": "pass",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "neg_no_conflict_explicit",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "new_context_rn",
+    "2.0.1": "fail",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "en_outscope_negative",
+    "2.0.1": "pass",
+    "2.0.2": "pass"
+  },
+  {
+    "id": "en_without_rn",
+    "2.0.1": "fail",
+    "2.0.2": "fail"
+  }
+]
