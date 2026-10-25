@@ -24,6 +24,8 @@ jobs:
             sha: 2f3d0b0e952d4b67a2c51a787cec5109bbb215fe
           - candidate: p2p-improved-v3-001
             sha: 561d26e8f9373978963ec70df7e913b263f577a2
+          - candidate: combined-v3-001
+            sha: f1ec47ba116c1f1a4893db26a67145a9b2819dd4
     steps:
       - uses: actions/checkout@v4
         with:
