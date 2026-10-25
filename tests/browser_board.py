@@ -187,7 +187,9 @@ class BrowserBoardTests(unittest.IsolatedAsyncioTestCase):
             ).wait_for(timeout=5000)
             previous = current
         ids = await self.page.locator(".card").evaluate_all("els => els.map(e => e.dataset.id)")
-        self.assertEqual(len(ids), 30)
+        # Alice owns every tenth (private) post, plus sees the public XSS fixture.
+        # Exactly 31 records are visible, not 30.
+        self.assertEqual(len(ids), 31)
         self.assertEqual(len(set(ids)), 30)
         self.assertTrue(await load_button.is_hidden())
 
