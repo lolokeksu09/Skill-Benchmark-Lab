@@ -49,7 +49,6 @@ function drawPost(post) {
       button.setAttribute('aria-label', previous ? 'Remove saved post' : 'Save post');
       status.textContent = 'Could not save post';
     } finally { button.disabled = false; }
-    }
   });
   card.append(button);
   return card;
