@@ -1,0 +1,4 @@
+.board { width: 960px; margin: 0 auto; padding: 20px; }
+.card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; }
+.bookmark { border: 1px solid #999; background: white; }
+.bookmark:hover { background: #eee; }
