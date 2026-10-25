@@ -1,3 +1,5 @@
+import { createHmac, timingSafeEqual } from 'node:crypto';
+
 /**
  * Benchmark-only local fixture. `demo-*` bearer credentials are test fixtures,
  * not production secrets; this server must not be deployed on the internet.
@@ -35,8 +37,24 @@ export function seedPosts() {
   return posts;
 }
 
-function encodeCursor(offset) {
-  return Buffer.from(JSON.stringify({ offset }), 'utf8').toString('base64url');
+const CURSOR_SECRET = 'community-feed-v4-cursor';
+
+function encodeCursor(data) {
+  const payload = Buffer.from(JSON.stringify(data), 'utf8').toString('base64url');
+  const mac = createHmac('sha256', CURSOR_SECRET).update(payload).digest('base64url');
+  return `${payload}.${mac}`;
+}
+
+function decodeCursor(cursor) {
+  if (typeof cursor !== 'string' || !/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(cursor)) return null;
+  const [payload, mac] = cursor.split('.');
+  const expected = createHmac('sha256', CURSOR_SECRET).update(payload).digest('base64url');
+  if (mac.length !== expected.length || !timingSafeEqual(Buffer.from(mac), Buffer.from(expected))) return null;
+  try {
+    const value = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+    return value;
+  } catch { return null; }
 }
 
 export function createEngine(posts = seedPosts()) {
@@ -45,35 +63,52 @@ export function createEngine(posts = seedPosts()) {
 
   function feed(viewer, { q = '', limit = '8', cursor = '' } = {}) {
     if (!viewer) return { status: 401, body: { error: 'unauthorized' } };
+    if (typeof limit !== 'string' || !/^(?:[1-9]|1[0-5])$/.test(limit)) return { status: 400, body: { error: 'invalid limit' } };
     const size = Number(limit);
-    if (!Number.isInteger(size) || size < 1 || size > 15) return { status: 400, body: { error: 'invalid limit' } };
-    let offset = 0;
-    if (cursor) {
-      try { offset = JSON.parse(Buffer.from(cursor, 'base64url').toString()).offset; }
-      catch { return { status: 400, body: { error: 'invalid cursor' } }; }
-    }
     const search = String(q).trim().toLowerCase();
     const visible = items
-      .filter(post => post.visibility === 'public' || post.owner === viewer || post.visibility === 'private')
+      .filter(post => post.visibility === 'public' || post.owner === viewer)
       .filter(post => `${post.title} ${post.summary}`.toLowerCase().includes(search))
-      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-    const page = visible.slice(offset, offset + size).map(post => {
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt) || a.id.localeCompare(b.id));
+    let start = 0;
+    if (cursor) {
+      const decoded = decodeCursor(cursor);
+      if (!decoded || Object.keys(decoded).length !== 4 || decoded.viewer !== viewer || decoded.query !== search ||
+          typeof decoded.createdAt !== 'string' || typeof decoded.id !== 'string') {
+        return { status: 400, body: { error: 'invalid cursor' } };
+      }
+      start = visible.findIndex(post => post.createdAt === decoded.createdAt && post.id === decoded.id);
+      if (start < 0) return { status: 400, body: { error: 'invalid cursor' } };
+      start += 1;
+    }
+    const pagePosts = visible.slice(start, start + size);
+    const page = pagePosts.map(post => {
       const state = bookmarks.get(`${viewer}:${post.id}`) ?? { saved: false, version: 0 };
       return { ...post, saved: state.saved, version: state.version };
     });
+    const last = pagePosts.at(-1);
     return {
-      status: 200,
-      body: { items: page, nextCursor: offset + size < visible.length ? encodeCursor(offset + size) : null },
+      status: 200, body: { items: page,
+        nextCursor: last && start + pagePosts.length < visible.length
+          ? encodeCursor({ viewer, query: search, createdAt: last.createdAt, id: last.id }) : null },
     };
   }
 
   function bookmark(viewer, id, payload, ifMatch) {
     if (!viewer) return { status: 401, body: { error: 'unauthorized' } };
     const post = items.find(entry => entry.id === id);
-    if (!post) return { status: 404, body: { error: 'not found' } };
+    if (!post || (post.visibility === 'private' && post.owner !== viewer)) return { status: 404, body: { error: 'not found' } };
+    if (ifMatch === undefined) return { status: 428, body: { error: 'if-match required' } };
+    if (typeof ifMatch !== 'string' || !/^"[0-9]+"$/.test(ifMatch)) return { status: 400, body: { error: 'invalid if-match' } };
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload) ||
+        Object.keys(payload).length !== 1 || typeof payload.saved !== 'boolean') {
+      return { status: 400, body: { error: 'invalid payload' } };
+    }
     const key = `${viewer}:${id}`;
     const old = bookmarks.get(key) ?? { saved: false, version: 0 };
-    const newState = { saved: Boolean(payload?.saved), version: old.version };
+    const requestedVersion = Number(ifMatch.slice(1, -1));
+    if (requestedVersion !== old.version) return { status: 412, body: { error: 'stale version' } };
+    const newState = { saved: payload.saved, version: old.version + (payload.saved === old.saved ? 0 : 1) };
     bookmarks.set(key, newState);
     return { status: 200, headers: { ETag: `"${newState.version}"` }, body: { id, ...newState } };
   }
