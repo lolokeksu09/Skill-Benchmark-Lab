@@ -32,6 +32,7 @@ function drawPost(post) {
     post.saved = next;
     setBookmarkState(next);
     button.disabled = true;
+    let saved = false;
     try {
       const response = await fetch(`/api/bookmarks/${encodeURIComponent(post.id)}`, {
         method: 'PUT',
@@ -45,11 +46,14 @@ function drawPost(post) {
       if (!response.ok) throw new Error('bookmark write failed');
       const body = await response.json();
       post.version = body.version;
+      saved = true;
     } catch {
-      post.saved = previous;
-      setBookmarkState(previous);
-      status.textContent = 'Could not save bookmark.';
     } finally {
+      if (!saved) {
+        post.saved = previous;
+        setBookmarkState(previous);
+        status.textContent = 'Could not save bookmark.';
+      }
       button.disabled = false;
     }
   });
