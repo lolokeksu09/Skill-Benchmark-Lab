@@ -17,7 +17,10 @@
       "runtime_tests_executed": true,
       "runtime_tests_passed": 1,
       "runtime_tests_failed": 2,
-      "source_code_archived": true
+      "source_code_archived": true,
+      "prompt_tokens": 255,
+      "completion_tokens": 110,
+      "finish_reason": "stop"
     },
     {
       "run_id": "trial-002",
@@ -30,7 +33,10 @@
       "runtime_tests_executed": false,
       "runtime_tests_passed": null,
       "runtime_tests_failed": null,
-      "source_code_archived": false
+      "source_code_archived": false,
+      "prompt_tokens": 255,
+      "completion_tokens": 110,
+      "finish_reason": "stop"
     },
     {
       "run_id": "trial-003",
@@ -43,7 +49,10 @@
       "runtime_tests_executed": false,
       "runtime_tests_passed": null,
       "runtime_tests_failed": null,
-      "source_code_archived": false
+      "source_code_archived": false,
+      "prompt_tokens": 255,
+      "completion_tokens": 110,
+      "finish_reason": "stop"
     }
   ],
   "median_duration_seconds": 25.755,
@@ -54,7 +63,8 @@
     "Static check patterns can match different candidates; identical tokens/static scores do not prove byte-for-byte identity or equal runtime quality.",
     "Runtime Node test results for trial-001 are archived and independently reproducible.",
     "No DDS or P2P inference performed at snapshot time; no skill comparison available.",
-    "User-provided sha256sum demonstrated byte-identical raw response text in all three control trials and DDS trial-001. This does not imply other scenario performance."
+    "User-provided sha256sum demonstrated byte-identical raw response text in all three control trials and DDS trial-001. This does not imply other scenario performance.",
+    "User reported input=255 and output=110 tokens for each control trial; those are server usage fields, not estimates."
   ],
   "raw_output_sha256_reported_by_user": "13249e973a22a75a0982379849e1b20932629495f8b240e974c999943438ca02",
   "hash_verification": {
