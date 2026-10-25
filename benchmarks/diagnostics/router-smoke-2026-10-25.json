@@ -1,0 +1,59 @@
+[
+  {
+    "id": "negative_tech_01",
+    "prompt": "Мы отказались от React Native. Нужен экран на Kotlin Compose.",
+    "expected_required": [
+      "android-jetpack-compose-expert"
+    ],
+    "expected_forbidden": [
+      "vercel-react-native-skills"
+    ],
+    "observed_selected": [
+      "android-jetpack-compose-expert",
+      "vercel-react-native-skills"
+    ],
+    "result": "failed",
+    "limitation": "Lexical matcher keeps negated React Native"
+  },
+  {
+    "id": "context_switch_02",
+    "prompt": "Мы обсуждали Compose, но теперь исправить CSS сетку веб страницы.",
+    "expected_required": [
+      "systematic-debugging"
+    ],
+    "expected_forbidden": [
+      "android-jetpack-compose-expert"
+    ],
+    "observed_selected": [
+      "systematic-debugging",
+      "android-jetpack-compose-expert",
+      "verification-before-completion"
+    ],
+    "result": "failed",
+    "limitation": "Former Compose context is mistaken for target stack"
+  },
+  {
+    "id": "wcag_03",
+    "prompt": "Сделай ревью accessibility WCAG для сайта; только анализ.",
+    "expected_required": [
+      "accessibility-compliance-accessibility-audit"
+    ],
+    "expected_forbidden": [],
+    "observed_selected": [
+      "accessibility-compliance-accessibility-audit"
+    ],
+    "result": "passed"
+  },
+  {
+    "id": "release_04",
+    "prompt": "Собери APK но не публикуй релиз.",
+    "expected_required": [],
+    "expected_forbidden": [
+      "deployment-procedures",
+      "deploy-to-vercel"
+    ],
+    "observed_selected": [],
+    "result": "passed",
+    "limitation": "Empty suggestion is permitted; this test checks non-publishing only"
+  }
+]
