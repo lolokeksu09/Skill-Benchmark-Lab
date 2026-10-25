@@ -75,7 +75,12 @@
       "feed_mjs": "no line differences",
       "feed_css": "no line differences",
       "limitation": "splitlines() suppresses line-ending differences; byte-for-byte string equality and JSON object equality have not yet been checked"
-    }
+    },
+    "parsed_json_equal": true,
+    "feed_mjs_string_equal": true,
+    "feed_css_string_equal": true,
+    "equality_confirmation": "User executed JSON parsing and direct Python == comparisons over the two local model outputs; reported all True",
+    "conclusion": "Raw JSON bytes differ, but fully parsed two-file code artifacts are identical."
   },
   "limitations": [
     "One bounded Thinking trial per variant; a repeatable skills effect has not been measured.",
@@ -84,6 +89,7 @@
     "The user's local server reasoning-budget setting was reported as 128; actual per-request reasoning tokens were not reported.",
     "DDS system instructions increase prompt tokens, so unadjusted wall-time ratios are not pure runtime model speed ratios.",
     "Different SHA-256 proves raw candidate file difference but not which requirement improved; user has not shared full files.",
-    "Later user-run difflib on JSON-parsed candidate files found no line-level differences in either feed.mjs or feed.css; distinct raw JSON SHA-256 alone does not indicate a code change."
+    "Later user-run difflib on JSON-parsed candidate files found no line-level differences in either feed.mjs or feed.css; distinct raw JSON SHA-256 alone does not indicate a code change.",
+    "Follow-up user-run JSON parsing and direct string comparison confirms both generated source files are identical; runtime tests for bounded Thinking still not run."
   ]
 }
