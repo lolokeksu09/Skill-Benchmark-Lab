@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-25",
+  "source": "User-provided Termux output from evaluator.thinking_pilot",
+  "scenario_id": "web-fixture-repair",
+  "variant": "development",
+  "experiment": "thinking_on",
+  "run_id": "trial-001",
+  "model": "Qwen3-8B-Q4_K_M.gguf",
+  "inference": {
+    "status": "candidate_saved",
+    "duration_seconds": 212.36,
+    "prompt_tokens": 1006,
+    "completion_tokens": 277,
+    "total_tokens": 1283,
+    "finish_reason": "stop",
+    "reasoning_present": true,
+    "candidate_valid_json": true
+  },
+  "configuration": {
+    "user_reported_llama_server_argument": "--reasoning-budget 128",
+    "context_tokens": 2048,
+    "temperature": 0.2,
+    "max_tokens": 768,
+    "active_skills": [
+      "systematic-debugging",
+      "accessibility-compliance-accessibility-audit"
+    ],
+    "skill_archive_sha256": "c6fe56e96644ae30b8ba07c35cd6a52a5a7ad34920558923ea1c947023db3439"
+  },
+  "static_preflight": {
+    "method": "static_text_only",
+    "checks": {
+      "html_escaping": {
+        "status": "possible",
+        "detail": "HTML escape entities found; execution is required to confirm behavior"
+      },
+      "save_button_accessible_name": {
+        "status": "fail",
+        "detail": "Icon-only button is missing the required aria-label"
+      },
+      "responsive_feed_width": {
+        "status": "pass",
+        "detail": "Found max-width: 100% in .feed ruleset"
+      }
+    },
+    "static_passed": 1,
+    "static_failed": 1,
+    "static_uncertain": 1
+  },
+  "runtime_tests_executed": false,
+  "runtime_tests_passed": null,
+  "candidate": {
+    "original_path_on_user_phone": "$HOME/Skill-Benchmark-Lab/results/raw/local-qwen-web-candidates/thinking/development/trial-001.txt",
+    "contents_not_received": true
+  },
+  "comparison_to_thinking_control_trial_002": {
+    "control_duration_seconds": 76.762,
+    "control_prompt_tokens": 254,
+    "control_completion_tokens": 271,
+    "control_total_tokens": 525,
+    "control_static_passed": 1,
+    "control_static_failed": 1,
+    "control_static_uncertain": 1,
+    "duration_ratio": 2.766,
+    "additional_input_tokens": 752,
+    "additional_output_tokens": 6,
+    "equal_static_profile": true,
+    "identical_raw_model_output": null
+  },
+  "limitations": [
+    "One bounded Thinking trial per variant; a repeatable skills effect has not been measured.",
+    "Identical static profiles do not imply identical candidate code.",
+    "Neither bounded Thinking candidate has undergone Node.js runtime tests.",
+    "The user's local server reasoning-budget setting was reported as 128; actual per-request reasoning tokens were not reported.",
+    "DDS system instructions increase prompt tokens, so unadjusted wall-time ratios are not pure runtime model speed ratios."
+  ]
+}
