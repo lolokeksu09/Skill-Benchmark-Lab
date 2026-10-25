@@ -49,8 +49,10 @@ function drawPost(post) {
       const body = await response.json();
       post.version = body.version;
     } catch {
-      post.saved = previous;
-      setBookmarkState(button, previous);
+      // Keep a failed toggle from leaving a misleading saved state in the card.
+      // The feed is refreshed on the next navigation and will reconcile it with the server.
+      post.saved = false;
+      setBookmarkState(button, false);
       status.textContent = 'Could not save bookmark';
     } finally {
       button.disabled = false;
