@@ -1,0 +1,50 @@
+name: V4 separate fixture feasibility audit
+on:
+  push:
+    branches:
+      - bench/v4-validation
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - candidate: control-v3
+            sha: 78e6715ea5a8518f6eb1d729e678259e0462c055
+          - candidate: p2p-improved-v3
+            sha: 561d26e8f9373978963ec70df7e913b263f577a2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: bench/v4-hard-base
+          path: fixture
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.sha }}
+          path: candidate
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify exact candidate SHA and copy only V4 test files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cd candidate && git rev-parse HEAD)" = '${{ matrix.sha }}'
+          cp fixture/tests/api.test.mjs candidate/tests/api.test.mjs
+          cp fixture/tests/browser_board.py candidate/tests/browser_board.py
+      - name: Install browser prerequisites
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Verify V4 contracts on frozen external reference
+        working-directory: candidate
+        run: |
+          npm test
+          npm run test:browser
