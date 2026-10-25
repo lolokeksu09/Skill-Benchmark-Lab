@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-25",
+  "source": "User-provided Termux execution result in this conversation",
+  "scenario_id": "web-fixture-repair",
+  "variant": "development",
+  "run_id": "trial-001",
+  "model": "Qwen3-8B-Q4_K_M.gguf",
+  "status": "candidate_saved",
+  "duration_seconds": 194.332,
+  "total_tokens": 1117,
+  "finish_reason": "stop",
+  "model_context_tokens_reported": 2048,
+  "protocol": {
+    "active_skills": [
+      "systematic-debugging",
+      "accessibility-compliance-accessibility-audit"
+    ],
+    "skill_archive_sha256": "c6fe56e96644ae30b8ba07c35cd6a52a5a7ad34920558923ea1c947023db3439",
+    "approx_messages_characters": 4861,
+    "mode": "routed_subset_of_two",
+    "repeats_completed": 1
+  },
+  "checks": {
+    "method": "static_text_only",
+    "static_passed": 1,
+    "static_failed": 2,
+    "static_uncertain": 0,
+    "html_escaping": {
+      "status": "fail",
+      "reason": "encodeURI/encodeURIComponent is not HTML escaping"
+    },
+    "save_button_accessible_name": {
+      "status": "fail",
+      "reason": "missing aria-label"
+    },
+    "responsive_feed_width": {
+      "status": "pass",
+      "reason": "max-width:100%"
+    },
+    "runtime_tests_executed": false,
+    "runtime_tests_passed": null
+  },
+  "candidate": {
+    "path_on_user_phone": "$HOME/Skill-Benchmark-Lab/results/raw/local-qwen-web-candidates/development/trial-001.txt",
+    "contents_not_received": true
+  },
+  "limits": [
+    "A single DDS trial cannot establish a repeatable skills effect.",
+    "The baseline figures are three control trials at different prompt lengths: a fair full performance comparison requires separating prompt processing and output generation, and repeating DDS trials.",
+    "No Node execution or manual candidate inspection yet; static outcome is not runtime test pass count.",
+    "No generated code has been imported into a production project.",
+    "Four raw response text files are byte-identical according to user-run SHA-256; no improvement in this one Qwen3-8B Web scenario."
+  ],
+  "raw_output_sha256_reported_by_user": "13249e973a22a75a0982379849e1b20932629495f8b240e974c999943438ca02",
+  "comparison_with_control": {
+    "comparison_kind": "sha256_of_raw_model_output",
+    "identical_to_all_three_control_trials": true,
+    "hash": "13249e973a22a75a0982379849e1b20932629495f8b240e974c999943438ca02",
+    "confirmed_by": "User-provided Termux sha256sum on 2026-10-25",
+    "extra_input_tokens": 752,
+    "same_output_tokens": true
+  },
+  "prompt_tokens": 1007,
+  "completion_tokens": 110
+}

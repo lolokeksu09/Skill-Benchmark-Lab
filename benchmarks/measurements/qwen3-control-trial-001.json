@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "origin": "user-shared Termux llama-server execution output plus generated synthetic Web fixture",
+  "recorded_date": "2026-10-25",
+  "scenario_id": "web-fixture-repair",
+  "variant": "control",
+  "run_id": "trial-001",
+  "model": "Qwen3-8B-Q4_K_M.gguf",
+  "model_source": "Local Termux llama-server",
+  "model_parameters_count": "8B",
+  "inference": {
+    "status": "candidate_saved",
+    "duration_seconds": 51.518,
+    "total_tokens": 365,
+    "finish_reason": "stop",
+    "metrics_source": "user-provided stdout; prompt/output token split not supplied"
+  },
+  "candidate": {
+    "synthetic_public_fixture": true,
+    "normalization": "Added one trailing LF to each file for Git reproducibility; no source expressions changed",
+    "path_prefix": "benchmarks/fixtures/web/candidate-qwen3-control-001",
+    "files": {
+      "feed.mjs": {
+        "sha256": "9eacd14a647c9abedbbaa6a47dcec5eef0e507230ecbe1c5a3478592ef792531"
+      },
+      "feed.css": {
+        "sha256": "a1ba7758d46b7c0012e071c5972abdce579de176b85862aa31c92f7134c70c94"
+      }
+    }
+  },
+  "validation": {
+    "static": {
+      "passed": 1,
+      "failed": 2,
+      "uncertain": 0,
+      "method": "user-executed heuristic check; result sent in chat"
+    },
+    "runtime": {
+      "engine": "Node.js 22.16.0",
+      "environment": "isolated temporary directory for test organization, not an OS security sandbox",
+      "tests_executed": 3,
+      "passed": 1,
+      "failed": 2,
+      "expected_failures": [
+        "escapes user-controlled title markup",
+        "icon-only save button has an accessible name"
+      ],
+      "passed_checks": [
+        "feed width is responsive rather than fixed to desktop pixels"
+      ],
+      "executed_locally_by_assistant": true,
+      "github_actions_check": "expected failure pattern CI verifies same assertions"
+    }
+  },
+  "limitations": [
+    "One control trial; no statistical comparison or evidence about Skills superiority",
+    "Reported inference duration and token count came from user's smartphone, not direct model instrumentation by GitHub",
+    "The evaluated fixture was user-supplied model output for a synthetic publicly shareable task, not private application code",
+    "No human quality rating assigned",
+    "The candidate is known to fail HTML escaping and accessibility; never ship to production"
+  ]
+}

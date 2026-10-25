@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-25",
+  "source": "User-provided Termux output from evaluator.thinking_pilot",
+  "scenario_id": "web-fixture-repair",
+  "variant": "development",
+  "experiment": "thinking_on",
+  "run_id": "trial-001",
+  "model": "Qwen3-8B-Q4_K_M.gguf",
+  "inference": {
+    "status": "candidate_saved",
+    "duration_seconds": 212.36,
+    "prompt_tokens": 1006,
+    "completion_tokens": 277,
+    "total_tokens": 1283,
+    "finish_reason": "stop",
+    "reasoning_present": true,
+    "candidate_valid_json": true
+  },
+  "configuration": {
+    "user_reported_llama_server_argument": "--reasoning-budget 128",
+    "context_tokens": 2048,
+    "temperature": 0.2,
+    "max_tokens": 768,
+    "active_skills": [
+      "systematic-debugging",
+      "accessibility-compliance-accessibility-audit"
+    ],
+    "skill_archive_sha256": "c6fe56e96644ae30b8ba07c35cd6a52a5a7ad34920558923ea1c947023db3439"
+  },
+  "static_preflight": {
+    "method": "static_text_only",
+    "checks": {
+      "html_escaping": {
+        "status": "possible",
+        "detail": "HTML escape entities found; execution is required to confirm behavior"
+      },
+      "save_button_accessible_name": {
+        "status": "fail",
+        "detail": "Icon-only button is missing the required aria-label"
+      },
+      "responsive_feed_width": {
+        "status": "pass",
+        "detail": "Found max-width: 100% in .feed ruleset"
+      }
+    },
+    "static_passed": 1,
+    "static_failed": 1,
+    "static_uncertain": 1
+  },
+  "runtime_tests_executed": false,
+  "runtime_tests_passed": null,
+  "candidate": {
+    "original_path_on_user_phone": "$HOME/Skill-Benchmark-Lab/results/raw/local-qwen-web-candidates/thinking/development/trial-001.txt",
+    "contents_not_received": true
+  },
+  "comparison_to_thinking_control_trial_002": {
+    "control_duration_seconds": 76.762,
+    "control_prompt_tokens": 254,
+    "control_completion_tokens": 271,
+    "control_total_tokens": 525,
+    "control_static_passed": 1,
+    "control_static_failed": 1,
+    "control_static_uncertain": 1,
+    "duration_ratio": 2.766,
+    "additional_input_tokens": 752,
+    "additional_output_tokens": 6,
+    "equal_static_profile": true,
+    "identical_raw_model_output": false,
+    "raw_candidate_sha256_control": "1d2d275951d73ba8cf77517e217c1769f494c580f9046092f37797ba06d6d1e4",
+    "raw_candidate_sha256_development": "854fee7ff88648794d1a830c60a6745e20a05dafd680f71ce8db6a49377918f4",
+    "hash_source": "User-provided Termux sha256sum of two local thinking candidate text files",
+    "line_level_diff_observed": {
+      "method": "User ran difflib.unified_diff on splitlines() of each JSON-parsed feed.mjs/feed.css field",
+      "feed_mjs": "no line differences",
+      "feed_css": "no line differences",
+      "limitation": "splitlines() suppresses line-ending differences; byte-for-byte string equality and JSON object equality have not yet been checked"
+    },
+    "parsed_json_equal": true,
+    "feed_mjs_string_equal": true,
+    "feed_css_string_equal": true,
+    "equality_confirmation": "User executed JSON parsing and direct Python == comparisons over the two local model outputs; reported all True",
+    "conclusion": "Raw JSON bytes differ, but fully parsed two-file code artifacts are identical."
+  },
+  "limitations": [
+    "One bounded Thinking trial per variant; a repeatable skills effect has not been measured.",
+    "Identical static profiles do not imply identical candidate code.",
+    "Neither bounded Thinking candidate has undergone Node.js runtime tests.",
+    "The user's local server reasoning-budget setting was reported as 128; actual per-request reasoning tokens were not reported.",
+    "DDS system instructions increase prompt tokens, so unadjusted wall-time ratios are not pure runtime model speed ratios.",
+    "Different SHA-256 proves raw candidate file difference but not which requirement improved; user has not shared full files.",
+    "Later user-run difflib on JSON-parsed candidate files found no line-level differences in either feed.mjs or feed.css; distinct raw JSON SHA-256 alone does not indicate a code change.",
+    "Follow-up user-run JSON parsing and direct string comparison confirms both generated source files are identical; runtime tests for bounded Thinking still not run."
+  ]
+}
