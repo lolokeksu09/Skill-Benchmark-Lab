@@ -19,3 +19,5 @@ body { margin: 0; }
   .toolbar { align-items: stretch; flex-direction: column; }
   .toolbar input { box-sizing: border-box; width: 100%; }
 }
+
+/* V6 harness rerun marker; no behavior change. */
