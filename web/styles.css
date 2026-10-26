@@ -14,3 +14,5 @@ body { margin: 0; }
 .bookmark:focus-visible { outline: 3px solid #2864d7; outline-offset: 2px; }
 #more { padding: 12px; margin: 24px 0; }
 @media (max-width: 760px) { .shell { padding: 20px; } .board { grid-template-columns: 1fr; } }
+
+/* V6 harness rerun marker; no behavior change. */
