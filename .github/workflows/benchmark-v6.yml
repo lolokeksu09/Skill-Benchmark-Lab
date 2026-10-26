@@ -1,0 +1,76 @@
+name: Skill Benchmark V6 — five focused checks
+on:
+  push:
+    branches:
+      - bench/v6-hard-base
+  pull_request:
+    branches:
+      - bench/v6-hard-base
+    paths:
+      - 'src/**'
+      - 'web/app.mjs'
+      - 'web/styles.css'
+      - 'tests/v6-contract.test.mjs'
+      - 'tests/browser_v6.py'
+      - '.github/workflows/benchmark-v6.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify candidate changed only the four source files
+        if: ${{ github.event_name == 'pull_request' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin bench/v6-hard-base:refs/remotes/origin/bench/v6-hard-base
+          git diff --name-only origin/bench/v6-hard-base HEAD > /tmp/changed.txt
+          while IFS= read -r path; do
+            case "$path" in
+              src/engine.mjs|src/server.mjs|web/app.mjs|web/styles.css) ;;
+              *) echo "Forbidden candidate change: $path"; exit 1 ;;
+            esac
+          done < /tmp/changed.txt
+          test -s /tmp/changed.txt
+          echo "PASS: candidate changed allowed source paths only"
+      - name: Install Playwright and Chromium
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Run focused checks
+        shell: bash
+        env:
+          BENCH_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [[ "$BENCH_BRANCH" == 'bench/v6-hard-base' ]]; then
+            set +e
+            node --test tests/v6-contract.test.mjs > /tmp/v6-api.log 2>&1
+            api=$?
+            python -m unittest tests/browser_v6.py -v > /tmp/v6-browser.log 2>&1
+            browser=$?
+            set -e
+            cat /tmp/v6-api.log
+            cat /tmp/v6-browser.log
+            [[ "$api" != 0 && "$browser" != 0 ]] || { echo "Baseline unexpectedly passed a V6 check"; exit 1; }
+            grep -q '^# tests 3$' /tmp/v6-api.log
+            grep -q '^# fail 3$' /tmp/v6-api.log
+            grep -q 'Ran 2 tests' /tmp/v6-browser.log
+            grep -q 'FAILED (failures=2)' /tmp/v6-browser.log
+            echo "PASS: V6 probes detect the seeded baseline failures (3 API groups, 2 Chromium groups)"
+          else
+            node --test tests/v6-contract.test.mjs
+            python -m unittest tests/browser_v6.py -v
+          fi
