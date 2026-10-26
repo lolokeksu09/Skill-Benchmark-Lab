@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Run P2P intake cases against an extracted DDS skill-router package."""
 import argparse
 import importlib.util
