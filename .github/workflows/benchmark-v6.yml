@@ -1,0 +1,52 @@
+name: Skill Benchmark V6 — focused differential checks
+on:
+  pull_request:
+    branches:
+      - bench/v6-hard-base
+    paths:
+      - 'src/**'
+      - 'web/app.mjs'
+      - 'web/styles.css'
+      - 'tests/v6-contract.test.mjs'
+      - 'tests/browser_v6.py'
+      - '.github/workflows/benchmark-v6.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify candidate changed only the four source files
+        if: ${{ github.event_name == 'pull_request' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin bench/v6-hard-base:refs/remotes/origin/bench/v6-hard-base
+          git diff --name-only origin/bench/v6-hard-base...HEAD > /tmp/changed.txt
+          while IFS= read -r path; do
+            case "$path" in
+              src/engine.mjs|src/server.mjs|web/app.mjs|web/styles.css) ;;
+              *) echo "Forbidden candidate change: $path"; exit 1 ;;
+            esac
+          done < /tmp/changed.txt
+          test -s /tmp/changed.txt
+          echo "PASS: candidate changed allowed source paths only"
+      - name: Run three focused HTTP contract checks
+        run: node --test tests/v6-contract.test.mjs
+      - name: Install Playwright and Chromium
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Run two focused real-browser checks
+        run: python -m unittest tests/browser_v6.py -v
