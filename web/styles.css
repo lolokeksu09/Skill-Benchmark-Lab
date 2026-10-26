@@ -20,3 +20,5 @@ body { margin: 0; }
   .toolbar input { box-sizing: border-box; width: 100%; }
   .board { grid-template-columns: 1fr; }
 }
+
+/* V6 harness rerun marker; no behavior change. */
