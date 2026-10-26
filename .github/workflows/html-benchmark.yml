@@ -1,0 +1,23 @@
+name: HTML Creation Benchmark
+on:
+  pull_request:
+    paths:
+      - 'html-benchmark/**'
+      - '.github/workflows/html-benchmark.yml'
+  push:
+    branches: [bench/html-hard-base]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install Chromium checks
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Static checks
+        run: python -m unittest discover -s html-benchmark/tests -p 'test_static.py' -v
+      - name: Chromium checks
+        run: python -m unittest discover -s html-benchmark/tests -p 'browser_test.py' -v

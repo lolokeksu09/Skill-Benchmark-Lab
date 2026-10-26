@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RiftHub — сообщество</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <style>
+    :root { color-scheme: light; font-family: Arial, sans-serif; background:#f5f7fb; color:#172033; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-width:520px; }
+    header { padding:24px 8vw; background:#172554; color:white; display:flex; justify-content:space-between; align-items:center; }
+    main { max-width:1200px; margin:0 auto; padding:32px 24px; }
+    .hero { padding:28px; border-radius:24px; background:#dbeafe; }
+    .toolbar { display:flex; gap:16px; margin:20px 0; }
+    input, select, button { padding:12px; border:1px solid #aab4c5; border-radius:8px; font:inherit; }
+    .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
+    .card { padding:20px; background:white; border-radius:16px; box-shadow:0 5px 20px #17203322; }
+    .actions { display:flex; gap:8px; margin-top:18px; }
+    button { cursor:pointer; background:white; }
+    .hidden { display:none; }
+    @media (max-width:700px) { .grid { grid-template-columns:1fr; } .toolbar { flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <header><strong>RiftHub</strong><button id="theme">☾</button></header>
+  <main>
+    <section class="hero"><p>СООБЩЕСТВО</p><h1>Идеи для следующей игры</h1><p>Найди игроков, сборки и полезные советы для Ущелья.</p></section>
+    <div class="toolbar"><input id="search" placeholder="Поиск"><select id="filter"><option>Все</option><option>Гайды</option><option>Команды</option></select></div>
+    <section class="grid" id="feed">
+      <article class="card" data-category="Гайды"><h2>Как читать карту</h2><p>Три привычки, которые помогают выигрывать объекты.</p><div class="actions"><button class="like">♡ Нравится</button><button class="save">Сохранить</button></div></article>
+      <article class="card" data-category="Команды"><h2>Ищем команду</h2><p>Играем вечером, спокойная коммуникация и голос.</p><div class="actions"><button class="like">♡ Нравится</button><button class="save">Сохранить</button></div></article>
+      <article class="card" data-category="Гайды"><h2>Маршрут лесника</h2><p>Безопасный старт для первых минут матча.</p><div class="actions"><button class="like">♡ Нравится</button><button class="save">Сохранить</button></div></article>
+    </section>
+    <p id="empty" class="hidden">Ничего не найдено</p>
+    <button id="more">Загрузить ещё</button>
+  </main>
+  <script>
+    const search = document.querySelector('#search');
+    const filter = document.querySelector('#filter');
+    function apply() {
+      const q = search.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => { card.hidden = !(card.innerText.toLowerCase().includes(q) && (filter.value === 'Все' || card.dataset.category === filter.value)); });
+    }
+    search.addEventListener('input', apply);
+    filter.addEventListener('change', apply);
+    document.querySelectorAll('.like').forEach(button => button.addEventListener('click', () => button.textContent = '♥ Нравится'));
+    document.querySelector('#theme').addEventListener('click', () => document.documentElement.style.colorScheme = 'dark');
+  </script>
+</body>
+</html>
