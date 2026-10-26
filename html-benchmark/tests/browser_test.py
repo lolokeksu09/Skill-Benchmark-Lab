@@ -18,7 +18,7 @@ class BrowserChecks(unittest.TestCase):
         self.assertLessEqual(self.page.evaluate('document.documentElement.scrollWidth'), 375)
         self.page.locator('#search').fill('лесника')
         self.assertEqual(self.page.locator('.card:visible').count(), 1)
-        save = self.page.locator('.save').first
+        save = self.page.locator('.save:visible').first
         self.assertTrue(save.get_attribute('aria-label'))
         save.click()
         self.assertEqual(save.get_attribute('aria-pressed'), 'true')
