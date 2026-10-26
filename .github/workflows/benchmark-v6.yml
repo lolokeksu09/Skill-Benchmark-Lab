@@ -36,7 +36,7 @@ jobs:
         run: |
           set -euo pipefail
           git fetch --no-tags --depth=1 origin bench/v6-hard-base:refs/remotes/origin/bench/v6-hard-base
-          git diff --name-only origin/bench/v6-hard-base...HEAD > /tmp/changed.txt
+          git diff --name-only origin/bench/v6-hard-base HEAD > /tmp/changed.txt
           while IFS= read -r path; do
             case "$path" in
               src/engine.mjs|src/server.mjs|web/app.mjs|web/styles.css) ;;
