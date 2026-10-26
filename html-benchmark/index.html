@@ -3,49 +3,172 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RiftHub — сообщество</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>RiftHub — сообщество Wild Rift</title>
   <style>
-    :root { color-scheme: light; font-family: Arial, sans-serif; background:#f5f7fb; color:#172033; }
-    * { box-sizing:border-box; }
-    body { margin:0; min-width:520px; }
-    header { padding:24px 8vw; background:#172554; color:white; display:flex; justify-content:space-between; align-items:center; }
-    main { max-width:1200px; margin:0 auto; padding:32px 24px; }
-    .hero { padding:28px; border-radius:24px; background:#dbeafe; }
-    .toolbar { display:flex; gap:16px; margin:20px 0; }
-    input, select, button { padding:12px; border:1px solid #aab4c5; border-radius:8px; font:inherit; }
-    .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
-    .card { padding:20px; background:white; border-radius:16px; box-shadow:0 5px 20px #17203322; }
-    .actions { display:flex; gap:8px; margin-top:18px; }
-    button { cursor:pointer; background:white; }
-    .hidden { display:none; }
-    @media (max-width:700px) { .grid { grid-template-columns:1fr; } .toolbar { flex-direction:column; } }
+    :root {
+      color-scheme: light;
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-soft: #edf3ff;
+      --text: #172033;
+      --muted: #5c6880;
+      --line: #d8e0ee;
+      --brand: #3157d5;
+      --brand-dark: #203d9d;
+      --accent: #f4b740;
+      --shadow: 0 12px 30px rgba(25, 45, 90, .10);
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #111827;
+      --surface: #1b2538;
+      --surface-soft: #253452;
+      --text: #f3f6ff;
+      --muted: #b7c2d8;
+      --line: #3c4a65;
+      --brand: #8ea8ff;
+      --brand-dark: #b5c5ff;
+      --accent: #ffd36a;
+      --shadow: 0 12px 30px rgba(0, 0, 0, .28);
+    }
+    * { box-sizing: border-box; }
+    html { min-width: 320px; background: var(--bg); }
+    body { margin: 0; min-width: 0; background: var(--bg); color: var(--text); font: 16px/1.55 Arial, sans-serif; }
+    button, input, select { font: inherit; }
+    button, select { cursor: pointer; }
+    button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .site-header { background: #172554; color: #fff; }
+    .header-inner { max-width: 1180px; margin: 0 auto; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; font-size: 1.2rem; font-weight: 800; letter-spacing: .02em; }
+    .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--accent); color: #172554; font-weight: 900; }
+    .theme-toggle { border: 1px solid rgba(255,255,255,.45); border-radius: 999px; padding: 9px 14px; color: #fff; background: transparent; }
+    .theme-toggle:hover { background: rgba(255,255,255,.12); }
+    main { max-width: 1180px; margin: 0 auto; padding: 34px 24px 64px; }
+    .hero { position: relative; overflow: hidden; margin-bottom: 26px; padding: clamp(26px, 5vw, 54px); border-radius: 26px; background: linear-gradient(120deg, #dbeafe, #e0e7ff 58%, #fef3c7); color: #172554; }
+    [data-theme="dark"] .hero { background: linear-gradient(120deg, #253b70, #30365e 58%, #5c4a2e); color: #fff; }
+    .hero::after { content: "✦"; position: absolute; right: 7%; bottom: -20px; color: rgba(49,87,213,.16); font-size: 10rem; line-height: 1; }
+    .eyebrow { position: relative; z-index: 1; margin: 0 0 8px; color: var(--brand-dark); font-size: .78rem; font-weight: 800; letter-spacing: .14em; }
+    .hero h1 { position: relative; z-index: 1; max-width: 680px; margin: 0; font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.08; letter-spacing: -.04em; }
+    .hero-copy { position: relative; z-index: 1; max-width: 590px; margin: 18px 0 0; color: #344264; font-size: 1.08rem; }
+    [data-theme="dark"] .hero-copy { color: #e5eaff; }
+    .toolbar { display: flex; align-items: end; gap: 14px; margin: 0 0 26px; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: var(--shadow); }
+    .field { display: grid; flex: 1 1 0; gap: 7px; }
+    .field-label { color: var(--muted); font-size: .82rem; font-weight: 700; }
+    input, select { width: 100%; min-height: 46px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 13px; background: var(--surface); color: var(--text); }
+    input::placeholder { color: var(--muted); }
+    .feed-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 0 0 14px; }
+    .feed-heading h2 { margin: 0; font-size: 1.35rem; }
+    .result-count { margin: 0; color: var(--muted); font-size: .9rem; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .card { display: flex; min-height: 240px; flex-direction: column; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: var(--shadow); }
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .category { display: inline-flex; border-radius: 999px; padding: 4px 10px; background: var(--surface-soft); color: var(--brand-dark); font-size: .76rem; font-weight: 800; }
+    .card h3 { margin: 18px 0 8px; font-size: 1.25rem; line-height: 1.2; }
+    .card p { margin: 0; color: var(--muted); }
+    .actions { display: flex; gap: 9px; margin-top: auto; padding-top: 20px; }
+    .action { border: 1px solid var(--line); border-radius: 9px; padding: 9px 12px; background: var(--surface); color: var(--text); }
+    .action:hover, .action[aria-pressed="true"] { border-color: var(--brand); color: var(--brand-dark); background: var(--surface-soft); }
+    .empty { margin: 22px 0; padding: 30px; border: 1px dashed var(--line); border-radius: 16px; background: var(--surface); color: var(--muted); text-align: center; }
+    .load-wrap { display: flex; justify-content: center; margin-top: 28px; }
+    .load-more { border: 0; border-radius: 10px; padding: 12px 20px; background: var(--brand); color: #fff; font-weight: 800; }
+    .load-more:hover { background: var(--brand-dark); }
+    [hidden] { display: none !important; }
+    @media (max-width: 800px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) {
+      .header-inner, main { padding-left: 16px; padding-right: 16px; }
+      main { padding-top: 22px; }
+      .toolbar { align-items: stretch; flex-direction: column; }
+      .grid { grid-template-columns: 1fr; }
+      .hero { border-radius: 20px; }
+      .feed-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
+    }
   </style>
 </head>
 <body>
-  <header><strong>RiftHub</strong><button id="theme">☾</button></header>
-  <main>
-    <section class="hero"><p>СООБЩЕСТВО</p><h1>Идеи для следующей игры</h1><p>Найди игроков, сборки и полезные советы для Ущелья.</p></section>
-    <div class="toolbar"><input id="search" placeholder="Поиск"><select id="filter"><option>Все</option><option>Гайды</option><option>Команды</option></select></div>
-    <section class="grid" id="feed">
-      <article class="card" data-category="Гайды"><h2>Как читать карту</h2><p>Три привычки, которые помогают выигрывать объекты.</p><div class="actions"><button class="like">♡ Нравится</button><button class="save">Сохранить</button></div></article>
-      <article class="card" data-category="Команды"><h2>Ищем команду</h2><p>Играем вечером, спокойная коммуникация и голос.</p><div class="actions"><button class="like">♡ Нравится</button><button class="save">Сохранить</button></div></article>
-      <article class="card" data-category="Гайды"><h2>Маршрут лесника</h2><p>Безопасный старт для первых минут матча.</p><div class="actions"><button class="like">♡ Нравится</button><button class="save">Сохранить</button></div></article>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="RiftHub, на главную"><span class="brand-mark" aria-hidden="true">R</span><span>RiftHub</span></a>
+      <button class="theme-toggle" id="theme" type="button" aria-label="Переключить тему" aria-pressed="false">☾ Тёмная тема</button>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">СООБЩЕСТВО WILD RIFT</p>
+      <h1 id="hero-title">Идеи для следующей игры</h1>
+      <p class="hero-copy">Находи игроков, сборки и полезные советы для Ущелья. Сохраняй лучшие публикации и возвращайся к ним перед матчем.</p>
     </section>
-    <p id="empty" class="hidden">Ничего не найдено</p>
-    <button id="more">Загрузить ещё</button>
+    <section aria-labelledby="feed-title">
+      <div class="toolbar" role="search">
+        <div class="field"><label class="field-label" for="search">Поиск публикаций</label><input id="search" type="search" autocomplete="off" placeholder="Например, лесник или карта"></div>
+        <div class="field"><label class="field-label" for="filter">Категория</label><select id="filter"><option value="Все">Все категории</option><option value="Гайды">Гайды</option><option value="Команды">Команды</option><option value="Новости">Новости</option></select></div>
+      </div>
+      <div class="feed-heading"><h2 id="feed-title">Свежие публикации</h2><p class="result-count" id="result-count" aria-live="polite"></p></div>
+      <div class="grid" id="feed">
+        <article class="card" data-category="Гайды"><div class="card-top"><span class="category">Гайды</span><span aria-label="5 минут чтения">5 мин</span></div><h3>Как читать карту</h3><p>Три привычки, которые помогают вовремя замечать цели и выигрывать объекты.</p><div class="actions"><button class="action like" type="button" aria-label="Поставить лайк публикации «Как читать карту»">♡ Нравится</button><button class="action save" type="button" aria-label="Сохранить публикацию «Как читать карту»" aria-pressed="false">☆ Сохранить</button></div></article>
+        <article class="card" data-category="Команды"><div class="card-top"><span class="category">Команды</span><span aria-label="3 минуты чтения">3 мин</span></div><h3>Ищем команду</h3><p>Играем вечером: спокойная коммуникация, голос и желание расти вместе.</p><div class="actions"><button class="action like" type="button" aria-label="Поставить лайк публикации «Ищем команду»">♡ Нравится</button><button class="action save" type="button" aria-label="Сохранить публикацию «Ищем команду»" aria-pressed="false">☆ Сохранить</button></div></article>
+        <article class="card" data-category="Гайды"><div class="card-top"><span class="category">Гайды</span><span aria-label="4 минуты чтения">4 мин</span></div><h3>Маршрут лесника</h3><p>Безопасный старт для первых минут матча: темп, обзор и приоритетные лагеря.</p><div class="actions"><button class="action like" type="button" aria-label="Поставить лайк публикации «Маршрут лесника»">♡ Нравится</button><button class="action save" type="button" aria-label="Сохранить публикацию «Маршрут лесника»" aria-pressed="false">☆ Сохранить</button></div></article>
+        <article class="card extra" data-category="Новости" hidden><div class="card-top"><span class="category">Новости</span><span aria-label="2 минуты чтения">2 мин</span></div><h3>Патч без сюрпризов</h3><p>Коротко о важных изменениях недели и героях, за которыми стоит следить.</p><div class="actions"><button class="action like" type="button" aria-label="Поставить лайк публикации «Патч без сюрпризов»">♡ Нравится</button><button class="action save" type="button" aria-label="Сохранить публикацию «Патч без сюрпризов»" aria-pressed="false">☆ Сохранить</button></div></article>
+        <article class="card extra" data-category="Гайды" hidden><div class="card-top"><span class="category">Гайды</span><span aria-label="6 минут чтения">6 мин</span></div><h3>Руны для командной игры</h3><p>Подбираем руны под стиль команды и учимся менять план по ходу игры.</p><div class="actions"><button class="action like" type="button" aria-label="Поставить лайк публикации «Руны для командной игры»">♡ Нравится</button><button class="action save" type="button" aria-label="Сохранить публикацию «Руны для командной игры»" aria-pressed="false">☆ Сохранить</button></div></article>
+        <article class="card extra" data-category="Команды" hidden><div class="card-top"><span class="category">Команды</span><span aria-label="4 минуты чтения">4 мин</span></div><h3>Тренировка перед рейтинговой</h3><p>Небольшой чек-лист для разминки и честного разбора последней игры.</p><div class="actions"><button class="action like" type="button" aria-label="Поставить лайк публикации «Тренировка перед рейтинговой»">♡ Нравится</button><button class="action save" type="button" aria-label="Сохранить публикацию «Тренировка перед рейтинговой»" aria-pressed="false">☆ Сохранить</button></div></article>
+      </div>
+      <p class="empty" id="empty" hidden role="status">По вашему запросу ничего не найдено. Попробуйте другой запрос или категорию.</p>
+      <div class="load-wrap"><button class="load-more" id="more" type="button">Загрузить ещё</button></div>
+    </section>
   </main>
   <script>
-    const search = document.querySelector('#search');
-    const filter = document.querySelector('#filter');
-    function apply() {
-      const q = search.value.toLowerCase();
-      document.querySelectorAll('.card').forEach(card => { card.hidden = !(card.innerText.toLowerCase().includes(q) && (filter.value === 'Все' || card.dataset.category === filter.value)); });
-    }
-    search.addEventListener('input', apply);
-    filter.addEventListener('change', apply);
-    document.querySelectorAll('.like').forEach(button => button.addEventListener('click', () => button.textContent = '♥ Нравится'));
-    document.querySelector('#theme').addEventListener('click', () => document.documentElement.style.colorScheme = 'dark');
+    (function () {
+      'use strict';
+      const root = document.documentElement;
+      const search = document.querySelector('#search');
+      const filter = document.querySelector('#filter');
+      const feed = document.querySelector('#feed');
+      const empty = document.querySelector('#empty');
+      const more = document.querySelector('#more');
+      const theme = document.querySelector('#theme');
+      const count = document.querySelector('#result-count');
+      let visibleExtras = false;
+
+      function getTheme() {
+        try { return localStorage.getItem('rifthub-theme'); } catch (error) { return null; }
+      }
+      function setTheme(value) {
+        root.dataset.theme = value;
+        theme.setAttribute('aria-pressed', value === 'dark' ? 'true' : 'false');
+        theme.textContent = value === 'dark' ? '☀ Светлая тема' : '☾ Тёмная тема';
+        try { localStorage.setItem('rifthub-theme', value); } catch (error) { /* storage may be unavailable */ }
+      }
+      setTheme(getTheme() === 'dark' ? 'dark' : 'light');
+
+      function applyFilters() {
+        const query = search.value.trim().toLocaleLowerCase();
+        const category = filter.value;
+        let matches = 0;
+        feed.querySelectorAll('.card').forEach(function (card) {
+          const text = card.textContent.toLocaleLowerCase();
+          const categoryMatch = category === 'Все' || card.dataset.category === category;
+          const searchMatch = !query || text.includes(query);
+          const allowed = visibleExtras || !card.classList.contains('extra');
+          const show = allowed && categoryMatch && searchMatch;
+          card.hidden = !show;
+          if (show) matches += 1;
+        });
+        empty.hidden = matches !== 0;
+        count.textContent = matches + (matches === 1 ? ' публикация' : ' публикации');
+      }
+      search.addEventListener('input', applyFilters);
+      filter.addEventListener('change', applyFilters);
+      theme.addEventListener('click', function () { setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'); });
+      theme.addEventListener('keydown', function (event) { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); theme.click(); } });
+      feed.addEventListener('click', function (event) {
+        const like = event.target.closest('.like');
+        const save = event.target.closest('.save');
+        if (like) { const active = like.getAttribute('aria-pressed') === 'true'; like.setAttribute('aria-pressed', String(!active)); like.textContent = active ? '♡ Нравится' : '♥ Нравится'; }
+        if (save) { const active = save.getAttribute('aria-pressed') === 'true'; save.setAttribute('aria-pressed', String(!active)); save.textContent = active ? '☆ Сохранить' : '★ Сохранено'; }
+      });
+      feed.addEventListener('keydown', function (event) { if (event.key === 'Enter' || event.key === ' ') { const control = event.target.closest('.like, .save'); if (control) { event.preventDefault(); control.click(); } } });
+      more.addEventListener('click', function () { visibleExtras = true; more.hidden = true; applyFilters(); });
+      applyFilters();
+    }());
   </script>
 </body>
 </html>
