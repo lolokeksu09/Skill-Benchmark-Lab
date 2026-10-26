@@ -19,8 +19,8 @@ function json(res, status, body, extra = {}) {
 async function readJson(req) {
   let text = '';
   for await (const chunk of req) text += chunk;
-  try { return JSON.parse(text); }
-  catch { return null; }
+  try { return { value: JSON.parse(text), valid: true }; }
+  catch { return { value: null, valid: false }; }
 }
 
 export async function startServer({ port = 0, engine = createEngine() } = {}) {
@@ -47,9 +47,13 @@ export async function startServer({ port = 0, engine = createEngine() } = {}) {
       return;
     }
     if (req.method === 'PUT' && /^\/api\/bookmarks\/[^/]+$/.test(url.pathname)) {
-      const id = decodeURIComponent(url.pathname.split('/').at(-1));
-      const body = await readJson(req);
-      const result = engine.bookmark(viewer, id, body, req.headers['if-match']);
+      let decodedId;
+      try { decodedId = decodeURIComponent(url.pathname.split('/').at(-1)); }
+      catch { json(res, 400, { error: 'invalid id' }); return; }
+      const parsed = await readJson(req);
+      const result = parsed.valid
+        ? engine.bookmark(viewer, decodedId, parsed.value, req.headers['if-match'])
+        : { status: 400, body: { error: 'invalid json' } };
       json(res, result.status, result.body, result.headers);
       return;
     }
