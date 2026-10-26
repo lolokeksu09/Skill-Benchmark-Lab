@@ -26,12 +26,28 @@ await observe('privacy_control', () => {
   };
 });
 await observe('parallel_bookmark_cas', async () => {
-  const e = createEngine();
-  const results = await Promise.all([
-    Promise.resolve().then(() => e.bookmark('alice', 'p01', { saved: true }, '"0"')),
-    Promise.resolve().then(() => e.bookmark('alice', 'p01', { saved: false }, '"0"')),
-  ]);
-  return { statuses: results.map(x => x.status) };
+  const s = await startServer();
+  try {
+    const request = (saved) => fetch(s.url + '/api/bookmarks/p01', {
+      method: 'PUT',
+      headers: {
+        authorization: 'Bearer demo-alice-key',
+        'content-type': 'application/json',
+        'if-match': '"0"',
+      },
+      body: JSON.stringify({ saved }),
+    });
+    // Exercise the actual HTTP boundary with overlapping requests; direct synchronous
+    // engine calls inside Promise.all would only test sequential stale-version handling.
+    const responses = await Promise.all([request(true), request(false)]);
+    const statuses = responses.map(response => response.status).sort((a, b) => a - b);
+    return {
+      statuses,
+      expectation: 'two overlapping authenticated HTTP PUTs with one If-Match version yield one 200 and one 412',
+    };
+  } finally {
+    await s.close();
+  }
 });
 await observe('constructed_out_of_range_cursor', () => {
   const e = createEngine();
