@@ -1,0 +1,271 @@
+{
+  "description": "V5 independent observations; raw values, not scores",
+  "run_url": "https://github.com/lolokeksu09/Skill-Benchmark-Lab/actions/runs/40263595773",
+  "run_id": 40263595773,
+  "probe_revision": "fd9a54127e6cebdfbf635f5cd6e651a3a00d56ea",
+  "base_sha": "efca49e75711b40a9fcdb2549434d810c8d35fd0",
+  "aliases": {
+    "A": {
+      "sha": "4fbceb661fc56828eabf35650f0f96372572f48c",
+      "pr": 21,
+      "job_id": 121381011363,
+      "node": "v22.23.3"
+    },
+    "B": {
+      "sha": "9239a91ccb1776a21834ba6167c9672b838bac68",
+      "pr": 22,
+      "job_id": 121381010919,
+      "node": "v22.23.3"
+    },
+    "C": {
+      "sha": "f5b1906825982c6e11bb308eb14c04ff2dc3c357",
+      "pr": 23,
+      "job_id": 121381011296,
+      "node": "v22.23.3"
+    },
+    "D": {
+      "sha": "54fddf9bd264286b785c199cf0144c389b108841",
+      "pr": 24,
+      "job_id": 121381011459,
+      "node": "v22.23.3"
+    },
+    "E": {
+      "sha": "619af95a236fe5d180ba5bdfbc5485a200c2140c",
+      "pr": 25,
+      "job_id": 121381011371,
+      "node": "v22.23.3"
+    }
+  },
+  "cases": {
+    "A": {
+      "privacy_control": {
+        "visibleIds": [],
+        "forbiddenWrite": 404
+      },
+      "parallel_bookmark_cas": {
+        "statuses": [
+          200,
+          412
+        ],
+        "expectation": "two overlapping authenticated HTTP PUTs with one If-Match version yield one 200 and one 412"
+      },
+      "constructed_out_of_range_cursor": {
+        "status": 200,
+        "returnedItems": 0,
+        "expectation": "400 for nonexistent cursor position"
+      },
+      "unsafe_if_match_integer": {
+        "status": 400,
+        "expectation": "V5 defense: reject unsafe integer as 400"
+      },
+      "anonymous_invalid_json": {
+        "status": 400,
+        "body": {
+          "error": "invalid JSON"
+        },
+        "expectation": "401 for unauthenticated API request"
+      },
+      "rapid_double_load_more": {
+        "additionalFeedRequests": 2,
+        "renderedP02Cards": 2,
+        "expectation": "one request and one rendered p02 card after competing Load more clicks"
+      },
+      "malformed_200_bookmark": {
+        "ariaAfterMalformedResponse": "invalid",
+        "retryIfMatch": "\"bad\"",
+        "reportedError": false,
+        "expectation": "aria false, retry If-Match \"0\", error announcement"
+      },
+      "mismatched_200_bookmark_id": {
+        "ariaAfterMismatchedId": "true",
+        "retryIfMatch": "\"1\"",
+        "reportedError": false,
+        "expectation": "reject mismatched post id; aria false and retry If-Match \"0\""
+      }
+    },
+    "B": {
+      "privacy_control": {
+        "visibleIds": [],
+        "forbiddenWrite": 404
+      },
+      "parallel_bookmark_cas": {
+        "statuses": [
+          200,
+          412
+        ],
+        "expectation": "two overlapping authenticated HTTP PUTs with one If-Match version yield one 200 and one 412"
+      },
+      "constructed_out_of_range_cursor": {
+        "status": 400,
+        "returnedItems": null,
+        "expectation": "400 for nonexistent cursor position"
+      },
+      "unsafe_if_match_integer": {
+        "status": 412,
+        "expectation": "V5 defense: reject unsafe integer as 400"
+      },
+      "anonymous_invalid_json": {
+        "status": 401,
+        "body": {
+          "error": "unauthorized"
+        },
+        "expectation": "401 for unauthenticated API request"
+      },
+      "rapid_double_load_more": {
+        "additionalFeedRequests": 1,
+        "renderedP02Cards": 1,
+        "expectation": "one request and one rendered p02 card after competing Load more clicks"
+      },
+      "malformed_200_bookmark": {
+        "ariaAfterMalformedResponse": "false",
+        "retryIfMatch": "\"0\"",
+        "reportedError": true,
+        "expectation": "aria false, retry If-Match \"0\", error announcement"
+      },
+      "mismatched_200_bookmark_id": {
+        "ariaAfterMismatchedId": "false",
+        "retryIfMatch": "\"0\"",
+        "reportedError": true,
+        "expectation": "reject mismatched post id; aria false and retry If-Match \"0\""
+      }
+    },
+    "C": {
+      "privacy_control": {
+        "visibleIds": [],
+        "forbiddenWrite": 404
+      },
+      "parallel_bookmark_cas": {
+        "statuses": [
+          200,
+          412
+        ],
+        "expectation": "two overlapping authenticated HTTP PUTs with one If-Match version yield one 200 and one 412"
+      },
+      "constructed_out_of_range_cursor": {
+        "status": 400,
+        "returnedItems": null,
+        "expectation": "400 for nonexistent cursor position"
+      },
+      "unsafe_if_match_integer": {
+        "status": 400,
+        "expectation": "V5 defense: reject unsafe integer as 400"
+      },
+      "anonymous_invalid_json": {
+        "status": 401,
+        "body": {
+          "error": "unauthorized"
+        },
+        "expectation": "401 for unauthenticated API request"
+      },
+      "rapid_double_load_more": {
+        "additionalFeedRequests": 1,
+        "renderedP02Cards": 1,
+        "expectation": "one request and one rendered p02 card after competing Load more clicks"
+      },
+      "malformed_200_bookmark": {
+        "ariaAfterMalformedResponse": "false",
+        "retryIfMatch": "\"0\"",
+        "reportedError": true,
+        "expectation": "aria false, retry If-Match \"0\", error announcement"
+      },
+      "mismatched_200_bookmark_id": {
+        "ariaAfterMismatchedId": "true",
+        "retryIfMatch": "\"1\"",
+        "reportedError": false,
+        "expectation": "reject mismatched post id; aria false and retry If-Match \"0\""
+      }
+    },
+    "D": {
+      "privacy_control": {
+        "visibleIds": [],
+        "forbiddenWrite": 404
+      },
+      "parallel_bookmark_cas": {
+        "statuses": [
+          200,
+          412
+        ],
+        "expectation": "two overlapping authenticated HTTP PUTs with one If-Match version yield one 200 and one 412"
+      },
+      "constructed_out_of_range_cursor": {
+        "status": 200,
+        "returnedItems": 0,
+        "expectation": "400 for nonexistent cursor position"
+      },
+      "unsafe_if_match_integer": {
+        "status": 412,
+        "expectation": "V5 defense: reject unsafe integer as 400"
+      },
+      "anonymous_invalid_json": {
+        "status": 401,
+        "body": {
+          "error": "unauthorized"
+        },
+        "expectation": "401 for unauthenticated API request"
+      },
+      "rapid_double_load_more": {
+        "additionalFeedRequests": 1,
+        "renderedP02Cards": 1,
+        "expectation": "one request and one rendered p02 card after competing Load more clicks"
+      },
+      "malformed_200_bookmark": {
+        "ariaAfterMalformedResponse": "true",
+        "retryIfMatch": "\"bad\"",
+        "reportedError": false,
+        "expectation": "aria false, retry If-Match \"0\", error announcement"
+      },
+      "mismatched_200_bookmark_id": {
+        "ariaAfterMismatchedId": "true",
+        "retryIfMatch": "\"1\"",
+        "reportedError": false,
+        "expectation": "reject mismatched post id; aria false and retry If-Match \"0\""
+      }
+    },
+    "E": {
+      "privacy_control": {
+        "visibleIds": [],
+        "forbiddenWrite": 404
+      },
+      "parallel_bookmark_cas": {
+        "statuses": [
+          200,
+          412
+        ],
+        "expectation": "two overlapping authenticated HTTP PUTs with one If-Match version yield one 200 and one 412"
+      },
+      "constructed_out_of_range_cursor": {
+        "status": 200,
+        "returnedItems": 0,
+        "expectation": "400 for nonexistent cursor position"
+      },
+      "unsafe_if_match_integer": {
+        "status": 412,
+        "expectation": "V5 defense: reject unsafe integer as 400"
+      },
+      "anonymous_invalid_json": {
+        "status": 400,
+        "body": {
+          "error": "invalid json"
+        },
+        "expectation": "401 for unauthenticated API request"
+      },
+      "rapid_double_load_more": {
+        "additionalFeedRequests": 2,
+        "renderedP02Cards": 1,
+        "expectation": "one request and one rendered p02 card after competing Load more clicks"
+      },
+      "malformed_200_bookmark": {
+        "ariaAfterMalformedResponse": "true",
+        "retryIfMatch": "\"bad\"",
+        "reportedError": false,
+        "expectation": "aria false, retry If-Match \"0\", error announcement"
+      },
+      "mismatched_200_bookmark_id": {
+        "ariaAfterMismatchedId": "true",
+        "retryIfMatch": "\"1\"",
+        "reportedError": false,
+        "expectation": "reject mismatched post id; aria false and retry If-Match \"0\""
+      }
+    }
+  }
+}
