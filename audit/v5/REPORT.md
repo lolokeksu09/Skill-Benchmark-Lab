@@ -22,7 +22,7 @@
 
 - [Независимые пробы](probes.mjs) выполняют реальный код кандидата, не модифицируя исходники.
 - [Отдельный workflow](../../.github/workflows/v5-audit.yml) использует matrix и SHA-pinned checkout пяти кандидатов; `git rev-parse HEAD` сверяется с полным эталонным SHA.
-- [Заключительный успешный Actions run #40244706188](https://github.com/lolokeksu09/Skill-Benchmark-Lab/actions/runs/40244706188): все пять jobs завершились без ошибки harness; Node `v22.23.3`.
+- [Успешный Actions run #40263595773](https://github.com/lolokeksu09/Skill-Benchmark-Lab/actions/runs/40263595773) выполнил исправленную версию `probes.mjs` на всех пяти точных SHA; все jobs успешны, Node `v22.23.3`. В контроле bookmark CAS отправляются два перекрывающихся аутентифицированных HTTP PUT через `startServer()` — не прямые последовательные вызовы синхронного `engine.bookmark()`.
 - [Сохранённые JSON-доказательства](evidence.json) содержат фактические ответы, SHA, идентификаторы jobs и исходный workflow run. Сырые ответы доступны также в журналах по маркеру `V5_OBSERVATIONS`.
 
 **Примечание:** зелёные jobs — это успешное выполнение скрипта наблюдений, **не прохождение кандидатом критериев**. Клиентские пробы запускают реальный `web/app.mjs` в Node VM с управляемыми `document` и `fetch`. Это изоляционная fault-injection проверка логики, **не Chromium E2E**. Существующие 33 Node и 11 Chromium тестов V4 не менялись и не перезапускались.
@@ -91,6 +91,6 @@
 
 ## Повторный запуск
 
-Проверка воспроизводится через [Actions #40244706188](https://github.com/lolokeksu09/Skill-Benchmark-Lab/actions/runs/40244706188), где каждое наблюдение сохраняется отдельно по полному SHA; постоянный снимок — [evidence.json](evidence.json). Можно запустить workflow вручную из ветки аудита после его публикации либо локально, положив выбранный checkout на зафиксированном коммите в `candidate/` и выполнив с Node 22 `V5_ALIAS=A V5_SHA=4fbceb661fc56828eabf35650f0f96372572f48c node audit/v5/probes.mjs`. Для остальных алиасов использовать SHA из матрицы workflow.
+Сырые наблюдения из исправленного запуска воспроизводятся через [Actions #40263595773](https://github.com/lolokeksu09/Skill-Benchmark-Lab/actions/runs/40263595773); каждый job сохраняет полный SHA и отдельные результаты, сведённые в [evidence.json](evidence.json). Последующий успешный CI на итоговом коммите PR подтверждает, что текущая версия отчёта и артефакта не ломает workflow. Можно запустить workflow вручную из ветки аудита после его публикации либо локально, положив выбранный checkout на зафиксированном коммите в `candidate/` и выполнив с Node 22 `V5_ALIAS=A V5_SHA=4fbceb661fc56828eabf35650f0f96372572f48c node audit/v5/probes.mjs`. Для остальных алиасов использовать SHA из матрицы workflow.
 
 **Пределы изменения:** только новые audit-файлы и workflow в [PR #26](https://github.com/lolokeksu09/Skill-Benchmark-Lab/pull/26), base `main`. Ни пять кандидатских веток, ни V4-тесты, ни исходный baseline не изменены. Merge не выполнен.
