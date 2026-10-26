@@ -1,51 +1,38 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RiftHub — сообщество</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <style>
-    :root { color-scheme: light; font-family: Arial, sans-serif; background:#f5f7fb; color:#172033; }
-    * { box-sizing:border-box; }
-    body { margin:0; min-width:520px; }
-    header { padding:24px 8vw; background:#172554; color:white; display:flex; justify-content:space-between; align-items:center; }
-    main { max-width:1200px; margin:0 auto; padding:32px 24px; }
-    .hero { padding:28px; border-radius:24px; background:#dbeafe; }
-    .toolbar { display:flex; gap:16px; margin:20px 0; }
-    input, select, button { padding:12px; border:1px solid #aab4c5; border-radius:8px; font:inherit; }
-    .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
-    .card { padding:20px; background:white; border-radius:16px; box-shadow:0 5px 20px #17203322; }
-    .actions { display:flex; gap:8px; margin-top:18px; }
-    button { cursor:pointer; background:white; }
-    .hidden { display:none; }
-    @media (max-width:700px) { .grid { grid-template-columns:1fr; } .toolbar { flex-direction:column; } }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="RiftHub — идеи, гайды и поиск команды для Wild Rift">
+<title>RiftHub — играем умнее</title>
+<style>
+:root{color-scheme:light;--bg:#f5f7ff;--surface:#fff;--surface-2:#eef2ff;--text:#18213b;--muted:#68718b;--line:#dce2f0;--accent:#5b4bdb;--accent-2:#14b8a6;--focus:#f59e0b;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0e1324;--surface:#171d33;--surface-2:#202944;--text:#f5f7ff;--muted:#aab3cb;--line:#303b5b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% 0%,#dcd8ff 0,transparent 34rem),var(--bg);color:var(--text);line-height:1.5}button,input,select{font:inherit}button{cursor:pointer}.shell{width:min(1120px,100% - 32px);margin:auto}.site-header{padding:20px 0}.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:800;letter-spacing:-.03em}.brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:13px;color:#fff;background:linear-gradient(135deg,var(--accent),#9a7bff);box-shadow:0 8px 20px #5b4bdb44}.icon-btn,.btn{border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);padding:11px 15px}.icon-btn{width:44px;height:44px;padding:0;font-size:1.1rem}.btn.primary{border-color:transparent;background:var(--accent);color:#fff;font-weight:700}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:stretch;padding:42px 0 28px}.hero-copy,.hero-card{border:1px solid var(--line);border-radius:28px;background:color-mix(in srgb,var(--surface) 88%,transparent);box-shadow:0 18px 50px #1a245414}.hero-copy{padding:clamp(26px,5vw,56px)}.eyebrow{margin:0 0 12px;color:var(--accent);font-weight:800;font-size:.78rem;letter-spacing:.14em}.hero h1{max-width:680px;margin:0;font-size:clamp(2.2rem,6vw,4.7rem);line-height:1.02;letter-spacing:-.06em}.hero p:not(.eyebrow){max-width:580px;margin:22px 0 0;color:var(--muted);font-size:1.08rem}.hero-card{position:relative;overflow:hidden;padding:26px;background:linear-gradient(145deg,#272359,#594bdb 58%,#15b8a6);color:#fff;min-height:240px}.hero-card:after{content:"";position:absolute;width:190px;height:190px;right:-55px;bottom:-78px;border-radius:50%;background:#fff3}.orb{position:absolute;width:88px;height:88px;right:38px;top:36px;border:1px solid #ffffff55;border-radius:28px;transform:rotate(18deg);background:#ffffff18}.hero-card strong{display:block;font-size:1.35rem}.hero-card p{max-width:240px;margin-top:90px;color:#fff;opacity:.9}.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:30px 0 14px}.section-head h2{margin:0;font-size:1.5rem;letter-spacing:-.03em}.section-head p{margin:0;color:var(--muted);font-size:.92rem}.toolbar{display:grid;grid-template-columns:1fr 190px;gap:12px;margin-bottom:18px}.field{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:0 14px}.field span{color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}input,select{width:100%;border:0;outline:0;background:transparent;color:var(--text);padding:14px 0}select{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:14px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{display:flex;flex-direction:column;min-width:0;padding:22px;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:0 10px 30px #1a24540b}.card-top{display:flex;justify-content:space-between;gap:12px;align-items:start}.tag{padding:5px 9px;border-radius:99px;background:var(--surface-2);color:var(--accent);font-size:.76rem;font-weight:800}.card h3{margin:17px 0 8px;font-size:1.18rem;line-height:1.2}.card p{margin:0;color:var(--muted)}.actions{display:flex;gap:8px;margin-top:auto;padding-top:22px}.action{flex:1;padding:10px 8px;border:1px solid var(--line);border-radius:11px;background:transparent;color:var(--text)}.action[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:#fff}.more-wrap{text-align:center;padding:24px 0 46px}.empty{padding:30px;border:1px dashed var(--line);border-radius:18px;text-align:center;color:var(--muted)}[hidden]{display:none!important}:focus-visible{outline:3px solid var(--focus);outline-offset:3px}@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:20px}.hero-card{min-height:180px}.hero-card p{margin-top:46px}.grid{grid-template-columns:1fr 1fr}.shell{width:min(100% - 24px,1120px)}}@media(max-width:520px){.grid,.toolbar{grid-template-columns:1fr}.hero-copy{padding:27px 22px}.hero h1{font-size:2.55rem}.section-head{display:block}.section-head p{margin-top:5px}}
+</style>
 </head>
 <body>
-  <header><strong>RiftHub</strong><button id="theme">☾</button></header>
-  <main>
-    <section class="hero"><p>СООБЩЕСТВО</p><h1>Идеи для следующей игры</h1><p>Найди игроков, сборки и полезные советы для Ущелья.</p></section>
-    <div class="toolbar"><input id="search" placeholder="Поиск"><select id="filter"><option>Все</option><option>Гайды</option><option>Команды</option></select></div>
-    <section class="grid" id="feed">
-      <article class="card" data-category="Гайды"><h2>Как читать карту</h2><p>Три привычки, которые помогают выигрывать объекты.</p><div class="actions"><button class="like">♡ Нравится</button><button class="save">Сохранить</button></div></article>
-      <article class="card" data-category="Команды"><h2>Ищем команду</h2><p>Играем вечером, спокойная коммуникация и голос.</p><div class="actions"><button class="like">♡ Нравится</button><button class="save">Сохранить</button></div></article>
-      <article class="card" data-category="Гайды"><h2>Маршрут лесника</h2><p>Безопасный старт для первых минут матча.</p><div class="actions"><button class="like">♡ Нравится</button><button class="save">Сохранить</button></div></article>
-    </section>
-    <p id="empty" class="hidden">Ничего не найдено</p>
-    <button id="more">Загрузить ещё</button>
-  </main>
-  <script>
-    const search = document.querySelector('#search');
-    const filter = document.querySelector('#filter');
-    function apply() {
-      const q = search.value.toLowerCase();
-      document.querySelectorAll('.card').forEach(card => { card.hidden = !(card.innerText.toLowerCase().includes(q) && (filter.value === 'Все' || card.dataset.category === filter.value)); });
-    }
-    search.addEventListener('input', apply);
-    filter.addEventListener('change', apply);
-    document.querySelectorAll('.like').forEach(button => button.addEventListener('click', () => button.textContent = '♥ Нравится'));
-    document.querySelector('#theme').addEventListener('click', () => document.documentElement.style.colorScheme = 'dark');
-  </script>
+<header class="site-header"><div class="shell nav"><a class="brand" href="#feed"><span class="brand-mark" aria-hidden="true">R</span><span>RiftHub</span></a><button class="icon-btn" id="theme" type="button" aria-label="Включить тёмную тему" aria-pressed="false">☾</button></div></header>
+<main class="shell">
+<section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><p class="eyebrow">СООБЩЕСТВО ДЛЯ ИГРЫ УМНЕЕ</p><h1 id="hero-title">Идеи для следующей победы.</h1><p>Гайды, поиск команды и короткие советы для тех, кто хочет играть спокойнее и сильнее.</p><div style="margin-top:24px"><a class="btn primary" href="#feed">Открыть ленту</a></div></div><aside class="hero-card" aria-label="Статистика сообщества"><span class="orb" aria-hidden="true"></span><strong>Сегодня в RiftHub</strong><p>Новые маршруты, разборы матчей и игроки для вечерней игры.</p><b>12 480 участников</b></aside></section>
+<section aria-labelledby="feed-title"><div class="section-head"><div><h2 id="feed-title">Свежие публикации</h2><p>Выбери тему и найди нужный совет.</p></div></div><div class="toolbar"><label class="field"><span aria-hidden="true">⌕</span><span class="sr-only">Поиск публикаций</span><input id="search" type="search" placeholder="Поиск по публикациям" autocomplete="off"></label><label><span class="sr-only">Категория</span><select id="filter"><option>Все</option><option>Гайды</option><option>Команды</option></select></label></div><div class="grid" id="feed" aria-live="polite">
+<article class="card" data-category="Гайды"><div class="card-top"><span class="tag">Гайды</span><span aria-hidden="true">✦</span></div><h3>Как читать карту до первого объекта</h3><p>Три привычки, которые помогают видеть следующий ход команды.</p><div class="actions"><button class="action like" type="button" aria-pressed="false">♡ Нравится</button><button class="action save" type="button" aria-label="Сохранить публикацию: Как читать карту до первого объекта" aria-pressed="false">Сохранить</button></div></article>
+<article class="card" data-category="Команды"><div class="card-top"><span class="tag">Команды</span><span aria-hidden="true">◌</span></div><h3>Ищем команду на вечер</h3><p>Спокойная коммуникация, голос и несколько матчей без токсичности.</p><div class="actions"><button class="action like" type="button" aria-pressed="false">♡ Нравится</button><button class="action save" type="button" aria-label="Сохранить публикацию: Ищем команду на вечер" aria-pressed="false">Сохранить</button></div></article>
+<article class="card" data-category="Гайды"><div class="card-top"><span class="tag">Гайды</span><span aria-hidden="true">⌁</span></div><h3>Безопасный маршрут лесника</h3><p>План первых минут матча для стабильного контроля карты.</p><div class="actions"><button class="action like" type="button" aria-pressed="false">♡ Нравится</button><button class="action save" type="button" aria-label="Сохранить публикацию: Безопасный маршрут лесника" aria-pressed="false">Сохранить</button></div></article>
+</div><p id="empty" class="empty" hidden>По этим условиям ничего не найдено. Измени запрос или категорию.</p></section>
+<div class="more-wrap"><button class="btn" id="more" type="button">Загрузить ещё</button></div>
+</main>
+<script>
+(() => {
+  const root = document.documentElement, search = document.querySelector('#search'), filter = document.querySelector('#filter'), feed = document.querySelector('#feed'), empty = document.querySelector('#empty'), more = document.querySelector('#more'), theme = document.querySelector('#theme');
+  const extra = [{category:'Команды', title:'Дуо для спокойного ранга', text:'Соберёмся после восьми и сыграем несколько матчей.'},{category:'Гайды', title:'Когда менять линию', text:'Простой чеклист для решений после первой башни.'}];
+  const key = 'rifthub-theme';
+  function setTheme(mode) { root.dataset.theme = mode === 'dark' ? 'dark' : 'light'; theme.setAttribute('aria-pressed', String(mode === 'dark')); theme.setAttribute('aria-label', mode === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему'); theme.textContent = mode === 'dark' ? '☀' : '☾'; try { localStorage.setItem(key, root.dataset.theme); } catch {} }
+  setTheme((() => { try { return localStorage.getItem(key) || 'light'; } catch { return 'light'; } })());
+  function apply() { const q = search.value.trim().toLocaleLowerCase('ru'); const category = filter.value; let visible = 0; feed.querySelectorAll('.card').forEach(card => { const match = card.textContent.toLocaleLowerCase('ru').includes(q) && (category === 'Все' || card.dataset.category === category); card.hidden = !match; if (match) visible += 1; }); empty.hidden = visible !== 0; }
+  function wire(button) { button.addEventListener('click', () => { const active = button.getAttribute('aria-pressed') !== 'true'; button.setAttribute('aria-pressed', String(active)); if (button.classList.contains('like')) button.textContent = active ? '♥ Нравится' : '♡ Нравится'; }); button.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); button.click(); } }); }
+  document.querySelectorAll('.like, .save').forEach(wire); search.addEventListener('input', apply); filter.addEventListener('change', apply); theme.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark')); more.addEventListener('click', () => { extra.forEach(item => { const card = document.createElement('article'); card.className = 'card'; card.dataset.category = item.category; const title = document.createElement('h3'); title.textContent = item.title; const text = document.createElement('p'); text.textContent = item.text; const actions = document.createElement('div'); actions.className = 'actions'; const like = document.createElement('button'); like.className = 'action like'; like.type = 'button'; like.setAttribute('aria-pressed', 'false'); like.textContent = '♡ Нравится'; const save = document.createElement('button'); save.className = 'action save'; save.type = 'button'; save.setAttribute('aria-pressed', 'false'); save.setAttribute('aria-label', `Сохранить публикацию: ${item.title}`); save.textContent = 'Сохранить'; actions.append(like, save); card.append(title, text, actions); feed.append(card); wire(like); wire(save); }); more.disabled = true; more.textContent = 'Все публикации загружены'; apply(); });
+})();
+</script>
 </body>
 </html>
