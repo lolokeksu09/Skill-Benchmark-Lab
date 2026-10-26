@@ -1,0 +1,34 @@
+[
+  {
+    "id": "p2p-positive-only-compose",
+    "prompt": "[P2P_INTAKE]\nRAW_QUERY: \"Build an Android Kotlin Compose screen without React Native\"\nTARGET: \"Android screen\"\nALLOWED_STACK: [\"Kotlin Compose\"]\nFORBIDDEN_TECH: [\"React Native\"]\nINVARIANTS: []\nDOD_FACTS: []\nASSUMPTIONS: []\n[/P2P_INTAKE]",
+    "required": ["android-jetpack-compose-expert"],
+    "forbidden": ["vercel-react-native-skills"],
+    "expected_stack": ["android", "compose"],
+    "forbidden_stack": ["react-native"]
+  },
+  {
+    "id": "p2p-historical-web-switch",
+    "prompt": "[P2P_INTAKE]\nRAW_QUERY: \"Fix the CSS grid; Compose is no longer used\"\nTARGET: \"Web CSS grid\"\nALLOWED_STACK: [\"HTML/CSS\"]\nFORBIDDEN_TECH: [\"Jetpack Compose\"]\nINVARIANTS: []\nDOD_FACTS: []\nASSUMPTIONS: []\n[/P2P_INTAKE]",
+    "required": ["systematic-debugging"],
+    "forbidden": ["android-jetpack-compose-expert"],
+    "expected_stack": ["web"],
+    "forbidden_stack": ["compose", "android"]
+  },
+  {
+    "id": "p2p-multistack-modules",
+    "prompt": "[P2P_INTAKE]\nRAW_QUERY: \"Implement two independent modules\"\nTARGET: \"Module A and Module B\"\nALLOWED_STACK: [\"module-a -> Kotlin Compose\", \"module-b -> React Native\"]\nFORBIDDEN_TECH: []\nINVARIANTS: [\"Keep module boundaries\"]\nDOD_FACTS: []\nASSUMPTIONS: []\n[/P2P_INTAKE]",
+    "required": ["dispatching-parallel-agents", "android-jetpack-compose-expert", "vercel-react-native-skills"],
+    "forbidden": [],
+    "expected_stack": ["android", "compose", "react-native"],
+    "forbidden_stack": []
+  },
+  {
+    "id": "p2p-hard-invariant",
+    "prompt": "[P2P_INTAKE]\nRAW_QUERY: \"Audit website security and fix only critical security issues\"\nTARGET: \"Website security audit and critical fixes\"\nALLOWED_STACK: [\"HTML/CSS\"]\nFORBIDDEN_TECH: []\nINVARIANTS: [\"critical issues only\"]\nDOD_FACTS: [\"No minor changes\"]\nASSUMPTIONS: []\n[/P2P_INTAKE]",
+    "required": ["security-auditor"],
+    "forbidden": [],
+    "expected_stack": ["web"],
+    "forbidden_stack": []
+  }
+]
