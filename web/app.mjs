@@ -8,6 +8,7 @@ let query = '';
 let searchGeneration = 0;
 let feedController = null;
 let loading = false;
+let loadMoreInFlight = false;
 
 function drawPost(post) {
   const card = document.createElement('article');
@@ -47,6 +48,10 @@ function drawPost(post) {
       });
       if (!response.ok) throw new Error('bookmark rejected');
       const body = await response.json();
+      if (body?.id !== post.id || typeof body.version !== 'number' || typeof body.saved !== 'boolean') {
+        throw new Error('invalid bookmark response');
+      }
+      post.saved = body.saved;
       post.version = body.version;
     } catch {
       post.saved = previous.saved;
@@ -61,6 +66,8 @@ function drawPost(post) {
 
 async function fetchPage(reset) {
   if (loading && !reset) return;
+  if (!reset && loadMoreInFlight) return;
+  if (!reset) loadMoreInFlight = true;
   const generation = reset ? ++searchGeneration : searchGeneration;
   if (feedController) feedController.abort();
   feedController = new AbortController();
@@ -80,7 +87,12 @@ async function fetchPage(reset) {
     status.textContent = `${board.children.length} discussions`;
   } catch (error) {
     if (error.name !== 'AbortError' && generation === searchGeneration) status.textContent = 'Could not load discussions';
-  } finally { if (generation === searchGeneration) loading = false; }
+  } finally {
+    if (generation === searchGeneration) {
+      loading = false;
+      if (!reset) loadMoreInFlight = false;
+    }
+  }
 }
 
 search.addEventListener('input', () => {
@@ -88,5 +100,8 @@ search.addEventListener('input', () => {
   cursor = null;
   fetchPage(true);
 });
-more.addEventListener('click', () => fetchPage(false));
+more.addEventListener('click', () => {
+  if (loading || loadMoreInFlight || !cursor) return;
+  fetchPage(false);
+});
 fetchPage(true);
