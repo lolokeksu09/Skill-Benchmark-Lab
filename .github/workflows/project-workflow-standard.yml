@@ -31,6 +31,4 @@ jobs:
       - name: Verify Python runtime
         run: python3 --version
       - name: Replay archived outputs and reject known-broken fixtures
-        run: |
-          python3 benchmarks/project-workflow-standard/verify.py
-          python3 -c 'raise SystemExit("Intentional CI failure probe; remove after observation")'
+        run: python3 benchmarks/project-workflow-standard/verify.py
