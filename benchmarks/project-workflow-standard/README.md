@@ -62,3 +62,9 @@ Before making improvement claims, freeze a new protocol with additional unseen t
 ## Additional recovery study
 
 The separate [recovery-v1 study](studies/recovery-v1/README.md) adds eight fresh-context applications of the unchanged v1.1/v1.2 instructions: two new tasks, two applications per cell. Both versions pass 78/78 repeated independent checks. It covers transient reads, local simulator writes with an unknown outcome, preservation of user work, a canceled apply step and accurate reporting of an unavailable provider gate. [Results and limits](studies/recovery-v1/RESULTS.md). It does not establish superiority or real-provider/UI/production behavior; the serving model identifier remains unavailable.
+
+## Safe replay and evaluation
+
+Use `python3 benchmarks/project-workflow-standard/hardened.py replay` for both frozen studies. This entry point rejects optimized Python because the preserved verifiers use assertions. It does not change historical snapshots or scores.
+
+For a fresh recovery application, use `python3 benchmarks/project-workflow-standard/hardened.py evaluate --work-root /path/to/isolated-work VERSION CASE REPEAT`. Exit 0 means automated checks passed, 1 means a failed or unexpected result, and 2 means at least one unavailable check; review the JSON for details. Evaluation works on temporary copies. These checks do not establish that reports are truthful or complete: review document meaning separately, and treat agent-controlled event files as evidence of recorded state rather than an independent action log.

@@ -23,6 +23,7 @@ def signature(report):
             **{k:report[k] for k in ['pass','fail','unavailable']}}
 
 def main():
+    if sys.flags.optimize:raise RuntimeError('Refusing optimized Python: assertions must be enabled')
     if sys.version_info<(3,12):raise RuntimeError('Python 3.12+ required')
     frozen=json.loads((ROOT/'frozen.json').read_text())
     for name,sha in frozen['files'].items():

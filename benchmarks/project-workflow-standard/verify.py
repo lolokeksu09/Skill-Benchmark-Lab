@@ -17,6 +17,7 @@ def load(name,path):
     return module
 
 def main():
+    if sys.flags.optimize:raise RuntimeError('Refusing optimized Python: assertions must be enabled')
     if sys.version_info<(3,12):raise RuntimeError('Python 3.12+ required')
     for version in ['1.1','1.2']:
         instruction_root=ROOT/'instructions'/version

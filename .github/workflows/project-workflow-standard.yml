@@ -30,7 +30,7 @@ jobs:
           persist-credentials: false
       - name: Verify Python runtime
         run: python3 --version
-      - name: Replay archived outputs and reject known-broken fixtures
-        run: python3 benchmarks/project-workflow-standard/verify.py
-      - name: Replay recovery study applications and controls
-        run: python3 benchmarks/project-workflow-standard/studies/recovery-v1/verify.py
+      - name: Test safe entry point
+        run: python3 -m unittest discover -s benchmarks/project-workflow-standard/tests -v
+      - name: Replay both studies and reject known-broken fixtures
+        run: python3 benchmarks/project-workflow-standard/hardened.py replay
