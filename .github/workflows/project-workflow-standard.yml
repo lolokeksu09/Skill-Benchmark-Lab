@@ -1,0 +1,36 @@
+name: Project Workflow Standard
+
+on:
+  pull_request:
+    paths:
+      - 'benchmarks/project-workflow-standard/**'
+      - '.github/workflows/project-workflow-standard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'benchmarks/project-workflow-standard/**'
+      - '.github/workflows/project-workflow-standard.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: workflow-standard-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  replay:
+    name: workflow-standard
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+      - name: Verify Python runtime
+        run: python3 --version
+      - name: Replay archived outputs and reject known-broken fixtures
+        run: |
+          python3 benchmarks/project-workflow-standard/verify.py
+          python3 -c 'raise SystemExit("Intentional CI failure probe; remove after observation")'

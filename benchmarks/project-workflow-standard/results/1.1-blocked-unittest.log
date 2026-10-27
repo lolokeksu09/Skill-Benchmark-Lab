@@ -1,0 +1,12 @@
+test_cli_outputs_json_for_input_file (test_report.Basic.test_cli_outputs_json_for_input_file) ... ok
+test_counts_all_statuses (test_report.Basic.test_counts_all_statuses) ... ok
+test_empty_report_is_not_ready (test_report.Basic.test_empty_report_is_not_ready) ... ok
+test_every_mandatory_check_must_succeed (test_report.Basic.test_every_mandatory_check_must_succeed) ... ok
+test_optional_failure_and_skipped_do_not_block_ready (test_report.Basic.test_optional_failure_and_skipped_do_not_block_ready) ... ok
+test_optional_only_is_not_ready (test_report.Basic.test_optional_only_is_not_ready) ... ok
+test_success (test_report.Basic.test_success) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.057s
+
+OK

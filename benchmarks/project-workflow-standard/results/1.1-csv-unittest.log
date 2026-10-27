@@ -1,0 +1,15 @@
+test_basic (test_contacts.ContactsTests.test_basic) ... ok
+test_bom_spaces_blank_rows_and_order (test_contacts.ContactsTests.test_bom_spaces_blank_rows_and_order) ... ok
+test_cli_limits (test_contacts.ContactsTests.test_cli_limits) ... ok
+test_cli_rejects_invalid_limit (test_contacts.ContactsTests.test_cli_rejects_invalid_limit) ... ok
+test_cli_reports_invalid_email (test_contacts.ContactsTests.test_cli_reports_invalid_email) ... ok
+test_duplicate_email_rejected (test_contacts.ContactsTests.test_duplicate_email_rejected) ... ok
+test_empty_email_rejected (test_contacts.ContactsTests.test_empty_email_rejected) ... ok
+test_empty_input (test_contacts.ContactsTests.test_empty_input) ... ok
+test_missing_email_column_rejected (test_contacts.ContactsTests.test_missing_email_column_rejected) ... ok
+test_quoted_values (test_contacts.ContactsTests.test_quoted_values) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.170s
+
+OK

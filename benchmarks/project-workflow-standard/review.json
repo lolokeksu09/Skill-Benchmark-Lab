@@ -1,0 +1,21 @@
+{
+  "method": "root manual read of all four FINAL.md and blocked PLAN.md; separate from automated evaluator",
+  "scope": "one fresh-context application per version/case; no post-result instruction tuning",
+  "observations": {
+    "1.1-csv": "all requirements and checks covered in bullets; complete local result",
+    "1.2-csv": "explicit per-requirement table, no remaining local blocker",
+    "1.1-blocked": "JSON requirements and user diff covered; obsolete CSV canceled; integration unavailable disclosed",
+    "1.2-blocked": "explicit requirement statuses and evidence; obsolete CSV canceled; integration unavailable disclosed"
+  },
+  "conclusion": "Both meet examined requirements. No implementation-quality superiority established. Candidate follows explicit completion-table format.",
+  "limits": [
+    "two artificial projects",
+    "one run per cell",
+    "common host instructions",
+    "no exact model identifier",
+    "no cost/token/latency statistics",
+    "no tool-call traces",
+    "no UI or publication task",
+    "unknown-outcome write/retry rule not behavior-tested"
+  ]
+}

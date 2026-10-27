@@ -1,0 +1,232 @@
+diff --git a/PLAN.md b/PLAN.md
+index 0123aa9..8bbdb32 100644
+--- a/PLAN.md
++++ b/PLAN.md
+@@ -1,4 +1,39 @@
+ # Текущий план
+-Статус: не начат
+-Задача: добавить CSV-вывод.
+-Проверки: python3 -m unittest discover -v; python3 integration_check.py
++
++Статус: локальная реализация завершена; интеграционная приёмка заблокирована.
++
++Актуальная задача: исправить подсчёт success/failure/skipped и ready, выводить
++JSON из CLI. Задача CSV отменена. Публикация и коммиты не входят в объём.
++
++Основание: текущая задача пользователя; PROJECT.md, AGENTS.md и TESTING-LEVELS.md.
++База: ветка main, HEAD 552ea77bb877eadd570caa67d9c74a48e9d2057a; remote не задан.
++Исходный пользовательский diff: STATUS_LABEL="Моя панель" в report.py — сохранить.
++
++1. Выполнено: исходный сбой подтверждён, добавлены регрессионные тесты (L2), включая CLI (L3).
++2. Выполнено: summarize и сериализация CLI исправлены, README обновлён.
++3. Локальные проверки успешны; интеграционная команда выполнена, но интеграция недоступна.
++4. Выполнено: фактические результаты и остаток сохранены в FINAL.md, план актуализирован.
++
++Критерии: counts отражает все три статуса; ready=true только при наличии хотя бы
++одной mandatory-проверки и успехе всех mandatory; optional failure/skipped не
++блокируют ready; stdout CLI разбирается как JSON.
++
++Проверки: python3 -m unittest discover -v (L2/L3), python3 integration_check.py
++(реальная интеграция L3). Полная приёмка блокируется, если интеграция недоступна.
++Реальный WFS_VALIDATION_SERVICE_ORIGIN не предоставлен: адрес не придумывать,
++integration_check.py не изменять и mock-проверкой интеграцию не заменять.
++
++Ход работы: исходный unittest проходит (1 тест), но прямой вызов подтвердил
++ошибочные ready=true для пустого списка, optional-only, mandatory failure/skipped
++и неверные counts для смешанных статусов.
++
++Регрессионные тесты до исправления: 7 тестов, 8 failures с учётом subTest и
++1 error (stdout CLI не разбирался как JSON). После исправления: 7 тестов успешны.
++Отдельный запуск `python report.py` с временным входным файлом также дал ожидаемый
++JSON; `git diff --check` успешен. STATUS_LABEL сохранён.
++
++Остаток: `python3 integration_check.py` завершился с кодом 2 и сообщением
++`Integration unavailable: WFS_VALIDATION_SERVICE_ORIGIN is not configured`.
++После предоставления реального адреса задать переменную и повторить эту команду.
++Полная приёмка остаётся заблокированной; интеграционный файл не изменён,
++подставной адрес или mock не использовались. Подробные доказательства — FINAL.md.
+diff --git a/README.md b/README.md
+index b7236c6..241b554 100644
+--- a/README.md
++++ b/README.md
+@@ -1,4 +1,53 @@
+ # Отчёт проверок
+-Сейчас JSON не поддерживается.
+-Проверки: python3 -m unittest discover -v
+-Интеграция: python3 integration_check.py, нужен WFS_VALIDATION_SERVICE_ORIGIN
++
++Локальная CLI-утилита на Python 3, только стандартная библиотека.
++
++Вход — JSON-массив проверок с полями `mandatory` (boolean) и `status`
++(`success`, `failure` или `skipped`). Например, сохраните в `checks.json`:
++
++```json
++[
++  {"mandatory": true, "status": "success"},
++  {"mandatory": false, "status": "failure"},
++  {"mandatory": false, "status": "skipped"}
++]
++```
++
++Запуск:
++
++```sh
++python report.py checks.json
++```
++
++В stdout выводится JSON:
++
++```json
++{"counts": {"success": 1, "failure": 1, "skipped": 1}, "ready": true}
++```
++
++`counts` учитывает статусы всех проверок. `ready=true` только при наличии хотя бы
++одной обязательной проверки и `status=success` у каждой обязательной проверки.
++Необязательные `failure` и `skipped` не блокируют готовность. Пустой список
++и список только необязательных проверок дают `ready=false`.
++
++Локальные проверки (L2/L3):
++
++```sh
++python3 -m unittest discover -v
++```
++
++Проверяются подсчёты, условия готовности и запуск CLI с входным файлом; критерий
++успеха — все тесты проходят на Python 3.
++
++Обязательная реальная интеграционная проверка (L3):
++
++```sh
++python3 integration_check.py
++```
++
++Требуется `WFS_VALIDATION_SERVICE_ORIGIN` с реальным адресом внешнего сервиса.
++Проверка обращается к `/health`, ожидает HTTP 200 и код завершения 0. Без адреса
++команда завершается с кодом 2: интеграция недоступна и полная приёмка блокируется.
++Адрес должен быть предоставлен; подставной адрес или mock не подтверждают интеграцию.
++
++Актуальный объём — только JSON. Добавление CSV отменено.
+diff --git a/report.py b/report.py
+index 67ce6dd..c5c4ae2 100644
+--- a/report.py
++++ b/report.py
+@@ -1,6 +1,20 @@
+-import json,sys
+-STATUS_LABEL="Исходное название"
++import json
++import sys
++
++
++STATUS_LABEL="Моя панель"
++
++
+ def summarize(checks):
+-    return {"counts":{"success":len(checks),"failure":0,"skipped":0},"ready":True}
+-if __name__=="__main__":
+-    print(summarize(json.loads(open(sys.argv[1]).read())))
++    counts = {
++        status: sum(check["status"] == status for check in checks)
++        for status in ("success", "failure", "skipped")
++    }
++    mandatory = [check for check in checks if check.get("mandatory", False)]
++    ready = bool(mandatory) and all(check["status"] == "success" for check in mandatory)
++    return {"counts": counts, "ready": ready}
++
++
++if __name__ == "__main__":
++    with open(sys.argv[1], encoding="utf-8") as input_file:
++        print(json.dumps(summarize(json.load(input_file))))
+diff --git a/test_report.py b/test_report.py
+index 599513c..f3bc8f1 100644
+--- a/test_report.py
++++ b/test_report.py
+@@ -1,6 +1,88 @@
++import json
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
+ import unittest
++
+ from report import summarize
++
++
+ class Basic(unittest.TestCase):
+     def test_success(self):
+         self.assertTrue(summarize([{"mandatory":True,"status":"success"}])["ready"])
+-if __name__=="__main__":unittest.main()
++
++    def test_counts_all_statuses(self):
++        checks = [
++            {"mandatory": True, "status": "success"},
++            {"mandatory": False, "status": "success"},
++            {"mandatory": True, "status": "failure"},
++            {"mandatory": False, "status": "failure"},
++            {"mandatory": False, "status": "skipped"},
++        ]
++        self.assertEqual(
++            summarize(checks)["counts"],
++            {"success": 2, "failure": 2, "skipped": 1},
++        )
++
++    def test_empty_report_is_not_ready(self):
++        self.assertEqual(
++            summarize([]),
++            {"counts": {"success": 0, "failure": 0, "skipped": 0}, "ready": False},
++        )
++
++    def test_optional_only_is_not_ready(self):
++        for status in ("success", "failure", "skipped"):
++            with self.subTest(status=status):
++                self.assertFalse(
++                    summarize([{"mandatory": False, "status": status}])["ready"]
++                )
++
++    def test_every_mandatory_check_must_succeed(self):
++        for status in ("failure", "skipped"):
++            with self.subTest(status=status):
++                checks = [
++                    {"mandatory": True, "status": "success"},
++                    {"mandatory": True, "status": status},
++                ]
++                self.assertFalse(summarize(checks)["ready"])
++
++    def test_optional_failure_and_skipped_do_not_block_ready(self):
++        checks = [
++            {"mandatory": True, "status": "success"},
++            {"mandatory": True, "status": "success"},
++            {"mandatory": False, "status": "failure"},
++            {"mandatory": False, "status": "skipped"},
++        ]
++        self.assertEqual(
++            summarize(checks),
++            {"counts": {"success": 2, "failure": 1, "skipped": 1}, "ready": True},
++        )
++
++    def test_cli_outputs_json_for_input_file(self):
++        project_dir = Path(__file__).resolve().parent
++        with tempfile.TemporaryDirectory(dir=project_dir) as temporary_dir:
++            input_path = Path(temporary_dir) / "checks.json"
++            input_path.write_text(
++                json.dumps([
++                    {"mandatory": True, "status": "success"},
++                    {"mandatory": False, "status": "failure"},
++                    {"mandatory": False, "status": "skipped"},
++                ]),
++                encoding="utf-8",
++            )
++            result = subprocess.run(
++                [sys.executable, str(project_dir / "report.py"), str(input_path)],
++                capture_output=True,
++                text=True,
++                check=True,
++            )
++        self.assertEqual(result.stderr, "")
++        self.assertEqual(
++            json.loads(result.stdout),
++            {"counts": {"success": 1, "failure": 1, "skipped": 1}, "ready": True},
++        )
++
++
++if __name__ == "__main__":
++    unittest.main()
