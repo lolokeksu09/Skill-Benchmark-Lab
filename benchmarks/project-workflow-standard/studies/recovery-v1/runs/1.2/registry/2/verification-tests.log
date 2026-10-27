@@ -1,0 +1,15 @@
+test_empty (test_package.BuildManifestTests.test_empty) ... ok
+test_normalizes_sorts_sums_and_discards_extra_fields (test_package.BuildManifestTests.test_normalizes_sorts_sums_and_discards_extra_fields) ... ok
+test_rejects_duplicate_names_after_trimming_and_casefold (test_package.BuildManifestTests.test_rejects_duplicate_names_after_trimming_and_casefold) ... ok
+test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) ... ok
+test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) ... ok
+test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) ... ok
+test_invalid_input_does_not_create_output (test_package.CliTests.test_invalid_input_does_not_create_output) ... ok
+test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) ... ok
+test_missing_input_keeps_existing_output (test_package.CliTests.test_missing_input_keeps_existing_output) ... ok
+test_valid_input (test_package.CliTests.test_valid_input) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 4.122s
+
+OK

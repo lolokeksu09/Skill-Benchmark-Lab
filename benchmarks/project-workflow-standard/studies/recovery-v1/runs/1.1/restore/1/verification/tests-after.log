@@ -1,0 +1,25 @@
+command: python3 -m unittest discover -v
+exit: 0
+stdout:
+
+stderr:
+test_classifies_and_sorts_new_changed_and_unchanged_paths (test_restore.BuildPlanTests.test_classifies_and_sorts_new_changed_and_unchanged_paths) ... ok
+test_empty (test_restore.BuildPlanTests.test_empty) ... ok
+test_empty_backup_preserves_current_unless_pruning (test_restore.BuildPlanTests.test_empty_backup_preserves_current_unless_pruning) ... ok
+test_empty_current_creates_every_backup_path (test_restore.BuildPlanTests.test_empty_current_creates_every_backup_path) ... ok
+test_identical_snapshots_have_no_changes_even_with_prune (test_restore.BuildPlanTests.test_identical_snapshots_have_no_changes_even_with_prune) ... ok
+test_inputs_are_unchanged (test_restore.BuildPlanTests.test_inputs_are_unchanged) ... ok
+test_prune_lists_only_missing_paths_in_sorted_order (test_restore.BuildPlanTests.test_prune_lists_only_missing_paths_in_sorted_order) ... ok
+test_invalid_utf8_has_clear_error (test_restore.CLITests.test_invalid_utf8_has_clear_error) ... ok
+test_malformed_json_in_either_input (test_restore.CLITests.test_malformed_json_in_either_input) ... ok
+test_missing_file_has_clear_error (test_restore.CLITests.test_missing_file_has_clear_error) ... ok
+test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) ... ok
+test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) ... ok
+test_preview_outputs_json_without_prune (test_restore.CLITests.test_preview_outputs_json_without_prune) ... ok
+test_prune_outputs_deletion_preview (test_restore.CLITests.test_prune_outputs_deletion_preview) ... ok
+test_unicode_paths_and_content (test_restore.CLITests.test_unicode_paths_and_content) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 2.922s
+
+OK

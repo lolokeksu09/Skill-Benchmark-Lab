@@ -1,0 +1,5 @@
+command: python3 -m py_compile restore.py test_restore.py
+exit: 0
+stdout:
+
+stderr:

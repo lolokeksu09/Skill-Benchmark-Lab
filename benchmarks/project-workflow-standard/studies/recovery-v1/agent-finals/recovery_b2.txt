@@ -1,0 +1,5 @@
+Готово. Обновлены package.py, README и тесты; 10 тестов, py_compile и diff-check успешны.
+
+manifest.json опубликован один раз в локальном реестре: `receipt-1`. После обрыва publish результат подтверждён через status, SHA-256 совпадает. Остатка нет.
+
+[FINAL.md](sandbox:/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/FINAL.md) · [manifest.json](sandbox:/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/manifest.json)

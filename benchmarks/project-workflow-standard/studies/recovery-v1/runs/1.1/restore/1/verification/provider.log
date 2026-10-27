@@ -1,0 +1,6 @@
+command: python3 provider_check.py
+exit: 2
+stdout:
+
+stderr:
+Provider check unavailable: owner-issued WFS_RESTORE_PROVIDER_RECEIPT is missing

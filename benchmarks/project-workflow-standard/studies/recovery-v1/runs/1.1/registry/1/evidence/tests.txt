@@ -1,0 +1,13 @@
+test_invalid_input_does_not_create_output (test_package.CliTests.test_invalid_input_does_not_create_output) ... ok
+test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) ... ok
+test_missing_input_preserves_existing_output (test_package.CliTests.test_missing_input_preserves_existing_output) ... ok
+test_sample_cli (test_package.CliTests.test_sample_cli) ... ok
+test_empty (test_package.ManifestTests.test_empty) ... ok
+test_invalid_records_are_rejected (test_package.ManifestTests.test_invalid_records_are_rejected) ... ok
+test_names_are_compared_using_unicode_casefold (test_package.ManifestTests.test_names_are_compared_using_unicode_casefold) ... ok
+test_normalizes_sorts_and_sums_without_mutating_input (test_package.ManifestTests.test_normalizes_sorts_and_sums_without_mutating_input) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.642s
+
+OK

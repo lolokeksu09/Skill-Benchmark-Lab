@@ -58,3 +58,7 @@ Starting new AI applications and any associated costs require owner opt-in. CI a
 ## Next measurements
 
 Before making improvement claims, freeze a new protocol with additional unseen tasks, repeated applications, a confirmed model/environment identifier and separate scoring for requirement coverage, implementation correctness, evidence accuracy, preservation of user work and delivery boundaries. Retry handling, unknown-outcome writes, UI, publication and large production projects remain untested by this pilot.
+
+## Additional recovery study
+
+The separate [recovery-v1 study](studies/recovery-v1/README.md) adds eight fresh-context applications of the unchanged v1.1/v1.2 instructions: two new tasks, two applications per cell. Both versions pass 78/78 repeated independent checks. It covers transient reads, local simulator writes with an unknown outcome, preservation of user work, a canceled apply step and accurate reporting of an unavailable provider gate. [Results and limits](studies/recovery-v1/RESULTS.md). It does not establish superiority or real-provider/UI/production behavior; the serving model identifier remains unavailable.

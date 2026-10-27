@@ -1,0 +1,17 @@
+test_empty (test_restore.BuildPlanTests.test_empty) ... ok
+test_empty_backup_does_not_delete_without_prune (test_restore.BuildPlanTests.test_empty_backup_does_not_delete_without_prune) ... ok
+test_empty_current_creates_all_backup_paths (test_restore.BuildPlanTests.test_empty_current_creates_all_backup_paths) ... ok
+test_identical_and_empty_contents_are_unchanged (test_restore.BuildPlanTests.test_identical_and_empty_contents_are_unchanged) ... ok
+test_inputs_are_not_mutated (test_restore.BuildPlanTests.test_inputs_are_not_mutated) ... ok
+test_only_new_and_changed_paths_are_included (test_restore.BuildPlanTests.test_only_new_and_changed_paths_are_included) ... ok
+test_prune_is_explicit_and_results_are_sorted (test_restore.BuildPlanTests.test_prune_is_explicit_and_results_are_sorted) ... ok
+test_invalid_encoding_has_clear_error (test_restore.CliTests.test_invalid_encoding_has_clear_error) ... ok
+test_invalid_input_has_clear_error_and_no_stdout (test_restore.CliTests.test_invalid_input_has_clear_error_and_no_stdout) ... ok
+test_json_output_in_both_modes_and_no_file_writes (test_restore.CliTests.test_json_output_in_both_modes_and_no_file_writes) ... ok
+test_missing_argument_has_usage_error (test_restore.CliTests.test_missing_argument_has_usage_error) ... ok
+test_missing_file_has_clear_error (test_restore.CliTests.test_missing_file_has_clear_error) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 2.402s
+
+OK

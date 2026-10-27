@@ -1,0 +1,2 @@
+{"create": ["new.txt"], "update": ["change.txt"], "delete": []}
+{"create": ["new.txt"], "update": ["change.txt"], "delete": ["old.txt"]}

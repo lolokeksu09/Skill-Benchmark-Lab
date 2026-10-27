@@ -1,0 +1,5 @@
+actual: {'create': ['keep.txt', 'new.txt', 'change.txt'], 'update': [], 'delete': ['keep.txt', 'old.txt', 'change.txt']}
+expected: {'create': ['new.txt'], 'update': ['change.txt'], 'delete': []}
+Traceback (most recent call last):
+  File "<stdin>", line 8, in <module>
+AssertionError

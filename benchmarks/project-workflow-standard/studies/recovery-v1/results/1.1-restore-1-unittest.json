@@ -1,0 +1,6 @@
+{
+  "command": "python3 -m unittest discover -v",
+  "exit_code": 0,
+  "python": "3.12.14",
+  "provider_receipt_env": "unset"
+}

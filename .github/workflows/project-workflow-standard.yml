@@ -32,3 +32,5 @@ jobs:
         run: python3 --version
       - name: Replay archived outputs and reject known-broken fixtures
         run: python3 benchmarks/project-workflow-standard/verify.py
+      - name: Replay recovery study applications and controls
+        run: python3 benchmarks/project-workflow-standard/studies/recovery-v1/verify.py

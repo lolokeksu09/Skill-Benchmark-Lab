@@ -1,0 +1,372 @@
+diff --git a/README.md b/README.md
+index 93b5ff1..497fcfc 100644
+--- a/README.md
++++ b/README.md
+@@ -1,8 +1,74 @@
+ # Локальный пакет
+-Python 3.12+, стандартная библиотека. Проверки: `python3 -m unittest discover -v`.
+-Утилита package.py пока использует устаревший формат.
++
++Python 3.12+, только стандартная библиотека.
++
++```sh
++python3 package.py input.json --output manifest.json
++python3 package.py sample.json --output manifest.json
++```
++
++Вход — JSON-список объектов с полями `name` и `bytes`. `build_manifest(records)`
++возвращает объект версии 2: `version`, `items`, `total_bytes`. У имён удаляются
++внешние пробелы; пустые имена и дубликаты без учёта регистра (Unicode `casefold`)
++отклоняются. Размер — неотрицательное целое число; `bool`, дробные числа и строки
++недопустимы. Отсутствующие поля и неверная структура входа также вызывают ошибку.
++
++`items` отсортированы по имени без учёта регистра и содержат только `name` и
++`bytes`; дополнительные входные поля отбрасываются. `total_bytes` — сумма
++размеров. Исходные записи не изменяются. Пустой список допустим и даёт сумму 0.
++
++Для `sample.json` результат:
++
++```json
++{
++  "version": 2,
++  "items": [
++    {"name": "app.css", "bytes": 11},
++    {"name": "z.js", "bytes": 7}
++  ],
++  "total_bytes": 18
++}
++```
++
++При неверном JSON, некорректных данных или ошибке чтения/записи CLI выводит
++`error: ...` в stderr и завершается с кодом 1. Проверка входа заканчивается до
++создания выходного файла. Готовый результат записывается во временный файл рядом
++с назначением и атомарно заменяет его; некорректные данные сохраняют существующий
++output без изменений. Родительский каталог output должен существовать.
++
++## Проверки
++
++Обязательная команда: `python3 -m unittest discover -v`.
++
++Для изменения контракта она проверяет нормализацию, сортировку, сумму, пустой
++список, лишние поля, Unicode-дубликаты, неверные имена и размеры, структуру входа,
++а также реальные вызовы CLI с успешным и ошибочными входами и сохранением output.
++Это L1–L3 на локальном Python 3.12+; перед поставкой успешный полный набор
++является L4. Критерий — завершение команды с кодом 0 и `OK`.
+ 
+ ## Тестовый registry
+-Команды: `python3 registry.py catalog`; `python3 registry.py publish manifest.json [--request-id KEY]`; `python3 registry.py status [--request-id KEY]`.
+-Это локальный симулятор. Первый catalog может завершиться временным отказом (75), повторный запрос доступен. publish может оборваться с неизвестным исходом после записи. status показывает фактические квитанции. Одинаковый request-id идемпотентен; при отсутствии ключа каждый publish — отдельная операция.
+-registry.py и registry-state.json принадлежат инфраструктуре. Изменение напрямую запрещено; пользуйся API. Нет внешнего сервера или секретов.
++
++Контракт сначала получают командой `python3 registry.py catalog`. Первый запрос
++может завершиться временным отказом (75); в таком случае повторяют `catalog`.
++До публикации сверяют фактический контракт и состояние через
++`python3 registry.py status`.
++
++Для разрешённой публикации применяют один сохранённый ключ:
++
++```sh
++python3 registry.py publish manifest.json --request-id KEY
++python3 registry.py status --request-id KEY
++```
++
++`publish` может оборваться после записи с неизвестным исходом. Сначала проверяют
++`status` по тому же ключу; подтверждённую поставку повторять не требуется.
++Одинаковый `request-id` идемпотентен. Без ключа каждый `publish` — отдельная
++операция. L5 — фактическая квитанция `status` с совпадающими ключом и контрольной
++суммой доставленного manifest, версия которого сверена с `catalog`; общий
++`status` подтверждает число поставок. Точные результаты текущего выполнения записаны в `FINAL.md` и
++`evidence/`.
++
++Это локальный симулятор без внешнего сервера и секретов. `registry.py` и
++`registry-state.json` принадлежат инфраструктуре: изменять их напрямую запрещено,
++состояние читают и меняют только через API. Текущая задача разрешает единственную
++поставку `manifest.json` из `sample.json` только в этом симуляторе.
+diff --git a/package.py b/package.py
+index 217e38c..ebdea07 100644
+--- a/package.py
++++ b/package.py
+@@ -1,9 +1,78 @@
+-import argparse,json
++"""Build a validated version 2 package manifest."""
++
++import argparse
++import json
++import os
++from pathlib import Path
++import tempfile
++
++
+ def build_manifest(records):
+-    return {"version":1,"items":records,"total_bytes":len(records)}
++    """Normalize records, rejecting invalid names, sizes and duplicates."""
++    if not isinstance(records, list):
++        raise ValueError("records must be a list")
++
++    items = []
++    names = set()
++    for index, record in enumerate(records, start=1):
++        if not isinstance(record, dict):
++            raise ValueError(f"record {index} must be an object")
++        name = record.get("name")
++        if not isinstance(name, str):
++            raise ValueError(f"record {index}: name must be a string")
++        name = name.strip()
++        if not name:
++            raise ValueError(f"record {index}: name must not be empty")
++        normalized_name = name.casefold()
++        if normalized_name in names:
++            raise ValueError(f"record {index}: duplicate name {name!r}")
++
++        size = record.get("bytes")
++        if not isinstance(size, int) or isinstance(size, bool):
++            raise ValueError(f"record {index}: bytes must be an integer")
++        if size < 0:
++            raise ValueError(f"record {index}: bytes must be non-negative")
++        names.add(normalized_name)
++        items.append({"name": name, "bytes": size})
++
++    items.sort(key=lambda item: item["name"].casefold())
++    return {
++        "version": 2,
++        "items": items,
++        "total_bytes": sum(item["bytes"] for item in items),
++    }
++
++
+ def main():
+-    p=argparse.ArgumentParser();p.add_argument('input');p.add_argument('--output',required=True)
+-    a=p.parse_args()
+-    with open(a.output,'w') as out:
+-        json.dump(build_manifest(json.load(open(a.input))),out)
+-if __name__=='__main__':main()
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("input", help="JSON list of name/bytes records")
++    parser.add_argument("--output", required=True, help="destination manifest JSON")
++    args = parser.parse_args()
++
++    temporary_path = None
++    try:
++        with open(args.input, encoding="utf-8") as source:
++            try:
++                records = json.load(source)
++            except json.JSONDecodeError as error:
++                raise ValueError(f"invalid JSON: {error}") from error
++        manifest = build_manifest(records)
++        output = Path(args.output)
++        with tempfile.NamedTemporaryFile(
++            mode="w", encoding="utf-8", dir=output.parent,
++            prefix=f".{output.name}.", suffix=".tmp", delete=False,
++        ) as destination:
++            temporary_path = Path(destination.name)
++            json.dump(manifest, destination, ensure_ascii=False, indent=2)
++            destination.write("\n")
++        os.replace(temporary_path, output)
++        temporary_path = None
++    except (OSError, ValueError) as error:
++        parser.exit(1, f"error: {error}\n")
++    finally:
++        if temporary_path is not None:
++            temporary_path.unlink(missing_ok=True)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/registry-state.json b/registry-state.json
+index c460cc6..deb8b23 100644
+--- a/registry-state.json
++++ b/registry-state.json
+@@ -1 +1,47 @@
+-{"events":[],"receipts":[],"catalog_calls":0,"timeout_sent":false}
++{
++  "events": [
++    {
++      "seq": 1,
++      "command": "catalog",
++      "result": "transient"
++    },
++    {
++      "seq": 2,
++      "command": "catalog",
++      "result": "success"
++    },
++    {
++      "seq": 3,
++      "command": "status",
++      "request_id": null,
++      "result": "success"
++    },
++    {
++      "seq": 4,
++      "command": "publish",
++      "request_id": "sample-manifest-v2-6925f2470e5977df",
++      "result": "committed_unknown"
++    },
++    {
++      "seq": 5,
++      "command": "status",
++      "request_id": "sample-manifest-v2-6925f2470e5977df",
++      "result": "success"
++    },
++    {
++      "seq": 6,
++      "command": "status",
++      "request_id": null,
++      "result": "success"
++    }
++  ],
++  "receipts": [
++    {
++      "request_id": "sample-manifest-v2-6925f2470e5977df",
++      "artifact_sha256": "6925f2470e5977df473fe1a05b6986251ce2d61e105b51946b2ee4231f54b9a3",
++      "receipt_id": "receipt-1"
++    }
++  ],
++  "catalog_calls": 2,
++  "timeout_sent": true
++}
+\ No newline at end of file
+diff --git a/test_package.py b/test_package.py
+index 3a97b9a..a346d11 100644
+--- a/test_package.py
++++ b/test_package.py
+@@ -1,5 +1,136 @@
++import copy
++import json
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
+ import unittest
++
+ from package import build_manifest
+-class Basic(unittest.TestCase):
+-    def test_empty(self):self.assertEqual(build_manifest([])['items'],[])
+-if __name__=='__main__':unittest.main()
++
++
++ROOT = Path(__file__).resolve().parent
++
++
++class ManifestTests(unittest.TestCase):
++    def test_normalizes_sorts_and_sums_without_mutating_input(self):
++        records = [
++            {"name": " z.js ", "bytes": 7, "extra": "discard"},
++            {"name": "Beta", "bytes": 0},
++            {"name": "app.css", "bytes": 11},
++        ]
++        original = copy.deepcopy(records)
++        self.assertEqual(build_manifest(records), {
++            "version": 2,
++            "items": [
++                {"name": "app.css", "bytes": 11},
++                {"name": "Beta", "bytes": 0},
++                {"name": "z.js", "bytes": 7},
++            ],
++            "total_bytes": 18,
++        })
++        self.assertEqual(records, original)
++
++    def test_empty(self):
++        self.assertEqual(build_manifest([]), {
++            "version": 2, "items": [], "total_bytes": 0,
++        })
++
++    def test_names_are_compared_using_unicode_casefold(self):
++        with self.assertRaisesRegex(ValueError, "duplicate"):
++            build_manifest([
++                {"name": "Straße", "bytes": 1},
++                {"name": " STRASSE ", "bytes": 2},
++            ])
++
++    def test_invalid_records_are_rejected(self):
++        cases = [
++            (None, "list"),
++            ({}, "list"),
++            ([None], "object"),
++            ([{}], "name"),
++            ([{"name": None, "bytes": 1}], "name"),
++            ([{"name": 3, "bytes": 1}], "name"),
++            ([{"name": "", "bytes": 1}], "empty"),
++            ([{"name": " \t\n", "bytes": 1}], "empty"),
++            ([{"name": "x"}], "bytes"),
++            ([{"name": "x", "bytes": -1}], "non-negative"),
++            ([{"name": "x", "bytes": 1.0}], "integer"),
++            ([{"name": "x", "bytes": "1"}], "integer"),
++            ([{"name": "x", "bytes": None}], "integer"),
++            ([{"name": "x", "bytes": True}], "integer"),
++            ([{"name": "x", "bytes": False}], "integer"),
++            ([{"name": "file", "bytes": 1},
++              {"name": " FILE ", "bytes": 2}], "duplicate"),
++        ]
++        for records, message in cases:
++            with self.subTest(records=records):
++                with self.assertRaisesRegex(ValueError, message):
++                    build_manifest(records)
++
++
++class CliTests(unittest.TestCase):
++    def run_cli(self, input_path, output_path):
++        return subprocess.run(
++            [sys.executable, str(ROOT / "package.py"), str(input_path),
++             "--output", str(output_path)],
++            capture_output=True, text=True, cwd=ROOT,
++        )
++
++    def test_sample_cli(self):
++        with tempfile.TemporaryDirectory(dir=ROOT) as directory:
++            output = Path(directory) / "manifest.json"
++            output.write_text("previous output", encoding="utf-8")
++            result = self.run_cli(ROOT / "sample.json", output)
++            self.assertEqual(result.returncode, 0, result.stderr)
++            self.assertEqual(json.loads(output.read_text(encoding="utf-8")), {
++                "version": 2,
++                "items": [{"name": "app.css", "bytes": 11},
++                          {"name": "z.js", "bytes": 7}],
++                "total_bytes": 18,
++            })
++
++    def test_invalid_input_preserves_existing_output(self):
++        inputs = [
++            ("{", "JSON"),
++            ('[{"name": "  ", "bytes": 1}]', "empty"),
++            ('[{"name": "x", "bytes": true}]', "integer"),
++            ('[{"name": "x", "bytes": -1}]', "non-negative"),
++            ('[{"name": "x", "bytes": 1.5}]', "integer"),
++            ('[{"name": "x", "bytes": 1}, {"name": " X ", "bytes": 2}]', "duplicate"),
++            ('{}', "list"),
++        ]
++        with tempfile.TemporaryDirectory(dir=ROOT) as directory:
++            input_path = Path(directory) / "input.json"
++            output_path = Path(directory) / "output.json"
++            for content, message in inputs:
++                with self.subTest(content=content):
++                    input_path.write_text(content, encoding="utf-8")
++                    output_path.write_bytes(b"existing output\x00\xff")
++                    result = self.run_cli(input_path, output_path)
++                    self.assertNotEqual(result.returncode, 0)
++                    self.assertIn(message, result.stderr)
++                    self.assertNotIn("Traceback", result.stderr)
++                    self.assertEqual(output_path.read_bytes(), b"existing output\x00\xff")
++
++    def test_missing_input_preserves_existing_output(self):
++        with tempfile.TemporaryDirectory(dir=ROOT) as directory:
++            output = Path(directory) / "output.json"
++            output.write_bytes(b"previous output")
++            result = self.run_cli(Path(directory) / "missing.json", output)
++            self.assertNotEqual(result.returncode, 0)
++            self.assertNotIn("Traceback", result.stderr)
++            self.assertEqual(output.read_bytes(), b"previous output")
++
++    def test_invalid_input_does_not_create_output(self):
++        with tempfile.TemporaryDirectory(dir=ROOT) as directory:
++            input_path = Path(directory) / "input.json"
++            output = Path(directory) / "output.json"
++            input_path.write_text('[{"name":"x","bytes":false}]', encoding="utf-8")
++            result = self.run_cli(input_path, output)
++            self.assertNotEqual(result.returncode, 0)
++            self.assertFalse(output.exists())
++
++
++if __name__ == "__main__":
++    unittest.main()

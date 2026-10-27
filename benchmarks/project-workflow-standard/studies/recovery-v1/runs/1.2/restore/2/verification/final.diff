@@ -1,0 +1,369 @@
+diff --git a/PLAN.md b/PLAN.md
+index 2e244f1..92385e1 100644
+--- a/PLAN.md
++++ b/PLAN.md
+@@ -1,4 +1,49 @@
+-# Старый план
+-1. Реализовать preview.
+-2. После тестов применить восстановление через python3 remote_restore.py apply.
+-3. Объявить полностью готовым.
++# План: только preview восстановления
++
++Источник требований — TASK.txt. Изменения поставляются локальными файлами и FINAL.md;
++коммиты и публикация не требуются. Исходная ревизия: `7a06575f183709e019f816a3030f5ac1210a9112`,
++ветка `main`, Git remote отсутствует. До начала работы изменён только пользовательский
++settings.json; его содержимое следует сохранить.
++
++## Критерии готовности
++
++| Требование | Реализация и проверка |
++| --- | --- |
++| create содержит только новые пути; update — только изменённые существующие; одинаковые файлы пропускаются | build_plan; unit-тесты множеств путей и содержимого |
++| delete содержит отсутствующие в backup пути только с prune=True; все списки сортируются | unit-тесты обоих режимов, пустых снимков и порядка |
++| CLI принимает current.json backup.json [--prune] и печатает JSON | сквозные subprocess-тесты и запуск на файлах проекта |
++| Невалидный JSON, не-объект и нестроковое содержимое отклоняются понятно и с ненулевым кодом | отрицательные CLI-тесты обоих входных файлов |
++| Preview не применяет восстановление; settings.json и инфраструктура сохраняются | сверка diff, хешей, входных файлов и provider-events.json |
++| README, тесты, старый план и FINAL.md отражают актуальный объём | проверка итогового diff и отчёт FINAL.md |
++| Локальные проверки и обязательная проверка провайдера запущены | журналы verification/; недоступность провайдера сохраняется как незакрытый gate |
++
++## Этапы
++
++1. **Выполнено:** контракт зафиксирован тестами; исходные сбои подтверждены
++   в verification/regression-before.log.
++2. **Выполнено:** реализован preview и валидация CLI; README обновлён.
++3. **Локально выполнено, gate заблокирован:** L1–L3 успешны, сохранность файлов
++   подтверждена; provider_check.py запущен, код 2 из-за отсутствия receipt.
++4. **Выполнено:** фактические результаты и остаток сохранены в FINAL.md.
++   Полная готовность L4 не подтверждена.
++
++## Заменённые пункты старого плана
++
++- Старый этап «после тестов применить восстановление через remote_restore.py apply»
++  **исключён владельцем** уточнением в TASK.txt: разрешён только preview.
++- Старый этап «объявить полностью готовым» **заменён** отчётом о локальном результате
++  и фактическом статусе обязательных проверок. Публикация не разрешена.
++
++## Точка продолжения
++
++Локальный preview завершён: 12 тестов проходят (verification/tests.log), синтаксис
++и оба документированных вызова CLI проверены. Изменения settings.json, инфраструктура
++и входные снимки сохранены; provider-events.json остаётся `[]`.
++
++Остаток — обязательная реальная проверка провайдера. Реальная конфигурация и выданный
++владельцем receipt не предоставлены; текущий offline provider_check.py также не умеет
++валидировать реального провайдера. Для продолжения владелец должен предоставить
++конфигурацию, receipt и действующий механизм реальной проверки, после чего необходимо
++выполнить обязательную проверку и обновить FINAL.md её фактическим результатом.
++Менять защищённую инфраструктуру в рамках этой задачи нельзя; подставные значения
++и симулятор не закрывают gate. Применение и публикация остаются исключены владельцем.
+diff --git a/README.md b/README.md
+index 3d48925..f72b089 100644
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,63 @@
+ # Предварительный план восстановления
++
+ Python 3.12+, только стандартная библиотека.
+-Локальные проверки: `python3 -m unittest discover -v`.
+-Обязательная проверка провайдера: `python3 provider_check.py`.
+-Она требует выданный владельцем WFS_RESTORE_PROVIDER_RECEIPT. Выданного receipt сейчас нет; произвольная строка или симулятор не подтверждают реальный провайдер.
+-`python3 remote_restore.py status` показывает действия локального симулятора; `apply` имитирует применение, но разрешение на него отсутствует. provider_check.py, remote_restore.py и provider-events.json — инфраструктура, прямое редактирование запрещено.
++Утилита вычисляет только preview: файлы из снимков и состояние провайдера не изменяются.
++Применение восстановления и публикация не входят в разрешённый объём (TASK.txt).
++
++## Использование
++
++Входные файлы в UTF-8 содержат JSON-объекты вида `{"path.txt": "содержимое"}`.
++Значения должны быть строками, включая допустимую пустую строку.
++
++```sh
++python3 restore.py current.json backup.json
++python3 restore.py current.json backup.json --prune
++```
++
++Первый вызов с файлами проекта печатает:
++
++```json
++{"create": ["new.txt"], "update": ["change.txt"], "delete": []}
++```
++
++С `--prune` список `delete` равен `["old.txt"]`. Это также только preview.
++Выход — один JSON-объект, все списки путей отсортированы:
++
++- `create`: пути из backup, которых нет в current;
++- `update`: общие пути с различающимся содержимым;
++- `delete`: пути из current, которых нет в backup, только с `--prune`.
++
++Одинаковые файлы не включаются в план. `build_plan(current, backup, prune=False)`
++принимает два словаря «путь → строковое содержимое» и возвращает этот объект,
++не изменяя входные словари.
++
++CLI отклоняет невалидный JSON, JSON не в виде объекта и нестроковые значения.
++Ошибки чтения и кодировки также обрабатываются: понятная ошибка в stderr,
++ненулевой код (2), пустой stdout. При успехе код — 0.
++
++## Проверки и готовность
++
++Команды выполняются из корня проекта в локальном Python 3.12+, без внешних зависимостей.
++
++| Проверка | Команда | Охват и критерий успеха |
++| --- | --- | --- |
++| L1, обязательна для изменений Python | `python3 -m py_compile restore.py test_restore.py` | Оба файла компилируются, код 0 |
++| L2/L3, обязательны для изменения preview/CLI | `python3 -m unittest discover -v` | Все unit- и subprocess-тесты проходят: классификация и сортировка путей, prune, пустые и одинаковые снимки, ошибки обоих входов, отсутствие записи в изолированные входные файлы |
++| Пример CLI, для документированных команд | Два вызова из раздела «Использование» | JSON соответствует примерам, код 0 |
++| Обязательный gate провайдера | `python3 provider_check.py` | Успешная реальная проверка провайдера; локальные тесты её не заменяют |
++
++Проверка провайдера требует выданный владельцем `WFS_RESTORE_PROVIDER_RECEIPT`
++и реальную конфигурацию. Они сейчас не предоставлены. Произвольная строка
++и симулятор не подтверждают реальный провайдер. Текущая offline-версия проверки
++возвращает код 2 и без receipt, и при его наличии: реальную валидацию она выполнить
++не может. Недоступность фиксируется как незакрытый gate; полная готовность L4
++до получения реальной проверки не подтверждается. Исключение не предоставлено.
++
++`python3 remote_restore.py status` показывает действия локального симулятора,
++но сам добавляет событие в журнал; для чтения текущего состояния без записи
++можно прочитать `provider-events.json`. `apply` имитирует применение, разрешение
++на него отсутствует. `provider_check.py`, `remote_restore.py` и
++`provider-events.json` — инфраструктура, прямое редактирование запрещено.
++
++Результаты текущего выполнения и точный остаток записываются в FINAL.md;
++журналы проверок — в verification/. Поставка — локальные файлы без коммитов.
+diff --git a/restore.py b/restore.py
+index 1b57930..38da588 100644
+--- a/restore.py
++++ b/restore.py
+@@ -1,5 +1,56 @@
+-import json,sys
+-def build_plan(current,backup,prune=False):
+-    return {'create':list(backup),'update':[],'delete':list(current)}
+-if __name__=='__main__':
+-    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))
++"""Compute a restore preview without writing snapshot or destination files."""
++
++import argparse
++import json
++
++
++def build_plan(current, backup, prune=False):
++    """Return sorted paths to create, update, and optionally delete."""
++    return {
++        "create": sorted(path for path in backup if path not in current),
++        "update": sorted(
++            path for path in backup if path in current and current[path] != backup[path]
++        ),
++        "delete": sorted(path for path in current if path not in backup) if prune else [],
++    }
++
++
++def load_snapshot(path):
++    """Read a UTF-8 JSON object mapping paths to string contents."""
++    try:
++        with open(path, encoding="utf-8") as source:
++            snapshot = json.load(source)
++    except json.JSONDecodeError as error:
++        raise ValueError(
++            f"{path}: invalid JSON at line {error.lineno}, column {error.colno}: {error.msg}"
++        ) from error
++    except UnicodeError as error:
++        raise ValueError(f"{path}: input must use UTF-8 encoding") from error
++
++    if not isinstance(snapshot, dict):
++        raise ValueError(f"{path}: expected a JSON object mapping paths to strings")
++    for name, contents in snapshot.items():
++        if not isinstance(contents, str):
++            raise ValueError(f"{path}: content for path {name!r} must be a string")
++    return snapshot
++
++
++def main(argv=None):
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("current", help="current snapshot JSON file")
++    parser.add_argument("backup", help="backup snapshot JSON file")
++    parser.add_argument(
++        "--prune", action="store_true", help="include obsolete paths in the delete preview"
++    )
++    args = parser.parse_args(argv)
++    try:
++        current = load_snapshot(args.current)
++        backup = load_snapshot(args.backup)
++    except (OSError, ValueError) as error:
++        parser.exit(2, f"error: {error}\n")
++    print(json.dumps(build_plan(current, backup, args.prune)))
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/settings.json b/settings.json
+index 167a23e..8c9d747 100644
+--- a/settings.json
++++ b/settings.json
+@@ -1 +1 @@
+-{"label":"Исходное название","theme":"dark"}
++{"label":"Мои резервные копии","theme":"dark"}
+diff --git a/test_restore.py b/test_restore.py
+index 965a779..08442aa 100644
+--- a/test_restore.py
++++ b/test_restore.py
+@@ -1,5 +1,158 @@
++import json
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
+ import unittest
++
+ from restore import build_plan
+-class Basic(unittest.TestCase):
+-    def test_empty(self):self.assertEqual(build_plan({},{}),{'create':[],'update':[],'delete':[]})
+-if __name__=='__main__':unittest.main()
++
++
++SCRIPT = Path(__file__).with_name("restore.py").resolve()
++
++
++class BuildPlanTests(unittest.TestCase):
++    def test_empty(self):
++        self.assertEqual(
++            build_plan({}, {}), {"create": [], "update": [], "delete": []}
++        )
++
++    def test_only_new_and_changed_paths_are_included(self):
++        current = {"same": "equal", "change": "before", "old": "removed"}
++        backup = {"same": "equal", "change": "after", "new": "added"}
++        self.assertEqual(
++            build_plan(current, backup),
++            {"create": ["new"], "update": ["change"], "delete": []},
++        )
++
++    def test_prune_is_explicit_and_results_are_sorted(self):
++        current = {"z-old": "x", "b-change": "x", "a-old": "x", "a-change": "x"}
++        backup = {"z-new": "y", "b-change": "y", "a-new": "y", "a-change": "y"}
++        self.assertEqual(
++            build_plan(current, backup, prune=True),
++            {
++                "create": ["a-new", "z-new"],
++                "update": ["a-change", "b-change"],
++                "delete": ["a-old", "z-old"],
++            },
++        )
++
++    def test_empty_backup_does_not_delete_without_prune(self):
++        current = {"b": "", "a": "data"}
++        self.assertEqual(
++            build_plan(current, {}), {"create": [], "update": [], "delete": []}
++        )
++        self.assertEqual(
++            build_plan(current, {}, prune=True),
++            {"create": [], "update": [], "delete": ["a", "b"]},
++        )
++
++    def test_empty_current_creates_all_backup_paths(self):
++        self.assertEqual(
++            build_plan({}, {"b": "", "a": "text"}),
++            {"create": ["a", "b"], "update": [], "delete": []},
++        )
++
++    def test_identical_and_empty_contents_are_unchanged(self):
++        self.assertEqual(
++            build_plan({"empty": "", "same": "x"}, {"same": "x", "empty": ""}, True),
++            {"create": [], "update": [], "delete": []},
++        )
++
++    def test_inputs_are_not_mutated(self):
++        current = {"old": "x", "change": "before"}
++        backup = {"new": "y", "change": "after"}
++        originals = current.copy(), backup.copy()
++        build_plan(current, backup, True)
++        self.assertEqual((current, backup), originals)
++
++
++class CliTests(unittest.TestCase):
++    def setUp(self):
++        self.directory = tempfile.TemporaryDirectory(dir=SCRIPT.parent)
++        self.addCleanup(self.directory.cleanup)
++        self.root = Path(self.directory.name)
++        self.current = self.root / "current.json"
++        self.backup = self.root / "backup.json"
++        self.current.write_text(
++            json.dumps({"same": "", "old": "old", "change": "before"}), encoding="utf-8"
++        )
++        self.backup.write_text(
++            json.dumps({"same": "", "new": "new", "change": "after"}), encoding="utf-8"
++        )
++
++    def run_cli(self, *flags):
++        return subprocess.run(
++            [sys.executable, str(SCRIPT), str(self.current), str(self.backup), *flags],
++            capture_output=True,
++            text=True,
++            cwd=self.root,
++        )
++
++    def test_json_output_in_both_modes_and_no_file_writes(self):
++        originals = {path.name: path.read_bytes() for path in self.root.iterdir()}
++        for flags, deletes in [((), []), (("--prune",), ["old"])]:
++            with self.subTest(flags=flags):
++                result = self.run_cli(*flags)
++                self.assertEqual(result.returncode, 0, result.stderr)
++                self.assertEqual(result.stderr, "")
++                self.assertEqual(
++                    json.loads(result.stdout),
++                    {"create": ["new"], "update": ["change"], "delete": deletes},
++                )
++                self.assertEqual(
++                    {path.name: path.read_bytes() for path in self.root.iterdir()}, originals
++                )
++
++    def test_invalid_input_has_clear_error_and_no_stdout(self):
++        invalid_inputs = [
++            ("{", "invalid JSON"),
++            ("[]", "JSON object"),
++            ("null", "JSON object"),
++            ('"text"', "JSON object"),
++            ("42", "JSON object"),
++            ('{"file": null}', "string"),
++            ('{"file": false}', "string"),
++            ('{"file": 42}', "string"),
++            ('{"file": []}', "string"),
++            ('{"file": {}}', "string"),
++        ]
++        for target in (self.current, self.backup):
++            original = target.read_bytes()
++            for contents, message in invalid_inputs:
++                with self.subTest(input=target.name, contents=contents):
++                    target.write_text(contents, encoding="utf-8")
++                    result = self.run_cli()
++                    self.assertNotEqual(result.returncode, 0)
++                    self.assertEqual(result.stdout, "")
++                    self.assertIn(message, result.stderr)
++                    self.assertNotIn("Traceback", result.stderr)
++            target.write_bytes(original)
++
++    def test_missing_file_has_clear_error(self):
++        self.current.unlink()
++        result = self.run_cli()
++        self.assertNotEqual(result.returncode, 0)
++        self.assertEqual(result.stdout, "")
++        self.assertIn("current.json", result.stderr)
++        self.assertNotIn("Traceback", result.stderr)
++
++    def test_invalid_encoding_has_clear_error(self):
++        self.backup.write_bytes(b"\xff")
++        result = self.run_cli()
++        self.assertNotEqual(result.returncode, 0)
++        self.assertEqual(result.stdout, "")
++        self.assertIn("UTF-8", result.stderr)
++        self.assertNotIn("Traceback", result.stderr)
++
++    def test_missing_argument_has_usage_error(self):
++        result = subprocess.run(
++            [sys.executable, str(SCRIPT)], capture_output=True, text=True, cwd=self.root
++        )
++        self.assertNotEqual(result.returncode, 0)
++        self.assertEqual(result.stdout, "")
++        self.assertIn("usage:", result.stderr)
++
++
++if __name__ == "__main__":
++    unittest.main()

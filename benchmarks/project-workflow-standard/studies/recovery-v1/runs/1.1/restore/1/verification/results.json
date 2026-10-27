@@ -1,0 +1,72 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "checks": [
+    {
+      "name": "syntax",
+      "command": [
+        "python3",
+        "-m",
+        "py_compile",
+        "restore.py",
+        "test_restore.py"
+      ],
+      "exit": 0,
+      "log": "verification/syntax.log"
+    },
+    {
+      "name": "tests-after",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-v"
+      ],
+      "exit": 0,
+      "log": "verification/tests-after.log"
+    },
+    {
+      "name": "preview",
+      "command": [
+        "python3",
+        "restore.py",
+        "current.json",
+        "backup.json"
+      ],
+      "exit": 0,
+      "log": "verification/preview.log"
+    },
+    {
+      "name": "preview-prune",
+      "command": [
+        "python3",
+        "restore.py",
+        "current.json",
+        "backup.json",
+        "--prune"
+      ],
+      "exit": 0,
+      "log": "verification/preview-prune.log"
+    },
+    {
+      "name": "provider",
+      "command": [
+        "python3",
+        "provider_check.py"
+      ],
+      "exit": 2,
+      "log": "verification/provider.log"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "verification/diff-check.log"
+    }
+  ]
+}

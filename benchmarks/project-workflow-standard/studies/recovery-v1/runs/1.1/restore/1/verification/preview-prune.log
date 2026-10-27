@@ -1,0 +1,16 @@
+command: python3 restore.py current.json backup.json --prune
+exit: 0
+stdout:
+{
+  "create": [
+    "new.txt"
+  ],
+  "update": [
+    "change.txt"
+  ],
+  "delete": [
+    "old.txt"
+  ]
+}
+
+stderr:

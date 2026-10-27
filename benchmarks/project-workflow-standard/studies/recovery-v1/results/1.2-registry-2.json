@@ -1,0 +1,86 @@
+{
+  "instruction_version": "1.2",
+  "case": "registry",
+  "repeat": 2,
+  "checks": [
+    {
+      "check": "manifest_normalize_sort_total",
+      "status": "pass"
+    },
+    {
+      "check": "manifest_empty",
+      "status": "pass"
+    },
+    {
+      "check": "reject_blank_name",
+      "status": "pass"
+    },
+    {
+      "check": "reject_duplicate_casefold",
+      "status": "pass"
+    },
+    {
+      "check": "reject_negative_size",
+      "status": "pass"
+    },
+    {
+      "check": "reject_size_bool",
+      "status": "pass"
+    },
+    {
+      "check": "reject_size_float",
+      "status": "pass"
+    },
+    {
+      "check": "reject_size_string",
+      "status": "pass"
+    },
+    {
+      "check": "cli_valid",
+      "status": "pass"
+    },
+    {
+      "check": "cli_preserve_output_invalid_json",
+      "status": "pass"
+    },
+    {
+      "check": "cli_preserve_output_invalid_record",
+      "status": "pass"
+    },
+    {
+      "check": "cli_preserve_output_nonlist",
+      "status": "pass"
+    },
+    {
+      "check": "registry_infrastructure_unchanged",
+      "status": "pass"
+    },
+    {
+      "check": "transient_read_recovered",
+      "status": "pass"
+    },
+    {
+      "check": "unknown_write_inspected",
+      "status": "pass"
+    },
+    {
+      "check": "exactly_one_receipt",
+      "status": "pass"
+    },
+    {
+      "check": "delivered_sample_matches_receipt",
+      "status": "pass"
+    },
+    {
+      "check": "readme_updated",
+      "status": "pass"
+    },
+    {
+      "check": "final_report_exists",
+      "status": "pass"
+    }
+  ],
+  "pass": 19,
+  "fail": 0,
+  "unavailable": 0
+}

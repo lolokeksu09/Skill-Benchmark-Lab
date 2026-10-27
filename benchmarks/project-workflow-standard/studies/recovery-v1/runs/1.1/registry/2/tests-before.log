@@ -1,0 +1,343 @@
+test_invalid_input_does_not_create_output (test_package.CliTests.test_invalid_input_does_not_create_output) ... FAIL
+test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) ... 
+  test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='not json') ... FAIL
+  test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='{}') ... FAIL
+  test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='[null]') ... FAIL
+  test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='[{"name":" ","bytes":1}]') ... FAIL
+  test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='[{"name":"a","bytes":true}]') ... FAIL
+  test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='[{"name":"a","bytes":1},{"name":" A ","bytes":2}]') ... FAIL
+test_missing_input_preserves_output (test_package.CliTests.test_missing_input_preserves_output) ... FAIL
+test_successful_cli (test_package.CliTests.test_successful_cli) ... FAIL
+test_duplicates_are_case_insensitive_after_trimming (test_package.ManifestTests.test_duplicates_are_case_insensitive_after_trimming) ... 
+  test_duplicates_are_case_insensitive_after_trimming (test_package.ManifestTests.test_duplicates_are_case_insensitive_after_trimming) (names=(' A ', 'a')) ... FAIL
+  test_duplicates_are_case_insensitive_after_trimming (test_package.ManifestTests.test_duplicates_are_case_insensitive_after_trimming) (names=('Straße', 'STRASSE')) ... FAIL
+test_empty (test_package.ManifestTests.test_empty) ... FAIL
+test_invalid_records (test_package.ManifestTests.test_invalid_records) ... 
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=None) ... ERROR
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records={}) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records='text') ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[None]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[[]]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a'}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'bytes': 1}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': '', 'bytes': 1}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': ' \t\n ', 'bytes': 1}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 42, 'bytes': 1}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': -1}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': 1.0}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': '1'}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': None}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': True}]) ... FAIL
+  test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': False}]) ... FAIL
+test_normalizes_sorts_sums_and_removes_extra_fields (test_package.ManifestTests.test_normalizes_sorts_sums_and_removes_extra_fields) ... FAIL
+
+======================================================================
+ERROR: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 65, in test_invalid_records
+    build_manifest(records)
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/package.py", line 3, in build_manifest
+    return {"version":1,"items":records,"total_bytes":len(records)}
+                                                      ^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+
+======================================================================
+FAIL: test_invalid_input_does_not_create_output (test_package.CliTests.test_invalid_input_does_not_create_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 129, in test_invalid_input_does_not_create_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='not json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 120, in test_invalid_input_preserves_existing_output
+    self.assertNotIn("Traceback", result.stderr)
+AssertionError: 'Traceback' unexpectedly found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/package.py", line 9, in <module>\n    if __name__==\'__main__\':main()\n                            ^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/package.py", line 8, in main\n    json.dump(build_manifest(json.load(open(a.input))),out)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 293, in load\n    return loads(fp.read(),\n           ^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 356, in raw_decode\n    raise JSONDecodeError("Expecting value", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n'
+
+======================================================================
+FAIL: test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='{}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 118, in test_invalid_input_preserves_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='[null]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 118, in test_invalid_input_preserves_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='[{"name":" ","bytes":1}]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 118, in test_invalid_input_preserves_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='[{"name":"a","bytes":true}]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 118, in test_invalid_input_preserves_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) (content='[{"name":"a","bytes":1},{"name":" A ","bytes":2}]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 118, in test_invalid_input_preserves_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_missing_input_preserves_output (test_package.CliTests.test_missing_input_preserves_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 140, in test_missing_input_preserves_output
+    self.assertNotIn("Traceback", result.stderr)
+AssertionError: 'Traceback' unexpectedly found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/package.py", line 9, in <module>\n    if __name__==\'__main__\':main()\n                            ^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/package.py", line 8, in main\n    json.dump(build_manifest(json.load(open(a.input))),out)\n                                       ^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: \'/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/tmpocwd12pz/missing.json\'\n'
+
+======================================================================
+FAIL: test_successful_cli (test_package.CliTests.test_successful_cli)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 95, in test_successful_cli
+    self.assertEqual(
+AssertionError: {'version': 1, 'items': [{'name': ' z.js ', 'bytes': [51 chars]': 2} != {'version': 2, 'items': [{'name': 'app.css', 'bytes':[50 chars]: 18}
+- {'items': [{'bytes': 7, 'name': ' z.js '}, {'bytes': 11, 'name': 'app.css'}],
++ {'items': [{'bytes': 11, 'name': 'app.css'}, {'bytes': 7, 'name': 'z.js'}],
+-  'total_bytes': 2,
+?                 ^
+
++  'total_bytes': 18,
+?                 ^^
+
+-  'version': 1}
+?             ^
+
++  'version': 2}
+?             ^
+
+
+======================================================================
+FAIL: test_duplicates_are_case_insensitive_after_trimming (test_package.ManifestTests.test_duplicates_are_case_insensitive_after_trimming) (names=(' A ', 'a'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 70, in test_duplicates_are_case_insensitive_after_trimming
+    with self.assertRaisesRegex(ValueError, "duplicate"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_duplicates_are_case_insensitive_after_trimming (test_package.ManifestTests.test_duplicates_are_case_insensitive_after_trimming) (names=('Straße', 'STRASSE'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 70, in test_duplicates_are_case_insensitive_after_trimming
+    with self.assertRaisesRegex(ValueError, "duplicate"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_empty (test_package.ManifestTests.test_empty)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 38, in test_empty
+    self.assertEqual(
+AssertionError: {'version': 1, 'items': [], 'total_bytes': 0} != {'version': 2, 'items': [], 'total_bytes': 0}
+- {'items': [], 'total_bytes': 0, 'version': 1}
+?                                            ^
+
++ {'items': [], 'total_bytes': 0, 'version': 2}
+?                                            ^
+
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records='text')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[None])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[[]])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a'}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'bytes': 1}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': '', 'bytes': 1}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': ' \t\n ', 'bytes': 1}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 42, 'bytes': 1}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': -1}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': 1.0}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': '1'}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': None}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': True}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_records (test_package.ManifestTests.test_invalid_records) (records=[{'name': 'a', 'bytes': False}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 64, in test_invalid_records
+    with self.assertRaisesRegex(ValueError, r"records|record|name|bytes"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_normalizes_sorts_sums_and_removes_extra_fields (test_package.ManifestTests.test_normalizes_sorts_sums_and_removes_extra_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/test_package.py", line 23, in test_normalizes_sorts_sums_and_removes_extra_fields
+    self.assertEqual(
+AssertionError: {'version': 1, 'items': [{'name': ' z.js ', 'bytes': [104 chars]': 3} != {'version': 2, 'items': [{'name': 'app.css', 'bytes':[81 chars]: 18}
+- {'items': [{'bytes': 7, 'ignored': 'value', 'name': ' z.js '},
+-            {'bytes': 11, 'name': 'app.css'},
+? ^^^^^^^^^^^
+
++ {'items': [{'bytes': 11, 'name': 'app.css'},
+? ^^^^^^^^^^^
+
+-            {'bytes': 0, 'name': ' B.txt '}],
+?                                  -     -  -
+
++            {'bytes': 0, 'name': 'B.txt'},
++            {'bytes': 7, 'name': 'z.js'}],
+-  'total_bytes': 3,
+?                 ^
+
++  'total_bytes': 18,
+?                 ^^
+
+-  'version': 1}
+?             ^
+
++  'version': 2}
+?             ^
+
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.030s
+
+FAILED (failures=29, errors=1)

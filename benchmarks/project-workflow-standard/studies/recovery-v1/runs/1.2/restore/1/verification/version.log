@@ -1,0 +1,19 @@
+Python: 3.12.14
+Working directory: /workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/restore/1
+command: git branch --show-current
+main
+command: git rev-parse HEAD
+7a06575f183709e019f816a3030f5ac1210a9112
+command: git remote -v
+(none)
+cf72d48a6565df1dedc8119e38a9897d05d30ab2ac237e0493284d37b7d48de2  restore.py
+763a226d0f9294c6b7a3e69d0963308e9b0df65a8183f76807f0162dadd444f2  test_restore.py
+f8b24ad1c1c144c1117a2e989543f759a728c06d3f736b313993626916ce09ba  README.md
+989902904b639a2a6868b8db90241a37897d2d5e4476c00c0c4bba83f81526f1  PLAN.md
+0be51e77ea4c56efb3f3ab1b0bd184b8ab6a3d3974c8d256fb8492e200b9c241  FINAL.md
+03bfe96dc007ccfb0e7dafe11c5ab4ff78d6fd8a789cccac226699c64e6b6fdb  current.json
+ffc083f67eb9be4a4dc90526cafe5e55beadcba320e0958ab40542123f132550  backup.json
+ea9446dc6c9f9a259f36f042dd6290e0852b1d3f1a36b00f702a428c7d96c369  settings.json
+8985363365e95eff18d8246c54e92ca6f363d3a3bc5a4ea27cfadf13267b4428  provider_check.py
+b3cbb6d6e0d863fd28aa1a7fa9541521a15ef0c49c0e618d02b35029361bc565  remote_restore.py
+37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570  provider-events.json

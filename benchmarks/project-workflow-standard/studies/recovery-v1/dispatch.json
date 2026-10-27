@@ -1,0 +1,69 @@
+{
+  "protocol_commit": "0da941dde8648a3b9ccde093d3a0c75941e41ade",
+  "applications": [
+    {
+      "agent": "recovery_a1",
+      "version": "1.1",
+      "case": "registry",
+      "repeat": 1,
+      "context": "fresh; no parent history",
+      "model_override": null
+    },
+    {
+      "agent": "recovery_b1",
+      "version": "1.2",
+      "case": "registry",
+      "repeat": 1,
+      "context": "fresh; no parent history",
+      "model_override": null
+    },
+    {
+      "agent": "recovery_c1",
+      "version": "1.1",
+      "case": "restore",
+      "repeat": 1,
+      "context": "fresh; no parent history",
+      "model_override": null
+    },
+    {
+      "agent": "recovery_d1",
+      "version": "1.2",
+      "case": "restore",
+      "repeat": 1,
+      "context": "fresh; no parent history",
+      "model_override": null
+    },
+    {
+      "agent": "recovery_b2",
+      "version": "1.2",
+      "case": "registry",
+      "repeat": 2,
+      "context": "fresh; no parent history",
+      "model_override": null
+    },
+    {
+      "agent": "recovery_a2",
+      "version": "1.1",
+      "case": "registry",
+      "repeat": 2,
+      "context": "fresh; no parent history",
+      "model_override": null
+    },
+    {
+      "agent": "recovery_d2",
+      "version": "1.2",
+      "case": "restore",
+      "repeat": 2,
+      "context": "fresh; no parent history",
+      "model_override": null
+    },
+    {
+      "agent": "recovery_c2",
+      "version": "1.1",
+      "case": "restore",
+      "repeat": 2,
+      "context": "fresh; no parent history",
+      "model_override": null
+    }
+  ]
+}

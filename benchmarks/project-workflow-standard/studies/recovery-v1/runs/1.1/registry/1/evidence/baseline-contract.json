@@ -1,0 +1,31 @@
+{
+  "actual": {
+    "version": 1,
+    "items": [
+      {
+        "name": " z.js ",
+        "bytes": 7
+      },
+      {
+        "name": "app.css",
+        "bytes": 11
+      }
+    ],
+    "total_bytes": 2
+  },
+  "expected": {
+    "version": 2,
+    "items": [
+      {
+        "name": "app.css",
+        "bytes": 11
+      },
+      {
+        "name": "z.js",
+        "bytes": 7
+      }
+    ],
+    "total_bytes": 18
+  },
+  "matches_contract": false
+}

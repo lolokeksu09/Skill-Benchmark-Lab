@@ -1,0 +1,358 @@
+test_empty (test_package.BuildManifestTests.test_empty) ... FAIL
+test_normalizes_sorts_sums_and_discards_extra_fields (test_package.BuildManifestTests.test_normalizes_sorts_sums_and_discards_extra_fields) ... FAIL
+test_rejects_duplicate_names_after_trimming_and_casefold (test_package.BuildManifestTests.test_rejects_duplicate_names_after_trimming_and_casefold) ... 
+  test_rejects_duplicate_names_after_trimming_and_casefold (test_package.BuildManifestTests.test_rejects_duplicate_names_after_trimming_and_casefold) (names=(' app.js ', 'APP.JS')) ... FAIL
+  test_rejects_duplicate_names_after_trimming_and_casefold (test_package.BuildManifestTests.test_rejects_duplicate_names_after_trimming_and_casefold) (names=('Straße', 'STRASSE')) ... FAIL
+test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) ... 
+  test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) (name='') ... FAIL
+  test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) (name=' \t\n') ... FAIL
+  test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) (name=None) ... FAIL
+  test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) (name=123) ... FAIL
+  test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) (name=True) ... FAIL
+test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) ... 
+  test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=-1) ... FAIL
+  test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=1.0) ... FAIL
+  test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=1.5) ... FAIL
+  test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=True) ... FAIL
+  test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=False) ... FAIL
+  test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size='7') ... FAIL
+  test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=None) ... FAIL
+test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) ... 
+  test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records={}) ... FAIL
+  test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records=None) ... ERROR
+  test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records='text') ... FAIL
+  test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records=[None]) ... FAIL
+  test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records=[{}]) ... FAIL
+  test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records=[{'name': 'app.js'}]) ... FAIL
+  test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records=[{'bytes': 1}]) ... FAIL
+test_invalid_input_does_not_create_output (test_package.CliTests.test_invalid_input_does_not_create_output) ... FAIL
+test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) ... 
+  test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='{broken') ... FAIL
+  test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='{}') ... FAIL
+  test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='null') ... FAIL
+  test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='[{"name":" ","bytes":1}]') ... FAIL
+  test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='[{"name":"app","bytes":true}]') ... FAIL
+  test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='[{"name":"app","bytes":-1}]') ... FAIL
+  test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='[{"name":"app","bytes":1.0}]') ... FAIL
+  test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='[{"name":"app","bytes":1},{"name":" APP ","bytes":2}]') ... FAIL
+test_missing_input_keeps_existing_output (test_package.CliTests.test_missing_input_keeps_existing_output) ... FAIL
+test_valid_input (test_package.CliTests.test_valid_input) ... ok
+
+======================================================================
+ERROR: test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 60, in test_rejects_wrong_structure_and_missing_fields
+    build_manifest(records)
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/package.py", line 3, in build_manifest
+    return {"version":1,"items":records,"total_bytes":len(records)}
+                                                      ^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+
+======================================================================
+FAIL: test_empty (test_package.BuildManifestTests.test_empty)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 16, in test_empty
+    self.assertEqual(
+AssertionError: {'version': 1, 'items': [], 'total_bytes': 0} != {'version': 2, 'items': [], 'total_bytes': 0}
+- {'items': [], 'total_bytes': 0, 'version': 1}
+?                                            ^
+
++ {'items': [], 'total_bytes': 0, 'version': 2}
+?                                            ^
+
+
+======================================================================
+FAIL: test_normalizes_sorts_sums_and_discards_extra_fields (test_package.BuildManifestTests.test_normalizes_sorts_sums_and_discards_extra_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 26, in test_normalizes_sorts_sums_and_discards_extra_fields
+    self.assertEqual(
+AssertionError: {'version': 1, 'items': [{'name': ' z.js ', 'bytes': [107 chars]': 3} != {'version': 2, 'items': [{'name': 'app.css', 'bytes':[83 chars]: 18}
+- {'items': [{'bytes': 7, 'extra': 'ignored', 'name': ' z.js '},
++ {'items': [{'bytes': 11, 'name': 'app.css'},
+             {'bytes': 0, 'name': 'Beta.js'},
+-            {'bytes': 11, 'name': ' app.css\t'}],
+?                      ^^           ^^^^ ^ ---
+
++            {'bytes': 7, 'name': 'z.js'}],
+?                      ^           ^ ^
+
+-  'total_bytes': 3,
+?                 ^
+
++  'total_bytes': 18,
+?                 ^^
+
+-  'version': 1}
+?             ^
+
++  'version': 2}
+?             ^
+
+
+======================================================================
+FAIL: test_rejects_duplicate_names_after_trimming_and_casefold (test_package.BuildManifestTests.test_rejects_duplicate_names_after_trimming_and_casefold) (names=(' app.js ', 'APP.JS'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 47, in test_rejects_duplicate_names_after_trimming_and_casefold
+    with self.subTest(names=names), self.assertRaisesRegex(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_duplicate_names_after_trimming_and_casefold (test_package.BuildManifestTests.test_rejects_duplicate_names_after_trimming_and_casefold) (names=('Straße', 'STRASSE'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 47, in test_rejects_duplicate_names_after_trimming_and_casefold
+    with self.subTest(names=names), self.assertRaisesRegex(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) (name='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 42, in test_rejects_empty_and_non_string_names
+    with self.subTest(name=name), self.assertRaisesRegex(ValueError, "name"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) (name=' \t\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 42, in test_rejects_empty_and_non_string_names
+    with self.subTest(name=name), self.assertRaisesRegex(ValueError, "name"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) (name=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 42, in test_rejects_empty_and_non_string_names
+    with self.subTest(name=name), self.assertRaisesRegex(ValueError, "name"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) (name=123)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 42, in test_rejects_empty_and_non_string_names
+    with self.subTest(name=name), self.assertRaisesRegex(ValueError, "name"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_empty_and_non_string_names (test_package.BuildManifestTests.test_rejects_empty_and_non_string_names) (name=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 42, in test_rejects_empty_and_non_string_names
+    with self.subTest(name=name), self.assertRaisesRegex(ValueError, "name"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=-1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 54, in test_rejects_invalid_sizes
+    with self.subTest(size=size), self.assertRaisesRegex(ValueError, "bytes"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=1.0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 54, in test_rejects_invalid_sizes
+    with self.subTest(size=size), self.assertRaisesRegex(ValueError, "bytes"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=1.5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 54, in test_rejects_invalid_sizes
+    with self.subTest(size=size), self.assertRaisesRegex(ValueError, "bytes"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 54, in test_rejects_invalid_sizes
+    with self.subTest(size=size), self.assertRaisesRegex(ValueError, "bytes"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 54, in test_rejects_invalid_sizes
+    with self.subTest(size=size), self.assertRaisesRegex(ValueError, "bytes"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size='7')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 54, in test_rejects_invalid_sizes
+    with self.subTest(size=size), self.assertRaisesRegex(ValueError, "bytes"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_sizes (test_package.BuildManifestTests.test_rejects_invalid_sizes) (size=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 54, in test_rejects_invalid_sizes
+    with self.subTest(size=size), self.assertRaisesRegex(ValueError, "bytes"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 59, in test_rejects_wrong_structure_and_missing_fields
+    with self.subTest(records=records), self.assertRaises(ValueError):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records='text')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 59, in test_rejects_wrong_structure_and_missing_fields
+    with self.subTest(records=records), self.assertRaises(ValueError):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records=[None])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 59, in test_rejects_wrong_structure_and_missing_fields
+    with self.subTest(records=records), self.assertRaises(ValueError):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records=[{}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 59, in test_rejects_wrong_structure_and_missing_fields
+    with self.subTest(records=records), self.assertRaises(ValueError):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records=[{'name': 'app.js'}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 59, in test_rejects_wrong_structure_and_missing_fields
+    with self.subTest(records=records), self.assertRaises(ValueError):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_wrong_structure_and_missing_fields (test_package.BuildManifestTests.test_rejects_wrong_structure_and_missing_fields) (records=[{'bytes': 1}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 59, in test_rejects_wrong_structure_and_missing_fields
+    with self.subTest(records=records), self.assertRaises(ValueError):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_input_does_not_create_output (test_package.CliTests.test_invalid_input_does_not_create_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 110, in test_invalid_input_does_not_create_output
+    self.assertFalse(self.output_path.exists())
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='{broken')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 102, in test_invalid_input_keeps_existing_output
+    self.assertIn("error:", result.stderr)
+AssertionError: 'error:' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/package.py", line 9, in <module>\n    if __name__==\'__main__\':main()\n                            ^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/package.py", line 8, in main\n    json.dump(build_manifest(json.load(open(a.input))),out)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 293, in load\n    return loads(fp.read(),\n           ^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 354, in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\njson.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)\n'
+
+======================================================================
+FAIL: test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='{}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 101, in test_invalid_input_keeps_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='null')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 102, in test_invalid_input_keeps_existing_output
+    self.assertIn("error:", result.stderr)
+AssertionError: 'error:' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/package.py", line 9, in <module>\n    if __name__==\'__main__\':main()\n                            ^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/package.py", line 8, in main\n    json.dump(build_manifest(json.load(open(a.input))),out)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/package.py", line 3, in build_manifest\n    return {"version":1,"items":records,"total_bytes":len(records)}\n                                                      ^^^^^^^^^^^^\nTypeError: object of type \'NoneType\' has no len()\n'
+
+======================================================================
+FAIL: test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='[{"name":" ","bytes":1}]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 101, in test_invalid_input_keeps_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='[{"name":"app","bytes":true}]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 101, in test_invalid_input_keeps_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='[{"name":"app","bytes":-1}]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 101, in test_invalid_input_keeps_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='[{"name":"app","bytes":1.0}]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 101, in test_invalid_input_keeps_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_invalid_input_keeps_existing_output (test_package.CliTests.test_invalid_input_keeps_existing_output) (input='[{"name":"app","bytes":1},{"name":" APP ","bytes":2}]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 101, in test_invalid_input_keeps_existing_output
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_missing_input_keeps_existing_output (test_package.CliTests.test_missing_input_keeps_existing_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/test_package.py", line 116, in test_missing_input_keeps_existing_output
+    self.assertIn("error:", result.stderr)
+AssertionError: 'error:' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/package.py", line 9, in <module>\n    if __name__==\'__main__\':main()\n                            ^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/package.py", line 8, in main\n    json.dump(build_manifest(json.load(open(a.input))),out)\n                                       ^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: \'/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/2/package-test-t9gvgkuu/input.json\'\n'
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.671s
+
+FAILED (failures=32, errors=1)

@@ -1,0 +1,9 @@
+{
+  "neutral_resume_messages": [
+    "recovery_a1",
+    "recovery_b1",
+    "recovery_c1"
+  ],
+  "reason": "Host conversation continued; these early dispatches were absent from the active-agent list and their product files were unchanged. A neutral same-task resume message was sent. No results or rubric were supplied.",
+  "not_a_new_application": true
+}

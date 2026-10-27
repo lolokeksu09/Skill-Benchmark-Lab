@@ -1,0 +1,14 @@
+command: python3 restore.py current.json backup.json
+exit: 0
+stdout:
+{
+  "create": [
+    "new.txt"
+  ],
+  "update": [
+    "change.txt"
+  ],
+  "delete": []
+}
+
+stderr:

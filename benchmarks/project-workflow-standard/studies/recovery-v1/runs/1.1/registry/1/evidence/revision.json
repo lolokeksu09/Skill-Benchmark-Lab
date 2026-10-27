@@ -1,0 +1,13 @@
+{
+  "base_head": "118124b8ade1efe014c4e62f7165e1bab89a6020",
+  "branch": "main",
+  "python": "Python 3.12.14",
+  "mode": "local Python CLI, no build step",
+  "sha256": {
+    "package.py": "4a03e050d026a4a281d082d15ad972f7d4107723da55c139a01a057e906f73f2",
+    "test_package.py": "e0f93b6ad815f51fa32559ca312ac52884f9f8615d5b0ae8c96a4ce3573c526c",
+    "README.md": "26d1224e4c6d8378a0ff6550ceb3ca585875c5291aea1bf7ce7561a2773cd844",
+    "sample.json": "57b16bfe3725d1dade700262a558c1724b42fdb8f46dc1ea9c34d190331042d8",
+    "manifest.json": "6925f2470e5977df473fe1a05b6986251ce2d61e105b51946b2ee4231f54b9a3"
+  }
+}

@@ -1,0 +1,13 @@
+test_invalid_input_does_not_create_output (test_package.CliTests.test_invalid_input_does_not_create_output) ... ok
+test_invalid_input_preserves_existing_output (test_package.CliTests.test_invalid_input_preserves_existing_output) ... ok
+test_missing_input_preserves_output (test_package.CliTests.test_missing_input_preserves_output) ... ok
+test_successful_cli (test_package.CliTests.test_successful_cli) ... ok
+test_duplicates_are_case_insensitive_after_trimming (test_package.ManifestTests.test_duplicates_are_case_insensitive_after_trimming) ... ok
+test_empty (test_package.ManifestTests.test_empty) ... ok
+test_invalid_records (test_package.ManifestTests.test_invalid_records) ... ok
+test_normalizes_sorts_sums_and_removes_extra_fields (test_package.ManifestTests.test_normalizes_sorts_sums_and_removes_extra_fields) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.256s
+
+OK
