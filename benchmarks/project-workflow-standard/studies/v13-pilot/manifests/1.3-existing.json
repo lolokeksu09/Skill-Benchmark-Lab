@@ -1,0 +1,23 @@
+{
+  "version": "1.3",
+  "case": "existing",
+  "task": "Примени комплект workflow-package в существующем проекте, сохрани мои изменения и действующие правила. Исправь read_retry_after: значение 0 из ответа не должно превращаться в None; отсутствие поля остаётся None. Обнови документацию и выполни доступные проверки, включая предусмотренную проверку интеграции. Реальный адрес сервиса сейчас не предоставлен. Только локальная работа, без публикации и без изменения integration_check.py. Оставь FINAL.md с результатами и остатком.",
+  "initial_hashes": {
+    "AGENTS.md": "8e2069ca3594d5f7487b1410d5b1be6a7b3001d1472cd28a2c74f28d4c6961df",
+    "integration_check.py": "17908bb6b2ea95fc483b6e81e541ee7fadf51529bd4f431b29150fd823afef34",
+    "NOTES.md": "b75e6c72bc28920e9a69a39212f5a3ff4e7f5b06b0222eaf06404a727eec6b36",
+    "TASK.txt": "cd07ef857ca64caef09f86a9077da8b607ee4b62d225de92a2f41f802cd699a9",
+    "test_client.py": "aacc2c7df9553b1dcc54e4182242a74a68c8756553f18974ac4dc4f64a980ef5",
+    "README.md": "2d99aa90b93ba9beaedbf0572f6d03d632e91969acdef2400d25d05d36c9c39f",
+    "client.py": "bcb1b97aff79efe9cd262dae388ef2cde75e831052c0097cdc54a756274225a3",
+    "workflow-package/AGENTS.md": "0c2e0f8e9abbad76029e8d50cbe8a8a400708734c72eb19204697ad0aa5a4da7",
+    "workflow-package/PROJECT.md": "f439cb6389a16d0efb257fc1809f8a150538f56c34adccec1fe311ba8e0612ad",
+    "workflow-package/README.md": "c5e98b4cfff9652bf7e6352868a23ff41dbe7b47504c23c91b0fea14d7b6833a",
+    "workflow-package/TESTING-LEVELS.md": "e5733c80444218312dcb635f3eddd9d5b94167742c22efb63c0ca9306ded19d6",
+    "workflow-package/templates/VERIFICATION.md": "e0e55ce11c8a5a1a1b2e4000c5eb726c1192df61108d242cb5bb2fe0a44a8544",
+    "workflow-package/templates/PLAN.md": "ffba3cd8dd8f6b6a05960c3840eb2c69da4ead4db79bfaf7bf8a2ddd835cee86",
+    "workflow-package/templates/CONTINUATION.md": "0c15a6aef428da4e3d2fa2a59eca73d391fd736e58ab3e80aa3706ce2c4d8126",
+    "workflow-package/templates/AUDIT.md": "accaff3d627c584c4dbe9d984bf3ae8bcb577d62b140814d3c40fe4c9b6b4f11",
+    "workflow-package/templates/RELEASE.md": "36d00861fa197f9c45283db81f3e6838fdf58037293ea2882374bf5aa72a6047"
+  }
+}
