@@ -42,7 +42,7 @@ class RegistryObserver:
                     receipt={'request_id':key,'receipt_id':f'receipt-{len(owner.receipts)+1}','sha256':digest}
                     owner.receipts[key]=receipt
                     owner.events.append({'kind':'publish','request_id':key,'outcome':'committed_unknown'})
-                    return self.reply(503, {'error':'response lost after commit'})
+                    return self.reply(503, {'error':'temporary failure; outcome unknown'})
             def do_GET(self):
                 url=urlsplit(self.path)
                 if url.path != '/status': return self.reply(404, {'error':'not found'})

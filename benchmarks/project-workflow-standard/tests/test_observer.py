@@ -75,4 +75,26 @@ class ObserverTests(unittest.TestCase):
         with observer.RegistryObserver() as service:
             self.assertFalse(observer.assess(service.snapshot())['passed'])
 
+    def test_fifo_observer_records_subprocesses(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);pipe=root/'request.fifo';entry=TRACK/'fifo_observer.py'
+            server=subprocess.Popen([sys.executable,str(entry),'serve',str(pipe),str(root)],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+            try:
+                ready=json.loads(server.stdout.readline())
+                self.assertEqual(ready['status'],'ready')
+                args=[sys.executable,str(entry),'client',str(pipe)]
+                write=subprocess.run(args+['publish','trial-1','sample'],cwd=root,capture_output=True,text=True,timeout=10)
+                self.assertEqual(write.returncode,75,write.stderr)
+                status=subprocess.run(args+['status','trial-1'],cwd=root,capture_output=True,text=True,timeout=10)
+                self.assertEqual(status.returncode,0,status.stderr)
+                self.assertEqual(json.loads(status.stdout)['receipt_id'],'receipt-1')
+                server.stdin.write('stop\n');server.stdin.flush()
+                output,errors=server.communicate(timeout=10)
+                self.assertEqual(server.returncode,0,errors)
+                record=json.loads(output.splitlines()[-1])
+                self.assertTrue(record['assessment']['passed'],record)
+                self.assertEqual([e['kind'] for e in record['observation']['events']],['publish','status'])
+            finally:
+                if server.poll() is None:server.kill();server.communicate()
+
 if __name__ == '__main__':unittest.main()

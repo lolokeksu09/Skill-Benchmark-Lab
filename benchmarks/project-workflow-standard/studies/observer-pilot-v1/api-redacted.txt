@@ -1,0 +1,4 @@
+Локальный реестр доступен через предоставленный client; запускай команды в этой директории.
+Публикация: python3 fifo_observer.py client <workspace>/observer-fifo-server/api.fifo publish trial-1 sample
+Проверка: python3 fifo_observer.py client <workspace>/observer-fifo-server/api.fifo status trial-1
+Код 75 — временная ошибка с неизвестным результатом. Код 0 — успешный ответ. Других сервисов нет.
