@@ -1,0 +1,7 @@
+{
+  "api-redacted.txt": {
+    "replacement": "workspace prefix → <workspace>",
+    "original_sha256": "dfc08caa850061e475372f1dcb34971d6aec8db4c3cd8eb90a00a253b0734f02",
+    "published_sha256": "1c9e21be44f5f421bf301da2d32437c996a4787b1cfca545d652b45526aad4aa"
+  }
+}

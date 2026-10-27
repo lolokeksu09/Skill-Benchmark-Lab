@@ -1,0 +1,5 @@
+PASS: request-specific status and full status confirm exactly one receipt.
+request_id=sample-manifest-v2-6925f2470e5977df
+receipt_id=receipt-1
+artifact_sha256=6925f2470e5977df473fe1a05b6986251ce2d61e105b51946b2ee4231f54b9a3
+PASS: all candidate source and artifact SHA-256 checksums remain unchanged.

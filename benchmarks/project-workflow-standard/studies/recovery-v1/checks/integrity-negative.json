@@ -1,0 +1,8 @@
+{
+  "command": "python3 <copied-track>/studies/recovery-v1/verify.py",
+  "mutation": "owned temporary copy: runs/1.1/registry/1/manifest.json replaced with {}",
+  "exit_code": 1,
+  "expected": "nonzero before replay",
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/tmp/recovery-integrity-negative-a1hqoi_7/track/studies/recovery-v1/verify.py\", line 73, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/tmp/recovery-integrity-negative-a1hqoi_7/track/studies/recovery-v1/verify.py\", line 32, in main\n    assert digest(ROOT/name)==sha,('recorded evidence changed',name)\n           ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('recorded evidence changed', 'runs/1.1/registry/1/manifest.json')\n"
+}

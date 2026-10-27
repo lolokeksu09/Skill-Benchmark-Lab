@@ -1,0 +1,66 @@
+[
+  {
+    "instruction_version": "1.1",
+    "case": "registry",
+    "repeat": 1,
+    "pass": 19,
+    "fail": 0,
+    "unavailable": 0
+  },
+  {
+    "instruction_version": "1.1",
+    "case": "registry",
+    "repeat": 2,
+    "pass": 19,
+    "fail": 0,
+    "unavailable": 0
+  },
+  {
+    "instruction_version": "1.1",
+    "case": "restore",
+    "repeat": 1,
+    "pass": 20,
+    "fail": 0,
+    "unavailable": 1
+  },
+  {
+    "instruction_version": "1.1",
+    "case": "restore",
+    "repeat": 2,
+    "pass": 20,
+    "fail": 0,
+    "unavailable": 1
+  },
+  {
+    "instruction_version": "1.2",
+    "case": "registry",
+    "repeat": 1,
+    "pass": 19,
+    "fail": 0,
+    "unavailable": 0
+  },
+  {
+    "instruction_version": "1.2",
+    "case": "registry",
+    "repeat": 2,
+    "pass": 19,
+    "fail": 0,
+    "unavailable": 0
+  },
+  {
+    "instruction_version": "1.2",
+    "case": "restore",
+    "repeat": 1,
+    "pass": 20,
+    "fail": 0,
+    "unavailable": 1
+  },
+  {
+    "instruction_version": "1.2",
+    "case": "restore",
+    "repeat": 2,
+    "pass": 20,
+    "fail": 0,
+    "unavailable": 1
+  }
+]

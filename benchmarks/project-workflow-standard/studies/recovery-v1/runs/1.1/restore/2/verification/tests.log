@@ -1,0 +1,18 @@
+test_all_lists_are_sorted_and_inputs_are_preserved (test_restore.BuildPlanTests.test_all_lists_are_sorted_and_inputs_are_preserved) ... ok
+test_empty (test_restore.BuildPlanTests.test_empty) ... ok
+test_empty_backup_requires_prune_for_deletion (test_restore.BuildPlanTests.test_empty_backup_requires_prune_for_deletion) ... ok
+test_empty_contents_and_unicode_paths (test_restore.BuildPlanTests.test_empty_contents_and_unicode_paths) ... ok
+test_empty_current_creates_every_backup_path (test_restore.BuildPlanTests.test_empty_current_creates_every_backup_path) ... ok
+test_identical_files_are_unchanged_with_or_without_prune (test_restore.BuildPlanTests.test_identical_files_are_unchanged_with_or_without_prune) ... ok
+test_new_changed_and_unchanged_files (test_restore.BuildPlanTests.test_new_changed_and_unchanged_files) ... ok
+test_invalid_json_in_either_input (test_restore.CLITests.test_invalid_json_in_either_input) ... ok
+test_invalid_utf8_input (test_restore.CLITests.test_invalid_utf8_input) ... ok
+test_json_preview_with_and_without_prune_preserves_inputs (test_restore.CLITests.test_json_preview_with_and_without_prune_preserves_inputs) ... ok
+test_missing_input (test_restore.CLITests.test_missing_input) ... ok
+test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) ... ok
+test_non_string_contents_in_either_input (test_restore.CLITests.test_non_string_contents_in_either_input) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 6.909s
+
+OK

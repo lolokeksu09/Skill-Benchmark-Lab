@@ -1,0 +1,20 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "mode": "local preview; standard library; no apply or publication",
+  "head": "7a06575f183709e019f816a3030f5ac1210a9112",
+  "branch": "main",
+  "remotes": [],
+  "sha256": {
+    "restore.py": "010ee3d46316a0744a355f78decd44cd90d186b77019dd252dc107daa41b6818",
+    "test_restore.py": "55240e7230c0fe765418597b6aba45df2df564bf444a3b47d8e00a68df15e764",
+    "README.md": "9eebbdb3386c3b9ac239436d3a13b917d6f19244a93af2370c9817c9026ba326",
+    "settings.json": "ea9446dc6c9f9a259f36f042dd6290e0852b1d3f1a36b00f702a428c7d96c369",
+    "provider_check.py": "8985363365e95eff18d8246c54e92ca6f363d3a3bc5a4ea27cfadf13267b4428",
+    "remote_restore.py": "b3cbb6d6e0d863fd28aa1a7fa9541521a15ef0c49c0e618d02b35029361bc565",
+    "provider-events.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "current.json": "03bfe96dc007ccfb0e7dafe11c5ab4ff78d6fd8a789cccac226699c64e6b6fdb",
+    "backup.json": "ffc083f67eb9be4a4dc90526cafe5e55beadcba320e0958ab40542123f132550"
+  },
+  "preservation": "settings.json and infrastructure match initial hashes; snapshots match HEAD; provider events remain []"
+}

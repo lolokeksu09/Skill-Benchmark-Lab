@@ -1,0 +1,20 @@
+test_content_is_compared_exactly (test_restore.BuildPlanTests.test_content_is_compared_exactly) ... ok
+test_default_preview_creates_updates_and_preserves_extra_files (test_restore.BuildPlanTests.test_default_preview_creates_updates_and_preserves_extra_files) ... ok
+test_empty (test_restore.BuildPlanTests.test_empty) ... ok
+test_empty_backup_only_deletes_with_prune (test_restore.BuildPlanTests.test_empty_backup_only_deletes_with_prune) ... ok
+test_empty_current_only_creates (test_restore.BuildPlanTests.test_empty_current_only_creates) ... ok
+test_identical_files_are_unchanged_with_or_without_prune (test_restore.BuildPlanTests.test_identical_files_are_unchanged_with_or_without_prune) ... ok
+test_inputs_are_not_mutated (test_restore.BuildPlanTests.test_inputs_are_not_mutated) ... ok
+test_prune_and_all_lists_are_sorted (test_restore.BuildPlanTests.test_prune_and_all_lists_are_sorted) ... ok
+test_cli_outputs_json_preview_and_supports_prune (test_restore.CliTests.test_cli_outputs_json_preview_and_supports_prune) ... ok
+test_invalid_json_is_rejected_in_either_input (test_restore.CliTests.test_invalid_json_is_rejected_in_either_input) ... ok
+test_invalid_utf8_is_reported_without_traceback (test_restore.CliTests.test_invalid_utf8_is_reported_without_traceback) ... ok
+test_missing_input_is_reported_without_traceback (test_restore.CliTests.test_missing_input_is_reported_without_traceback) ... ok
+test_non_objects_are_rejected_in_either_input (test_restore.CliTests.test_non_objects_are_rejected_in_either_input) ... ok
+test_non_string_contents_are_rejected_in_either_input (test_restore.CliTests.test_non_string_contents_are_rejected_in_either_input) ... ok
+test_preview_does_not_change_input_files (test_restore.CliTests.test_preview_does_not_change_input_files) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 2.231s
+
+OK

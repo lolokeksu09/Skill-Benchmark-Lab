@@ -1,0 +1,99 @@
+{
+  "time_utc": "2026-10-27T19:08:49.120649+00:00",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "base_head": "23ee2b60624f50ef57ce627b99a3ed07366e6f62",
+  "branch": "main",
+  "remotes": "",
+  "sha256": {
+    "package.py": "592908908114f41f2d49b0d984f99f132618fa54e91e7362cc29990e9414a827",
+    "test_package.py": "ad377b00308ce784f0634709a3b1223f1da1aa7be476658f72240f983d4d796d",
+    "README.md": "932ce574c2b9b2c48996ff5a8d083123ad85933dd05a9807e60452873cea7976",
+    "sample.json": "57b16bfe3725d1dade700262a558c1724b42fdb8f46dc1ea9c34d190331042d8",
+    "manifest.json": "6925f2470e5977df473fe1a05b6986251ce2d61e105b51946b2ee4231f54b9a3"
+  },
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "py_compile",
+        "package.py",
+        "test_package.py"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--quiet",
+        "--",
+        "registry.py"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "unittest": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-v"
+    ],
+    "returncode": 0,
+    "tests": 8,
+    "evidence": "tests-after.log"
+  },
+  "regression_before_fix": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-v"
+    ],
+    "returncode": 1,
+    "tests": 8,
+    "failures": 29,
+    "errors": 1,
+    "evidence": "tests-before.log"
+  },
+  "catalog": [
+    {
+      "command": [
+        "python3",
+        "registry.py",
+        "catalog"
+      ],
+      "returncode": 75,
+      "stdout": "",
+      "stderr": "Temporary registry failure. This read may be retried.\n"
+    },
+    {
+      "command": [
+        "python3",
+        "registry.py",
+        "catalog"
+      ],
+      "returncode": 0,
+      "stdout": "{\"manifest_version\": 2, \"fields\": [\"name\", \"bytes\"]}\n",
+      "stderr": ""
+    }
+  ]
+}

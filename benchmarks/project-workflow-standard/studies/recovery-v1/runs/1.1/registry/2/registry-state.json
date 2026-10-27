@@ -1,0 +1,47 @@
+{
+  "events": [
+    {
+      "seq": 1,
+      "command": "catalog",
+      "result": "transient"
+    },
+    {
+      "seq": 2,
+      "command": "catalog",
+      "result": "success"
+    },
+    {
+      "seq": 3,
+      "command": "status",
+      "request_id": null,
+      "result": "success"
+    },
+    {
+      "seq": 4,
+      "command": "publish",
+      "request_id": "manifest-v2-6925f2470e5977df473fe1a05b698625",
+      "result": "committed_unknown"
+    },
+    {
+      "seq": 5,
+      "command": "status",
+      "request_id": "manifest-v2-6925f2470e5977df473fe1a05b698625",
+      "result": "success"
+    },
+    {
+      "seq": 6,
+      "command": "status",
+      "request_id": null,
+      "result": "success"
+    }
+  ],
+  "receipts": [
+    {
+      "request_id": "manifest-v2-6925f2470e5977df473fe1a05b698625",
+      "artifact_sha256": "6925f2470e5977df473fe1a05b6986251ce2d61e105b51946b2ee4231f54b9a3",
+      "receipt_id": "receipt-1"
+    }
+  ],
+  "catalog_calls": 2,
+  "timeout_sent": true
+}

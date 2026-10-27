@@ -1,0 +1,420 @@
+test_classifies_and_sorts_new_changed_and_unchanged_paths (test_restore.BuildPlanTests.test_classifies_and_sorts_new_changed_and_unchanged_paths) ... FAIL
+test_empty (test_restore.BuildPlanTests.test_empty) ... ok
+test_empty_backup_preserves_current_unless_pruning (test_restore.BuildPlanTests.test_empty_backup_preserves_current_unless_pruning) ... FAIL
+test_empty_current_creates_every_backup_path (test_restore.BuildPlanTests.test_empty_current_creates_every_backup_path) ... FAIL
+test_identical_snapshots_have_no_changes_even_with_prune (test_restore.BuildPlanTests.test_identical_snapshots_have_no_changes_even_with_prune) ... 
+  test_identical_snapshots_have_no_changes_even_with_prune (test_restore.BuildPlanTests.test_identical_snapshots_have_no_changes_even_with_prune) (prune=False) ... FAIL
+  test_identical_snapshots_have_no_changes_even_with_prune (test_restore.BuildPlanTests.test_identical_snapshots_have_no_changes_even_with_prune) (prune=True) ... FAIL
+test_inputs_are_unchanged (test_restore.BuildPlanTests.test_inputs_are_unchanged) ... ok
+test_prune_lists_only_missing_paths_in_sorted_order (test_restore.BuildPlanTests.test_prune_lists_only_missing_paths_in_sorted_order) ... FAIL
+test_invalid_utf8_has_clear_error (test_restore.CLITests.test_invalid_utf8_has_clear_error) ... FAIL
+test_malformed_json_in_either_input (test_restore.CLITests.test_malformed_json_in_either_input) ... 
+  test_malformed_json_in_either_input (test_restore.CLITests.test_malformed_json_in_either_input) (input='current.json') ... FAIL
+  test_malformed_json_in_either_input (test_restore.CLITests.test_malformed_json_in_either_input) (input='backup.json') ... FAIL
+test_missing_file_has_clear_error (test_restore.CLITests.test_missing_file_has_clear_error) ... FAIL
+test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) ... 
+  test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='current.json', value=[]) ... FAIL
+  test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='current.json', value=None) ... FAIL
+  test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='current.json', value=True) ... FAIL
+  test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='current.json', value=42) ... FAIL
+  test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='current.json', value='text') ... FAIL
+  test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='backup.json', value=[]) ... FAIL
+  test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='backup.json', value=None) ... FAIL
+  test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='backup.json', value=True) ... FAIL
+  test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='backup.json', value=42) ... FAIL
+  test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='backup.json', value='text') ... FAIL
+test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) ... 
+  test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='current.json', value=None) ... FAIL
+  test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='current.json', value=True) ... FAIL
+  test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='current.json', value=42) ... FAIL
+  test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='current.json', value=[]) ... FAIL
+  test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='current.json', value={}) ... FAIL
+  test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='backup.json', value=None) ... FAIL
+  test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='backup.json', value=True) ... FAIL
+  test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='backup.json', value=42) ... FAIL
+  test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='backup.json', value=[]) ... FAIL
+  test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='backup.json', value={}) ... FAIL
+test_preview_outputs_json_without_prune (test_restore.CLITests.test_preview_outputs_json_without_prune) ... ERROR
+test_prune_outputs_deletion_preview (test_restore.CLITests.test_prune_outputs_deletion_preview) ... ERROR
+test_unicode_paths_and_content (test_restore.CLITests.test_unicode_paths_and_content) ... ERROR
+
+======================================================================
+ERROR: test_preview_outputs_json_without_prune (test_restore.CLITests.test_preview_outputs_json_without_prune)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 123, in test_preview_outputs_json_without_prune
+    json.loads(result.stdout),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 354, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+======================================================================
+ERROR: test_prune_outputs_deletion_preview (test_restore.CLITests.test_prune_outputs_deletion_preview)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 131, in test_prune_outputs_deletion_preview
+    json.loads(result.stdout), {"create": [], "update": [], "delete": ["old"]}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 354, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+======================================================================
+ERROR: test_unicode_paths_and_content (test_restore.CLITests.test_unicode_paths_and_content)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 141, in test_unicode_paths_and_content
+    json.loads(result.stdout),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 354, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+======================================================================
+FAIL: test_classifies_and_sorts_new_changed_and_unchanged_paths (test_restore.BuildPlanTests.test_classifies_and_sorts_new_changed_and_unchanged_paths)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 34, in test_classifies_and_sorts_new_changed_and_unchanged_paths
+    self.assertEqual(
+AssertionError: {'create': ['z-new.txt', 'a-new.txt', 'z-change.txt', [104 chars]xt']} != {'create': ['a-new.txt', 'z-new.txt'], 'update': ['a-c[37 chars]: []}
+- {'create': ['z-new.txt',
++ {'create': ['a-new.txt', 'z-new.txt'],
+?             +++++++++++++           +
+
++  'delete': [],
++  'update': ['a-change.txt', 'z-change.txt']}
+-             'a-new.txt',
+-             'z-change.txt',
+-             'keep.txt',
+-             'a-change.txt'],
+-  'delete': ['old.txt', 'z-change.txt', 'a-change.txt', 'keep.txt'],
+-  'update': []}
+
+======================================================================
+FAIL: test_empty_backup_preserves_current_unless_pruning (test_restore.BuildPlanTests.test_empty_backup_preserves_current_unless_pruning)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 63, in test_empty_backup_preserves_current_unless_pruning
+    self.assertEqual(
+AssertionError: {'create': [], 'update': [], 'delete': ['b', 'a']} != {'create': [], 'update': [], 'delete': []}
+- {'create': [], 'delete': ['b', 'a'], 'update': []}
+?                           --------
+
++ {'create': [], 'delete': [], 'update': []}
+
+======================================================================
+FAIL: test_empty_current_creates_every_backup_path (test_restore.BuildPlanTests.test_empty_current_creates_every_backup_path)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 72, in test_empty_current_creates_every_backup_path
+    self.assertEqual(
+AssertionError: {'create': ['b', 'a'], 'update': [], 'delete': []} != {'create': ['a', 'b'], 'update': [], 'delete': []}
+- {'create': ['b', 'a'], 'delete': [], 'update': []}
+?                -----
+
++ {'create': ['a', 'b'], 'delete': [], 'update': []}
+?             +++++
+
+
+======================================================================
+FAIL: test_identical_snapshots_have_no_changes_even_with_prune (test_restore.BuildPlanTests.test_identical_snapshots_have_no_changes_even_with_prune) (prune=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 56, in test_identical_snapshots_have_no_changes_even_with_prune
+    self.assertEqual(
+AssertionError: {'create': ['same'], 'update': [], 'delete': ['same']} != {'create': [], 'update': [], 'delete': []}
+- {'create': ['same'], 'delete': ['same'], 'update': []}
+?             ------              ------
+
++ {'create': [], 'delete': [], 'update': []}
+
+======================================================================
+FAIL: test_identical_snapshots_have_no_changes_even_with_prune (test_restore.BuildPlanTests.test_identical_snapshots_have_no_changes_even_with_prune) (prune=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 56, in test_identical_snapshots_have_no_changes_even_with_prune
+    self.assertEqual(
+AssertionError: {'create': ['same'], 'update': [], 'delete': ['same']} != {'create': [], 'update': [], 'delete': []}
+- {'create': ['same'], 'delete': ['same'], 'update': []}
+?             ------              ------
+
++ {'create': [], 'delete': [], 'update': []}
+
+======================================================================
+FAIL: test_prune_lists_only_missing_paths_in_sorted_order (test_restore.BuildPlanTests.test_prune_lists_only_missing_paths_in_sorted_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 44, in test_prune_lists_only_missing_paths_in_sorted_order
+    self.assertEqual(
+AssertionError: {'create': ['new', 'change', 'keep'], 'update': [], 'delet[36 chars]ep']} != {'create': ['new'], 'update': ['change'], 'delete': ['a-old', 'z-old']}
++ {'create': ['new'], 'delete': ['a-old', 'z-old'], 'update': ['change']}
+- {'create': ['new', 'change', 'keep'],
+-  'delete': ['z-old', 'a-old', 'change', 'keep'],
+-  'update': []}
+
+======================================================================
+FAIL: test_invalid_utf8_has_clear_error (test_restore.CLITests.test_invalid_utf8_has_clear_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 171, in test_invalid_utf8_has_clear_error
+    self.assert_input_error(self.run_cli(b'\xff', b'{}'), "current.json", "UTF-8")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 111, in assert_input_error
+    self.assertIn(filename, result.stderr)
+AssertionError: 'current.json' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 5, in <module>\n    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 293, in load\n    return loads(fp.read(),\n                 ^^^^^^^^^\n  File "<frozen codecs>", line 322, in decode\nUnicodeDecodeError: \'utf-8\' codec can\'t decode byte 0xff in position 0: invalid start byte\n'
+
+======================================================================
+FAIL: test_malformed_json_in_either_input (test_restore.CLITests.test_malformed_json_in_either_input) (input='current.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 150, in test_malformed_json_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "invalid JSON")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 111, in assert_input_error
+    self.assertIn(filename, result.stderr)
+AssertionError: 'current.json' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 5, in <module>\n    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 293, in load\n    return loads(fp.read(),\n           ^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 354, in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\njson.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)\n'
+
+======================================================================
+FAIL: test_malformed_json_in_either_input (test_restore.CLITests.test_malformed_json_in_either_input) (input='backup.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 150, in test_malformed_json_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "invalid JSON")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 111, in assert_input_error
+    self.assertIn(filename, result.stderr)
+AssertionError: 'backup.json' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 5, in <module>\n    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))\n                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 293, in load\n    return loads(fp.read(),\n           ^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 354, in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\njson.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)\n'
+
+======================================================================
+FAIL: test_missing_file_has_clear_error (test_restore.CLITests.test_missing_file_has_clear_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 180, in test_missing_file_has_clear_error
+    self.assert_input_error(result, "missing.json", "cannot read")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 112, in assert_input_error
+    self.assertIn(message, result.stderr)
+AssertionError: 'cannot read' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 5, in <module>\n    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))\n                               ^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: \'/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/tmp55892dkl/missing.json\'\n'
+
+======================================================================
+FAIL: test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='current.json', value=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 158, in test_non_object_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "JSON object")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='current.json', value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 158, in test_non_object_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "JSON object")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 111, in assert_input_error
+    self.assertIn(filename, result.stderr)
+AssertionError: 'current.json' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 5, in <module>\n    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 3, in build_plan\n    return {\'create\':list(backup),\'update\':[],\'delete\':list(current)}\n                                                       ^^^^^^^^^^^^^\nTypeError: \'NoneType\' object is not iterable\n'
+
+======================================================================
+FAIL: test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='current.json', value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 158, in test_non_object_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "JSON object")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 111, in assert_input_error
+    self.assertIn(filename, result.stderr)
+AssertionError: 'current.json' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 5, in <module>\n    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 3, in build_plan\n    return {\'create\':list(backup),\'update\':[],\'delete\':list(current)}\n                                                       ^^^^^^^^^^^^^\nTypeError: \'bool\' object is not iterable\n'
+
+======================================================================
+FAIL: test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='current.json', value=42)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 158, in test_non_object_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "JSON object")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 111, in assert_input_error
+    self.assertIn(filename, result.stderr)
+AssertionError: 'current.json' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 5, in <module>\n    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 3, in build_plan\n    return {\'create\':list(backup),\'update\':[],\'delete\':list(current)}\n                                                       ^^^^^^^^^^^^^\nTypeError: \'int\' object is not iterable\n'
+
+======================================================================
+FAIL: test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='current.json', value='text')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 158, in test_non_object_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "JSON object")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='backup.json', value=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 158, in test_non_object_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "JSON object")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='backup.json', value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 158, in test_non_object_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "JSON object")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 111, in assert_input_error
+    self.assertIn(filename, result.stderr)
+AssertionError: 'backup.json' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 5, in <module>\n    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 3, in build_plan\n    return {\'create\':list(backup),\'update\':[],\'delete\':list(current)}\n                     ^^^^^^^^^^^^\nTypeError: \'NoneType\' object is not iterable\n'
+
+======================================================================
+FAIL: test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='backup.json', value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 158, in test_non_object_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "JSON object")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 111, in assert_input_error
+    self.assertIn(filename, result.stderr)
+AssertionError: 'backup.json' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 5, in <module>\n    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 3, in build_plan\n    return {\'create\':list(backup),\'update\':[],\'delete\':list(current)}\n                     ^^^^^^^^^^^^\nTypeError: \'bool\' object is not iterable\n'
+
+======================================================================
+FAIL: test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='backup.json', value=42)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 158, in test_non_object_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "JSON object")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 111, in assert_input_error
+    self.assertIn(filename, result.stderr)
+AssertionError: 'backup.json' not found in 'Traceback (most recent call last):\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 5, in <module>\n    print(build_plan(json.load(open(sys.argv[1])),json.load(open(sys.argv[2]))))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/restore.py", line 3, in build_plan\n    return {\'create\':list(backup),\'update\':[],\'delete\':list(current)}\n                     ^^^^^^^^^^^^\nTypeError: \'int\' object is not iterable\n'
+
+======================================================================
+FAIL: test_non_object_in_either_input (test_restore.CLITests.test_non_object_in_either_input) (input='backup.json', value='text')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 158, in test_non_object_in_either_input
+    self.assert_input_error(self.run_cli(*inputs), name, "JSON object")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='current.json', value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 167, in test_non_string_content_in_either_input
+    self.assert_input_error(result, name, "string")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='current.json', value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 167, in test_non_string_content_in_either_input
+    self.assert_input_error(result, name, "string")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='current.json', value=42)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 167, in test_non_string_content_in_either_input
+    self.assert_input_error(result, name, "string")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='current.json', value=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 167, in test_non_string_content_in_either_input
+    self.assert_input_error(result, name, "string")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='current.json', value={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 167, in test_non_string_content_in_either_input
+    self.assert_input_error(result, name, "string")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='backup.json', value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 167, in test_non_string_content_in_either_input
+    self.assert_input_error(result, name, "string")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='backup.json', value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 167, in test_non_string_content_in_either_input
+    self.assert_input_error(result, name, "string")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='backup.json', value=42)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 167, in test_non_string_content_in_either_input
+    self.assert_input_error(result, name, "string")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='backup.json', value=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 167, in test_non_string_content_in_either_input
+    self.assert_input_error(result, name, "string")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_non_string_content_in_either_input (test_restore.CLITests.test_non_string_content_in_either_input) (input='backup.json', value={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 167, in test_non_string_content_in_either_input
+    self.assert_input_error(result, name, "string")
+  File "/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/restore/1/test_restore.py", line 109, in assert_input_error
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+----------------------------------------------------------------------
+Ran 15 tests in 2.132s
+
+FAILED (failures=30, errors=3)

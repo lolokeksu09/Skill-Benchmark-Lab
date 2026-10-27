@@ -1,0 +1,9 @@
+{
+  "observation": {"events": [], "receipts": []},
+  "assessment": {
+    "passed": false,
+    "reasons": ["expected one unknown-outcome write", "expected one committed receipt"],
+    "scope": "requests reaching this fixture only"
+  },
+  "source": "observer stdout on shutdown; the parent TCP probe also returned connection refused"
+}

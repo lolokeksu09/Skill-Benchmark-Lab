@@ -1,0 +1,3 @@
+Готово: package.py и README обновлены, 8 тестов прошли. Выполнена одна локальная публикация; после обрыва publish API подтвердил receipt-1 и совпадение SHA-256. Повторной публикации не было. Оставшихся шагов нет.
+
+[FINAL.md](sandbox:/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/2/FINAL.md)

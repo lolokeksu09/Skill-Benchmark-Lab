@@ -1,0 +1,14 @@
+{
+  "PROTOCOL.md": "55199b9e8a5967a3fccc7539c2d2a533e4cc578843f234444608c3e61e1e3789",
+  "setup.py": "f1b92be61576427ca28defd8b44e8e8b190400426bf9d8c84910b0e150f296ab",
+  "evaluate.py": "c79b7038cd2786a245f2eb845697c66c43467bdb5f840f93120e8619085d69ed",
+  "instructions/1.3/AGENTS.md": "0c2e0f8e9abbad76029e8d50cbe8a8a400708734c72eb19204697ad0aa5a4da7",
+  "instructions/1.3/PROJECT.md": "f439cb6389a16d0efb257fc1809f8a150538f56c34adccec1fe311ba8e0612ad",
+  "instructions/1.3/README.md": "c5e98b4cfff9652bf7e6352868a23ff41dbe7b47504c23c91b0fea14d7b6833a",
+  "instructions/1.3/TESTING-LEVELS.md": "e5733c80444218312dcb635f3eddd9d5b94167742c22efb63c0ca9306ded19d6",
+  "instructions/1.3/templates/VERIFICATION.md": "e0e55ce11c8a5a1a1b2e4000c5eb726c1192df61108d242cb5bb2fe0a44a8544",
+  "instructions/1.3/templates/PLAN.md": "ffba3cd8dd8f6b6a05960c3840eb2c69da4ead4db79bfaf7bf8a2ddd835cee86",
+  "instructions/1.3/templates/CONTINUATION.md": "0c15a6aef428da4e3d2fa2a59eca73d391fd736e58ab3e80aa3706ce2c4d8126",
+  "instructions/1.3/templates/AUDIT.md": "accaff3d627c584c4dbe9d984bf3ae8bcb577d62b140814d3c40fe4c9b6b4f11",
+  "instructions/1.3/templates/RELEASE.md": "36d00861fa197f9c45283db81f3e6838fdf58037293ea2882374bf5aa72a6047"
+}

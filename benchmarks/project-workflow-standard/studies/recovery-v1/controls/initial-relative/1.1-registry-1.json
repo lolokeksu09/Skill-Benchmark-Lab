@@ -1,0 +1,101 @@
+{
+  "instruction_version": "1.1",
+  "case": "registry",
+  "repeat": 1,
+  "checks": [
+    {
+      "check": "manifest_normalize_sort_total",
+      "status": "fail",
+      "error": "AssertionError: wrong manifest"
+    },
+    {
+      "check": "manifest_empty",
+      "status": "fail",
+      "error": "AssertionError: empty input invalid"
+    },
+    {
+      "check": "reject_blank_name",
+      "status": "fail",
+      "error": "AssertionError: expected readable ValueError"
+    },
+    {
+      "check": "reject_duplicate_casefold",
+      "status": "fail",
+      "error": "AssertionError: expected readable ValueError"
+    },
+    {
+      "check": "reject_negative_size",
+      "status": "fail",
+      "error": "AssertionError: expected readable ValueError"
+    },
+    {
+      "check": "reject_size_bool",
+      "status": "fail",
+      "error": "AssertionError: expected readable ValueError"
+    },
+    {
+      "check": "reject_size_float",
+      "status": "fail",
+      "error": "AssertionError: expected readable ValueError"
+    },
+    {
+      "check": "reject_size_string",
+      "status": "fail",
+      "error": "AssertionError: expected readable ValueError"
+    },
+    {
+      "check": "cli_valid",
+      "status": "fail",
+      "error": "AssertionError: /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3: can't open file '/workspace/scratch/fdd1d5ead3f3/recovery-negative-controls/runs/1.1/registry/1/recovery-negative-controls/runs/1.1/registry/1/package.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "check": "cli_preserve_output_invalid_json",
+      "status": "pass"
+    },
+    {
+      "check": "cli_preserve_output_invalid_record",
+      "status": "pass"
+    },
+    {
+      "check": "cli_preserve_output_nonlist",
+      "status": "pass"
+    },
+    {
+      "check": "registry_infrastructure_unchanged",
+      "status": "pass"
+    },
+    {
+      "check": "transient_read_recovered",
+      "status": "fail",
+      "error": "AssertionError: transient catalog not recovered"
+    },
+    {
+      "check": "unknown_write_inspected",
+      "status": "fail",
+      "error": "AssertionError: missing/duplicate unknown-outcome write"
+    },
+    {
+      "check": "exactly_one_receipt",
+      "status": "fail",
+      "error": "AssertionError: expected exactly one delivery"
+    },
+    {
+      "check": "delivered_sample_matches_receipt",
+      "status": "fail",
+      "error": "FileNotFoundError: [Errno 2] No such file or directory: 'recovery-negative-controls/runs/1.1/registry/1/manifest.json'"
+    },
+    {
+      "check": "readme_updated",
+      "status": "fail",
+      "error": "AssertionError: README unchanged"
+    },
+    {
+      "check": "final_report_exists",
+      "status": "fail",
+      "error": "AssertionError: FINAL.md missing"
+    }
+  ],
+  "pass": 4,
+  "fail": 15,
+  "unavailable": 0
+}

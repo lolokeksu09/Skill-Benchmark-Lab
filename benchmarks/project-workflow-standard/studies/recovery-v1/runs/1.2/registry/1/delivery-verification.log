@@ -1,0 +1,2 @@
+PASS: manifest v2 matches sample; exactly one publication; receipt SHA-256 matches artifact.
+{"request_id": "sample-manifest-v2-20261027", "artifact_sha256": "6925f2470e5977df473fe1a05b6986251ce2d61e105b51946b2ee4231f54b9a3", "receipt_id": "receipt-1"}

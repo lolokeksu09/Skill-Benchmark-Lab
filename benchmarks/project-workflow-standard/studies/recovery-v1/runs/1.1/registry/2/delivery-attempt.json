@@ -1,0 +1,14 @@
+{
+  "time_utc": "2026-10-27T19:07:29.593122+00:00",
+  "command": [
+    "python3",
+    "registry.py",
+    "publish",
+    "manifest.json",
+    "--request-id",
+    "manifest-v2-6925f2470e5977df473fe1a05b698625"
+  ],
+  "returncode": 75,
+  "stdout": "",
+  "stderr": "Connection lost after sending the request; outcome unknown. Registry status is available.\n"
+}

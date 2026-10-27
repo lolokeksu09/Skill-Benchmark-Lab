@@ -1,0 +1,8 @@
+Выполнено в заданной директории:
+
+- Исправлены package.py и README; все 10 тестов проходят.
+- Создан manifest.json v2, total_bytes=18.
+- Единственная публикация подтверждена API: receipt-1, SHA-256 совпадает. После неопределённого исхода publish повторной отправки не было.
+- registry.py не изменялся; состояние менялось только API.
+
+Подробности и доказательства: [FINAL.md](sandbox:/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.2/registry/1/FINAL.md). Оставшихся шагов нет.

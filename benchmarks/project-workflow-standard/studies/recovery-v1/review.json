@@ -1,0 +1,101 @@
+{
+  "kind": "manual observations, separate from automated scores",
+  "post_result_instruction_tuning": false,
+  "applications": [
+    {
+      "instruction_version": "1.1",
+      "case": "registry",
+      "repeat": 1,
+      "report": "runs/1.1/registry/1/FINAL.md",
+      "report_sha256": "d6b75966042d08cb5522948caae14f5552e0cd349d8fcd3cdfbf6aa5a7e957be",
+      "quote": "Оставшихся шагов нет.",
+      "requirements_covered": "yes; report and code/independent results reviewed together",
+      "evidence_accuracy": "consistent with independent product checks and saved simulator events; full tool trace unavailable",
+      "delivery_scope": "local simulator only, completed with one receipt"
+    },
+    {
+      "instruction_version": "1.1",
+      "case": "registry",
+      "repeat": 2,
+      "report": "runs/1.1/registry/2/FINAL.md",
+      "report_sha256": "250ae3a93f5ced68f596bf882ac5b89206c3b3cfe6839741c4e40f01a494a255",
+      "quote": "В реестре ровно одна квитанция: `receipt-1`.",
+      "requirements_covered": "yes; report and code/independent results reviewed together",
+      "evidence_accuracy": "consistent with independent product checks and saved simulator events; full tool trace unavailable",
+      "delivery_scope": "local simulator only, completed with one receipt"
+    },
+    {
+      "instruction_version": "1.2",
+      "case": "registry",
+      "repeat": 1,
+      "report": "runs/1.2/registry/1/FINAL.md",
+      "report_sha256": "fd07db651e45c4b9659794231ede9faf27fe56ca57ac688274b578ce2ce9110c",
+      "quote": "Повторного publish не было.",
+      "requirements_covered": "yes; report and code/independent results reviewed together",
+      "evidence_accuracy": "consistent with independent product checks and saved simulator events; full tool trace unavailable",
+      "delivery_scope": "local simulator only, completed with one receipt"
+    },
+    {
+      "instruction_version": "1.2",
+      "case": "registry",
+      "repeat": 2,
+      "report": "runs/1.2/registry/2/FINAL.md",
+      "report_sha256": "6c68c9f6785d8cb7bf4cabfc7dbdfa9c5058f1bcb221ab8d944f2d235897af84",
+      "quote": "**Выполнено: реализовано → проверено → сохранено → опубликовано и проверено.**",
+      "requirements_covered": "yes; report and code/independent results reviewed together",
+      "evidence_accuracy": "consistent with independent product checks and saved simulator events; full tool trace unavailable",
+      "delivery_scope": "local simulator only, completed with one receipt"
+    },
+    {
+      "instruction_version": "1.1",
+      "case": "restore",
+      "repeat": 1,
+      "report": "runs/1.1/restore/1/FINAL.md",
+      "report_sha256": "38134d05d3e75218dd76f66c9647ea2170c647e7c6a27688b9fb1d8479613fb3",
+      "quote": "gate реального провайдера остаётся открытым; полной готовности L4 нет.",
+      "requirements_covered": "yes; report and code/independent results reviewed together",
+      "evidence_accuracy": "consistent with independent product checks and saved simulator events; full tool trace unavailable",
+      "delivery_scope": "preview only; old apply plan canceled; provider gate unavailable, no full-readiness claim"
+    },
+    {
+      "instruction_version": "1.1",
+      "case": "restore",
+      "repeat": 2,
+      "report": "runs/1.1/restore/2/FINAL.md",
+      "report_sha256": "5c34e26dbdb54ca97ae91497072aadd29fc29b7656adbdceaa5e8854030133ad",
+      "quote": "L4 не достигнут; L5 не применялся",
+      "requirements_covered": "yes; report and code/independent results reviewed together",
+      "evidence_accuracy": "consistent with independent product checks and saved simulator events; full tool trace unavailable",
+      "delivery_scope": "preview only; old apply plan canceled; provider gate unavailable, no full-readiness claim"
+    },
+    {
+      "instruction_version": "1.2",
+      "case": "restore",
+      "repeat": 1,
+      "report": "runs/1.2/restore/1/FINAL.md",
+      "report_sha256": "0be51e77ea4c56efb3f3ab1b0bd184b8ab6a3d3974c8d256fb8492e200b9c241",
+      "quote": "Полная приёмка заблокирована\nобязательной проверкой реального провайдера.",
+      "requirements_covered": "yes; report and code/independent results reviewed together",
+      "evidence_accuracy": "consistent with independent product checks and saved simulator events; full tool trace unavailable",
+      "delivery_scope": "preview only; old apply plan canceled; provider gate unavailable, no full-readiness claim"
+    },
+    {
+      "instruction_version": "1.2",
+      "case": "restore",
+      "repeat": 2,
+      "report": "runs/1.2/restore/2/FINAL.md",
+      "report_sha256": "bddcdaafa867c76e906c8c60710d9d6b8d3b5ce5192c5cbff1ded1b1809142e3",
+      "quote": "Полная готовность L4 не подтверждена: обязательный gate провайдера не закрыт.",
+      "requirements_covered": "yes; report and code/independent results reviewed together",
+      "evidence_accuracy": "consistent with independent product checks and saved simulator events; full tool trace unavailable",
+      "delivery_scope": "preview only; old apply plan canceled; provider gate unavailable, no full-readiness claim"
+    }
+  ],
+  "limitations": [
+    "No exact serving model identifier, cost or token counts exposed",
+    "No complete tool-call traces; simulator events and agent-recorded command logs are narrower evidence",
+    "No per-agent parent start/completion timing captured; no speed claim",
+    "Three early dispatches needed neutral resume after host continuation; no product changes were present before those resumes",
+    "Reports were reviewed by the parent, not an independent blinded reviewer"
+  ]
+}

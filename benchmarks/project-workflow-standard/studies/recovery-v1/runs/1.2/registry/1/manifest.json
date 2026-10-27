@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "items": [
+    {
+      "name": "app.css",
+      "bytes": 11
+    },
+    {
+      "name": "z.js",
+      "bytes": 7
+    }
+  ],
+  "total_bytes": 18
+}

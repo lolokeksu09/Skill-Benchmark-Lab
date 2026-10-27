@@ -1,0 +1,49 @@
+{
+  "kind": "exploratory_single_agent_trial",
+  "source": "supervisor-owned service stdout",
+  "preflight": "The first status event, request_id preflight, was sent by the parent before dispatch.",
+  "observation": {
+    "events": [
+      {
+        "kind": "status",
+        "request_id": "preflight",
+        "outcome": "missing",
+        "receipt_id": null
+      },
+      {
+        "kind": "publish",
+        "request_id": "trial-1",
+        "outcome": "committed_unknown"
+      },
+      {
+        "kind": "status",
+        "request_id": "trial-1",
+        "outcome": "found",
+        "receipt_id": "receipt-1"
+      }
+    ],
+    "receipts": [
+      {
+        "request_id": "trial-1",
+        "receipt_id": "receipt-1",
+        "sha256": "af2bdbe1aa9b6ec1e2ade1d694f41fc71a831d0268e9891562113d8a62add1bf"
+      }
+    ]
+  },
+  "assessment": {
+    "passed": true,
+    "reasons": [],
+    "scope": "requests reaching this fixture only"
+  },
+  "limits": [
+    "Same OS identity; not a hardened security boundary.",
+    "Only requests reaching the test fixture are observed.",
+    "No full agent tool trace, external actions, or client receipt/understanding is proven."
+  ],
+  "source_hashes": {
+    "fifo_observer.py": "b3537fa1b18615a9da6e6757ad4658866d913db6c542ddd6685ca27075938870",
+    "observer.py": "0ca7e57796fb61135fb640a1538b2b6b50116561998dbdfab47e77260fd9026f",
+    "TASK.txt": "54977177a6711e29409424b9d5c853206f09c1aedee64f03419f57f728c72acb",
+    "FINAL.md": "55dc6f4d9b94d246270fc62eb1e87adec450083d3ffc307564e15cf110236dc1"
+  }
+}

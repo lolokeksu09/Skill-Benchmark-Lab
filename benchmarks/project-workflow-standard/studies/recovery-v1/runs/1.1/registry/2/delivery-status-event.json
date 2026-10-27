@@ -1,0 +1,13 @@
+{
+  "time_utc": "2026-10-27T19:07:35.820102+00:00",
+  "command": [
+    "python3",
+    "registry.py",
+    "status",
+    "--request-id",
+    "manifest-v2-6925f2470e5977df473fe1a05b698625"
+  ],
+  "returncode": 0,
+  "stdout": "{\"receipts\": [{\"request_id\": \"manifest-v2-6925f2470e5977df473fe1a05b698625\", \"artifact_sha256\": \"6925f2470e5977df473fe1a05b6986251ce2d61e105b51946b2ee4231f54b9a3\", \"receipt_id\": \"receipt-1\"}]}\n",
+  "stderr": ""
+}

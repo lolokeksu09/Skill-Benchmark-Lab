@@ -1,0 +1,5 @@
+Готово: обновлены `package.py`, README и тесты; 8 тестов проходят.
+
+`manifest.json` опубликован единственный раз. После сбоя ответа API подтвердил `receipt-1`, совпадение SHA-256 и ровно одну поставку. Повторной публикации не было.
+
+[FINAL.md](sandbox:/workspace/scratch/fdd1d5ead3f3/recovery-executions/runs/1.1/registry/1/FINAL.md) содержит точные действия и доказательства. Оставшихся шагов нет.

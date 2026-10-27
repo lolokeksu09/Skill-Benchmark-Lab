@@ -1,0 +1,136 @@
+[
+  {
+    "time": "2026-10-27T19:08:20.462216+00:00",
+    "command": [
+      "python3",
+      "package.py",
+      "sample.json",
+      "--output",
+      "manifest.json"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "time": "2026-10-27T19:08:20.469755+00:00",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "time": "2026-10-27T19:08:20.542052+00:00",
+    "command": [
+      "python3",
+      "registry.py",
+      "catalog"
+    ],
+    "exit_code": 75,
+    "stdout": "",
+    "stderr": "Temporary registry failure. This read may be retried.\n"
+  },
+  {
+    "time": "2026-10-27T19:08:27.531159+00:00",
+    "command": [
+      "python3",
+      "registry.py",
+      "catalog"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"manifest_version\": 2, \"fields\": [\"name\", \"bytes\"]}\n",
+    "stderr": ""
+  },
+  {
+    "time": "2026-10-27T19:08:34.157089+00:00",
+    "command": [
+      "python3",
+      "registry.py",
+      "status"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"receipts\": []}\n",
+    "stderr": ""
+  },
+  {
+    "time": "2026-10-27T19:08:40.741885+00:00",
+    "command": [
+      "python3",
+      "registry.py",
+      "publish",
+      "manifest.json",
+      "--request-id",
+      "sample-manifest-v2-6925f2470e5977df"
+    ],
+    "exit_code": 75,
+    "stdout": "",
+    "stderr": "Connection lost after sending the request; outcome unknown. Registry status is available.\n"
+  },
+  {
+    "time": "2026-10-27T19:08:45.014973+00:00",
+    "command": [
+      "python3",
+      "registry.py",
+      "status",
+      "--request-id",
+      "sample-manifest-v2-6925f2470e5977df"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"receipts\": [{\"request_id\": \"sample-manifest-v2-6925f2470e5977df\", \"artifact_sha256\": \"6925f2470e5977df473fe1a05b6986251ce2d61e105b51946b2ee4231f54b9a3\", \"receipt_id\": \"receipt-1\"}]}\n",
+    "stderr": ""
+  },
+  {
+    "time": "2026-10-27T19:09:03.697079+00:00",
+    "command": [
+      "python3",
+      "registry.py",
+      "status"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"receipts\": [{\"request_id\": \"sample-manifest-v2-6925f2470e5977df\", \"artifact_sha256\": \"6925f2470e5977df473fe1a05b6986251ce2d61e105b51946b2ee4231f54b9a3\", \"receipt_id\": \"receipt-1\"}]}\n",
+    "stderr": ""
+  },
+  {
+    "time": "2026-10-27T19:09:16.161040+00:00",
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "package.py",
+      "test_package.py",
+      "README.md"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "time": "2026-10-27T19:09:16.166710+00:00",
+    "command": [
+      "git",
+      "diff",
+      "--exit-code",
+      "--",
+      "registry.py"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "time": "2026-10-27T19:09:16.173291+00:00",
+    "command": [
+      "git",
+      "status",
+      "--short"
+    ],
+    "exit_code": 0,
+    "stdout": " M README.md\n M package.py\n M registry-state.json\n M test_package.py\n?? __pycache__/\n?? evidence/\n?? manifest.json\n?? tmpaiuk_ifg/\n",
+    "stderr": ""
+  }
+]

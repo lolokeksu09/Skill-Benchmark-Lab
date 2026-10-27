@@ -1,0 +1,4 @@
+settings.json: OK
+provider_check.py: OK
+remote_restore.py: OK
+provider-events.json: OK
