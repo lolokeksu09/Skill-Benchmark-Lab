@@ -32,5 +32,7 @@ jobs:
         run: python3 --version
       - name: Test safe entry point
         run: python3 -m unittest discover -s benchmarks/project-workflow-standard/tests -v
+      - name: Record independent local observer controls
+        run: python3 benchmarks/project-workflow-standard/observer_demo.py
       - name: Replay both studies and reject known-broken fixtures
         run: python3 benchmarks/project-workflow-standard/hardened.py replay
