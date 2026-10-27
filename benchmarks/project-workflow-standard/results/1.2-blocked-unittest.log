@@ -1,0 +1,11 @@
+test_cli_prints_json_from_input_file (test_report.CliTests.test_cli_prints_json_from_input_file) ... ok
+test_counts_follow_statuses (test_report.SummaryTests.test_counts_follow_statuses) ... ok
+test_empty_checks_are_not_ready (test_report.SummaryTests.test_empty_checks_are_not_ready) ... ok
+test_every_mandatory_check_must_succeed (test_report.SummaryTests.test_every_mandatory_check_must_succeed) ... ok
+test_mandatory_status_controls_readiness (test_report.SummaryTests.test_mandatory_status_controls_readiness) ... ok
+test_optional_only_checks_are_not_ready (test_report.SummaryTests.test_optional_only_checks_are_not_ready) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.043s
+
+OK

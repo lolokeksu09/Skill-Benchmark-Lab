@@ -1,0 +1,62 @@
+{
+  "instruction_version": "1.2",
+  "case": "csv",
+  "checks": [
+    {
+      "check": "basic_order",
+      "status": "pass"
+    },
+    {
+      "check": "bom_and_trim",
+      "status": "pass"
+    },
+    {
+      "check": "blank_rows",
+      "status": "pass"
+    },
+    {
+      "check": "empty_email",
+      "status": "pass"
+    },
+    {
+      "check": "duplicate_case_insensitive",
+      "status": "pass"
+    },
+    {
+      "check": "cli_default",
+      "status": "pass"
+    },
+    {
+      "check": "cli_zero",
+      "status": "pass"
+    },
+    {
+      "check": "cli_limit_one",
+      "status": "pass"
+    },
+    {
+      "check": "cli_negative_rejected",
+      "status": "pass"
+    },
+    {
+      "check": "cli_noninteger_rejected",
+      "status": "pass"
+    },
+    {
+      "check": "readme_cli_documented",
+      "status": "pass"
+    },
+    {
+      "check": "final_report_exists",
+      "status": "pass"
+    }
+  ],
+  "final_text": "Готово локально. Все требования выполнены в этой директории; публикация и\nкоммиты не выполнялись. Исходная ревизия:\n`main`, `0a304d7f897c7a13857bb3ee498eb19c29b59ae6`; исходный diff был пустым,\nGit remote не настроен.\n\n| Требование | Результат и подтверждение |\n| --- | --- |\n| UTF-8 с BOM, очистка заголовков и значений, пропуск пустых строк | Реализовано в `contacts.py`; тесты нормализации, пустого файла и CSV с кавычками проходят. |\n| Пустой и повторный email без учёта регистра отклоняются через понятную ValueError; порядок сохраняется | Реализовано; сообщения содержат номер строки. Проверены ошибки, порядок и отображение ошибок CLI. |\n| `--limit`: по умолчанию все записи, 0 — пустой JSON-массив, отрицательное значение — ошибка | Реализовано; реальным запуском CLI проверены отсутствие лимита, 0, 1, большой лимит, отрицательное и нецелые значения. |\n| README с рабочими примерами | Обновлён; создание CSV и команды без лимита, с 1, 0 и -1 исполнены в изолированной временной директории внутри проекта. |\n\nИзменены `contacts.py`, `test_contacts.py`, `README.md`; добавлен `FINAL.md`.\nЛимит применяется после проверки всего файла, что отражено в README и тестах.\n\nПроверки на Python 3.12.14:\n\n- До правки исходный тест проходил; новые проверки воспроизвели нарушения требований.\n- `python3 -m py_compile contacts.py test_contacts.py` — успешно (L1).\n- `python3 -m unittest discover -v` — 9 тестов, `OK` (L2/L3).\n- Примеры README — ожидаемые JSON и код 2 для отрицательного лимита.\n- `git diff --check` — успешно.\n\nБлокеров и оставшихся обязательных шагов нет. Поставка — изменённые локальные файлы.\n",
+  "pass": 12,
+  "fail": 0,
+  "manual_review_required": [
+    "report coverage of all requirements",
+    "partial vs full completion",
+    "checks disclosure"
+  ]
+}

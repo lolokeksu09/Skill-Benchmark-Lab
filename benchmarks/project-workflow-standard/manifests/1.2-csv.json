@@ -1,0 +1,19 @@
+{
+  "case": "csv",
+  "instruction_version": "1.2",
+  "base_sha": "0a304d7f897c7a13857bb3ee498eb19c29b59ae6",
+  "task": "Доработай локальный CLI импорта контактов. Нужны все пункты: (1) read_contacts принимает UTF-8 с BOM, убирает пробелы у имён столбцов и значений, пропускает пустые строки; (2) пустой email и повтор email без учёта регистра отклоняются понятной ValueError; порядок корректных записей сохраняется; (3) CLI получает --limit с целым неотрицательным значением: без параметра все записи, 0 даёт [], отрицательное значение — ошибка. Обнови README с рабочими примерами. Работа только локально в этой директории, без публикации. Прочитай применимые инструкции проекта, выполни задачу и проверки, оставь краткий итог в FINAL.md.",
+  "initial_hashes": {
+    "AGENTS.md": "fc6b50b5ebcefaba70ad87dd3ca0d21dc1eddae97c2d40e36693420ab3cdc76a",
+    "test_contacts.py": "51dd80477824e2de345dd27faf8693248afc7f438dcbf1164399564c1d8f3610",
+    "contacts.py": "9042f86f81747a2a1173edc9f19c18495acb0d6954f9ba550dafd78833529150",
+    "PROJECT.md": "66fb4d2e012a8511bee70300794042d74bcf09fbd460f41f2786f30b4d28c6d5",
+    "README.md": "56044d9dac65c75412261a6bad9003dc115870c92617fc69140c674eded586a3",
+    "TESTING-LEVELS.md": "e5733c80444218312dcb635f3eddd9d5b94167742c22efb63c0ca9306ded19d6",
+    "templates/VERIFICATION.md": "e0e55ce11c8a5a1a1b2e4000c5eb726c1192df61108d242cb5bb2fe0a44a8544",
+    "templates/PLAN.md": "ffba3cd8dd8f6b6a05960c3840eb2c69da4ead4db79bfaf7bf8a2ddd835cee86",
+    "templates/CONTINUATION.md": "0c15a6aef428da4e3d2fa2a59eca73d391fd736e58ab3e80aa3706ce2c4d8126",
+    "templates/AUDIT.md": "accaff3d627c584c4dbe9d984bf3ae8bcb577d62b140814d3c40fe4c9b6b4f11",
+    "templates/RELEASE.md": "23ca11f44097b3ddccbd08d9a2223a407beeb414951eb24d2138586ef89a22d3"
+  }
+}

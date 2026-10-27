@@ -1,0 +1,62 @@
+{
+  "instruction_version": "1.1",
+  "case": "csv",
+  "checks": [
+    {
+      "check": "basic_order",
+      "status": "pass"
+    },
+    {
+      "check": "bom_and_trim",
+      "status": "pass"
+    },
+    {
+      "check": "blank_rows",
+      "status": "pass"
+    },
+    {
+      "check": "empty_email",
+      "status": "pass"
+    },
+    {
+      "check": "duplicate_case_insensitive",
+      "status": "pass"
+    },
+    {
+      "check": "cli_default",
+      "status": "pass"
+    },
+    {
+      "check": "cli_zero",
+      "status": "pass"
+    },
+    {
+      "check": "cli_limit_one",
+      "status": "pass"
+    },
+    {
+      "check": "cli_negative_rejected",
+      "status": "pass"
+    },
+    {
+      "check": "cli_noninteger_rejected",
+      "status": "pass"
+    },
+    {
+      "check": "readme_cli_documented",
+      "status": "pass"
+    },
+    {
+      "check": "final_report_exists",
+      "status": "pass"
+    }
+  ],
+  "final_text": "# Итог\n\nГотово локально: `contacts.py`, `test_contacts.py`, `README.md`.\n\n- Импорт поддерживает UTF-8 с BOM, удаляет внешние пробелы у заголовков и\n  значений, пропускает пустые строки и сохраняет порядок записей.\n- Пустой email и повтор без учёта регистра отклоняются через `ValueError`\n  с номером строки; CLI показывает сообщение и возвращает код 2.\n- Добавлен `--limit`: без параметра — все записи, `0` — `[]`, отрицательное\n  или нецелое значение — ошибка. Проверка CSV выполняется до ограничения вывода.\n- README содержит исполненные примеры запуска и команду проверок.\n\nПроверено на Python 3.12.14:\n\n- `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -v` — 10 тестов,\n  `OK`, включая отдельные процессы CLI (L1–L3). До исправления эти же\n  регрессионные тесты выявили 18 сбоев подслучаев.\n- `git diff --check` — успешно.\n- Примеры README выполнены с временным CSV: полный вывод, лимиты 1 и 0,\n  ошибка отрицательного лимита — ожидаемые JSON и коды завершения.\n\nОснова: ветка `main`, HEAD `267149813482972354a5bcefa0fd79c9c6714456`;\nизменения оставлены в локальном diff. Git remote отсутствует.\nНовые зависимости не добавлены. Коммитов и публикации не выполнялось;\nоставшихся шагов для локальной задачи нет.\n",
+  "pass": 12,
+  "fail": 0,
+  "manual_review_required": [
+    "report coverage of all requirements",
+    "partial vs full completion",
+    "checks disclosure"
+  ]
+}

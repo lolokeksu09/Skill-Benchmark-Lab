@@ -1,0 +1,14 @@
+[
+  {
+    "path": "results/1.1-blocked.json",
+    "original_sha256": "142b1f26abcfd7b7128c332346be0935e2f1e168260deeec11ccc97755ac66ca",
+    "published_sha256": "62ae6e49d366023bc08f758915fe9aa7365e25929e9ca9240099195bcb318d87",
+    "redaction": "workspace prefix only; raw archive retained separately"
+  },
+  {
+    "path": "runs/1.1/blocked/FINAL.md",
+    "original_sha256": "16360bed3b1e77c3a1687dd78e7165bc367677fcc9d6ecc7bda1b950b332a175",
+    "published_sha256": "7bdbd7eaca6303e5fce994c62e576f6f5ca0c690a5d770f6f60237d53c280e9f",
+    "redaction": "workspace prefix only; raw archive retained separately"
+  }
+]
