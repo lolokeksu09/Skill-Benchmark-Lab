@@ -1,0 +1,28 @@
+{
+  "files": {
+    "PROTOCOL.md": "532d7ad577e69590f0bf885e12108a7fa73646babaa050ec8e163f6930155e44",
+    "setup.py": "c1ddab9ecb48ef7e043d500b180425e03b8951dc359478854bb1fe3a179fd463",
+    "evaluate.py": "a35e77da575a436bb7bba876877cb8833ef5c7b1388672a6c1a0bf4d49df40e7",
+    "../../instructions/1.1/AGENTS.md": "242165e820e3ce015b53cdfa338e7f9411aacde8ce1d2b5ed16d80c765cfc9b7",
+    "../../instructions/1.1/PROJECT.md": "f439cb6389a16d0efb257fc1809f8a150538f56c34adccec1fe311ba8e0612ad",
+    "../../instructions/1.1/README.md": "a48359403f12eabc06d04a9a1dfbe7d73767ed32d96e148503a7e2d5bfc569b0",
+    "../../instructions/1.1/TESTING-LEVELS.md": "11548f84cfa71a8f98aed23b43b65d5b33d15382623d477f401d50bb8e5d37a8",
+    "../../instructions/1.1/templates/VERIFICATION.md": "dc1795573f4517b88c39ef5867fe0f6548193842178411121411cb2fe63c6ee7",
+    "../../instructions/1.1/templates/PLAN.md": "1bffcc56d1e0d134e4f431dec165425d10987a288c4fa2f631071e2e1c4405a9",
+    "../../instructions/1.1/templates/CONTINUATION.md": "8b42c2394744fcd7fee2f643e26942fe12354b75689457f8fb954e413d569880",
+    "../../instructions/1.1/templates/AUDIT.md": "accaff3d627c584c4dbe9d984bf3ae8bcb577d62b140814d3c40fe4c9b6b4f11",
+    "../../instructions/1.1/templates/RELEASE.md": "31017a86153de361c3c2d924463c4450677b6966ec544b140efb0035876a49fc",
+    "../../instructions/1.2/AGENTS.md": "fc6b50b5ebcefaba70ad87dd3ca0d21dc1eddae97c2d40e36693420ab3cdc76a",
+    "../../instructions/1.2/PROJECT.md": "f439cb6389a16d0efb257fc1809f8a150538f56c34adccec1fe311ba8e0612ad",
+    "../../instructions/1.2/README.md": "e0c843b59c0cdb93b6c87277ee189fbdee733f0f33089d3e2f805103653bd6aa",
+    "../../instructions/1.2/TESTING-LEVELS.md": "e5733c80444218312dcb635f3eddd9d5b94167742c22efb63c0ca9306ded19d6",
+    "../../instructions/1.2/templates/VERIFICATION.md": "e0e55ce11c8a5a1a1b2e4000c5eb726c1192df61108d242cb5bb2fe0a44a8544",
+    "../../instructions/1.2/templates/PLAN.md": "ffba3cd8dd8f6b6a05960c3840eb2c69da4ead4db79bfaf7bf8a2ddd835cee86",
+    "../../instructions/1.2/templates/CONTINUATION.md": "0c15a6aef428da4e3d2fa2a59eca73d391fd736e58ab3e80aa3706ce2c4d8126",
+    "../../instructions/1.2/templates/AUDIT.md": "accaff3d627c584c4dbe9d984bf3ae8bcb577d62b140814d3c40fe4c9b6b4f11",
+    "../../instructions/1.2/templates/RELEASE.md": "23ca11f44097b3ddccbd08d9a2223a407beeb414951eb24d2138586ef89a22d3"
+  },
+  "no_post_result_tuning": true,
+  "serving_model": "not exposed by host; inherited default, no override",
+  "tokens_and_cost": "unavailable"
+}
