@@ -162,6 +162,28 @@ def _list_files(workspace: Path, prefix: str = "") -> list[str]:
                 names.append(rel)
     return sorted(names)
 
+def _verify_pristine_inputs(workspace: Path, meta: dict) -> None:
+    """Verify both trusted standard and non-standard pristine inputs before agent spawn."""
+    scenario_dir = ROOT / "scenarios" / SCENARIOS[meta["scenario"]]
+    fixture = scenario_dir / "fixture"
+    if meta.get("fixture_sha256") != safe.tree_hash(fixture):
+        raise BridgeError("fixture provenance mismatch")
+    expected = safe.snapshot(fixture)
+    if "TASK.md" in expected:
+        raise BridgeError("fixture shadows TASK.md")
+    expected["TASK.md"] = hashlib.sha256(safe.read_bytes(scenario_dir, "task.md")).hexdigest()
+    if safe.snapshot(workspace, exclude=("_standard",)) != expected:
+        raise BridgeError("non-standard workspace inputs differ from pristine fixture and TASK.md")
+    trusted = json.loads((ROOT / "standards/manifest.json").read_text(encoding="utf-8"))["files"]
+    standard_dir = workspace / "_standard"
+    actual = safe.snapshot(standard_dir)
+    versions = [v for v in ("v1.3", "v1.4-rc3") if actual == trusted[v]]
+    if len(versions) != 1:
+        raise BridgeError("standard tree does not match exactly one trusted version")
+    if meta.get("standard_tree_sha256") != safe.tree_hash(standard_dir):
+        raise BridgeError("standard tree metadata hash mismatch")
+
+
 def _run_tests(workspace: Path, scenario: str, image: str, timeout: int = 120) -> dict:
     if scenario != "S05":
         return {"ok": False, "available": False,
@@ -260,6 +282,10 @@ def main() -> int:
     if (preflight.get("protocol") != meta["protocol"] or preflight.get("status") != "READY"
             or preflight.get("image") != args.image):
         p.error("preflight must be READY and bind the exact --image digest")
+    try:
+        _verify_pristine_inputs(workspace, meta)
+    except (BridgeError, safe.UnsafeFile, OSError, ValueError, KeyError) as exc:
+        p.error(f"untrusted initial workspace: {exc}")
     evaluator_path = ROOT / "scenarios" / SCENARIOS[meta["scenario"]] / "evaluator.py"
 
     critical: list[str] = []

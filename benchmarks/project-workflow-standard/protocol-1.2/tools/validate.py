@@ -162,6 +162,40 @@ def main():
                 evidence=json.loads(out.read_text())
                 assert evidence["status"]==expect,(expect,evidence["status"],evidence["critical_errors"])
                 return evidence,bundle
+            # Refuse modified bundles before spawning an external agent executable.
+            guard_marker = tmp / "modified-bundle-agent-started"
+            guard_agent = write_agent("agent_pristine_guard.py",
+                "from pathlib import Path\nPath(" + repr(str(guard_marker)) + ").write_text('started')\n")
+            def reject_pre_spawn(label, scenario, version, modify):
+                target = tmp / ("tampered-" + label)
+                prepared = run([sys.executable, ROOT/"tools/prepare_run.py", "--scenario",
+                                scenario, "--standard", version, "--output", target])
+                assert prepared.returncode == 0, prepared.stderr
+                modify(target)
+                command = [sys.executable, ROOT/"tools/agent_runner.py", target,
+                           "--agent-command", f"{sys.executable} {guard_agent}",
+                           "--preflight", preflight, "--image", image, "--timeout", "10"]
+                rejected = run(command, timeout=20)
+                assert rejected.returncode != 0 and "untrusted initial workspace" in rejected.stderr, (
+                    label, rejected.returncode, rejected.stdout, rejected.stderr[-600:])
+                assert not guard_marker.exists(), "agent started for modified bundle"
+                assert (target/"tool-log.jsonl").read_text() == "", "rejected bundle wrote a tool log"
+            reject_pre_spawn("task", "S05", "v1.3",
+                             lambda b: (b/"workspace/TASK.md").write_text("altered task"))
+            reject_pre_spawn("fixture", "S05", "v1.3",
+                             lambda b: (b/"workspace/cli.py").write_text("altered candidate"))
+            reject_pre_spawn("extra", "S06", "v1.4-rc3",
+                             lambda b: (b/"workspace/extra.txt").write_text("unexpected file"))
+            reject_pre_spawn("standard", "S06", "v1.4-rc3",
+                             lambda b: (b/"workspace/_standard/AGENTS.md").write_text("altered standard"))
+            def rewrite_binding(b, name):
+                meta = json.loads((b/"RUN.json").read_text())
+                meta[name] = "0" * 64
+                (b/"RUN.json").write_text(json.dumps(meta))
+            reject_pre_spawn("standard-metadata", "S05", "v1.3",
+                             lambda b: rewrite_binding(b, "standard_tree_sha256"))
+            reject_pre_spawn("fixture-metadata", "S06", "v1.4-rc3",
+                             lambda b: rewrite_binding(b, "fixture_sha256"))
             positive=write_agent("agent_positive.py",'''
 import json, sys
 hello = json.loads(sys.stdin.readline())
