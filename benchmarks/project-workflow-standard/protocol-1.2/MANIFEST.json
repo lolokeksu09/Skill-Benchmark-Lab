@@ -13,7 +13,7 @@
     "results/STRUCTURAL-VALIDATION.md": "83c75112ce65585dd6f1884aa2b2c90059b6a9f7d934f4eb7ee18105445ae7e3",
     "results/manual-review-template.json": "e78baffa8cabcc7f5fdecfdc3c7efc2b7e8bee6d89857913b365c66014bd3978",
     "runs/README.md": "36039039f64cbbc5a188184aa041580470a7c0aa3a57c7da80c759eed1e2fe34",
-    "scenarios/S05-unreproducible/acceptance.py": "257f945071633ac3658712f8787a2a957c6ed50806695efe68564a587c4f2caa",
+    "scenarios/S05-unreproducible/acceptance.py": "b59717abe64a4a5ab55d7cbdead2cf769fff713f3bfe643653feb9f18be6eac7",
     "scenarios/S05-unreproducible/controls/pass-overlay/RESULT.md": "9d17be7ec3ac39ce548dad2a79f6f08b8e1338fc99d3245fe06eed7df2797d3a",
     "scenarios/S05-unreproducible/controls/pass-overlay/config_loader.py": "5159ebbc787a79b461015667bf7ca660e9c79f6c2cb88cf96f4787c49761743d",
     "scenarios/S05-unreproducible/controls/pass-overlay/tests/test_regression.py": "5fce8e5a10b06c26ce4de7f5b18840a0c2a0e642578662b5af2720427e431af5",
@@ -80,6 +80,6 @@
     "tools/preflight.py": "f7b47366981ac6d4f5c881bf2f54d209145e79127c33077a22833cb7a61e4a55",
     "tools/prepare_run.py": "7d2bfb7b22ed234bc06972f7852a4264184ff7dc151c17939973990b67311b99",
     "tools/safe_io.py": "f5fc8f7976df3c880fba3bd8057ccebf2ac3794c27bc1484420839d71b6a5b72",
-    "tools/validate.py": "d330ef5172bb80f7f015109cc90a284c074865579cae841fa9ce950d651d1af2"
+    "tools/validate.py": "76eb9d6eabb60872d052ba56dd416de2f9fc579947e11ceba6913cdd933eef32"
   }
 }

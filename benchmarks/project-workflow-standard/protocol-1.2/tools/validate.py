@@ -117,9 +117,20 @@ def main():
                 for control,item in expect.items():
                     with tempfile.TemporaryDirectory() as tmp:
                         work=Path(tmp)/control;factory.materialize(scenario,control,work)
+                        if scenario=="S05" and control=="fail-cli":
+                            positive=Path(tmp)/"positive";factory.materialize("S05","pass",positive)
+                            mutated=(work/"cli.py").read_bytes()
+                            assert b"broken CLI mutation" in mutated,"fail-cli mutation marker missing"
+                            assert mutated!=(positive/"cli.py").read_bytes(),"fail-cli equals positive control"
                         cmd=[sys.executable,base/"evaluator.py",work]+(["--image",image] if scenario=="S05" else [])
                         proc=run(cmd);report=report_from(proc);actual={c["name"] for c in report["checks"] if not c["ok"]};expected=set(item["failed_exactly"])
-                        assert proc.returncode!=0 and actual==expected,f"{control}: expected exactly {sorted(expected)}, got {sorted(actual)}"
+                        if proc.returncode==0 or actual!=expected:
+                            raise AssertionError(
+                                f"{control}: expected exactly {sorted(expected)}, got {sorted(actual)}\n"
+                                f"evaluator_exit_code={proc.returncode}\n"
+                                f"evaluator_stderr={proc.stderr}\n"
+                                f"full_report={json.dumps(report,ensure_ascii=False,indent=2)}"
+                            )
                         total+=1
             return f"{total} exact mutation sets"
         tests += [positive,negative,mutations]
