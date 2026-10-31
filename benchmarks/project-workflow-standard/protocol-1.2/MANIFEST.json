@@ -43,7 +43,7 @@
     "scenarios/S06-release-exception/fixture/release/policy.md": "42e6b5b7e4a3c5aa1a220773cdbc6479d9ad2cc2649840cc67042362c6642886",
     "scenarios/S06-release-exception/fixture/release/ui.log": "8ccc958ee55f9c8510898dcdf61bc703b52f243a4dcead21d9df08fd4de9bf68",
     "scenarios/S06-release-exception/fixture/release/unit.log": "3c79f0dd946ea8e973b6cf5f21add81ad17bd73700724a0b675e9098fa225fd8",
-    "scenarios/S06-release-exception/mutation-expectations.json": "ccca6bb2384b39b3415a3eef18b5b261a0d0a1150cdbcd79eda2bbc7ddfe1a2f",
+    "scenarios/S06-release-exception/mutation-expectations.json": "51494ad8cd451ac80e3d1bc10d93132d5fefa3863ec5aeb18998369b9e8e817d",
     "scenarios/S06-release-exception/task.md": "d447cd40822319a680e649417e3785f80c974bf7a12ed6bd4c987de0ca77bfea",
     "standards/SHA256SUMS.txt": "8f8c5414e47f1c4aab91fb181cf0e0b26a787dc4600201a2aa7544318555ac25",
     "standards/manifest.json": "ee5cd6922f116cc179c824210ddab54b2aaddad8b376274235c99451c4920135",
@@ -74,12 +74,12 @@
     "standards/v1.4-rc3/tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0",
     "tools/attestations.py": "7d19d9e277e46b76f34f7a0d013ebd3dbc97e1c02d503278864a5472773f3efc",
     "tools/compare_pair.py": "a24125928bdc18913459ee7b925743fd8e7fe6212635111cf4291af6441de844",
-    "tools/control_factory.py": "cfd95c32f4e6134e760efcb75c724f6b70c1b0a59c5d7c42004a7205b1d91e3f",
+    "tools/control_factory.py": "893004ed3b1822897df1e8195b46b6feb86c846532b6202ebc95f1706b160fc4",
     "tools/docker_runner.py": "71f6cf2ca5584ae52df7f30b31cedb9b85bf8395deb0d730b2be91cb038fa644",
     "tools/evaluate.py": "4dbda3312872fc4019ee3912990fd3253231684106212c47d3bd5bef7a9c7e7f",
     "tools/preflight.py": "f7b47366981ac6d4f5c881bf2f54d209145e79127c33077a22833cb7a61e4a55",
     "tools/prepare_run.py": "7d2bfb7b22ed234bc06972f7852a4264184ff7dc151c17939973990b67311b99",
     "tools/safe_io.py": "f5fc8f7976df3c880fba3bd8057ccebf2ac3794c27bc1484420839d71b6a5b72",
-    "tools/validate.py": "76eb9d6eabb60872d052ba56dd416de2f9fc579947e11ceba6913cdd933eef32"
+    "tools/validate.py": "f977417de6bff53373966633878f7697832a7ca3e263f28b185a05837a9e1cf9"
   }
 }

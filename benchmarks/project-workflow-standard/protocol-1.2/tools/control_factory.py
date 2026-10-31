@@ -3,8 +3,14 @@ import json, shutil
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 SCENARIOS={"S05":"S05-unreproducible","S06":"S06-release-exception"}
+CONTROLS={
+    "S05":{"pass","fail","fail-cli","fail-no-new-tests","fail-overclaim","fail-sandbox-escape"},
+    "S06":{"pass","fail","fail-expired-exception","fail-empty-md","fail-gate-status","fail-publication","fail-evidence-modified"},
+}
 
 def materialize(scenario:str, control:str, target:Path):
+    if scenario not in CONTROLS or control not in CONTROLS[scenario]:
+        raise ValueError(f"invalid scenario/control: {scenario}/{control}")
     base=ROOT/"scenarios"/SCENARIOS[scenario]
     shutil.copytree(base/"fixture",target)
     shutil.copytree(base/"controls/pass-overlay",target,dirs_exist_ok=True)
@@ -28,5 +34,3 @@ def materialize(scenario:str, control:str, target:Path):
         if control in {"fail","fail-empty-md"}:(target/"DECISION.md").write_text("")
         if control in {"fail","fail-evidence-modified"}:
             with (target/"release/device.log").open("a") as f:f.write("tampered\n")
-    if control not in {"fail","fail-cli","fail-no-new-tests","fail-overclaim","fail-sandbox-escape","fail-expired-exception","fail-empty-md","fail-gate-status","fail-publication","fail-evidence-modified"}:
-        raise ValueError(f"unknown control: {control}")

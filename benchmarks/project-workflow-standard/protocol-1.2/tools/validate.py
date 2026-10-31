@@ -54,6 +54,14 @@ def main():
     def bundles_and_pairs():
         with tempfile.TemporaryDirectory() as tmp:
             tmp=Path(tmp);bundles={}
+            invalid=tmp/"rejected-s06-fail-cli"
+            try:
+                factory.materialize("S06","fail-cli",invalid)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("S06 fail-cli must raise ValueError")
+            assert not invalid.exists(),"invalid control modified files before rejection"
             for scenario in SCENARIOS:
                 for version in STANDARDS:
                     target=tmp/f"{scenario}-{version}";p=run([sys.executable,ROOT/"tools/prepare_run.py","--scenario",scenario,"--standard",version,"--output",target]);assert p.returncode==0,p.stderr

@@ -24,11 +24,5 @@
     "failed_exactly": [
       "release_inputs_preserved"
     ]
-  },
-  "fail-cli": {
-    "failed_exactly": [
-      "cli_invalid",
-      "cli_valid"
-    ]
   }
 }
