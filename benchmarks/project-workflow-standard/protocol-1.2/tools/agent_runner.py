@@ -10,8 +10,12 @@ workspace access happens through a bounded JSON-lines tool protocol:
 
 Allowed tools: list_files, read_file, write_file, run_tests, finish.
 Unknown tools, malformed messages, and path traversal fail closed and
-terminate the run. Every protocol message is appended to the bundle
-tool-log.jsonl so the log is complete by construction.
+terminate the run. TASK.md and _standard/ are immutable benchmark inputs:
+write_file refuses them without failing the whole run. Every protocol
+message is appended to the bundle tool-log.jsonl so the log is complete
+by construction; logged string values over 4096 chars are stored as
+sha256+preview with a truncated flag, and the log carries a byte budget,
+so the attested log stays bounded and hashable.
 
 The evidence payload written here is UNSIGNED. The operator signs it
 separately with the runner key (namespace pws-runner-v1). JSON flags in
@@ -23,7 +27,7 @@ real AI provider by itself; --agent-command is supplied by the operator.
 """
 from __future__ import annotations
 import argparse, hashlib, importlib.util, json, os, re, shlex, shutil
-import signal, subprocess, sys, tempfile, threading
+import signal, subprocess, sys, tempfile, threading, time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -37,6 +41,8 @@ MAX_TURNS = 200
 GRACE_SECONDS = 10
 REQUIRED_ENV = ["workspace_root_only", "network_disabled", "external_credentials_absent",
                 "publication_tools_absent", "resource_limits_enforced", "tool_log_complete"]
+LOG_VALUE_LIMIT = 4096
+LOG_BUDGET_BYTES = 3 * 1024 * 1024
 
 def module(name: str, path: Path):
     spec = importlib.util.spec_from_file_location(name, path)
@@ -52,9 +58,31 @@ class BridgeError(RuntimeError):
 def _utc() -> str:
     return datetime.now(timezone.utc).isoformat()
 
+def _bounded(value, _depth: int = 0):
+    """Bound logged string values; large payloads become digest + preview.
+
+    The full value is still sent to the agent; only the log entry is
+    bounded, so the attested tool log can never grow unboundedly via
+    repeated large read_file/write_file payloads.
+    """
+    if isinstance(value, str) and len(value) > LOG_VALUE_LIMIT:
+        return {"sha256": hashlib.sha256(value.encode("utf-8")).hexdigest(),
+                "preview": value[:256], "length": len(value), "truncated": True}
+    if isinstance(value, dict):
+        return {key: _bounded(item, _depth + 1) for key, item in value.items()}
+    if isinstance(value, (list, tuple)) and _depth < 8:
+        return [_bounded(item, _depth + 1) for item in value]
+    return value
+
+def _log_event(log, event: dict) -> None:
+    """Append one bounded event to the tool log and enforce the byte budget."""
+    log.write(json.dumps(_bounded(event), ensure_ascii=False) + "\n"); log.flush()
+    if os.fstat(log.fileno()).st_size > LOG_BUDGET_BYTES:
+        raise BridgeError("tool log byte budget exceeded; refusing unbounded evidence")
+
 def _send(proc, log, event: dict) -> None:
     line = json.dumps(event, ensure_ascii=False)
-    log.write(line + "\n"); log.flush()
+    _log_event(log, event)
     try:
         proc.stdin.write((line + "\n").encode("utf-8")); proc.stdin.flush()
     except (BrokenPipeError, OSError) as exc:
@@ -134,7 +162,7 @@ def _list_files(workspace: Path, prefix: str = "") -> list[str]:
                 names.append(rel)
     return sorted(names)
 
-def _run_tests(workspace: Path, scenario: str, image: str) -> dict:
+def _run_tests(workspace: Path, scenario: str, image: str, timeout: int = 120) -> dict:
     if scenario != "S05":
         return {"ok": False, "available": False,
                 "error": "run_tests is not available for this scenario; no automated candidate test suite exists"}
@@ -142,23 +170,41 @@ def _run_tests(workspace: Path, scenario: str, image: str) -> dict:
               "s=unittest.defaultTestLoader.discover('/work/tests');"
               "r=unittest.TextTestRunner(verbosity=2).run(s);"
               "raise SystemExit(not r.wasSuccessful())")
-    result = docker.run_python(workspace, ["-c", driver], image=image, timeout=120)
+    result = docker.run_python(workspace, ["-c", driver], image=image, timeout=timeout)
     return {"ok": bool(result.get("ok")), "available": True, "status": result.get("status"),
             "exit_code": result.get("exit_code"), "output": str(result.get("output", ""))[-4000:],
             "backend": result.get("backend"), "image": result.get("image"),
             "container_removed": result.get("container_removed")}
 
 def _terminate(proc: subprocess.Popen) -> dict:
-    """Kill the whole agent process group and reap it; never leave an orphan."""
+    """Kill the whole agent process group and reap it; never leave an orphan.
+
+    The killpg is unconditional: a parent that already exited may have left
+    orphan children in its process group, and they would otherwise keep
+    running (and keep the protocol pipes open) after the bridge concludes.
+    The pgid is captured at spawn time because os.getpgid() stops working on
+    the pid once the exited agent has been reaped by poll(). Note that a
+    child which creates its own session escapes process-group termination;
+    containing such an adapter is the OS-level isolation boundary documented
+    in README.md (trusted adapter model). `terminated_by_bridge` records only
+    whether the agent process itself was still running and had to be killed;
+    a no-op killpg on an empty group does not flip it, so a clean positive
+    run still reports terminated_by_bridge=False.
+    """
     state = {"terminated_by_bridge": False, "timed_out": False}
-    if proc.poll() is not None:
-        state["exit_code"] = proc.returncode
-        return state
-    state["terminated_by_bridge"] = True
-    try:
-        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
-    except (ProcessLookupError, PermissionError):
-        pass
+    if proc.poll() is None:
+        state["terminated_by_bridge"] = True
+    pgid = getattr(proc, "pws_pgid", None)
+    if pgid is None:
+        try:
+            pgid = os.getpgid(proc.pid)
+        except ProcessLookupError:
+            pgid = None
+    if pgid is not None:
+        try:
+            os.killpg(pgid, signal.SIGKILL)
+        except (ProcessLookupError, PermissionError):
+            pass
     try:
         proc.wait(timeout=5)
     except subprocess.TimeoutExpired:
@@ -232,6 +278,10 @@ def main() -> int:
         proc = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, env=env, cwd=scratch_path,
                                 start_new_session=True)
+        try:
+            proc.pws_pgid = os.getpgid(proc.pid)
+        except ProcessLookupError:
+            proc.pws_pgid = None
         stderr_thread = threading.Thread(target=_drain_stderr, args=(proc.stderr, stderr_sink), daemon=True)
         stderr_thread.start()
         timed_out = threading.Event()
@@ -243,6 +293,7 @@ def main() -> int:
         watchdog.start()
         finished = False
         termination = {"terminated_by_bridge": False, "timed_out": False}
+        deadline = time.monotonic() + args.timeout
         try:
             manifest = _list_files(workspace)
             task_text = safe.read_text(workspace, "TASK.md", 64 * 1024)
@@ -271,9 +322,8 @@ def main() -> int:
                     critical.append("malformed_agent_message")
                     break
                 if message.get("type") == "finish":
-                    log.write(json.dumps({"type": "finish", "model": message.get("model"),
-                                          "provider": message.get("provider")}, ensure_ascii=False) + "\n")
-                    log.flush()
+                    _log_event(log, {"type": "finish", "model": message.get("model"),
+                                     "provider": message.get("provider")})
                     for key in agent_info:
                         if isinstance(message.get(key), str):
                             agent_info[key] = message[key]
@@ -283,11 +333,11 @@ def main() -> int:
                     critical.append("malformed_agent_message")
                     break
                 tool_calls += 1
-                log.write(json.dumps(message, ensure_ascii=False) + "\n"); log.flush()
+                _log_event(log, message)
                 tool = message.get("tool")
                 call_id = message.get("id")
                 result: dict = {"type": "tool_result", "id": call_id, "ok": False}
-                if tool not in {"list_files", "read_file", "write_file", "run_tests"}:
+                if not isinstance(tool, str) or tool not in {"list_files", "read_file", "write_file", "run_tests"}:
                     critical.append("forbidden_tool")
                     if isinstance(tool, str) and tool:
                         result["action"] = tool
@@ -313,13 +363,19 @@ def main() -> int:
                         content = message.get("content")
                         if not isinstance(content, str):
                             raise safe.UnsafeFile("write_file content must be a string")
+                        text_path = str(path).replace("\\", "/")
+                        if text_path == "TASK.md" or text_path.startswith("_standard/"):
+                            raise safe.UnsafeFile(
+                                "immutable benchmark input: TASK.md and _standard/ cannot be modified")
                         data = content.encode("utf-8")
                         safe.write_bytes(workspace, path, data, MAX_WRITE_BYTES)
                         bytes_written += len(data)
                         result.update(ok=True, bytes=len(data),
                                       sha256=hashlib.sha256(data).hexdigest())
                     elif tool == "run_tests":
-                        outcome = _run_tests(workspace, meta["scenario"], args.image)
+                        remaining = int(deadline - time.monotonic())
+                        outcome = _run_tests(workspace, meta["scenario"], args.image,
+                                             timeout=max(1, min(120, remaining)))
                         result.update(ok=bool(outcome.get("ok")), **{k: v for k, v in outcome.items() if k != "ok"})
                 except safe.UnsafeFile as exc:
                     result["error"] = f"unsafe path or content: {exc}"
@@ -331,10 +387,16 @@ def main() -> int:
                     proc.wait(timeout=GRACE_SECONDS)
                 except subprocess.TimeoutExpired:
                     critical.append("agent_did_not_exit_after_finish")
+            if finished and not critical and proc.returncode not in (0, None):
+                critical.append(f"agent_exit_nonzero:{proc.returncode}")
             termination.update(_terminate(proc))
             stderr_thread.join(timeout=5)
         except (BrokenPipeError, OSError, BridgeError) as exc:
             critical.append(f"bridge_error: {exc!r}")
+            termination.update(_terminate(proc))
+            stderr_thread.join(timeout=5)
+        except Exception as exc:  # defensive: any unexpected bridge defect fails closed, never hangs open
+            critical.append(f"bridge_unexpected_error: {exc!r}")
             termination.update(_terminate(proc))
             stderr_thread.join(timeout=5)
         finally:
@@ -384,11 +446,15 @@ def main() -> int:
             "environment_notes": {
                 "workspace_root_only": "all file access mediated by safe_io rooted at the workspace; agent command never receives the workspace path",
                 "network_disabled": "candidate code executes only via docker --network none",
-                "external_credentials_absent": "agent env is PATH/HOME plus --allow-env only; candidate container receives no credentials",
+                "external_credentials_absent": "agent env is PATH/HOME plus explicitly disclosed --allow-env only (see trusted_side.allow_env); candidate container receives no credentials",
                 "publication_tools_absent": "candidate container is read-only with no credentials and no network",
                 "resource_limits_enforced": "docker --pids-limit/--memory/--cpus on every candidate execution",
-                "tool_log_complete": "every protocol message is appended to tool-log.jsonl before any tool executes",
+                "tool_log_complete": "every protocol message is appended to tool-log.jsonl before any tool executes; values over 4096 chars are logged as sha256+preview with a truncated flag and the log has a byte budget",
             },
+            "trusted_side": {"allow_env": sorted(args.allow_env),
+                             "note": ("The external agent process is trusted runner infrastructure. "
+                                      "--allow-env names are operator-approved host variables passed to it; "
+                                      "they are disclosed here and must never include AI-provider credentials.")},
             "started_utc": started,
             "finished_utc": _utc(),
             "timeout_seconds": args.timeout,

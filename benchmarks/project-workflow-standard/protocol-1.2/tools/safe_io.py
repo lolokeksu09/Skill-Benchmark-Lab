@@ -1,6 +1,6 @@
 """Read candidate trees without following links or accepting special files."""
 from __future__ import annotations
-import hashlib, json, os, stat
+import hashlib, json, os, secrets, stat
 from pathlib import Path, PurePosixPath
 
 DEFAULT_LIMIT = 1024 * 1024
@@ -63,35 +63,63 @@ def read_json(root: Path, relative: str | Path, limit: int = DEFAULT_LIMIT):
     return json.loads(read_text(root, relative, limit))
 
 def write_bytes(root: Path, relative: str | Path, data: bytes, limit: int = DEFAULT_LIMIT) -> None:
-    """Write one bounded regular file without following links; parent must already exist."""
+    """Atomically write one bounded regular file without following links.
+
+    The target is stat'ed before anything is opened for writing, so FIFOs and
+    other special files are rejected without a blocking open, and hardlinks
+    (st_nlink > 1) are refused so a write can never modify data that lives
+    outside the workspace. The payload is written to a fresh temporary file
+    and published with os.replace: readers never observe a partial file, an
+    existing target is replaced as a directory entry (never followed), and
+    the final inode is verified. Parent directories must already exist.
+    """
     if len(data) > limit:
         raise UnsafeFile(f"write exceeds {limit} bytes: {relative!r}")
     parts = _parts(relative)
     root_fd = _open_root(root)
     fds = [root_fd]
+    tmp_name = None
     try:
         current = root_fd
         for part in parts[:-1]:
             flags = os.O_RDONLY | os.O_DIRECTORY | getattr(os, "O_NOFOLLOW", 0)
             current = os.open(part, flags, dir_fd=current)
             fds.append(current)
-        flags = (os.O_WRONLY | os.O_CREAT | os.O_TRUNC |
+        name = parts[-1]
+        try:
+            before = os.stat(name, dir_fd=current, follow_symlinks=False)
+        except FileNotFoundError:
+            before = None
+        if before is not None:
+            if not stat.S_ISREG(before.st_mode):
+                raise UnsafeFile(f"not a regular file: {relative}")
+            if before.st_nlink > 1:
+                raise UnsafeFile(f"refusing to write hard-linked file: {relative}")
+        tmp_name = f".pws-write-{os.getpid()}-{secrets.token_hex(8)}"
+        flags = (os.O_WRONLY | os.O_CREAT | os.O_EXCL |
                  getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_CLOEXEC", 0))
-        fd = os.open(parts[-1], flags, 0o644, dir_fd=current)
+        fd = os.open(tmp_name, flags, 0o644, dir_fd=current)
         fds.append(fd)
-        before = os.fstat(fd)
-        if not stat.S_ISREG(before.st_mode):
-            raise UnsafeFile(f"not a regular file: {relative}")
         view = memoryview(data)
         while view:
             written = os.write(fd, view)
             view = view[written:]
         after = os.fstat(fd)
-        if (before.st_dev, before.st_ino) != (after.st_dev, after.st_ino) or not stat.S_ISREG(after.st_mode):
-            raise UnsafeFile(f"file changed while being written: {relative}")
+        if not stat.S_ISREG(after.st_mode):
+            raise UnsafeFile(f"temporary file is not regular: {relative}")
         if after.st_size != len(data):
             raise UnsafeFile(f"short write: {relative}")
+        os.replace(tmp_name, name, src_dir_fd=current, dst_dir_fd=current)
+        tmp_name = None
+        final = os.stat(name, dir_fd=current, follow_symlinks=False)
+        if (final.st_dev, final.st_ino) != (after.st_dev, after.st_ino):
+            raise UnsafeFile(f"file changed while being written: {relative}")
     finally:
+        if tmp_name is not None:
+            try:
+                os.unlink(tmp_name, dir_fd=current)
+            except OSError:
+                pass
         for fd in reversed(fds):
             os.close(fd)
 

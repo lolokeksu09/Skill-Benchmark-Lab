@@ -3,8 +3,8 @@
   "hash_algorithm": "sha256",
   "files": {
     "CHANGELOG.md": "e18ef33219e9541f0dd6116a0940b6a373e528433d919e6fbda18e2b6742082d",
-    "PROTOCOL.md": "61b55efd32dbbbaedec2aa1450d574892d5107540d70e720581ff2df3ce3685a",
-    "README.md": "6d8d2948cc7efd2005c0509ab5ee147636d2bdd8b9011953bc8bb733ad2dd458",
+    "PROTOCOL.md": "358eefda3dd799cbd13f9b56b4e83ad430063841d103b6c019aa98d5532bac7f",
+    "README.md": "5fecef0688de037245182966661b587a149b03aafa0f08cac9203b179330318b",
     "SCENARIOS.md": "7d468c8a89d208046a391138b89d2aace3d3c00c36a18bba5601a19ca27d5d48",
     "attestations/allowed_signers.example": "02e416b38136cf83b48faa4edb197f42e6b2dfb1540ab4a6bea724047ad849f6",
     "config.json": "0f9f152d6a8cefa7a96e8ad8a218493aa8d781245fddc9372b9acaf96309fdb5",
@@ -79,9 +79,9 @@
     "tools/evaluate.py": "140fa9d91c52d5614a2f8cacb4ee3dc83eddbab9e105a4aedc3a26ca95af3bb6",
     "tools/preflight.py": "2737af13d0b383012bf1c45e2b18ae674bf3539caa074dcbb2b7d70710baf628",
     "tools/prepare_run.py": "9d91814d165211f028e6b84e147f761ae4018ad8a398c63717f1f6bd68d62315",
-    "tools/safe_io.py": "8648ab6468fe61acb3114bbff6da65448bf126832f2a1a7721e713e0967c64ca",
-    "tools/validate.py": "dba82765b643e78d0cc115bb4325e1a7df51d15166dee98ad64928db463fbc15",
+    "tools/safe_io.py": "4a556447edf2399e2bda6533d1359d56effc08cf9015ef67322aa909b4ef3f59",
+    "tools/validate.py": "187b70db7fac668df22433ea3c8d5761d49f92b7b1a42eb89d09663a25d503a2",
     "scenarios/S05-unreproducible/probe_wrapper.py": "61e501d545bbd5a9859942692c14404359627b5ad7115fb9f7d9ceaa60b164a2",
-    "tools/agent_runner.py": "f4b1214fa4d6b51c5fac7ed9f6862168cb216354395f8ac1b292623a59f91f55"
+    "tools/agent_runner.py": "76566a3deec602f4ea65364cdbb42a008e51291629f5de5c9f4feb6176b76880"
   }
 }

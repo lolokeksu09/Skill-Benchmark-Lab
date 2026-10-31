@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Validate Protocol 1.2. --static-only never claims sandbox or agent validation."""
-import argparse, hashlib, importlib.util, json, os, shutil, subprocess, sys, tempfile
+import argparse, hashlib, importlib.util, json, os, shutil, subprocess, sys, tempfile, threading
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 SCENARIOS={"S05":"S05-unreproducible","S06":"S06-release-exception"}
@@ -60,6 +60,18 @@ def main():
             except (safe.UnsafeFile,OSError):pass
             (root/"wlink").symlink_to(outside)
             try:safe.write_bytes(root,"wlink",b"x");raise AssertionError("symlink write accepted")
+            except (safe.UnsafeFile,OSError):pass
+            os.mkfifo(root/"wfifo")
+            fifo_error=[]
+            def _fifo_write():
+                try:safe.write_bytes(root,"wfifo",b"x")
+                except Exception as exc:fifo_error.append(exc)
+            fifo_thread=threading.Thread(target=_fifo_write,daemon=True);fifo_thread.start();fifo_thread.join(5)
+            assert not fifo_thread.is_alive(),"write_bytes blocked on FIFO"
+            assert fifo_error and isinstance(fifo_error[0],(safe.UnsafeFile,OSError)),fifo_error
+            (root/"wfifo").unlink()
+            os.link(outside,root/"hard")
+            try:safe.write_bytes(root,"hard",b"changed");raise AssertionError("hardlink write accepted")
             except (safe.UnsafeFile,OSError):pass
             assert outside.read_text()=="secret"
     def bundles_and_pairs():
@@ -127,15 +139,17 @@ def main():
             preflight.write_text(json.dumps({"protocol":"PWS-BENCH-PROTOCOL-1.2","status":"READY","image":image}))
             def write_agent(name,code):
                 path=tmp/name;path.write_text(code);return path
-            def run_bridge(agent,expect,scenario="S05",timeout_s=60):
+            def run_bridge(agent,expect,scenario="S05",timeout_s=60,allow_env=None):
                 bundle=tmp/("bundle-"+agent.stem)
                 p=run([sys.executable,ROOT/"tools/prepare_run.py","--scenario",scenario,
                        "--standard","v1.3","--output",bundle]);assert p.returncode==0,p.stderr
                 out=tmp/("evidence-"+agent.stem+".json")
-                proc=run([sys.executable,ROOT/"tools/agent_runner.py",bundle,
-                          "--agent-command",f"{sys.executable} {agent}",
-                          "--preflight",preflight,"--image",image,
-                          "--timeout",str(timeout_s),"--output",out],timeout=timeout_s+90)
+                command=[sys.executable,ROOT/"tools/agent_runner.py",bundle,
+                         "--agent-command",f"{sys.executable} {agent}",
+                         "--preflight",preflight,"--image",image,
+                         "--timeout",str(timeout_s),"--output",out]
+                for name in allow_env or []:command+=["--allow-env",name]
+                proc=run(command,timeout=timeout_s+90)
                 assert proc.returncode==0,proc.stderr[-600:]
                 evidence=json.loads(out.read_text())
                 assert evidence["status"]==expect,(expect,evidence["status"],evidence["critical_errors"])
@@ -224,7 +238,102 @@ print(json.dumps({"type": "finish", "model": "fake", "provider": "deterministic-
 sys.exit(0)
 ''')
             run_bridge(s06_agent,"executed",scenario="S06")
-            return "positive bindings, forbidden tool, traversal, timeout, env isolation, S06 run_tests unavailability"
+            orphan_marker=tmp/"orphan-child.pid"
+            orphan=write_agent("agent_orphan.py",'''
+import json, os, subprocess, sys
+sys.stdin.readline()
+subprocess.Popen([sys.executable, "-c",
+ "import os,time,pathlib;pathlib.Path(r'" + repr("ORPHAN_MARKER") + "').write_text(str(os.getpid()));time.sleep(300)"])
+os._exit(0)
+'''.replace("ORPHAN_MARKER",str(orphan_marker)))
+            evidence,_=run_bridge(orphan,"terminated_timeout",timeout_s=5)
+            assert evidence["process"]["timed_out"] is True
+            orphan_pid=int(orphan_marker.read_text())
+            try:os.kill(orphan_pid,0);raise AssertionError(f"orphan child {orphan_pid} survived bridge termination")
+            except ProcessLookupError:pass
+            malformed=write_agent("agent_malformed.py",'''
+import json, sys
+sys.stdin.readline()
+print(json.dumps({"type": "tool_call", "id": "1", "tool": []}), flush=True)
+sys.stdin.readline()
+''')
+            evidence,_=run_bridge(malformed,"failed_bridge")
+            assert "forbidden_tool" in evidence["critical_errors"],evidence["critical_errors"]
+            exit_nonzero=write_agent("agent_exit_nonzero.py",'''
+import json, sys
+sys.stdin.readline()
+print(json.dumps({"type": "finish", "model": "fake", "provider": "deterministic-control",
+                  "tokens": "not_measured", "cost": "not_measured"}), flush=True)
+sys.exit(1)
+''')
+            evidence,_=run_bridge(exit_nonzero,"failed_bridge")
+            assert any(c.startswith("agent_exit_nonzero") for c in evidence["critical_errors"]),evidence["critical_errors"]
+            assert evidence["process"]["exit_code"]==1,evidence["process"]
+            immutable=write_agent("agent_immutable.py",'''
+import json, sys
+sys.stdin.readline()
+def call(cid, tool, **kw):
+    print(json.dumps({"type": "tool_call", "id": cid, "tool": tool, **kw}), flush=True)
+    return json.loads(sys.stdin.readline())
+task_before=call("0", "read_file", path="TASK.md")["content"]
+std_before=call("0b", "read_file", path="_standard/AGENTS.md")["content"]
+r1=call("1", "write_file", path="TASK.md", content="tampered task")
+r2=call("2", "write_file", path="_standard/AGENTS.md", content="tampered standard")
+assert r1["ok"] is False and "immutable" in r1["error"], r1
+assert r2["ok"] is False and "immutable" in r2["error"], r2
+r3=call("3", "write_file", path="notes.txt", content="allowed write")
+assert r3["ok"] is True, r3
+assert call("4", "read_file", path="TASK.md")["content"]==task_before, "TASK.md was modified"
+assert call("5", "read_file", path="_standard/AGENTS.md")["content"]==std_before, "_standard was modified"
+print(json.dumps({"type": "finish", "model": "fake", "provider": "deterministic-control",
+                  "tokens": "not_measured", "cost": "not_measured"}), flush=True)
+sys.exit(0)
+''')
+            evidence,bundle=run_bridge(immutable,"executed")
+            assert safe.read_text(bundle/"workspace","notes.txt")=="allowed write"
+            truncation=write_agent("agent_truncation.py",'''
+import json, sys
+sys.stdin.readline()
+payload="A"*9000
+def call(cid, tool, **kw):
+    print(json.dumps({"type": "tool_call", "id": cid, "tool": tool, **kw}), flush=True)
+    return json.loads(sys.stdin.readline())
+r=call("1", "write_file", path="big.txt", content=payload)
+assert r["ok"] is True, r
+r=call("2", "read_file", path="big.txt")
+assert r["ok"] is True and len(r["content"])==9000, r
+print(json.dumps({"type": "finish", "model": "fake", "provider": "deterministic-control",
+                  "tokens": "not_measured", "cost": "not_measured"}), flush=True)
+sys.exit(0)
+''')
+            evidence,bundle=run_bridge(truncation,"executed")
+            log_text=(bundle/"tool-log.jsonl").read_text()
+            assert "A"*9000 not in log_text,"raw large payload present in attested log"
+            assert '"truncated": true' in log_text,"no truncation marker in attested log"
+            assert hashlib.sha256(("A"*9000).encode()).hexdigest() in log_text,"payload digest missing from attested log"
+            assert len(log_text.encode())<3*1024*1024,"attested log exceeded byte budget"
+            assert evidence["tool_log_sha256"]==attest.file_hash(bundle/"tool-log.jsonl")
+            disclosed=write_agent("agent_disclosed_env.py",'''
+import json, os, sys
+sys.stdin.readline()
+present="PWS_BRIDGE_DISCLOSE" in os.environ
+print(json.dumps({"type": "finish", "model": "fake", "provider": "deterministic-control",
+                  "tokens": "not_measured", "cost": "not_measured"}), flush=True)
+sys.stderr.write("PRESENT=%s\\n" % present); sys.stderr.flush()
+sys.exit(0)
+''')
+            os.environ["PWS_BRIDGE_DISCLOSE"]="operator-approved-marker"
+            try:
+                evidence,_=run_bridge(disclosed,"executed",allow_env=["PWS_BRIDGE_DISCLOSE"])
+            finally:
+                os.environ.pop("PWS_BRIDGE_DISCLOSE",None)
+            assert evidence["trusted_side"]["allow_env"]==["PWS_BRIDGE_DISCLOSE"],evidence.get("trusted_side")
+            assert "PRESENT=True" in evidence["agent_stderr_tail"],evidence["agent_stderr_tail"]
+            disclosed_neg=write_agent("agent_disclosed_env_neg.py",disclosed.read_text())
+            evidence,_=run_bridge(disclosed_neg,"executed")
+            assert evidence["trusted_side"]["allow_env"]==[],evidence.get("trusted_side")
+            assert "PRESENT=False" in evidence["agent_stderr_tail"],evidence["agent_stderr_tail"]
+            return "positive bindings, forbidden tool, traversal, timeout, env isolation, S06 run_tests unavailability; orphan kill, malformed schema, non-zero exit after finish, immutable inputs, bounded log, allow-env disclosure"
     tests=[required,manifest,origins,safe_files,bundles_and_pairs,fail_closed_acceptance,agent_bridge]
     if not args.static_only:
         assert args.preflight,"--preflight required unless --static-only"
