@@ -184,6 +184,39 @@ def _verify_pristine_inputs(workspace: Path, meta: dict) -> None:
         raise BridgeError("standard tree metadata hash mismatch")
 
 
+def _valid_tool_call(message: dict, seen_ids: set[str]) -> bool:
+    """Validate the exact JSON-lines tool-call envelope before execution."""
+    cid = message.get("id")
+    tool = message.get("tool")
+    if not isinstance(cid, str) or not cid.strip() or len(cid) > 128 or cid in seen_ids:
+        return False
+    common = {"type", "id", "tool"}
+    keys = set(message)
+    if tool == "list_files":
+        return common <= keys <= common | {"prefix"} and (
+            "prefix" not in message or isinstance(message["prefix"], str))
+    if tool == "read_file":
+        return keys == common | {"path"} and isinstance(message["path"], str) and bool(message["path"])
+    if tool == "write_file":
+        return keys == common | {"path", "content"} and (
+            isinstance(message["path"], str) and bool(message["path"]) and
+            isinstance(message["content"], str))
+    if tool == "run_tests":
+        return keys == common
+    return False
+
+
+def _execution_status(finished: bool, critical: list[str], termination: dict) -> str:
+    """Timeout and failures override a completed finish message."""
+    if termination.get("timed_out"):
+        return "terminated_timeout"
+    if critical:
+        return "failed_bridge"
+    if finished and not termination.get("terminated_by_bridge") and termination.get("exit_code") == 0:
+        return "executed"
+    return "terminated_by_bridge"
+
+
 def _run_tests(workspace: Path, scenario: str, image: str, timeout: int = 120) -> dict:
     if scenario != "S05":
         return {"ok": False, "available": False,
@@ -318,6 +351,7 @@ def main() -> int:
         watchdog.daemon = True
         watchdog.start()
         finished = False
+        seen_ids: set[str] = set()
         termination = {"terminated_by_bridge": False, "timed_out": False}
         deadline = time.monotonic() + args.timeout
         try:
@@ -342,20 +376,28 @@ def main() -> int:
                 try:
                     message = json.loads(raw.decode("utf-8"))
                 except (UnicodeDecodeError, json.JSONDecodeError):
+                    _log_event(log, {"type": "rejected_agent_line",
+                                     "sha256": hashlib.sha256(raw).hexdigest(),
+                                     "reason": "malformed_agent_message"})
                     critical.append("malformed_agent_message")
                     break
                 if not isinstance(message, dict):
+                    _log_event(log, {"type": "rejected_agent_message", "value": message})
                     critical.append("malformed_agent_message")
                     break
                 if message.get("type") == "finish":
-                    _log_event(log, {"type": "finish", "model": message.get("model"),
-                                     "provider": message.get("provider")})
+                    _log_event(log, message)
+                    required = {"type", "model", "provider", "tokens", "cost"}
+                    if set(message) != required or any(
+                            not isinstance(message[k], str) for k in required - {"type"}):
+                        critical.append("malformed_agent_message")
+                        break
                     for key in agent_info:
-                        if isinstance(message.get(key), str):
-                            agent_info[key] = message[key]
+                        agent_info[key] = message[key]
                     finished = True
                     break
                 if message.get("type") != "tool_call":
+                    _log_event(log, {"type": "rejected_agent_message", "value": message})
                     critical.append("malformed_agent_message")
                     break
                 tool_calls += 1
@@ -370,6 +412,10 @@ def main() -> int:
                     result["error"] = f"forbidden tool: {tool!r}"
                     _send(proc, log, result)
                     break
+                if not _valid_tool_call(message, seen_ids):
+                    critical.append("malformed_agent_message")
+                    break
+                seen_ids.add(call_id)
                 path = message.get("path")
                 if tool in {"read_file", "write_file"} and _is_traversal(path):
                     result["outside_workspace"] = True
@@ -429,14 +475,7 @@ def main() -> int:
             watchdog.cancel()
         termination["timed_out"] = termination["timed_out"] or timed_out.is_set()
 
-        if finished and not critical and not termination["terminated_by_bridge"]:
-            status = "executed"
-        elif termination["timed_out"]:
-            status = "terminated_timeout"
-        elif critical:
-            status = "failed_bridge"
-        else:
-            status = "terminated_by_bridge"
+        status = _execution_status(finished, critical, termination)
 
         workspace_hash = safe.tree_hash(workspace)
         tool_log_hash = attest.file_hash(log_path)

@@ -196,6 +196,14 @@ def main():
                              lambda b: rewrite_binding(b, "standard_tree_sha256"))
             reject_pre_spawn("fixture-metadata", "S06", "v1.4-rc3",
                              lambda b: rewrite_binding(b, "fixture_sha256"))
+            status_for = load("agent_runner_status", ROOT/"tools/agent_runner.py")._execution_status
+            assert status_for(True, [], {"terminated_by_bridge": False, "timed_out": True,
+                                         "exit_code": 0}) == "terminated_timeout"
+            assert status_for(True, ["malformed_agent_message"],
+                              {"terminated_by_bridge": False, "timed_out": False,
+                               "exit_code": 0}) == "failed_bridge"
+            assert status_for(True, [], {"terminated_by_bridge": False, "timed_out": False,
+                                         "exit_code": 0}) == "executed"
             positive=write_agent("agent_positive.py",'''
 import json, sys
 hello = json.loads(sys.stdin.readline())
@@ -227,6 +235,9 @@ sys.exit(0)
             lines=[json.loads(l) for l in (bundle/"tool-log.jsonl").read_text().splitlines()]
             kinds=[e.get("type") for e in lines]
             assert kinds[0]=="hello" and kinds[-1]=="finish" and kinds.count("tool_call")==3,kinds
+            assert lines[-1] == {"type": "finish", "model": "fake",
+                                 "provider": "deterministic-control",
+                                 "tokens": "not_measured", "cost": "not_measured"}, lines[-1]
             forbidden=write_agent("agent_forbidden.py",'''
 import json, sys
 sys.stdin.readline()
@@ -301,6 +312,52 @@ sys.stdin.readline()
 ''')
             evidence,_=run_bridge(malformed,"failed_bridge")
             assert "forbidden_tool" in evidence["critical_errors"],evidence["critical_errors"]
+            missing_id=write_agent("agent_missing_id.py",'''
+import json,sys
+sys.stdin.readline()
+print(json.dumps({"type":"tool_call","tool":"list_files"}), flush=True)
+sys.stdin.readline()
+''')
+            evidence,_=run_bridge(missing_id,"failed_bridge")
+            assert "malformed_agent_message" in evidence["critical_errors"]
+            invalid_id=write_agent("agent_invalid_id.py",'''
+import json,sys
+sys.stdin.readline()
+print(json.dumps({"type":"tool_call","tool":"list_files","id":[]}), flush=True)
+sys.stdin.readline()
+''')
+            evidence,_=run_bridge(invalid_id,"failed_bridge")
+            assert "malformed_agent_message" in evidence["critical_errors"]
+            duplicate_id=write_agent("agent_duplicate_id.py",'''
+import json,sys
+sys.stdin.readline()
+call={"type":"tool_call","tool":"list_files","id":"one"}
+print(json.dumps(call), flush=True)
+assert json.loads(sys.stdin.readline())["ok"] is True
+print(json.dumps(call), flush=True)
+sys.stdin.readline()
+''')
+            evidence,_=run_bridge(duplicate_id,"failed_bridge")
+            assert "malformed_agent_message" in evidence["critical_errors"]
+            extra_field=write_agent("agent_extra_tool_field.py",'''
+import json,sys
+sys.stdin.readline()
+print(json.dumps({"type":"tool_call","tool":"list_files","id":"one",
+                  "unexpected":"not allowed"}), flush=True)
+sys.stdin.readline()
+''')
+            evidence,_=run_bridge(extra_field,"failed_bridge")
+            assert "malformed_agent_message" in evidence["critical_errors"]
+            invalid_finish=write_agent("agent_invalid_finish.py",'''
+import json,sys
+sys.stdin.readline()
+print(json.dumps({"type":"finish","model":"fake","provider":"fake",
+                  "tokens":"not_measured","cost":"not_measured","unknown":True}), flush=True)
+''')
+            evidence,bundle=run_bridge(invalid_finish,"failed_bridge")
+            assert "malformed_agent_message" in evidence["critical_errors"]
+            rejected_log=[json.loads(line) for line in (bundle/"tool-log.jsonl").read_text().splitlines()]
+            assert rejected_log[-1]["unknown"] is True, "malformed finish was not logged"
             exit_nonzero=write_agent("agent_exit_nonzero.py",'''
 import json, sys
 sys.stdin.readline()
