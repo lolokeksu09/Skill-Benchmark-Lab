@@ -3,39 +3,25 @@
   "phase": "pilot",
   "agent_runs_executed": 0,
   "order": [
-    "S05-v1.3-r1",
-    "S05-v1.4-rc3-r1",
-    "S06-v1.3-r1",
-    "S06-v1.4-rc3-r1"
-  ],
-  "runs": [
     {
-      "run_id": "S05-v1.3-r1",
+      "slot": "S05-A",
       "scenario": "S05",
-      "standard": "v1.3",
-      "repeat": 1,
-      "status": "prepared_only_after_command"
+      "repeat": 1
     },
     {
-      "run_id": "S05-v1.4-rc3-r1",
+      "slot": "S05-B",
       "scenario": "S05",
-      "standard": "v1.4-rc3",
-      "repeat": 1,
-      "status": "prepared_only_after_command"
+      "repeat": 1
     },
     {
-      "run_id": "S06-v1.3-r1",
+      "slot": "S06-A",
       "scenario": "S06",
-      "standard": "v1.3",
-      "repeat": 1,
-      "status": "prepared_only_after_command"
+      "repeat": 1
     },
     {
-      "run_id": "S06-v1.4-rc3-r1",
+      "slot": "S06-B",
       "scenario": "S06",
-      "standard": "v1.4-rc3",
-      "repeat": 1,
-      "status": "prepared_only_after_command"
+      "repeat": 1
     }
   ],
   "main_benchmark": {
@@ -57,5 +43,6 @@
       "v1.4-rc3"
     ],
     "planned_runs": 60
-  }
+  },
+  "allocation": "Trusted runner stores opaque run_id -> standard privately outside reviewer-visible evidence. No per-run version assignment is published here."
 }

@@ -42,3 +42,7 @@ JSON-поля `status=executed`, `verified_by_runner` или `approved=true` н�
 `prepare_run.py` создаёт bundle, но не запускает агента. `compare_pair.py` требует одинаковый сценарий/repeat, одинаковые non-standard входы и две разные trusted standard trees. Mutation expectations являются точными множествами failed checks, а не subset.
 
 До независимого review исправлений и успешного Docker preflight четыре агентных пилота не запускаются. Основной benchmark на 60 запусков не начат.
+
+## Слепое рецензирование и непрозрачные идентификаторы
+
+`run_id` содержит только ID сценария и случайный hex; он не кодирует версию или repeat и **не доказывает назначенную версию**. `RUN.json` с `standard_tree_sha256` остаётся приватным для доверенного runner и не передаётся рецензенту. Версия выводится при сравнении пар исключительно из trusted `_standard/` tree. Приватное соответствие `run_id → standard` хранится отдельно от публичного `pilot-manifest.json` и reviewer-visible evidence. Само значение `standard_tree_sha256` раскрывает версию при сопоставлении с публичным manifest, поэтому его нельзя включать в blinded review packet.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Prepare an immutable-input run bundle; this does not launch an agent."""
-import argparse, hashlib, importlib.util, json, shutil, sys
+import argparse, hashlib, importlib.util, json, secrets, shutil, sys
 from datetime import datetime, timezone
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,9 +26,9 @@ def main():
     shutil.copytree(fixture, workspace)
     shutil.copytree(standard, workspace / "_standard")
     shutil.copy2(scenario_dir / "task.md", workspace / "TASK.md")
-    metadata = {"run_id": f"{args.scenario}-{args.standard}-r{args.repeat}",
+    metadata = {"run_id": f"{args.scenario}-{secrets.token_hex(16)}",
                 "protocol": "PWS-BENCH-PROTOCOL-1.2", "scenario": args.scenario,
-                "standard": args.standard, "repeat": args.repeat,
+                "repeat": args.repeat,
                 "status": "prepared_not_executed", "fixture_sha256": safe.tree_hash(fixture),
                 "standard_tree_sha256": safe.tree_hash(standard),
                 "prepared_utc": datetime.now(timezone.utc).isoformat(),
