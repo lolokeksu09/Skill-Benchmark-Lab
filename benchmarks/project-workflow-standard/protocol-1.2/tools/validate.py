@@ -244,7 +244,65 @@ sys.stdin.readline()
 print(json.dumps({"type": "tool_call", "id": "1", "tool": "delete_file", "path": "TASK.md"}), flush=True)
 sys.stdin.readline()
 ''')
-            run_bridge(forbidden,"failed_bridge")
+            _, failed_bundle=run_bridge(forbidden,"failed_bridge")
+            assert (failed_bundle/".pws-agent-run-claim.json").is_file(), "missing single-use claim"
+            assert safe.read_json(failed_bundle,"RUN.json")["status"]=="failed_bridge"
+            old_log=(failed_bundle/"tool-log.jsonl").read_bytes()
+            replay_command=[sys.executable,ROOT/"tools/agent_runner.py",failed_bundle,
+                            "--agent-command",f"{sys.executable} {guard_agent}",
+                            "--preflight",preflight,"--image",image,"--timeout","10"]
+            replay=run(replay_command,timeout=20)
+            assert replay.returncode!=0 and "not prepared_not_executed" in replay.stderr,replay.stderr
+            assert (failed_bundle/"tool-log.jsonl").read_bytes()==old_log,"replay modified log"
+            assert not guard_marker.exists(),"replay started external adapter"
+
+            # Two concurrent invocations on one pristine bundle must start exactly one adapter.
+            starts=tmp/"parallel-agent-starts"
+            parallel_agent=write_agent("agent_parallel.py",
+                "import json,os,sys,time\n"
+                "sys.stdin.readline()\n"
+                "with open(" + repr(str(starts)) + ", 'a') as f:\n"
+                "    f.write(str(os.getpid()) + '\\n')\n"
+                "time.sleep(0.75)\n"
+                "print(json.dumps({'type':'finish','model':'fake','provider':'deterministic-control',"
+                "'tokens':'not_measured','cost':'not_measured'}),flush=True)\n")
+            parallel_bundle=tmp/"bundle-parallel"
+            prepared=run([sys.executable,ROOT/"tools/prepare_run.py","--scenario","S06",
+                          "--standard","v1.3","--output",parallel_bundle])
+            assert prepared.returncode==0,prepared.stderr
+            parallel_command=[sys.executable,ROOT/"tools/agent_runner.py",parallel_bundle,
+                              "--agent-command",f"{sys.executable} {parallel_agent}",
+                              "--preflight",preflight,"--image",image,"--timeout","15"]
+            first=subprocess.Popen([str(x) for x in parallel_command],
+                                   stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+            second=subprocess.Popen([str(x) for x in parallel_command],
+                                    stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+            first_out,first_err=first.communicate(timeout=25)
+            second_out,second_err=second.communicate(timeout=25)
+            assert sorted([first.returncode,second.returncode])[0]==0, (
+                first.returncode,second.returncode,first_err,second_err)
+            assert sum(code!=0 for code in [first.returncode,second.returncode])==1, (
+                first.returncode,second.returncode,first_err,second_err)
+            assert len(starts.read_text().splitlines())==1,"parallel agent started more than once"
+            assert safe.read_json(parallel_bundle,"RUN.json")["status"]=="executed"
+            assert (parallel_bundle/".pws-agent-run-claim.json").is_file()
+            parallel_log=[json.loads(l) for l in (parallel_bundle/"tool-log.jsonl").read_text().splitlines()]
+            assert [x["type"] for x in parallel_log]==["hello","finish"],parallel_log
+
+            # A stale non-empty journal must be refused before claiming or spawning.
+            dirty_bundle=tmp/"bundle-dirty-log"
+            prepared=run([sys.executable,ROOT/"tools/prepare_run.py","--scenario","S06",
+                          "--standard","v1.3","--output",dirty_bundle])
+            assert prepared.returncode==0,prepared.stderr
+            (dirty_bundle/"tool-log.jsonl").write_text('stale\n')
+            dirty_cmd=[sys.executable,ROOT/"tools/agent_runner.py",dirty_bundle,
+                       "--agent-command",f"{sys.executable} {guard_agent}",
+                       "--preflight",preflight,"--image",image,"--timeout","10"]
+            dirty=run(dirty_cmd,timeout=20)
+            assert dirty.returncode!=0 and "tool log must be empty" in dirty.stderr,dirty.stderr
+            assert not (dirty_bundle/".pws-agent-run-claim.json").exists()
+            assert not guard_marker.exists(),"dirty log started external adapter"
+            assert (dirty_bundle/"tool-log.jsonl").read_text()=="stale\n"
             traversal=write_agent("agent_traversal.py",'''
 import json, sys
 sys.stdin.readline()

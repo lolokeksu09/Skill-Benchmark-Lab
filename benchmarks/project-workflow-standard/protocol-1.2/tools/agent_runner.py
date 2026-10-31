@@ -184,6 +184,32 @@ def _verify_pristine_inputs(workspace: Path, meta: dict) -> None:
         raise BridgeError("standard tree metadata hash mismatch")
 
 
+def _claim_single_use_bundle(bundle: Path, meta: dict) -> None:
+    """Atomically consume a prepared run ID; claims persist on failure and timeout."""
+    if meta.get("status") != "prepared_not_executed":
+        raise BridgeError("bundle is not prepared_not_executed; create a new run_id")
+    if not isinstance(meta.get("run_id"), str) or not meta["run_id"]:
+        raise BridgeError("bundle has no valid run_id")
+    if safe.read_bytes(bundle, "tool-log.jsonl", LOG_BUDGET_BYTES):
+        raise BridgeError("tool log must be empty before the first agent execution")
+
+    claim = bundle / ".pws-agent-run-claim.json"
+    flags = (os.O_WRONLY | os.O_CREAT | os.O_EXCL |
+             getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_CLOEXEC", 0))
+    try:
+        fd = os.open(claim, flags, 0o600)
+    except FileExistsError as exc:
+        raise BridgeError("bundle already claimed; create a new run_id") from exc
+    with os.fdopen(fd, "w", encoding="utf-8") as output:
+        output.write(json.dumps({"run_id": meta["run_id"], "claimed_utc": _utc(),
+                                 "bridge_protocol": PROTOCOL}, sort_keys=True) + "\n")
+        output.flush()
+        os.fsync(output.fileno())
+    meta["status"] = "runner_claimed"
+    safe.write_bytes(bundle, "RUN.json",
+                     (json.dumps(meta, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
+
+
 def _valid_tool_call(message: dict, seen_ids: set[str]) -> bool:
     """Validate the exact JSON-lines tool-call envelope before execution."""
     cid = message.get("id")
@@ -310,6 +336,8 @@ def main() -> int:
     meta = safe.read_json(bundle, "RUN.json")
     if meta.get("protocol") != "PWS-BENCH-PROTOCOL-1.2" or meta.get("scenario") not in SCENARIOS:
         p.error("valid Protocol 1.2 run bundle required")
+    if meta.get("status") != "prepared_not_executed":
+        p.error("bundle is not prepared_not_executed; create a new run_id")
     preflight_path = args.preflight.resolve()
     preflight = safe.read_json(preflight_path.parent, preflight_path.name)
     if (preflight.get("protocol") != meta["protocol"] or preflight.get("status") != "READY"
@@ -319,6 +347,10 @@ def main() -> int:
         _verify_pristine_inputs(workspace, meta)
     except (BridgeError, safe.UnsafeFile, OSError, ValueError, KeyError) as exc:
         p.error(f"untrusted initial workspace: {exc}")
+    try:
+        _claim_single_use_bundle(bundle, meta)
+    except (BridgeError, safe.UnsafeFile, OSError, ValueError, KeyError) as exc:
+        p.error(f"runner bundle claim rejected: {exc}")
     evaluator_path = ROOT / "scenarios" / SCENARIOS[meta["scenario"]] / "evaluator.py"
 
     critical: list[str] = []
@@ -329,7 +361,7 @@ def main() -> int:
     started = _utc()
     log_path = bundle / "tool-log.jsonl"
 
-    with tempfile.TemporaryDirectory() as scratch, open(log_path, "a", encoding="utf-8") as log:
+    with tempfile.TemporaryDirectory() as scratch, open(log_path, "w", encoding="utf-8") as log:
         scratch_path = Path(scratch)
         env = build_agent_env(args.allow_env, scratch_path / "home")
         (scratch_path / "home").mkdir()

@@ -80,8 +80,8 @@
     "tools/preflight.py": "2737af13d0b383012bf1c45e2b18ae674bf3539caa074dcbb2b7d70710baf628",
     "tools/prepare_run.py": "9d91814d165211f028e6b84e147f761ae4018ad8a398c63717f1f6bd68d62315",
     "tools/safe_io.py": "0d5bb518a8254987694ef7f4c96247df2fecaa00525512e2c209f7f95d8b90b0",
-    "tools/validate.py": "cba35098362eed8159f219227bc087e55621a4114be78b850350a8e358ba1321",
+    "tools/validate.py": "0b248ff7ca5c13ed93c956ae115d9c434741ff70b6a63d6bb5b919139e97268a",
     "scenarios/S05-unreproducible/probe_wrapper.py": "61e501d545bbd5a9859942692c14404359627b5ad7115fb9f7d9ceaa60b164a2",
-    "tools/agent_runner.py": "22629f68a7b0a11f1eb5345828a5b8a265b1dbf98a67380734d6b18e4c603451"
+    "tools/agent_runner.py": "125f08ce3cad96f7e9f1fd89595bc9130576211c39f53637e9efc46d284a7c84"
   }
 }
