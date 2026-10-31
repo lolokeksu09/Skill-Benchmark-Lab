@@ -54,6 +54,14 @@ def main():
             (root/"sub").mkdir()
             safe.write_bytes(root,"sub/new.txt",b"created")
             assert safe.read_bytes(root,"sub/new.txt")==b"created"
+            for alias in ("./ok", "sub/./new.txt", "sub//new.txt", "sub/new.txt/"):
+                try:
+                    safe.write_bytes(root, alias, b"tampered")
+                    raise AssertionError(f"normalized path alias accepted: {alias}")
+                except safe.UnsafeFile:
+                    pass
+            assert safe.read_text(root,"ok")=="fine"
+            assert safe.read_bytes(root,"sub/new.txt")==b"created"
             try:safe.write_bytes(root,"../escape.txt",b"x");raise AssertionError("traversal write accepted")
             except (safe.UnsafeFile,OSError):pass
             try:safe.write_bytes(root,"missing-parent/x.txt",b"x");raise AssertionError("missing parent accepted")
@@ -281,6 +289,10 @@ r1=call("1", "write_file", path="TASK.md", content="tampered task")
 r2=call("2", "write_file", path="_standard/AGENTS.md", content="tampered standard")
 assert r1["ok"] is False and "immutable" in r1["error"], r1
 assert r2["ok"] is False and "immutable" in r2["error"], r2
+for i, alias in enumerate(("./TASK.md", "TASK.md/", "./_standard/AGENTS.md",
+                           "_standard/./AGENTS.md", "_standard//AGENTS.md")):
+    rejected=call("alias-%d" % i, "write_file", path=alias, content="tampered")
+    assert rejected["ok"] is False, (alias, rejected)
 r3=call("3", "write_file", path="notes.txt", content="allowed write")
 assert r3["ok"] is True, r3
 assert call("4", "read_file", path="TASK.md")["content"]==task_before, "TASK.md was modified"

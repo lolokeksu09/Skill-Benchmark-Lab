@@ -14,7 +14,8 @@ class UnsafeFile(ValueError):
 def _parts(relative: str | Path) -> list[str]:
     text = str(relative).replace("\\", "/")
     path = PurePosixPath(text)
-    if not text or path.is_absolute() or any(p in {"", ".", ".."} for p in path.parts):
+    # Reject path aliases before PurePosixPath collapses dot and empty components.
+    if not text or path.is_absolute() or any(p in {"", ".", ".."} for p in text.split("/")):
         raise UnsafeFile(f"unsafe relative path: {relative!r}")
     return list(path.parts)
 
