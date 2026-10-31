@@ -1,0 +1,26 @@
+{
+  "exceptions": [
+    {
+      "id": "EXC-001",
+      "gate": "SEC-SCAN",
+      "candidate": "3.2.0-rc1",
+      "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "authorized_by": "Release Owner",
+      "source": "approval-001.txt",
+      "expires": "2026-11-15",
+      "status": "active",
+      "residual_risk": "Dependency scan not executed for this candidate."
+    },
+    {
+      "id": "EXC-002",
+      "gate": "DEVICE-IOS",
+      "candidate": "3.1.0",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "authorized_by": "Release Owner",
+      "source": "approval-002.txt",
+      "expires": "2026-10-01",
+      "status": "expired",
+      "residual_risk": "Previous release only."
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "protocol": "PWS-BENCH-PROTOCOL-1.2",
+  "phase": "pilot",
+  "agent_runs_executed": 0,
+  "order": [
+    "S05-v1.3-r1",
+    "S05-v1.4-rc3-r1",
+    "S06-v1.3-r1",
+    "S06-v1.4-rc3-r1"
+  ],
+  "runs": [
+    {
+      "run_id": "S05-v1.3-r1",
+      "scenario": "S05",
+      "standard": "v1.3",
+      "repeat": 1,
+      "status": "prepared_only_after_command"
+    },
+    {
+      "run_id": "S05-v1.4-rc3-r1",
+      "scenario": "S05",
+      "standard": "v1.4-rc3",
+      "repeat": 1,
+      "status": "prepared_only_after_command"
+    },
+    {
+      "run_id": "S06-v1.3-r1",
+      "scenario": "S06",
+      "standard": "v1.3",
+      "repeat": 1,
+      "status": "prepared_only_after_command"
+    },
+    {
+      "run_id": "S06-v1.4-rc3-r1",
+      "scenario": "S06",
+      "standard": "v1.4-rc3",
+      "repeat": 1,
+      "status": "prepared_only_after_command"
+    }
+  ],
+  "main_benchmark": {
+    "scenarios": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10"
+    ],
+    "repeats": 3,
+    "versions": [
+      "v1.3",
+      "v1.4-rc3"
+    ],
+    "planned_runs": 60
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "source_zip_sha256": {
+    "Project-Workflow-Standard-v1.3.zip": "43f2df643db28c7103266c98dbb22692fe46472775eba73aa40b28de728bf4b3",
+    "Project-Workflow-Standard-v1.4-rc3.zip": "4485c84e7a89c361ed78bea5a9d8136403a944977478f7e4f75f4135d95ec333"
+  },
+  "files": {
+    "v1.3": {
+      "AGENTS.md": "0c2e0f8e9abbad76029e8d50cbe8a8a400708734c72eb19204697ad0aa5a4da7",
+      "PROJECT.md": "f439cb6389a16d0efb257fc1809f8a150538f56c34adccec1fe311ba8e0612ad",
+      "README.md": "c5e98b4cfff9652bf7e6352868a23ff41dbe7b47504c23c91b0fea14d7b6833a",
+      "TESTING-LEVELS.md": "e5733c80444218312dcb635f3eddd9d5b94167742c22efb63c0ca9306ded19d6",
+      "templates/AUDIT.md": "accaff3d627c584c4dbe9d984bf3ae8bcb577d62b140814d3c40fe4c9b6b4f11",
+      "templates/CONTINUATION.md": "0c15a6aef428da4e3d2fa2a59eca73d391fd736e58ab3e80aa3706ce2c4d8126",
+      "templates/PLAN.md": "ffba3cd8dd8f6b6a05960c3840eb2c69da4ead4db79bfaf7bf8a2ddd835cee86",
+      "templates/RELEASE.md": "36d00861fa197f9c45283db81f3e6838fdf58037293ea2882374bf5aa72a6047",
+      "templates/VERIFICATION.md": "e0e55ce11c8a5a1a1b2e4000c5eb726c1192df61108d242cb5bb2fe0a44a8544"
+    },
+    "v1.4-rc3": {
+      "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+      "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+      "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+      "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+      "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+      "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+      "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+      "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+      "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+      "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+      "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+      "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+      "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+      "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+      "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+      "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+    }
+  }
+}

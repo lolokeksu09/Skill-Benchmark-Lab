@@ -1,0 +1,6 @@
+Sanitized historical report; original payload is unavailable.
+Traceback (most recent call last):
+  File "config_loader.py", line 10, in parse_timeout
+    value = int(payload["timeout"])
+ValueError: invalid literal for int() with base 10: <redacted>
+The exact input and original environment were not preserved.

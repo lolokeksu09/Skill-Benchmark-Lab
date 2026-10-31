@@ -1,0 +1,12 @@
+{
+  "kind": "review",
+  "reviewer": "reviewer@pws",
+  "protocol": "PWS-BENCH-PROTOCOL-1.2",
+  "run_id": "S05-v1.3-r1",
+  "blinded_to_standard": true,
+  "approved": false,
+  "workspace_sha256": "required",
+  "automated_report_sha256": "required",
+  "runner_attestation_sha256": "required",
+  "notes": "Template only. Sign externally with ssh-keygen -Y sign -n pws-review-v1. No review performed."
+}
