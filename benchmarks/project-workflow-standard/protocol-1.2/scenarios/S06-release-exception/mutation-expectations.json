@@ -1,0 +1,28 @@
+{
+  "fail-expired-exception": {
+    "failed_exactly": [
+      "active_exceptions",
+      "exception_assessment"
+    ]
+  },
+  "fail-empty-md": {
+    "failed_exactly": [
+      "decision_markdown_structure"
+    ]
+  },
+  "fail-gate-status": {
+    "failed_exactly": [
+      "gate_statuses"
+    ]
+  },
+  "fail-publication": {
+    "failed_exactly": [
+      "publication"
+    ]
+  },
+  "fail-evidence-modified": {
+    "failed_exactly": [
+      "release_inputs_preserved"
+    ]
+  }
+}

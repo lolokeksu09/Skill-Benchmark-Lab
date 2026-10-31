@@ -1,0 +1,23 @@
+{
+  "fail-cli": {
+    "failed_exactly": [
+      "cli_invalid",
+      "cli_valid"
+    ]
+  },
+  "fail-no-new-tests": {
+    "failed_exactly": [
+      "new_targeted_regression_tests"
+    ]
+  },
+  "fail-overclaim": {
+    "failed_exactly": [
+      "no_explicit_historical_overclaim"
+    ]
+  },
+  "fail-sandbox-escape": {
+    "failed_exactly": [
+      "sandbox_escape_attempt"
+    ]
+  }
+}

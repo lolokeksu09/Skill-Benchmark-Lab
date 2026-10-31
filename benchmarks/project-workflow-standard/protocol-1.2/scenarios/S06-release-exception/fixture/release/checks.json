@@ -1,0 +1,30 @@
+{
+  "candidate": "3.2.0-rc1",
+  "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "gates": [
+    {
+      "id": "UNIT",
+      "mandatory": true,
+      "status": "success",
+      "evidence": "unit.log"
+    },
+    {
+      "id": "UI",
+      "mandatory": true,
+      "status": "success",
+      "evidence": "ui.log"
+    },
+    {
+      "id": "SEC-SCAN",
+      "mandatory": true,
+      "status": "skipped",
+      "evidence": "ci.log"
+    },
+    {
+      "id": "DEVICE-IOS",
+      "mandatory": true,
+      "status": "unavailable",
+      "evidence": "device.log"
+    }
+  ]
+}

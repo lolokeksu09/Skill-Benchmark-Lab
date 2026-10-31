@@ -1,0 +1,40 @@
+name: Project Workflow Standard 1.2
+
+on:
+  pull_request:
+    paths:
+      - 'benchmarks/project-workflow-standard/protocol-1.2/**'
+      - '.github/workflows/project-workflow-standard-1-2.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'benchmarks/project-workflow-standard/protocol-1.2/**'
+      - '.github/workflows/project-workflow-standard-1-2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: workflow-standard-1-2-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: preflight-and-deterministic-controls
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PWS_ROOT: benchmarks/project-workflow-standard/protocol-1.2
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+      - name: Verify Python runtime
+        run: python3 --version
+      - name: Static integrity and security checks
+        run: python3 "$PWS_ROOT/tools/validate.py" --static-only
+      - name: Docker runner preflight
+        run: python3 "$PWS_ROOT/tools/preflight.py" --output /tmp/pws-preflight.json
+      - name: Positive, negative and exact mutation controls
+        run: python3 "$PWS_ROOT/tools/validate.py" --preflight /tmp/pws-preflight.json

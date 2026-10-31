@@ -1,0 +1,48 @@
+{
+  "protocol": "PWS-BENCH-PROTOCOL-1.2",
+  "phase": "pilot",
+  "agent_runs_executed": 0,
+  "order": [
+    {
+      "slot": "S05-A",
+      "scenario": "S05",
+      "repeat": 1
+    },
+    {
+      "slot": "S05-B",
+      "scenario": "S05",
+      "repeat": 1
+    },
+    {
+      "slot": "S06-A",
+      "scenario": "S06",
+      "repeat": 1
+    },
+    {
+      "slot": "S06-B",
+      "scenario": "S06",
+      "repeat": 1
+    }
+  ],
+  "main_benchmark": {
+    "scenarios": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10"
+    ],
+    "repeats": 3,
+    "versions": [
+      "v1.3",
+      "v1.4-rc3"
+    ],
+    "planned_runs": 60
+  },
+  "allocation": "Trusted runner stores opaque run_id -> standard privately outside reviewer-visible evidence. No per-run version assignment is published here."
+}

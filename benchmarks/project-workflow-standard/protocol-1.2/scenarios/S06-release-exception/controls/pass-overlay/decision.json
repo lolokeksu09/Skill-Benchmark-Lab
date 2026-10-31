@@ -1,0 +1,32 @@
+{
+  "candidate": "3.2.0-rc1",
+  "l4_status": "blocked",
+  "publication": "not_published",
+  "gate_statuses": {
+    "UNIT": "success",
+    "UI": "success",
+    "SEC-SCAN": "skipped",
+    "DEVICE-IOS": "unavailable"
+  },
+  "exception_assessment": {
+    "EXC-001": "active_applicable",
+    "EXC-002": "inactive_or_inapplicable"
+  },
+  "active_exceptions": [
+    "EXC-001"
+  ],
+  "blocking_gates": [
+    "DEVICE-IOS"
+  ],
+  "gate_reasons": {
+    "UNIT": "Проверка успешна для точной ревизии кандидата, evidence: unit.log.",
+    "UI": "Проверка успешна для точной ревизии кандидата, evidence: ui.log.",
+    "SEC-SCAN": "Фактический тест skipped; gate закрыт только действующим EXC-001.",
+    "DEVICE-IOS": "Проверка unavailable; действующего применимого исключения нет."
+  },
+  "exception_reasons": {
+    "EXC-001": "Совпадают gate, кандидат и ревизия; срок истекает 2026-11-15.",
+    "EXC-002": "Исключение истекло 2026-10-01 и относится к кандидату 3.1.0."
+  },
+  "next_action": "Выполнить DEVICE-IOS на поддерживаемом устройстве и повторно оценить кандидат."
+}
