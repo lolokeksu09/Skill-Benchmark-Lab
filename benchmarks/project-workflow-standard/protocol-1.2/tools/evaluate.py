@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Evaluate behavior; accept only with valid signed runner and blinded-reviewer attestations."""
-import argparse, importlib.util, json, sys
+import argparse, importlib.util, json, re, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCENARIOS = {"S05": "S05-unreproducible", "S06": "S06-release-exception"}
@@ -33,8 +33,8 @@ def main():
         p.error("valid Protocol 1.2 run bundle required")
     evaluator_path = ROOT / "scenarios" / SCENARIOS[meta["scenario"]] / "evaluator.py"
     scenario = module("scenario_evaluator", evaluator_path)
-    if meta["scenario"] == "S05" and (not args.image or "@sha256:" not in args.image):
-        p.error("S05 requires --image with a preflight-resolved digest")
+    if meta["scenario"] == "S05" and (not args.image or not re.fullmatch(r"[^\s@]+@sha256:[0-9a-fA-F]{64}", args.image)):
+        p.error("S05 requires --image with an immutable preflight-resolved digest")
     report = scenario.evaluate(workspace, image=args.image)
     workspace_hash = safe.tree_hash(workspace)
     tool_log_hash = attest.file_hash(bundle / "tool-log.jsonl")
@@ -57,7 +57,7 @@ def main():
         runner, runner_state = attest.load_signed(args.runner_attestation, args.runner_signature,
                 args.allowed_signers, args.runner_identity, "pws-runner-v1", "runner")
         if runner:
-            runner_payload_hash = attest.file_hash(args.runner_attestation)
+            runner_payload_hash = runner_state["payload_sha256"]
             bindings = {"run_id": meta["run_id"], "protocol": meta["protocol"],
                         "workspace_sha256": workspace_hash, "tool_log_sha256": tool_log_hash,
                         "scenario_evaluator_sha256": evaluator_hash,
@@ -67,7 +67,7 @@ def main():
             missing = [k for k in REQUIRED_ENV if env.get(k) is not True]
             if runner.get("status") != "executed": mismatches.append("status")
             if not preflight_ok: mismatches.append("preflight_not_ready_or_image_mismatch")
-            if "@sha256:" not in str(runner.get("image", "")): mismatches.append("image")
+            if runner.get("image") != args.image or not args.image or not re.fullmatch(r"[^\s@]+@sha256:[0-9a-fA-F]{64}", args.image): mismatches.append("image_mismatch")
             runner_state.update({"binding_mismatches": mismatches, "missing_environment": missing})
             runner_state["ok"] = not mismatches and not missing
     report["runner_attestation"] = runner_state

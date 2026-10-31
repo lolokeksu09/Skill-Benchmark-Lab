@@ -14,9 +14,9 @@ def file_hash(path: Path) -> str:
     return hashlib.sha256(safe.read_bytes(path.parent, path.name, 4 * 1024 * 1024)).hexdigest()
 
 def verify_detached(payload_path: Path, signature_path: Path, allowed_signers: Path,
-                    identity: str, namespace: str) -> tuple[bool, str]:
+                    identity: str, namespace: str) -> tuple[bool, str, bytes | None]:
     if not shutil.which("ssh-keygen"):
-        return False, "ssh-keygen unavailable"
+        return False, "ssh-keygen unavailable", None
     try:
         payload = safe.read_bytes(payload_path.parent, payload_path.name, 4 * 1024 * 1024)
         # Validate these as regular files too; ssh-keygen must not follow a candidate link.
@@ -25,19 +25,19 @@ def verify_detached(payload_path: Path, signature_path: Path, allowed_signers: P
         proc = subprocess.run(["ssh-keygen", "-Y", "verify", "-f", str(allowed_signers),
                                "-I", identity, "-n", namespace, "-s", str(signature_path)],
                               input=payload, capture_output=True, timeout=10)
-        return proc.returncode == 0, proc.stderr.decode("utf-8", "replace").strip()
+        return proc.returncode == 0, proc.stderr.decode("utf-8", "replace").strip(), (payload if proc.returncode == 0 else None)
     except Exception as exc:
-        return False, repr(exc)
+        return False, repr(exc), None
 
 def load_signed(payload_path: Path, signature_path: Path, allowed_signers: Path,
                 identity: str, namespace: str, kind: str) -> tuple[dict | None, dict]:
-    ok, detail = verify_detached(payload_path, signature_path, allowed_signers, identity, namespace)
+    ok, detail, verified_bytes = verify_detached(payload_path, signature_path, allowed_signers, identity, namespace)
     if not ok:
         return None, {"ok": False, "identity": identity, "detail": detail}
     try:
-        payload = json.loads(safe.read_text(payload_path.parent, payload_path.name, 4 * 1024 * 1024))
+        payload = json.loads(verified_bytes)
         if payload.get("kind") != kind:
             return None, {"ok": False, "identity": identity, "detail": "wrong attestation kind"}
-        return payload, {"ok": True, "identity": identity, "payload_sha256": file_hash(payload_path)}
+        return payload, {"ok": True, "identity": identity, "payload_sha256": hashlib.sha256(verified_bytes).hexdigest()}
     except Exception as exc:
         return None, {"ok": False, "identity": identity, "detail": repr(exc)}
