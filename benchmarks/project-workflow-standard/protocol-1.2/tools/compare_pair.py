@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Require equal non-standard inputs and exactly v1.3 versus v1.4-rc3 trusted trees."""
-import argparse, importlib.util, json, sys
+import argparse, hashlib, importlib.util, json, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("safe_io", ROOT / "tools/safe_io.py")
@@ -14,10 +14,18 @@ def checked_bundle(path: Path):
     actual_standard = safe.snapshot(path / "workspace/_standard")
     if actual_standard != expected_standard:
         raise ValueError(f"untrusted or modified standard tree: {meta['standard']}")
-    fixture = safe.tree_hash(ROOT / "scenarios" / {"S05":"S05-unreproducible","S06":"S06-release-exception"}[meta["scenario"]] / "fixture")
-    if meta.get("fixture_sha256") != fixture:
+    scenario_dir = ROOT / "scenarios" / {"S05":"S05-unreproducible","S06":"S06-release-exception"}[meta["scenario"]]
+    fixture_dir = scenario_dir / "fixture"
+    if meta.get("fixture_sha256") != safe.tree_hash(fixture_dir):
         raise ValueError("fixture provenance mismatch")
-    return meta, safe.snapshot(path / "workspace", exclude=("_standard",))
+    pristine = safe.snapshot(fixture_dir)
+    if "TASK.md" in pristine:
+        raise ValueError("fixture shadows TASK.md")
+    pristine["TASK.md"] = hashlib.sha256(safe.read_bytes(scenario_dir, "task.md")).hexdigest()
+    observed = safe.snapshot(path / "workspace", exclude=("_standard",))
+    if observed != pristine:
+        raise ValueError("non-standard inputs differ from pristine fixture and TASK.md")
+    return meta, observed
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

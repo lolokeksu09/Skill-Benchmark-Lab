@@ -73,13 +73,13 @@
     "standards/v1.4-rc3/templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
     "standards/v1.4-rc3/tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0",
     "tools/attestations.py": "160c71841b4c05e2e252f2e8c70daf124c3a114ef9e00d6c8ecc68433e5bdd10",
-    "tools/compare_pair.py": "a24125928bdc18913459ee7b925743fd8e7fe6212635111cf4291af6441de844",
+    "tools/compare_pair.py": "4719eed0dc46ef5e099492b776bf0beda1a97b6e31f8bc5c28f9a0d140c832d6",
     "tools/control_factory.py": "893004ed3b1822897df1e8195b46b6feb86c846532b6202ebc95f1706b160fc4",
     "tools/docker_runner.py": "cbd5ff4336a19ce4d8039fb2c14ef9cf78cba869ac1b799f6672a04a85576a16",
     "tools/evaluate.py": "140fa9d91c52d5614a2f8cacb4ee3dc83eddbab9e105a4aedc3a26ca95af3bb6",
     "tools/preflight.py": "f7b47366981ac6d4f5c881bf2f54d209145e79127c33077a22833cb7a61e4a55",
     "tools/prepare_run.py": "7d2bfb7b22ed234bc06972f7852a4264184ff7dc151c17939973990b67311b99",
     "tools/safe_io.py": "f5fc8f7976df3c880fba3bd8057ccebf2ac3794c27bc1484420839d71b6a5b72",
-    "tools/validate.py": "f977417de6bff53373966633878f7697832a7ca3e263f28b185a05837a9e1cf9"
+    "tools/validate.py": "a897521f6c99c8b2bd90a4417cb7bb40a46a25343bbceb1a82dc0635d73ae3f4"
   }
 }

@@ -68,6 +68,10 @@ def main():
                     assert not (target/"workspace/RUN.json").exists();bundles[(scenario,version)]=target
                 pair=run([sys.executable,ROOT/"tools/compare_pair.py",bundles[(scenario,"v1.3")],bundles[(scenario,"v1.4-rc3")]]);assert pair.returncode==0,pair.stdout
             same=run([sys.executable,ROOT/"tools/compare_pair.py",bundles[("S05","v1.3")],bundles[("S06","v1.3")]]);assert same.returncode!=0,"same standards accepted"
+            for version in STANDARDS:
+                (bundles[("S05",version)]/"workspace/cli.py").write_text("both-pairs-tampered\n")
+            tampered = run([sys.executable,ROOT/"tools/compare_pair.py",bundles[("S05","v1.3")],bundles[("S05","v1.4-rc3")]])
+            assert tampered.returncode != 0, "jointly tampered inputs accepted"
             shutil.rmtree(bundles[("S05","v1.4-rc3")]/"workspace/_standard")
             missing=run([sys.executable,ROOT/"tools/compare_pair.py",bundles[("S05","v1.3")],bundles[("S05","v1.4-rc3")]]);assert missing.returncode!=0,"missing standard accepted"
         return "both versions and exact non-standard equality enforced"
