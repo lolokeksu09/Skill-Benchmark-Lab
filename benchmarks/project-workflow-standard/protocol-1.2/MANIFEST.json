@@ -77,9 +77,9 @@
     "tools/control_factory.py": "893004ed3b1822897df1e8195b46b6feb86c846532b6202ebc95f1706b160fc4",
     "tools/docker_runner.py": "cbd5ff4336a19ce4d8039fb2c14ef9cf78cba869ac1b799f6672a04a85576a16",
     "tools/evaluate.py": "140fa9d91c52d5614a2f8cacb4ee3dc83eddbab9e105a4aedc3a26ca95af3bb6",
-    "tools/preflight.py": "f7b47366981ac6d4f5c881bf2f54d209145e79127c33077a22833cb7a61e4a55",
+    "tools/preflight.py": "bf85e4d2f178a6b9057ce8767f5e3261c2c7d553b29dbd070ac83721eeea4f50",
     "tools/prepare_run.py": "7d2bfb7b22ed234bc06972f7852a4264184ff7dc151c17939973990b67311b99",
-    "tools/safe_io.py": "f5fc8f7976df3c880fba3bd8057ccebf2ac3794c27bc1484420839d71b6a5b72",
+    "tools/safe_io.py": "13a62baa6096702289b465852c1c5c143eb5a3eaa5cf1eaf7ef7344aff33a5cd",
     "tools/validate.py": "a897521f6c99c8b2bd90a4417cb7bb40a46a25343bbceb1a82dc0635d73ae3f4"
   }
 }

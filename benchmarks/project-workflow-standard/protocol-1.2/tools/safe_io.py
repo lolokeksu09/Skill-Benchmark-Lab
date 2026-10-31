@@ -4,6 +4,9 @@ import hashlib, json, os, stat
 from pathlib import Path, PurePosixPath
 
 DEFAULT_LIMIT = 1024 * 1024
+MAX_SNAPSHOT_FILES = 4096
+MAX_SNAPSHOT_TOTAL_BYTES = 32 * 1024 * 1024
+MAX_SNAPSHOT_DEPTH = 16
 
 class UnsafeFile(ValueError):
     pass
@@ -59,28 +62,63 @@ def read_text(root: Path, relative: str | Path, limit: int = DEFAULT_LIMIT) -> s
 def read_json(root: Path, relative: str | Path, limit: int = DEFAULT_LIMIT):
     return json.loads(read_text(root, relative, limit))
 
-def snapshot(root: Path, exclude: tuple[str, ...] = (), limit: int = DEFAULT_LIMIT) -> dict[str, str]:
-    root = Path(root)
-    root_fd = _open_root(root)
-    os.close(root_fd)
+def _snapshot_once(root: Path, exclude: tuple[str, ...], limit: int,
+                   max_files: int, max_total_bytes: int, max_depth: int) -> dict[str, str]:
     result: dict[str, str] = {}
+    total_bytes = 0
+    entries = 0
     for directory, dirnames, filenames in os.walk(root, followlinks=False):
-        directory_path = Path(directory)
+        relative_dir = Path(directory).relative_to(root)
+        depth = 0 if relative_dir == Path(".") else len(relative_dir.parts)
+        if depth > max_depth:
+            raise UnsafeFile("snapshot directory depth exceeded")
         for name in list(dirnames):
-            path = directory_path / name
+            path = Path(directory) / name
             mode = path.lstat().st_mode
             if stat.S_ISLNK(mode) or not stat.S_ISDIR(mode):
                 raise UnsafeFile(f"unsafe directory entry: {path.relative_to(root)}")
+            entries += 1
+            if entries > max_files:
+                raise UnsafeFile("snapshot entry count exceeded")
+            if depth + 1 > max_depth:
+                raise UnsafeFile("snapshot directory depth exceeded")
         for name in filenames:
-            path = directory_path / name
+            path = Path(directory) / name
             rel = path.relative_to(root).as_posix()
             if rel in exclude or any(rel.startswith(prefix.rstrip("/") + "/") for prefix in exclude):
                 continue
+            entries += 1
+            if entries > max_files:
+                raise UnsafeFile("snapshot file count exceeded")
+            if depth + 1 > max_depth:
+                raise UnsafeFile("snapshot file depth exceeded")
             mode = path.lstat().st_mode
             if not stat.S_ISREG(mode) or stat.S_ISLNK(mode):
                 raise UnsafeFile(f"non-regular candidate file: {rel}")
-            result[rel] = hashlib.sha256(read_bytes(root, rel, limit)).hexdigest()
+            data = read_bytes(root, rel, limit)
+            total_bytes += len(data)
+            if total_bytes > max_total_bytes:
+                raise UnsafeFile("snapshot aggregate bytes exceeded")
+            result[rel] = hashlib.sha256(data).hexdigest()
     return dict(sorted(result.items()))
+
+
+def snapshot(root: Path, exclude: tuple[str, ...] = (), limit: int = DEFAULT_LIMIT,
+             max_files: int = MAX_SNAPSHOT_FILES,
+             max_total_bytes: int = MAX_SNAPSHOT_TOTAL_BYTES,
+             max_depth: int = MAX_SNAPSHOT_DEPTH) -> dict[str, str]:
+    """Two bounded passes detect observed changes; not an atomic filesystem snapshot."""
+    root = Path(root)
+    fd = _open_root(root)
+    os.close(fd)
+    if min(limit, max_files, max_total_bytes, max_depth) < 1:
+        raise UnsafeFile("snapshot limits must be positive")
+    first = _snapshot_once(root, exclude, limit, max_files, max_total_bytes, max_depth)
+    second = _snapshot_once(root, exclude, limit, max_files, max_total_bytes, max_depth)
+    if first != second:
+        raise UnsafeFile("workspace changed between snapshot passes")
+    return second
+
 
 def tree_hash(root: Path, exclude: tuple[str, ...] = ()) -> str:
     entries = snapshot(root, exclude)
