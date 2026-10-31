@@ -62,6 +62,39 @@ def read_text(root: Path, relative: str | Path, limit: int = DEFAULT_LIMIT) -> s
 def read_json(root: Path, relative: str | Path, limit: int = DEFAULT_LIMIT):
     return json.loads(read_text(root, relative, limit))
 
+def write_bytes(root: Path, relative: str | Path, data: bytes, limit: int = DEFAULT_LIMIT) -> None:
+    """Write one bounded regular file without following links; parent must already exist."""
+    if len(data) > limit:
+        raise UnsafeFile(f"write exceeds {limit} bytes: {relative!r}")
+    parts = _parts(relative)
+    root_fd = _open_root(root)
+    fds = [root_fd]
+    try:
+        current = root_fd
+        for part in parts[:-1]:
+            flags = os.O_RDONLY | os.O_DIRECTORY | getattr(os, "O_NOFOLLOW", 0)
+            current = os.open(part, flags, dir_fd=current)
+            fds.append(current)
+        flags = (os.O_WRONLY | os.O_CREAT | os.O_TRUNC |
+                 getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_CLOEXEC", 0))
+        fd = os.open(parts[-1], flags, 0o644, dir_fd=current)
+        fds.append(fd)
+        before = os.fstat(fd)
+        if not stat.S_ISREG(before.st_mode):
+            raise UnsafeFile(f"not a regular file: {relative}")
+        view = memoryview(data)
+        while view:
+            written = os.write(fd, view)
+            view = view[written:]
+        after = os.fstat(fd)
+        if (before.st_dev, before.st_ino) != (after.st_dev, after.st_ino) or not stat.S_ISREG(after.st_mode):
+            raise UnsafeFile(f"file changed while being written: {relative}")
+        if after.st_size != len(data):
+            raise UnsafeFile(f"short write: {relative}")
+    finally:
+        for fd in reversed(fds):
+            os.close(fd)
+
 def _snapshot_once(root: Path, exclude: tuple[str, ...], limit: int,
                    max_files: int, max_total_bytes: int, max_depth: int) -> dict[str, str]:
     result: dict[str, str] = {}

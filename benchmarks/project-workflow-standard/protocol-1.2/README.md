@@ -4,7 +4,7 @@
 
 ## Статус
 
-Агентных запусков: **0 из 4**. Преимущество любой версии не установлено. Реализованы только S05 и S06. CI проверяет runner и детерминированные controls; CI не вызывает AI и не выполняет публикацию.
+Агентных запусков: **0 из 4**. Преимущество любой версии не установлено. Реализованы только S05 и S06. CI проверяет runner и детерминированные controls; CI не вызывает AI и не выполняет публикацию. Auditable AI runner bridge (`tools/agent_runner.py`) реализован и проверяется в CI детерминированными fake-agent controls без AI-провайдера и без credentials.
 
 ## Модель изоляции
 
@@ -15,6 +15,10 @@
 - Тег образа используется только для preflight pull. Выполнение и аттестация привязаны к разрешённому `sha256` digest.
 
 Docker делит ядро с host и не эквивалентен VM. Это пилотная граница для недоверенного candidate-кода при доверенном Docker daemon; для более сильной угрозы нужна отдельная VM.
+
+## AI runner bridge
+
+`tools/agent_runner.py` — реализованный fail-closed мост между trusted orchestrator и внешней AI-командой. Внешняя команда не получает путь workspace и не наследует host environment (только `PATH`/`HOME` и явные `--allow-env`). Весь доступ к workspace идёт через JSON-lines протокол `pws-agent-bridge-v1` с инструментами `list_files`, `read_file`, `write_file`, `run_tests`, `finish`; каждое сообщение попадает в `tool-log.jsonl`. `run_tests` для S05 выполняет candidate-тесты только в Docker-контейнере с preflight image; для S06 недоступен. Неизвестные инструменты, malformed-сообщения и path traversal закрывают прогон; общий deadline enforced watchdog-терминацией всей process group. Мост пишет **неподписанный** evidence payload; подпись runner key (`pws-runner-v1`) выполняется оператором отдельно. CI проверяет мост только детерминированными fake-агентами: позитивные bindings, forbidden tool, traversal, timeout, изоляцию environment, недоступность `run_tests` в S06. Реальный AI не вызывается.
 
 ## Проверка
 

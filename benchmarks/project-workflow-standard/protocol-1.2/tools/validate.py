@@ -29,7 +29,7 @@ def main():
             note=fn();completed+=1;print(f"PASS {name}"+(f": {note}" if note else ""))
         except Exception as exc:failures+=1;print(f"FAIL {name}: {exc}")
     def required():
-        for rel in ["README.md","PROTOCOL.md","MANIFEST.json","config.json","tools/preflight.py","tools/docker_runner.py","tools/safe_io.py"]:
+        for rel in ["README.md","PROTOCOL.md","MANIFEST.json","config.json","tools/preflight.py","tools/docker_runner.py","tools/safe_io.py","tools/agent_runner.py"]:
             assert (ROOT/rel).is_file(),rel
         assert "PWS-BENCH-PROTOCOL-1.2" in (ROOT/"PROTOCOL.md").read_text()
     def manifest():
@@ -51,6 +51,17 @@ def main():
             (root/"link").unlink();os.mkfifo(root/"fifo")
             try:safe.snapshot(root);raise AssertionError("FIFO accepted")
             except (safe.UnsafeFile,OSError):pass
+            (root/"sub").mkdir()
+            safe.write_bytes(root,"sub/new.txt",b"created")
+            assert safe.read_bytes(root,"sub/new.txt")==b"created"
+            try:safe.write_bytes(root,"../escape.txt",b"x");raise AssertionError("traversal write accepted")
+            except (safe.UnsafeFile,OSError):pass
+            try:safe.write_bytes(root,"missing-parent/x.txt",b"x");raise AssertionError("missing parent accepted")
+            except (safe.UnsafeFile,OSError):pass
+            (root/"wlink").symlink_to(outside)
+            try:safe.write_bytes(root,"wlink",b"x");raise AssertionError("symlink write accepted")
+            except (safe.UnsafeFile,OSError):pass
+            assert outside.read_text()=="secret"
     def bundles_and_pairs():
         with tempfile.TemporaryDirectory() as tmp:
             tmp=Path(tmp);bundles={}
@@ -103,7 +114,118 @@ def main():
             wrong=dict(review);wrong["run_id"]="other";wp=tmp/"wrong.json";wp.write_text(json.dumps(wrong));ws=sign(review_key,wp,"pws-review-v1")
             rejected=run(command+["--review-attestation",wp,"--review-signature",ws]);assert rejected.returncode!=0 and not report_from(rejected)["accepted"],"wrong binding accepted"
             return "forged flags, missing review and wrong bindings rejected; synthetic signature path only"
-    tests=[required,manifest,origins,safe_files,bundles_and_pairs,fail_closed_acceptance]
+    def agent_bridge():
+        """Deterministic fake-agent controls for the tool-mediated runner bridge.
+
+        No AI provider is contacted; the fake agents are inline scripts speaking
+        the pws-agent-bridge-v1 JSON-lines protocol.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp=Path(tmp)
+            image="python@sha256:"+"0"*64
+            preflight=tmp/"preflight.json"
+            preflight.write_text(json.dumps({"protocol":"PWS-BENCH-PROTOCOL-1.2","status":"READY","image":image}))
+            def write_agent(name,code):
+                path=tmp/name;path.write_text(code);return path
+            def run_bridge(agent,expect,scenario="S05",timeout_s=60):
+                bundle=tmp/("bundle-"+agent.stem)
+                p=run([sys.executable,ROOT/"tools/prepare_run.py","--scenario",scenario,
+                       "--standard","v1.3","--output",bundle]);assert p.returncode==0,p.stderr
+                out=tmp/("evidence-"+agent.stem+".json")
+                proc=run([sys.executable,ROOT/"tools/agent_runner.py",bundle,
+                          "--agent-command",f"{sys.executable} {agent}",
+                          "--preflight",preflight,"--image",image,
+                          "--timeout",str(timeout_s),"--output",out],timeout=timeout_s+90)
+                assert proc.returncode==0,proc.stderr[-600:]
+                evidence=json.loads(out.read_text())
+                assert evidence["status"]==expect,(expect,evidence["status"],evidence["critical_errors"])
+                return evidence,bundle
+            positive=write_agent("agent_positive.py",'''
+import json, sys
+hello = json.loads(sys.stdin.readline())
+assert hello["type"] == "hello" and hello["protocol"] == "pws-agent-bridge-v1", hello
+assert hello["scenario"] == "S05" and "TASK.md" in hello["workspace_manifest"], hello
+def call(cid, tool, **kw):
+    print(json.dumps({"type": "tool_call", "id": cid, "tool": tool, **kw}), flush=True)
+    return json.loads(sys.stdin.readline())
+res = call("1", "list_files")
+assert res["ok"] and "TASK.md" in res["files"], res
+res = call("2", "read_file", path="TASK.md")
+assert res["ok"] and len(res["content"]) > 0, res
+res = call("3", "write_file", path="AGENT-NOTES.txt", content="deterministic control")
+assert res["ok"] and res["bytes"] == 21 and len(res["sha256"]) == 64, res
+print(json.dumps({"type": "finish", "model": "fake", "provider": "deterministic-control",
+                  "tokens": "not_measured", "cost": "not_measured"}), flush=True)
+sys.exit(0)
+''')
+            evidence,bundle=run_bridge(positive,"executed")
+            assert evidence["workspace_sha256"]==safe.tree_hash(bundle/"workspace")
+            assert evidence["tool_log_sha256"]==attest.file_hash(bundle/"tool-log.jsonl")
+            assert evidence["scenario_evaluator_sha256"]==attest.file_hash(ROOT/"scenarios/S05-unreproducible/evaluator.py")
+            assert evidence["preflight_sha256"]==attest.file_hash(preflight)
+            assert evidence["image"]==image
+            assert evidence["run_id"]==safe.read_json(bundle,"RUN.json")["run_id"]
+            assert all(evidence["environment"].values())
+            assert evidence["process"]=={"terminated_by_bridge": False, "timed_out": False, "exit_code": 0}
+            assert safe.read_text(bundle/"workspace","AGENT-NOTES.txt")=="deterministic control"
+            lines=[json.loads(l) for l in (bundle/"tool-log.jsonl").read_text().splitlines()]
+            kinds=[e.get("type") for e in lines]
+            assert kinds[0]=="hello" and kinds[-1]=="finish" and kinds.count("tool_call")==3,kinds
+            forbidden=write_agent("agent_forbidden.py",'''
+import json, sys
+sys.stdin.readline()
+print(json.dumps({"type": "tool_call", "id": "1", "tool": "delete_file", "path": "TASK.md"}), flush=True)
+sys.stdin.readline()
+''')
+            run_bridge(forbidden,"failed_bridge")
+            traversal=write_agent("agent_traversal.py",'''
+import json, sys
+sys.stdin.readline()
+print(json.dumps({"type": "tool_call", "id": "1", "tool": "read_file", "path": "../../RUN.json"}), flush=True)
+sys.stdin.readline()
+''')
+            evidence,bundle=run_bridge(traversal,"failed_bridge")
+            log_lines=(bundle/"tool-log.jsonl").read_text().splitlines()
+            assert any(json.loads(l).get("outside_workspace") is True for l in log_lines),"escape attempt not flagged"
+            assert all("prepared_not_executed" not in l for l in log_lines),"outside content exfiltrated"
+            sleeping=write_agent("agent_sleep.py",'''
+import sys, time
+sys.stdin.readline()
+time.sleep(60)
+''')
+            evidence,_=run_bridge(sleeping,"terminated_timeout",timeout_s=3)
+            assert evidence["process"]["timed_out"] is True
+            env_agent=write_agent("agent_env.py",'''
+import json, os, sys
+sys.stdin.readline()
+leaked = sorted(k for k in os.environ if k.startswith("PWS_BRIDGE"))
+print(json.dumps({"type": "finish", "model": "fake", "provider": "deterministic-control",
+                  "tokens": "not_measured", "cost": "not_measured"}), flush=True)
+sys.stderr.write("LEAKED=" + json.dumps(leaked) + "\\n"); sys.stderr.flush()
+sys.exit(0)
+''')
+            os.environ["PWS_BRIDGE_SECRET"]="bridge-secret-marker"
+            try:
+                evidence,bundle=run_bridge(env_agent,"executed")
+            finally:
+                os.environ.pop("PWS_BRIDGE_SECRET",None)
+            assert evidence["agent_stderr_tail"].strip().endswith("LEAKED=[]"),evidence["agent_stderr_tail"]
+            assert "bridge-secret-marker" not in json.dumps(evidence)
+            assert "bridge-secret-marker" not in (bundle/"tool-log.jsonl").read_text()
+            s06_agent=write_agent("agent_s06.py",'''
+import json, sys
+hello = json.loads(sys.stdin.readline())
+assert hello["scenario"] == "S06", hello
+print(json.dumps({"type": "tool_call", "id": "1", "tool": "run_tests"}), flush=True)
+res = json.loads(sys.stdin.readline())
+assert res["type"] == "tool_result" and res.get("available") is False, res
+print(json.dumps({"type": "finish", "model": "fake", "provider": "deterministic-control",
+                  "tokens": "not_measured", "cost": "not_measured"}), flush=True)
+sys.exit(0)
+''')
+            run_bridge(s06_agent,"executed",scenario="S06")
+            return "positive bindings, forbidden tool, traversal, timeout, env isolation, S06 run_tests unavailability"
+    tests=[required,manifest,origins,safe_files,bundles_and_pairs,fail_closed_acceptance,agent_bridge]
     if not args.static_only:
         assert args.preflight,"--preflight required unless --static-only"
         pre=json.loads(args.preflight.read_text());assert pre["status"]=="READY" and pre["protocol"]=="PWS-BENCH-PROTOCOL-1.2","runner NOT_READY"
