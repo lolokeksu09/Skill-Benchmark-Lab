@@ -20,12 +20,43 @@ def _consume(pipe, sink: list[str]) -> None:
             data = chunk[:OUTPUT_LIMIT-total]
             sink.append(data.decode("utf-8", "replace")); total += len(data)
 
+def _inspect_absent(name: str) -> tuple[bool, str]:
+    try:
+        result = subprocess.run(["docker", "container", "inspect", name],
+                                stdin=subprocess.DEVNULL, capture_output=True, text=True,
+                                timeout=10, env={"PATH": "/usr/bin:/bin"})
+        detail = (result.stdout + result.stderr).strip()[-1000:]
+        return (result.returncode != 0 and
+                ("No such object" in detail or "No such container" in detail)), detail
+    except (OSError, subprocess.SubprocessError) as exc:
+        return False, repr(exc)
+
+
+def _cleanup(name: str) -> tuple[bool, list[str]]:
+    notes = []
+    absent, detail = _inspect_absent(name)
+    if absent:
+        return True, notes
+    try:
+        removed = subprocess.run(["docker", "rm", "-f", name], stdin=subprocess.DEVNULL,
+                                 capture_output=True, text=True, timeout=10,
+                                 env={"PATH": "/usr/bin:/bin"})
+        if removed.returncode:
+            notes.append(f"docker rm -f failed ({removed.returncode}): {(removed.stdout + removed.stderr)[-1000:]}")
+    except (OSError, subprocess.SubprocessError) as exc:
+        notes.append(f"docker rm -f error: {exc!r}")
+    absent, detail = _inspect_absent(name)
+    if not absent:
+        notes.append(f"container absence not confirmed: {detail}")
+    return absent, notes
+
+
 def run_python(workspace: Path, args: list[str], image: str, harness: Path | None = None,
                timeout: int = 30, writable: bool = False) -> dict:
-    """Run untrusted code in a new network-less, cgroup-limited container."""
+    """Fail-closed Docker execution, including container cleanup confirmation."""
     if not shutil.which("docker"):
         return {"ok": False, "status": "sandbox_unavailable", "exit_code": None,
-                "output": "docker is required; host execution is forbidden"}
+                "output": "docker is required; host execution is forbidden", "container_removed": False}
     if "@sha256:" not in image:
         raise SandboxUnavailable("resolved image digest required; tags are not an execution identity")
     workspace = Path(workspace)
@@ -47,6 +78,10 @@ def run_python(workspace: Path, args: list[str], image: str, harness: Path | Non
     command += [image, "python3", "-I", *args]
     sink: list[str] = []
     proc = None
+    reader = None
+    code = None
+    status = "sandbox_error"
+    error = ""
     try:
         proc = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
                                 stderr=subprocess.STDOUT, env={"PATH": "/usr/bin:/bin"})
@@ -56,18 +91,29 @@ def run_python(workspace: Path, args: list[str], image: str, harness: Path | Non
             code = proc.wait(timeout=timeout)
             status = "executed"
         except subprocess.TimeoutExpired:
-            subprocess.run(["docker", "rm", "-f", name], stdin=subprocess.DEVNULL,
-                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                           timeout=10, env={"PATH": "/usr/bin:/bin"})
-            code = proc.wait(timeout=10); status = "timeout"
-        reader.join(timeout=5)
-        output = "".join(sink)
-        return {"ok": code == 0 and status == "executed", "status": status, "exit_code": code,
-                "output": output, "backend": "docker-cgroup-network-none-readonly",
-                "image": image, "container_removed": True}
+            status = "timeout"
+            error = f"docker run exceeded {timeout}s"
     except (OSError, subprocess.SubprocessError) as exc:
+        error = f"docker run error: {exc!r}"
+    finally:
+        removed, notes = _cleanup(name)
         if proc is not None and proc.poll() is None:
-            subprocess.run(["docker", "rm", "-f", name], stdout=subprocess.DEVNULL,
-                           stderr=subprocess.DEVNULL, env={"PATH": "/usr/bin:/bin"})
-        return {"ok": False, "status": "sandbox_error", "exit_code": None,
-                "output": repr(exc), "backend": "docker"}
+            try:
+                code = proc.wait(timeout=3)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                try:
+                    proc.wait(timeout=3)
+                except subprocess.TimeoutExpired:
+                    notes.append("docker CLI did not terminate after kill")
+        if reader is not None:
+            reader.join(timeout=5)
+    if not removed:
+        status = "cleanup_failed"
+    output = "".join(sink)
+    if error or notes:
+        output += "\n" + "\n".join([s for s in [error, *notes] if s])
+    return {"ok": code == 0 and status == "executed" and removed,
+            "status": status, "exit_code": code, "output": output,
+            "backend": "docker-cgroup-network-none-readonly", "image": image,
+            "container_removed": removed}
