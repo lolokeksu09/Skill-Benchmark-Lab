@@ -243,7 +243,7 @@ sys.exit(0)
 import json, os, subprocess, sys
 sys.stdin.readline()
 subprocess.Popen([sys.executable, "-c",
- "import os,time,pathlib;pathlib.Path(r'" + repr("ORPHAN_MARKER") + "').write_text(str(os.getpid()));time.sleep(300)"])
+ "import os,time,pathlib;pathlib.Path(" + repr("ORPHAN_MARKER") + ").write_text(str(os.getpid()));time.sleep(300)"])
 os._exit(0)
 '''.replace("ORPHAN_MARKER",str(orphan_marker)))
             evidence,_=run_bridge(orphan,"terminated_timeout",timeout_s=5)
