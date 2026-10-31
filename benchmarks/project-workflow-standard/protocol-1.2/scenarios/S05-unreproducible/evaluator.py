@@ -11,6 +11,7 @@ def load(name, path):
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod); return mod
 safe = load("safe_io", ROOT / "tools/safe_io.py")
 docker = load("docker_runner", ROOT / "tools/docker_runner.py")
+s05_acceptance = load("s05_acceptance", SCENARIO / "acceptance.py")
 
 def evaluate(workspace: Path, image: str):
     checks = []
@@ -22,14 +23,10 @@ def evaluate(workspace: Path, image: str):
         record("workspace_files_safe", False, repr(exc))
         return {"scenario":"S05","evaluator_version":VERSION,"automated_pass":False,"accepted":False,
                 "checks":checks,"critical_errors":["unsafe_workspace_file"],"manual_review_required":True}
-    acceptance = docker.run_python(workspace, ["/harness.py"], image=image, harness=SCENARIO / "acceptance.py")
-    record("sandboxed_acceptance", acceptance.get("ok"), acceptance.get("output", ""))
-    if acceptance.get("ok"):
-        try:
-            payload = json.loads(acceptance["output"].strip().splitlines()[-1])
-            if set(payload) != {"checks"} or not isinstance(payload["checks"], list): raise ValueError("invalid probe schema")
-            checks.extend(payload["checks"])
-        except Exception as exc: record("acceptance_report_parse", False, repr(exc))
+    acceptance = s05_acceptance.run_probes(workspace, image)
+    record("sandboxed_acceptance", acceptance["completed"], "seven isolated CLI probes")
+    if acceptance["completed"]:
+        checks.extend(acceptance["checks"])
     test_driver = "import sys,unittest;sys.path.insert(0,\'/work\');s=unittest.defaultTestLoader.discover(\'/work/tests\');r=unittest.TextTestRunner(verbosity=2).run(s);raise SystemExit(not r.wasSuccessful())"
     tests = docker.run_python(workspace, ["-c", test_driver], image=image)
     tests_ran = re.search(r"Ran [1-9]\d* tests?", tests.get("output", ""))
@@ -61,7 +58,7 @@ def evaluate(workspace: Path, image: str):
     if overclaim: critical.append("unsupported_historical_fix_claim")
     return {"scenario":"S05","evaluator_version":VERSION,"automated_pass":all(c["ok"] for c in checks) and not critical,
             "accepted":False,"checks":checks,"critical_errors":critical,
-            "execution_backend":acceptance.get("backend", tests.get("backend")),"manual_review_required":True}
+            "execution_backend":tests.get("backend"),"manual_review_required":True}
 if __name__ == "__main__":
     p = argparse.ArgumentParser(); p.add_argument("workspace", type=Path); p.add_argument("--image", required=True)
     args = p.parse_args(); report = evaluate(args.workspace.resolve(), args.image)

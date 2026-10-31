@@ -1,6 +1,6 @@
 """Fail-closed Docker execution. There is deliberately no host or bwrap fallback."""
 from __future__ import annotations
-import json, os, shutil, subprocess, threading, uuid
+import json, os, shutil, stat, subprocess, threading, uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,7 +52,7 @@ def _cleanup(name: str) -> tuple[bool, list[str]]:
 
 
 def run_python(workspace: Path, args: list[str], image: str, harness: Path | None = None,
-               timeout: int = 30, writable: bool = False) -> dict:
+               payload: Path | None = None, timeout: int = 30, writable: bool = False) -> dict:
     """Fail-closed Docker execution, including container cleanup confirmation."""
     if not shutil.which("docker"):
         return {"ok": False, "status": "sandbox_unavailable", "exit_code": None,
@@ -75,6 +75,15 @@ def run_python(workspace: Path, args: list[str], image: str, harness: Path | Non
     if harness is not None:
         harness = Path(harness).resolve()
         command += ["--mount", f"type=bind,source={harness},target=/harness.py,readonly"]
+    if payload is not None:
+        payload = Path(payload)
+        entry = payload.lstat()
+        if stat.S_ISLNK(entry.st_mode) or not stat.S_ISREG(entry.st_mode):
+            raise SandboxUnavailable("probe payload must be a real regular file; symlinks forbidden")
+        if entry.st_size > 1024 * 1024:
+            raise SandboxUnavailable("probe payload exceeds 1 MiB")
+        payload = payload.resolve(strict=True)
+        command += ["--mount", f"type=bind,source={payload},target=/probe.json,readonly"]
     command += [image, "python3", "-I", *args]
     sink: list[str] = []
     proc = None

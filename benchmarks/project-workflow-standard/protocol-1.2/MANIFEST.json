@@ -13,12 +13,12 @@
     "results/STRUCTURAL-VALIDATION.md": "83c75112ce65585dd6f1884aa2b2c90059b6a9f7d934f4eb7ee18105445ae7e3",
     "results/manual-review-template.json": "e425b148a0756d229268f6d70986f7c2fc5e6082092130c175682dc0ef313698",
     "runs/README.md": "36039039f64cbbc5a188184aa041580470a7c0aa3a57c7da80c759eed1e2fe34",
-    "scenarios/S05-unreproducible/acceptance.py": "b59717abe64a4a5ab55d7cbdead2cf769fff713f3bfe643653feb9f18be6eac7",
+    "scenarios/S05-unreproducible/acceptance.py": "7f2a6e2cbfd1511ea9fb3216600a93aad52042922db42862edbae37c6132595a",
     "scenarios/S05-unreproducible/controls/pass-overlay/RESULT.md": "9d17be7ec3ac39ce548dad2a79f6f08b8e1338fc99d3245fe06eed7df2797d3a",
     "scenarios/S05-unreproducible/controls/pass-overlay/config_loader.py": "5159ebbc787a79b461015667bf7ca660e9c79f6c2cb88cf96f4787c49761743d",
     "scenarios/S05-unreproducible/controls/pass-overlay/tests/test_regression.py": "5fce8e5a10b06c26ce4de7f5b18840a0c2a0e642578662b5af2720427e431af5",
     "scenarios/S05-unreproducible/criteria.json": "dacfac8eadd0f152d4b34da0367626e534c9782ff5fda4c7248238a86259c7ce",
-    "scenarios/S05-unreproducible/evaluator.py": "d12a4eeb6a8c97c060abeb02086b7e92d34c85c02ea646e2859062f5cdd84f16",
+    "scenarios/S05-unreproducible/evaluator.py": "aade5553cb371d8e084db90c5216ff05ec69bdfc8813d60455a92b63129fa576",
     "scenarios/S05-unreproducible/fixture/README.md": "e8f735ce11115b8035074549516d1fdd7bd7a5ed7e8936b6de06e9c1c08cbeda",
     "scenarios/S05-unreproducible/fixture/USER-NOTES.txt": "fba9299d79d263866b6c8076c4186edb8a937093636dff7372ad38d7245f8222",
     "scenarios/S05-unreproducible/fixture/cli.py": "6a4dbd88369c742313479359acd07fc8c919bbd1c63123768e714fbee7948522",
@@ -75,11 +75,12 @@
     "tools/attestations.py": "160c71841b4c05e2e252f2e8c70daf124c3a114ef9e00d6c8ecc68433e5bdd10",
     "tools/compare_pair.py": "5d76233255708576ed88a384e875940dca35963029c3a40f6d084485dd6aa9ff",
     "tools/control_factory.py": "893004ed3b1822897df1e8195b46b6feb86c846532b6202ebc95f1706b160fc4",
-    "tools/docker_runner.py": "cbd5ff4336a19ce4d8039fb2c14ef9cf78cba869ac1b799f6672a04a85576a16",
+    "tools/docker_runner.py": "932792ad03de3358c38b27d64b504716dc2adca86973d9dea2a785766b57c5af",
     "tools/evaluate.py": "140fa9d91c52d5614a2f8cacb4ee3dc83eddbab9e105a4aedc3a26ca95af3bb6",
     "tools/preflight.py": "2737af13d0b383012bf1c45e2b18ae674bf3539caa074dcbb2b7d70710baf628",
     "tools/prepare_run.py": "9d91814d165211f028e6b84e147f761ae4018ad8a398c63717f1f6bd68d62315",
     "tools/safe_io.py": "13a62baa6096702289b465852c1c5c143eb5a3eaa5cf1eaf7ef7344aff33a5cd",
-    "tools/validate.py": "a897521f6c99c8b2bd90a4417cb7bb40a46a25343bbceb1a82dc0635d73ae3f4"
+    "tools/validate.py": "a897521f6c99c8b2bd90a4417cb7bb40a46a25343bbceb1a82dc0635d73ae3f4",
+    "scenarios/S05-unreproducible/probe_wrapper.py": "61e501d545bbd5a9859942692c14404359627b5ad7115fb9f7d9ceaa60b164a2"
   }
 }
