@@ -1,0 +1,118 @@
+{
+  "checker_sha256": "040ab9bdd280aca06e9b6a6db2e958a54c6175d2af7bba9eb1ebaf0d5a9daa13",
+  "python": "3.12.14",
+  "cases": [
+    {
+      "case": "baseline_directory",
+      "expected_ok": true,
+      "exit": 0,
+      "json": {
+        "package": {
+          "files": 16,
+          "bytes": 112637,
+          "links": "32 local links/anchors resolve"
+        },
+        "ok": true,
+        "agent_behavior_evaluated": false
+      },
+      "stderr": "",
+      "matched": true
+    },
+    {
+      "case": "blank_readme",
+      "expected_ok": false,
+      "exit": 1,
+      "json": {
+        "ok": false,
+        "error": "empty source file",
+        "agent_behavior_evaluated": false
+      },
+      "stderr": "",
+      "matched": true
+    },
+    {
+      "case": "blank_readme_optimized",
+      "expected_ok": false,
+      "exit": 1,
+      "json": {
+        "ok": false,
+        "error": "empty source file",
+        "agent_behavior_evaluated": false
+      },
+      "stderr": "",
+      "matched": true
+    },
+    {
+      "case": "whitespace_link",
+      "expected_ok": true,
+      "exit": 0,
+      "json": {
+        "package": {
+          "files": 16,
+          "bytes": 112648,
+          "links": "33 local links/anchors resolve"
+        },
+        "ok": true,
+        "agent_behavior_evaluated": false
+      },
+      "stderr": "",
+      "matched": true
+    },
+    {
+      "case": "outside_symlink",
+      "expected_ok": false,
+      "exit": 1,
+      "json": {
+        "ok": false,
+        "error": "symlink in package: outside.bin",
+        "agent_behavior_evaluated": false
+      },
+      "stderr": "",
+      "matched": true
+    },
+    {
+      "case": "backslash",
+      "expected_ok": false,
+      "exit": 1,
+      "json": {
+        "ok": false,
+        "error": "unsafe path: '..\\\\outside.bin'",
+        "agent_behavior_evaluated": false
+      },
+      "stderr": "",
+      "matched": true
+    },
+    {
+      "case": "alias",
+      "expected_ok": false,
+      "exit": 1,
+      "json": {
+        "ok": false,
+        "error": "noncanonical path: 'alias//file.bin'",
+        "agent_behavior_evaluated": false
+      },
+      "stderr": "",
+      "matched": true
+    },
+    {
+      "case": "nul",
+      "expected_ok": false,
+      "exit": 1,
+      "json": {
+        "ok": false,
+        "error": "ZIP filename was truncated/normalized",
+        "agent_behavior_evaluated": false
+      },
+      "stderr": "",
+      "matched": true
+    },
+    {
+      "case": "bad_deflate",
+      "expected_ok": false,
+      "exit": 1,
+      "json": null,
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/pws-independent-final-qa82_ty7/candidate/tools/check_standard.py\", line 336, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/pws-independent-final-qa82_ty7/candidate/tools/check_standard.py\", line 324, in main\n    result = {\"package\": package_checks(args.path)}\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pws-independent-final-qa82_ty7/candidate/tools/check_standard.py\", line 186, in package_checks\n    files = load(src)\n            ^^^^^^^^^\n  File \"/tmp/pws-independent-final-qa82_ty7/candidate/tools/check_standard.py\", line 102, in load\n    data = f.read(MAX_FILE + 1)\n           ^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/__init__.py\", line 1008, in read\n    data = self._read1(n)\n           ^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/__init__.py\", line 1084, in _read1\n    data = self._decompressor.decompress(data, n)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nzlib.error: Error -3 while decompressing data: invalid block type\n",
+      "matched": false
+    }
+  ]
+}
