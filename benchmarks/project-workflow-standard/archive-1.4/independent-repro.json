@@ -1,0 +1,45 @@
+{
+  "baseline": {
+    "exit": 0,
+    "stdout": "Source: /tmp/pws-independent-rphl05wk/copy\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+    "stderr": ""
+  },
+  "empty_readme": {
+    "exit": 1,
+    "stdout": "Source: /tmp/pws-independent-rphl05wk/copy\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 19 local links resolve\nFAIL 6. Version consistency: README.md does not mention 1.4-rc3\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nFAIL 8. Template and protocol markers: \nResult: 6/8 checks passed; no agent behavior evaluated\n",
+    "stderr": ""
+  },
+  "empty_readme_optimized": {
+    "exit": 0,
+    "stdout": "Source: /tmp/pws-independent-rphl05wk/copy\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 19 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+    "stderr": ""
+  },
+  "directory_symlink": {
+    "outside_content_read": true
+  },
+  "directory_symlink_fullcheck": {
+    "exit": 0,
+    "stdout": "Source: /tmp/pws-independent-rphl05wk/copy\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+    "stderr": ""
+  },
+  "..\\outside.bin": {
+    "exit": 0,
+    "stdout": "Source: /tmp/pws-independent-rphl05wk/case-5.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+    "stderr": ""
+  },
+  "alias//file.bin": {
+    "exit": 0,
+    "stdout": "Source: /tmp/pws-independent-rphl05wk/case-6.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+    "stderr": ""
+  },
+  "outside-link.bin": {
+    "exit": 0,
+    "stdout": "Source: /tmp/pws-independent-rphl05wk/case-7.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+    "stderr": ""
+  },
+  "missing_fragment": {
+    "exit": 0,
+    "stdout": "Source: /tmp/pws-independent-rphl05wk/fragment\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+    "stderr": ""
+  }
+}

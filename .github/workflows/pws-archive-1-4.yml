@@ -1,0 +1,47 @@
+name: PWS archive audit 1.4
+
+on:
+  pull_request:
+    paths:
+      - 'benchmarks/project-workflow-standard/archive-1.4/**'
+      - '.github/workflows/pws-archive-1-4.yml'
+  push:
+    branches: ['audit/pws-v1.4-archive']
+    paths:
+      - 'benchmarks/project-workflow-standard/archive-1.4/**'
+      - '.github/workflows/pws-archive-1-4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pws-archive-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  archive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+      - name: Verify runtime and revision
+        run: |
+          python3 --version
+          git rev-parse HEAD
+      - name: Verify original, tests, mutation corpus and delivered ZIP
+        run: python3 benchmarks/project-workflow-standard/archive-1.4/verify_archive.py --output /tmp/pws-archive-evidence
+      - name: Show measured comparison and artifact hash
+        run: |
+          cat /tmp/pws-archive-evidence/comparison.log
+          cat /tmp/pws-archive-evidence/SHA256SUMS.txt
+      - name: Preserve exact logs and checked ZIP
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: pws-archive-${{ github.sha }}
+          path: /tmp/pws-archive-evidence/
+          if-no-files-found: error
+          retention-days: 14

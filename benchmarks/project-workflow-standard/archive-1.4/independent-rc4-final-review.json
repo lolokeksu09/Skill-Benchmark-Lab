@@ -1,0 +1,35 @@
+{
+  "checker_sha256": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df",
+  "python": "3.12.14",
+  "cases": [
+    {
+      "case": "baseline_directory",
+      "expected_ok": true,
+      "exit": 0,
+      "json": {
+        "package": {
+          "files": 16,
+          "bytes": 112683,
+          "links": "32 local links/anchors resolve"
+        },
+        "ok": true,
+        "agent_behavior_evaluated": false
+      },
+      "stderr": "",
+      "matched": true
+    },
+    {
+      "case": "bad_deflate",
+      "expected_ok": false,
+      "exit": 1,
+      "json": {
+        "ok": false,
+        "error": "Error -3 while decompressing data: invalid block type",
+        "agent_behavior_evaluated": false
+      },
+      "stderr": "",
+      "matched": true
+    }
+  ],
+  "scope": "final targeted recheck; prior independent findings retained separately"
+}

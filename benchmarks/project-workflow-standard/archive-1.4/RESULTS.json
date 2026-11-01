@@ -1,0 +1,4107 @@
+{
+  "protocol": "PWS-ARCHIVE-1",
+  "scope": "archive validators, not AI agents",
+  "agent_runs": 0,
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+  "evaluator_sha256": "298aa8bca3efbff2dacdd9c2b4e9206ad887a06a319a6164c857509c3b6d3c69",
+  "protocol_sha256": "69e98b5b6297a226391a449602fe87f8362e042658dd5ba2b233e2e70d06be4f",
+  "sources": {
+    "rc3": {
+      "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+      "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+      "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+      "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+      "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+      "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+      "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+      "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+      "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+      "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+      "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+      "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+      "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+      "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+      "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+      "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+    },
+    "rc4": {
+      "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+      "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+      "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+      "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+      "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+      "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+      "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+      "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+      "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+      "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+      "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+      "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+      "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+      "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+      "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+      "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+    }
+  },
+  "summary": {
+    "crc_only": {
+      "runs": 72,
+      "cases": 24,
+      "correct": 9,
+      "false_accept": 63,
+      "false_reject": 0,
+      "tool_error": 0,
+      "elapsed_total_s": 0.03144051200206377
+    },
+    "rc3": {
+      "runs": 87,
+      "cases": 29,
+      "correct": 42,
+      "false_accept": 42,
+      "false_reject": 3,
+      "tool_error": 0,
+      "elapsed_total_s": 3.407172639000237
+    },
+    "rc4": {
+      "runs": 87,
+      "cases": 29,
+      "correct": 87,
+      "false_accept": 0,
+      "false_reject": 0,
+      "tool_error": 0,
+      "elapsed_total_s": 4.199443390998113
+    }
+  },
+  "runs": [
+    {
+      "case": "valid_zip",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03321347400014929,
+      "input": {
+        "zip_sha256": "b12fe4e4e4acf5ef5e71cdc6a522b3bf3db86b1a8c24d96d869cbe41e218712e"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_zip",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0008182399997167522,
+      "input": {
+        "zip_sha256": "b12fe4e4e4acf5ef5e71cdc6a522b3bf3db86b1a8c24d96d869cbe41e218712e"
+      }
+    },
+    {
+      "case": "valid_zip",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.044940294999832986,
+      "input": {
+        "zip_sha256": "04b9cd905e1a92216a7e01e3b3b2cfb0971a9b05a90a5d8a1e0e7afc0643e9d3"
+      },
+      "stdout": "PASS {\"package\": {\"files\": 16, \"bytes\": 112683, \"links\": \"32 local links/anchors resolve\"}, \"ok\": true, \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_zip",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.031199739999919984,
+      "input": {
+        "zip_sha256": "b12fe4e4e4acf5ef5e71cdc6a522b3bf3db86b1a8c24d96d869cbe41e218712e"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_zip",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004201720003038645,
+      "input": {
+        "zip_sha256": "b12fe4e4e4acf5ef5e71cdc6a522b3bf3db86b1a8c24d96d869cbe41e218712e"
+      }
+    },
+    {
+      "case": "valid_zip",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.04845474400008243,
+      "input": {
+        "zip_sha256": "04b9cd905e1a92216a7e01e3b3b2cfb0971a9b05a90a5d8a1e0e7afc0643e9d3"
+      },
+      "stdout": "PASS {\"package\": {\"files\": 16, \"bytes\": 112683, \"links\": \"32 local links/anchors resolve\"}, \"ok\": true, \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_zip",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03175125600000683,
+      "input": {
+        "zip_sha256": "b12fe4e4e4acf5ef5e71cdc6a522b3bf3db86b1a8c24d96d869cbe41e218712e"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_zip",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003681450002659403,
+      "input": {
+        "zip_sha256": "b12fe4e4e4acf5ef5e71cdc6a522b3bf3db86b1a8c24d96d869cbe41e218712e"
+      }
+    },
+    {
+      "case": "valid_zip",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.050481813000260445,
+      "input": {
+        "zip_sha256": "04b9cd905e1a92216a7e01e3b3b2cfb0971a9b05a90a5d8a1e0e7afc0643e9d3"
+      },
+      "stdout": "PASS {\"package\": {\"files\": 16, \"bytes\": 112683, \"links\": \"32 local links/anchors resolve\"}, \"ok\": true, \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_directory",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03203970300000947,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_directory",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.04694778600014615,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "PASS {\"package\": {\"files\": 16, \"bytes\": 112683, \"links\": \"32 local links/anchors resolve\"}, \"ok\": true, \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_directory",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03311985999971512,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_directory",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.05002935399988928,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "PASS {\"package\": {\"files\": 16, \"bytes\": 112683, \"links\": \"32 local links/anchors resolve\"}, \"ok\": true, \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_directory",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03980565999972896,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "valid_directory",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.04851837899968814,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "PASS {\"package\": {\"files\": 16, \"bytes\": 112683, \"links\": \"32 local links/anchors resolve\"}, \"ok\": true, \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "fenced_example",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": true,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03191206399969815,
+      "input": {
+        "zip_sha256": "f19611fcd0e0ac895c27e54101fe7a71e8a53b0e478eb4f3b20a9f403392ee02"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nFAIL 5. Local links: missing README.md:58 -> missing.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "fenced_example",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00036827399981120834,
+      "input": {
+        "zip_sha256": "f19611fcd0e0ac895c27e54101fe7a71e8a53b0e478eb4f3b20a9f403392ee02"
+      }
+    },
+    {
+      "case": "fenced_example",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.04585205399962433,
+      "input": {
+        "zip_sha256": "79dc722bb46fcdc92268f9e9a1e49347dd929b98dcf8cf693cc7de26f6e35ad6"
+      },
+      "stdout": "PASS {\"package\": {\"files\": 16, \"bytes\": 112716, \"links\": \"32 local links/anchors resolve\"}, \"ok\": true, \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "fenced_example",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": true,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.030267832999925304,
+      "input": {
+        "zip_sha256": "f19611fcd0e0ac895c27e54101fe7a71e8a53b0e478eb4f3b20a9f403392ee02"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nFAIL 5. Local links: missing README.md:58 -> missing.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "fenced_example",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003752960001293104,
+      "input": {
+        "zip_sha256": "f19611fcd0e0ac895c27e54101fe7a71e8a53b0e478eb4f3b20a9f403392ee02"
+      }
+    },
+    {
+      "case": "fenced_example",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.043959484999959386,
+      "input": {
+        "zip_sha256": "79dc722bb46fcdc92268f9e9a1e49347dd929b98dcf8cf693cc7de26f6e35ad6"
+      },
+      "stdout": "PASS {\"package\": {\"files\": 16, \"bytes\": 112716, \"links\": \"32 local links/anchors resolve\"}, \"ok\": true, \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "fenced_example",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": true,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.031984290999844234,
+      "input": {
+        "zip_sha256": "f19611fcd0e0ac895c27e54101fe7a71e8a53b0e478eb4f3b20a9f403392ee02"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nFAIL 5. Local links: missing README.md:58 -> missing.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "fenced_example",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003461020000941062,
+      "input": {
+        "zip_sha256": "f19611fcd0e0ac895c27e54101fe7a71e8a53b0e478eb4f3b20a9f403392ee02"
+      }
+    },
+    {
+      "case": "fenced_example",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": true,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.045965396000156034,
+      "input": {
+        "zip_sha256": "79dc722bb46fcdc92268f9e9a1e49347dd929b98dcf8cf693cc7de26f6e35ad6"
+      },
+      "stdout": "PASS {\"package\": {\"files\": 16, \"bytes\": 112716, \"links\": \"32 local links/anchors resolve\"}, \"ok\": true, \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_original",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.040841646999979275,
+      "input": {
+        "zip_sha256": "779e592880f5e2d51276c0c138bec184c8f6384a39924e2a3e153938f5abca97"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nFAIL 2. Preserve original documents: missing: ['PROJECT.md']\nFAIL 3. Complete package structure: missing: ['PROJECT.md']\nPASS 4. UTF-8 decoding: 15 readable sources\nFAIL 5. Local links: missing AGENTS.md:5 -> PROJECT.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 5/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_original",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003483749997030827,
+      "input": {
+        "zip_sha256": "779e592880f5e2d51276c0c138bec184c8f6384a39924e2a3e153938f5abca97"
+      }
+    },
+    {
+      "case": "missing_original",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03859786899965911,
+      "input": {
+        "zip_sha256": "f97eb497c3c3ac5f82e4575f6e5b099b26e266fa9955dfe721c316c7b4124642"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"package files differ: missing=['PROJECT.md']; extra=[]\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_original",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.029027221999967878,
+      "input": {
+        "zip_sha256": "779e592880f5e2d51276c0c138bec184c8f6384a39924e2a3e153938f5abca97"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nFAIL 2. Preserve original documents: missing: ['PROJECT.md']\nFAIL 3. Complete package structure: missing: ['PROJECT.md']\nPASS 4. UTF-8 decoding: 15 readable sources\nFAIL 5. Local links: missing AGENTS.md:5 -> PROJECT.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 5/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_original",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00046550800016120775,
+      "input": {
+        "zip_sha256": "779e592880f5e2d51276c0c138bec184c8f6384a39924e2a3e153938f5abca97"
+      }
+    },
+    {
+      "case": "missing_original",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.046002602000044135,
+      "input": {
+        "zip_sha256": "f97eb497c3c3ac5f82e4575f6e5b099b26e266fa9955dfe721c316c7b4124642"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"package files differ: missing=['PROJECT.md']; extra=[]\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_original",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03281506999974226,
+      "input": {
+        "zip_sha256": "779e592880f5e2d51276c0c138bec184c8f6384a39924e2a3e153938f5abca97"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nFAIL 2. Preserve original documents: missing: ['PROJECT.md']\nFAIL 3. Complete package structure: missing: ['PROJECT.md']\nPASS 4. UTF-8 decoding: 15 readable sources\nFAIL 5. Local links: missing AGENTS.md:5 -> PROJECT.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 5/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_original",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00037418300007630023,
+      "input": {
+        "zip_sha256": "779e592880f5e2d51276c0c138bec184c8f6384a39924e2a3e153938f5abca97"
+      }
+    },
+    {
+      "case": "missing_original",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04871248499966896,
+      "input": {
+        "zip_sha256": "f97eb497c3c3ac5f82e4575f6e5b099b26e266fa9955dfe721c316c7b4124642"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"package files differ: missing=['PROJECT.md']; extra=[]\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_extra",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03155989800006864,
+      "input": {
+        "zip_sha256": "678107b49cf5f53e4eb9cce41c35ba8adcd96d4d88bb650518f28b85c8a241a0"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nFAIL 3. Complete package structure: missing: ['examples/README.md']\nPASS 4. UTF-8 decoding: 15 readable sources\nFAIL 5. Local links: missing README.md:18 -> examples/README.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 6/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_extra",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000433742000041093,
+      "input": {
+        "zip_sha256": "678107b49cf5f53e4eb9cce41c35ba8adcd96d4d88bb650518f28b85c8a241a0"
+      }
+    },
+    {
+      "case": "missing_extra",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04791619199977504,
+      "input": {
+        "zip_sha256": "180ea08a003f726f6eb0edc60c51249628d159e8a844c8d390f04d0f844075ad"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"package files differ: missing=['examples/README.md']; extra=[]\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_extra",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03230000800022026,
+      "input": {
+        "zip_sha256": "678107b49cf5f53e4eb9cce41c35ba8adcd96d4d88bb650518f28b85c8a241a0"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nFAIL 3. Complete package structure: missing: ['examples/README.md']\nPASS 4. UTF-8 decoding: 15 readable sources\nFAIL 5. Local links: missing README.md:18 -> examples/README.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 6/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_extra",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003543639995768899,
+      "input": {
+        "zip_sha256": "678107b49cf5f53e4eb9cce41c35ba8adcd96d4d88bb650518f28b85c8a241a0"
+      }
+    },
+    {
+      "case": "missing_extra",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04235487000005378,
+      "input": {
+        "zip_sha256": "180ea08a003f726f6eb0edc60c51249628d159e8a844c8d390f04d0f844075ad"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"package files differ: missing=['examples/README.md']; extra=[]\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_extra",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04414869499987617,
+      "input": {
+        "zip_sha256": "678107b49cf5f53e4eb9cce41c35ba8adcd96d4d88bb650518f28b85c8a241a0"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nFAIL 3. Complete package structure: missing: ['examples/README.md']\nPASS 4. UTF-8 decoding: 15 readable sources\nFAIL 5. Local links: missing README.md:18 -> examples/README.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 6/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_extra",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000405610000143497,
+      "input": {
+        "zip_sha256": "678107b49cf5f53e4eb9cce41c35ba8adcd96d4d88bb650518f28b85c8a241a0"
+      }
+    },
+    {
+      "case": "missing_extra",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04150717699985762,
+      "input": {
+        "zip_sha256": "180ea08a003f726f6eb0edc60c51249628d159e8a844c8d390f04d0f844075ad"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"package files differ: missing=['examples/README.md']; extra=[]\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "unexpected_payload",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.032538761000068916,
+      "input": {
+        "zip_sha256": "0521771c5d290d307982893aa322882e63ca303fb80ce2f60ae06d7b5a0b99f7"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "unexpected_payload",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000402745999963372,
+      "input": {
+        "zip_sha256": "0521771c5d290d307982893aa322882e63ca303fb80ce2f60ae06d7b5a0b99f7"
+      }
+    },
+    {
+      "case": "unexpected_payload",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03613990800022293,
+      "input": {
+        "zip_sha256": "e1ae481de5b865e526d321e3428b12472217ab43aa540acbdd1689898abec739"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"package files differ: missing=[]; extra=['payload.bin']\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "unexpected_payload",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.033746496999810915,
+      "input": {
+        "zip_sha256": "0521771c5d290d307982893aa322882e63ca303fb80ce2f60ae06d7b5a0b99f7"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "unexpected_payload",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000394433000110439,
+      "input": {
+        "zip_sha256": "0521771c5d290d307982893aa322882e63ca303fb80ce2f60ae06d7b5a0b99f7"
+      }
+    },
+    {
+      "case": "unexpected_payload",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04561830800003008,
+      "input": {
+        "zip_sha256": "e1ae481de5b865e526d321e3428b12472217ab43aa540acbdd1689898abec739"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"package files differ: missing=[]; extra=['payload.bin']\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "unexpected_payload",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03160468900023261,
+      "input": {
+        "zip_sha256": "0521771c5d290d307982893aa322882e63ca303fb80ce2f60ae06d7b5a0b99f7"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "unexpected_payload",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000416806999965047,
+      "input": {
+        "zip_sha256": "0521771c5d290d307982893aa322882e63ca303fb80ce2f60ae06d7b5a0b99f7"
+      }
+    },
+    {
+      "case": "unexpected_payload",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04087532299990926,
+      "input": {
+        "zip_sha256": "e1ae481de5b865e526d321e3428b12472217ab43aa540acbdd1689898abec739"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"package files differ: missing=[]; extra=['payload.bin']\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "invalid_utf8",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.030391033999876527,
+      "input": {
+        "zip_sha256": "86e9fd170cbb545fb795e30278bbc8a909f5d462f75469d82873dd85275b2c1a"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nFAIL 4. UTF-8 decoding: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte\nPASS 5. Local links: 10 local links resolve\nFAIL 6. Version consistency: 'README.md'\nFAIL 7. Core rule markers: 'TESTING-LEVELS.md'\nFAIL 8. Template and protocol markers: 'templates/PLAN.md'\nResult: 4/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "invalid_utf8",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00035233099970355397,
+      "input": {
+        "zip_sha256": "86e9fd170cbb545fb795e30278bbc8a909f5d462f75469d82873dd85275b2c1a"
+      }
+    },
+    {
+      "case": "invalid_utf8",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03884381799980474,
+      "input": {
+        "zip_sha256": "ea09b1991be982f77931ec51f8c29be565371973084a0b25be6178a974572ab8"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"'utf-8' codec can't decode byte 0xff in position 0: invalid start byte\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "invalid_utf8",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03176721099998758,
+      "input": {
+        "zip_sha256": "86e9fd170cbb545fb795e30278bbc8a909f5d462f75469d82873dd85275b2c1a"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nFAIL 4. UTF-8 decoding: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte\nPASS 5. Local links: 10 local links resolve\nFAIL 6. Version consistency: 'README.md'\nFAIL 7. Core rule markers: 'TESTING-LEVELS.md'\nFAIL 8. Template and protocol markers: 'templates/PLAN.md'\nResult: 4/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "invalid_utf8",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003738129998964723,
+      "input": {
+        "zip_sha256": "86e9fd170cbb545fb795e30278bbc8a909f5d462f75469d82873dd85275b2c1a"
+      }
+    },
+    {
+      "case": "invalid_utf8",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04073521600003005,
+      "input": {
+        "zip_sha256": "ea09b1991be982f77931ec51f8c29be565371973084a0b25be6178a974572ab8"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"'utf-8' codec can't decode byte 0xff in position 0: invalid start byte\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "invalid_utf8",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.030966626000008546,
+      "input": {
+        "zip_sha256": "86e9fd170cbb545fb795e30278bbc8a909f5d462f75469d82873dd85275b2c1a"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nFAIL 4. UTF-8 decoding: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte\nPASS 5. Local links: 10 local links resolve\nFAIL 6. Version consistency: 'README.md'\nFAIL 7. Core rule markers: 'TESTING-LEVELS.md'\nFAIL 8. Template and protocol markers: 'templates/PLAN.md'\nResult: 4/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "invalid_utf8",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003463919997557241,
+      "input": {
+        "zip_sha256": "86e9fd170cbb545fb795e30278bbc8a909f5d462f75469d82873dd85275b2c1a"
+      }
+    },
+    {
+      "case": "invalid_utf8",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03685521599982167,
+      "input": {
+        "zip_sha256": "ea09b1991be982f77931ec51f8c29be565371973084a0b25be6178a974572ab8"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"'utf-8' codec can't decode byte 0xff in position 0: invalid start byte\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_local_link",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.033008086000336334,
+      "input": {
+        "zip_sha256": "71d0efab6be8ce7588fd0272ddbdc6338e52b6c89eb22742d97c6bb10b41afb8"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nFAIL 5. Local links: missing README.md:57 -> missing.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_local_link",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00040260600007968605,
+      "input": {
+        "zip_sha256": "71d0efab6be8ce7588fd0272ddbdc6338e52b6c89eb22742d97c6bb10b41afb8"
+      }
+    },
+    {
+      "case": "broken_local_link",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04520960399986507,
+      "input": {
+        "zip_sha256": "b8f97a0ffd9013321f868802f7a469134b4c8efb9400676cbffd0d3f7b2066c7"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing link: README.md: missing.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_local_link",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03301060000012512,
+      "input": {
+        "zip_sha256": "71d0efab6be8ce7588fd0272ddbdc6338e52b6c89eb22742d97c6bb10b41afb8"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nFAIL 5. Local links: missing README.md:57 -> missing.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_local_link",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004231259999869508,
+      "input": {
+        "zip_sha256": "71d0efab6be8ce7588fd0272ddbdc6338e52b6c89eb22742d97c6bb10b41afb8"
+      }
+    },
+    {
+      "case": "broken_local_link",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.051441522000004625,
+      "input": {
+        "zip_sha256": "b8f97a0ffd9013321f868802f7a469134b4c8efb9400676cbffd0d3f7b2066c7"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing link: README.md: missing.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_local_link",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03091772299967488,
+      "input": {
+        "zip_sha256": "71d0efab6be8ce7588fd0272ddbdc6338e52b6c89eb22742d97c6bb10b41afb8"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nFAIL 5. Local links: missing README.md:57 -> missing.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_local_link",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00038541999992958154,
+      "input": {
+        "zip_sha256": "71d0efab6be8ce7588fd0272ddbdc6338e52b6c89eb22742d97c6bb10b41afb8"
+      }
+    },
+    {
+      "case": "broken_local_link",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.047969986999760295,
+      "input": {
+        "zip_sha256": "b8f97a0ffd9013321f868802f7a469134b4c8efb9400676cbffd0d3f7b2066c7"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing link: README.md: missing.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_anchor",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.049169742000231054,
+      "input": {
+        "zip_sha256": "6f120c1d0ac1eaa49ae86384269ae9e8e54bf220ad82ae61b0e71335f718f10d"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 32 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_anchor",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004044390002491127,
+      "input": {
+        "zip_sha256": "6f120c1d0ac1eaa49ae86384269ae9e8e54bf220ad82ae61b0e71335f718f10d"
+      }
+    },
+    {
+      "case": "broken_anchor",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.061275704000308906,
+      "input": {
+        "zip_sha256": "70d028fc148d536241fca7f99d9bb81737e55ccd5e229ebf02eafaa5b9a295aa"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing heading: README.md: AGENTS.md#missing\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_anchor",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.04118755500030602,
+      "input": {
+        "zip_sha256": "6f120c1d0ac1eaa49ae86384269ae9e8e54bf220ad82ae61b0e71335f718f10d"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 32 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_anchor",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004460199997993186,
+      "input": {
+        "zip_sha256": "6f120c1d0ac1eaa49ae86384269ae9e8e54bf220ad82ae61b0e71335f718f10d"
+      }
+    },
+    {
+      "case": "broken_anchor",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.05119976400010273,
+      "input": {
+        "zip_sha256": "70d028fc148d536241fca7f99d9bb81737e55ccd5e229ebf02eafaa5b9a295aa"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing heading: README.md: AGENTS.md#missing\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_anchor",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.05912839199982045,
+      "input": {
+        "zip_sha256": "6f120c1d0ac1eaa49ae86384269ae9e8e54bf220ad82ae61b0e71335f718f10d"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 32 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_anchor",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00049270899990006,
+      "input": {
+        "zip_sha256": "6f120c1d0ac1eaa49ae86384269ae9e8e54bf220ad82ae61b0e71335f718f10d"
+      }
+    },
+    {
+      "case": "broken_anchor",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.07345824399999401,
+      "input": {
+        "zip_sha256": "70d028fc148d536241fca7f99d9bb81737e55ccd5e229ebf02eafaa5b9a295aa"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing heading: README.md: AGENTS.md#missing\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_image",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.04048518600029638,
+      "input": {
+        "zip_sha256": "2b4fa40f1f73293d99c618ec22f70b4bdfe5a4658ec7dd87fc5d8a10c8cae868"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_image",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000386031000289222,
+      "input": {
+        "zip_sha256": "2b4fa40f1f73293d99c618ec22f70b4bdfe5a4658ec7dd87fc5d8a10c8cae868"
+      }
+    },
+    {
+      "case": "broken_image",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.054039874999944004,
+      "input": {
+        "zip_sha256": "b1de6ca648aefdfb2513811fa6f00bb0f6eccb696b10853a67225a7fd6be27b5"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing link: README.md: missing.png\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_image",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.05081014799998229,
+      "input": {
+        "zip_sha256": "2b4fa40f1f73293d99c618ec22f70b4bdfe5a4658ec7dd87fc5d8a10c8cae868"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_image",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004721580003206327,
+      "input": {
+        "zip_sha256": "2b4fa40f1f73293d99c618ec22f70b4bdfe5a4658ec7dd87fc5d8a10c8cae868"
+      }
+    },
+    {
+      "case": "broken_image",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04487417800010007,
+      "input": {
+        "zip_sha256": "b1de6ca648aefdfb2513811fa6f00bb0f6eccb696b10853a67225a7fd6be27b5"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing link: README.md: missing.png\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_image",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.04046376299993426,
+      "input": {
+        "zip_sha256": "2b4fa40f1f73293d99c618ec22f70b4bdfe5a4658ec7dd87fc5d8a10c8cae868"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_image",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000609992000136117,
+      "input": {
+        "zip_sha256": "2b4fa40f1f73293d99c618ec22f70b4bdfe5a4658ec7dd87fc5d8a10c8cae868"
+      }
+    },
+    {
+      "case": "broken_image",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04614209299961658,
+      "input": {
+        "zip_sha256": "b1de6ca648aefdfb2513811fa6f00bb0f6eccb696b10853a67225a7fd6be27b5"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing link: README.md: missing.png\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_reference",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.033951371000057406,
+      "input": {
+        "zip_sha256": "851c0509f9d765b3ba5b983412e96cd5f9d084cd3de0eddfdcab1d4edd14f754"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_reference",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003948439998566755,
+      "input": {
+        "zip_sha256": "851c0509f9d765b3ba5b983412e96cd5f9d084cd3de0eddfdcab1d4edd14f754"
+      }
+    },
+    {
+      "case": "broken_reference",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04673816599961356,
+      "input": {
+        "zip_sha256": "3952b47e8316841c5ee08c466ab9bab72c7e7b83211b36c7379e04c53c9eec6a"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"undefined reference: README.md: undefined\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_reference",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03219304000003831,
+      "input": {
+        "zip_sha256": "851c0509f9d765b3ba5b983412e96cd5f9d084cd3de0eddfdcab1d4edd14f754"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_reference",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00039346200037471135,
+      "input": {
+        "zip_sha256": "851c0509f9d765b3ba5b983412e96cd5f9d084cd3de0eddfdcab1d4edd14f754"
+      }
+    },
+    {
+      "case": "broken_reference",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.05520907599975544,
+      "input": {
+        "zip_sha256": "3952b47e8316841c5ee08c466ab9bab72c7e7b83211b36c7379e04c53c9eec6a"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"undefined reference: README.md: undefined\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_reference",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.035662501999922824,
+      "input": {
+        "zip_sha256": "851c0509f9d765b3ba5b983412e96cd5f9d084cd3de0eddfdcab1d4edd14f754"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "broken_reference",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000370869000107632,
+      "input": {
+        "zip_sha256": "851c0509f9d765b3ba5b983412e96cd5f9d084cd3de0eddfdcab1d4edd14f754"
+      }
+    },
+    {
+      "case": "broken_reference",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.051018446999933076,
+      "input": {
+        "zip_sha256": "3952b47e8316841c5ee08c466ab9bab72c7e7b83211b36c7379e04c53c9eec6a"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"undefined reference: README.md: undefined\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_safety_marker",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03919588799999474,
+      "input": {
+        "zip_sha256": "bfada8ac7c3b69578491c30a94fb53f04bd7c34eacf63950e0411409910dcfd1"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nFAIL 7. Core rule markers: \nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_safety_marker",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0006006490002619103,
+      "input": {
+        "zip_sha256": "bfada8ac7c3b69578491c30a94fb53f04bd7c34eacf63950e0411409910dcfd1"
+      }
+    },
+    {
+      "case": "missing_safety_marker",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04464944000028481,
+      "input": {
+        "zip_sha256": "10b3b89715bde7b96ddb7fd6ac742aa33418e91617c7465f647621105d1c3f84"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing selected marker: TESTING-LEVELS.md: не переносится автоматически\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_safety_marker",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.044093178000366606,
+      "input": {
+        "zip_sha256": "bfada8ac7c3b69578491c30a94fb53f04bd7c34eacf63950e0411409910dcfd1"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nFAIL 7. Core rule markers: \nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_safety_marker",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0005692030003956461,
+      "input": {
+        "zip_sha256": "bfada8ac7c3b69578491c30a94fb53f04bd7c34eacf63950e0411409910dcfd1"
+      }
+    },
+    {
+      "case": "missing_safety_marker",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04783336499986035,
+      "input": {
+        "zip_sha256": "10b3b89715bde7b96ddb7fd6ac742aa33418e91617c7465f647621105d1c3f84"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing selected marker: TESTING-LEVELS.md: не переносится автоматически\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_safety_marker",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.036714347999804886,
+      "input": {
+        "zip_sha256": "bfada8ac7c3b69578491c30a94fb53f04bd7c34eacf63950e0411409910dcfd1"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nFAIL 7. Core rule markers: \nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_safety_marker",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000391679000131262,
+      "input": {
+        "zip_sha256": "bfada8ac7c3b69578491c30a94fb53f04bd7c34eacf63950e0411409910dcfd1"
+      }
+    },
+    {
+      "case": "missing_safety_marker",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04215179099992383,
+      "input": {
+        "zip_sha256": "10b3b89715bde7b96ddb7fd6ac742aa33418e91617c7465f647621105d1c3f84"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing selected marker: TESTING-LEVELS.md: не переносится автоматически\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "empty_readme",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.039468441999815695,
+      "input": {
+        "zip_sha256": "5e99115ab9c3c2408b073861c100c906490540140855b306ce316cb7b4221dc3"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 19 local links resolve\nFAIL 6. Version consistency: README.md does not mention 1.4-rc3\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nFAIL 8. Template and protocol markers: \nResult: 6/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "empty_readme",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00045491299988498213,
+      "input": {
+        "zip_sha256": "5e99115ab9c3c2408b073861c100c906490540140855b306ce316cb7b4221dc3"
+      }
+    },
+    {
+      "case": "empty_readme",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04313100899980782,
+      "input": {
+        "zip_sha256": "2add17397f1a7551b86fda010581b62428b9b8e8c6c4c9f32b8c8ab4325989d0"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"empty source file\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "empty_readme",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03570071800004371,
+      "input": {
+        "zip_sha256": "5e99115ab9c3c2408b073861c100c906490540140855b306ce316cb7b4221dc3"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 19 local links resolve\nFAIL 6. Version consistency: README.md does not mention 1.4-rc3\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nFAIL 8. Template and protocol markers: \nResult: 6/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "empty_readme",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000354064000021026,
+      "input": {
+        "zip_sha256": "5e99115ab9c3c2408b073861c100c906490540140855b306ce316cb7b4221dc3"
+      }
+    },
+    {
+      "case": "empty_readme",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.045600481999827025,
+      "input": {
+        "zip_sha256": "2add17397f1a7551b86fda010581b62428b9b8e8c6c4c9f32b8c8ab4325989d0"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"empty source file\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "empty_readme",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.032205908999912936,
+      "input": {
+        "zip_sha256": "5e99115ab9c3c2408b073861c100c906490540140855b306ce316cb7b4221dc3"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 19 local links resolve\nFAIL 6. Version consistency: README.md does not mention 1.4-rc3\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nFAIL 8. Template and protocol markers: \nResult: 6/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "empty_readme",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003932619997613074,
+      "input": {
+        "zip_sha256": "5e99115ab9c3c2408b073861c100c906490540140855b306ce316cb7b4221dc3"
+      }
+    },
+    {
+      "case": "empty_readme",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.0406695640003818,
+      "input": {
+        "zip_sha256": "2add17397f1a7551b86fda010581b62428b9b8e8c6c4c9f32b8c8ab4325989d0"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"empty source file\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "wrong_version",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04349843799991504,
+      "input": {
+        "zip_sha256": "6d9440f004fb38a4dada172a83cc3fa62109a25e75fb01c9b4adfbb2e547db13"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nFAIL 6. Version consistency: README.md does not mention 1.4-rc3\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "wrong_version",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00036592100013876916,
+      "input": {
+        "zip_sha256": "6d9440f004fb38a4dada172a83cc3fa62109a25e75fb01c9b4adfbb2e547db13"
+      }
+    },
+    {
+      "case": "wrong_version",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04897492899999634,
+      "input": {
+        "zip_sha256": "c081c27015b9a97afe05218b30773a5cce5f92c973e3aff21e0e041f3afd4aba"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"README version mismatch\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "wrong_version",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03480549500000052,
+      "input": {
+        "zip_sha256": "6d9440f004fb38a4dada172a83cc3fa62109a25e75fb01c9b4adfbb2e547db13"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nFAIL 6. Version consistency: README.md does not mention 1.4-rc3\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "wrong_version",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004341620001468982,
+      "input": {
+        "zip_sha256": "6d9440f004fb38a4dada172a83cc3fa62109a25e75fb01c9b4adfbb2e547db13"
+      }
+    },
+    {
+      "case": "wrong_version",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.041133205000278394,
+      "input": {
+        "zip_sha256": "c081c27015b9a97afe05218b30773a5cce5f92c973e3aff21e0e041f3afd4aba"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"README version mismatch\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "wrong_version",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.038229578000027686,
+      "input": {
+        "zip_sha256": "6d9440f004fb38a4dada172a83cc3fa62109a25e75fb01c9b4adfbb2e547db13"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nFAIL 6. Version consistency: README.md does not mention 1.4-rc3\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 7/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "wrong_version",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0007068559998515411,
+      "input": {
+        "zip_sha256": "6d9440f004fb38a4dada172a83cc3fa62109a25e75fb01c9b4adfbb2e547db13"
+      }
+    },
+    {
+      "case": "wrong_version",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03654138199999579,
+      "input": {
+        "zip_sha256": "c081c27015b9a97afe05218b30773a5cce5f92c973e3aff21e0e041f3afd4aba"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"README version mismatch\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_symlink",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03320878300019103,
+      "input": {
+        "zip_sha256": "127ffac2f33da6a777b690f34fe936634fd23ad8876f5bcd57a949b2caac5931"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_symlink",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00043192900011490565,
+      "input": {
+        "zip_sha256": "127ffac2f33da6a777b690f34fe936634fd23ad8876f5bcd57a949b2caac5931"
+      }
+    },
+    {
+      "case": "zip_symlink",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03703365399996983,
+      "input": {
+        "zip_sha256": "a32ce27bb90877a2629fb49aa224cb3ec3de0834f2633fae93bf8c9a2fe60dde"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"nonregular ZIP entry: payload\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_symlink",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03492817099959211,
+      "input": {
+        "zip_sha256": "127ffac2f33da6a777b690f34fe936634fd23ad8876f5bcd57a949b2caac5931"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_symlink",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004307169997446181,
+      "input": {
+        "zip_sha256": "127ffac2f33da6a777b690f34fe936634fd23ad8876f5bcd57a949b2caac5931"
+      }
+    },
+    {
+      "case": "zip_symlink",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04229319900014161,
+      "input": {
+        "zip_sha256": "a32ce27bb90877a2629fb49aa224cb3ec3de0834f2633fae93bf8c9a2fe60dde"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"nonregular ZIP entry: payload\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_symlink",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.038098218999948585,
+      "input": {
+        "zip_sha256": "127ffac2f33da6a777b690f34fe936634fd23ad8876f5bcd57a949b2caac5931"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_symlink",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004831150004065421,
+      "input": {
+        "zip_sha256": "127ffac2f33da6a777b690f34fe936634fd23ad8876f5bcd57a949b2caac5931"
+      }
+    },
+    {
+      "case": "zip_symlink",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03814904999990176,
+      "input": {
+        "zip_sha256": "a32ce27bb90877a2629fb49aa224cb3ec3de0834f2633fae93bf8c9a2fe60dde"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"nonregular ZIP entry: payload\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_symlink",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03213661100016907,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": {
+          "type": "symlink",
+          "target": "../outside.md"
+        },
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_symlink",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04024601699984487,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": {
+          "type": "symlink",
+          "target": "../outside.md"
+        },
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"symlink in package: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_symlink",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.033427376999952685,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": {
+          "type": "symlink",
+          "target": "../outside.md"
+        },
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_symlink",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03650514800028759,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": {
+          "type": "symlink",
+          "target": "../outside.md"
+        },
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"symlink in package: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_symlink",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.030435950000082812,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": {
+          "type": "symlink",
+          "target": "../outside.md"
+        },
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_symlink",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.037233265999930154,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": {
+          "type": "symlink",
+          "target": "../outside.md"
+        },
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"symlink in package: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_fifo",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.032686800000192306,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": {
+          "type": "fifo"
+        },
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nFAIL 2. Preserve original documents: missing: ['PROJECT.md']\nFAIL 3. Complete package structure: missing: ['PROJECT.md']\nPASS 4. UTF-8 decoding: 15 readable sources\nFAIL 5. Local links: missing AGENTS.md:5 -> PROJECT.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 5/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_fifo",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03920593300017572,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": {
+          "type": "fifo"
+        },
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"not a regular file: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_fifo",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.030175865999808593,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": {
+          "type": "fifo"
+        },
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nFAIL 2. Preserve original documents: missing: ['PROJECT.md']\nFAIL 3. Complete package structure: missing: ['PROJECT.md']\nPASS 4. UTF-8 decoding: 15 readable sources\nFAIL 5. Local links: missing AGENTS.md:5 -> PROJECT.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 5/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_fifo",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04319426199981535,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": {
+          "type": "fifo"
+        },
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"not a regular file: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_fifo",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.029211168000074395,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": {
+          "type": "fifo"
+        },
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nFAIL 2. Preserve original documents: missing: ['PROJECT.md']\nFAIL 3. Complete package structure: missing: ['PROJECT.md']\nPASS 4. UTF-8 decoding: 15 readable sources\nFAIL 5. Local links: missing AGENTS.md:5 -> PROJECT.md\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 5/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "directory_fifo",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03552579899996999,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": {
+          "type": "fifo"
+        },
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"not a regular file: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_traversal",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.030753780999930314,
+      "input": {
+        "zip_sha256": "c1c84f8f7f22e713da772ff21626a9d2ddcdf1c0be956176ef12e4b575586c5d"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: unsafe ZIP path: ../payload.bin\n"
+    },
+    {
+      "case": "zip_traversal",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004334519999247277,
+      "input": {
+        "zip_sha256": "c1c84f8f7f22e713da772ff21626a9d2ddcdf1c0be956176ef12e4b575586c5d"
+      }
+    },
+    {
+      "case": "zip_traversal",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03542118399991523,
+      "input": {
+        "zip_sha256": "b1a8325f99d51e15fafc183619febb1b3d1a88a39bb3b50d648e7cb5dc66333b"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"noncanonical path: '../payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_traversal",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.031059982999977365,
+      "input": {
+        "zip_sha256": "c1c84f8f7f22e713da772ff21626a9d2ddcdf1c0be956176ef12e4b575586c5d"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: unsafe ZIP path: ../payload.bin\n"
+    },
+    {
+      "case": "zip_traversal",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004872909998994146,
+      "input": {
+        "zip_sha256": "c1c84f8f7f22e713da772ff21626a9d2ddcdf1c0be956176ef12e4b575586c5d"
+      }
+    },
+    {
+      "case": "zip_traversal",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03814305199966839,
+      "input": {
+        "zip_sha256": "b1a8325f99d51e15fafc183619febb1b3d1a88a39bb3b50d648e7cb5dc66333b"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"noncanonical path: '../payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_traversal",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03312506799966286,
+      "input": {
+        "zip_sha256": "c1c84f8f7f22e713da772ff21626a9d2ddcdf1c0be956176ef12e4b575586c5d"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: unsafe ZIP path: ../payload.bin\n"
+    },
+    {
+      "case": "zip_traversal",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0005059079999227833,
+      "input": {
+        "zip_sha256": "c1c84f8f7f22e713da772ff21626a9d2ddcdf1c0be956176ef12e4b575586c5d"
+      }
+    },
+    {
+      "case": "zip_traversal",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.043018613000185724,
+      "input": {
+        "zip_sha256": "b1a8325f99d51e15fafc183619febb1b3d1a88a39bb3b50d648e7cb5dc66333b"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"noncanonical path: '../payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_absolute",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.034700659999998607,
+      "input": {
+        "zip_sha256": "860cd8c5aaaa1f02cd58ad58d7cf44249f112a14a8de63b2e4f4e3163f14c996"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: unsafe ZIP path: /payload.bin\n"
+    },
+    {
+      "case": "zip_absolute",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0005160529999557184,
+      "input": {
+        "zip_sha256": "860cd8c5aaaa1f02cd58ad58d7cf44249f112a14a8de63b2e4f4e3163f14c996"
+      }
+    },
+    {
+      "case": "zip_absolute",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.045298975000150676,
+      "input": {
+        "zip_sha256": "6b14aeed1ec1a704e41d51ad07b49f6d4eb1f9576acc77f88060f45ed9ba1ce4"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"unsafe path: '/payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_absolute",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.030869601000176772,
+      "input": {
+        "zip_sha256": "860cd8c5aaaa1f02cd58ad58d7cf44249f112a14a8de63b2e4f4e3163f14c996"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: unsafe ZIP path: /payload.bin\n"
+    },
+    {
+      "case": "zip_absolute",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003897970000252826,
+      "input": {
+        "zip_sha256": "860cd8c5aaaa1f02cd58ad58d7cf44249f112a14a8de63b2e4f4e3163f14c996"
+      }
+    },
+    {
+      "case": "zip_absolute",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03838482799983467,
+      "input": {
+        "zip_sha256": "ed91041bb9ae5087dcd73422bcedeb15e91b8faddc82b23330a50090b73a274f"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"unsafe path: '/payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_absolute",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03826613300043391,
+      "input": {
+        "zip_sha256": "624de6007c6f802a82281b560482c9e6e408440df04723fab3602480a310e51c"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: unsafe ZIP path: /payload.bin\n"
+    },
+    {
+      "case": "zip_absolute",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004854980002164666,
+      "input": {
+        "zip_sha256": "624de6007c6f802a82281b560482c9e6e408440df04723fab3602480a310e51c"
+      }
+    },
+    {
+      "case": "zip_absolute",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04314263700007359,
+      "input": {
+        "zip_sha256": "ed91041bb9ae5087dcd73422bcedeb15e91b8faddc82b23330a50090b73a274f"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"unsafe path: '/payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_backslash",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.035656712999752926,
+      "input": {
+        "zip_sha256": "f68d0cb89ceee559020da83e95c884778a1ff5f655a58e49662e5d5a1e082e54"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_backslash",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0005330789999788976,
+      "input": {
+        "zip_sha256": "f68d0cb89ceee559020da83e95c884778a1ff5f655a58e49662e5d5a1e082e54"
+      }
+    },
+    {
+      "case": "zip_backslash",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.041916553000191925,
+      "input": {
+        "zip_sha256": "8a2cd78537cadb7b6f721dd690087e0281e2060b69e1420def3b10c07eb19e37"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"unsafe path: 'a\\\\\\\\payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_backslash",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03232096400006412,
+      "input": {
+        "zip_sha256": "f68d0cb89ceee559020da83e95c884778a1ff5f655a58e49662e5d5a1e082e54"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_backslash",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003836279997813108,
+      "input": {
+        "zip_sha256": "f68d0cb89ceee559020da83e95c884778a1ff5f655a58e49662e5d5a1e082e54"
+      }
+    },
+    {
+      "case": "zip_backslash",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.038129636000121536,
+      "input": {
+        "zip_sha256": "8a2cd78537cadb7b6f721dd690087e0281e2060b69e1420def3b10c07eb19e37"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"unsafe path: 'a\\\\\\\\payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_backslash",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.029926081000212434,
+      "input": {
+        "zip_sha256": "f68d0cb89ceee559020da83e95c884778a1ff5f655a58e49662e5d5a1e082e54"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_backslash",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00035962199990535737,
+      "input": {
+        "zip_sha256": "f68d0cb89ceee559020da83e95c884778a1ff5f655a58e49662e5d5a1e082e54"
+      }
+    },
+    {
+      "case": "zip_backslash",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03886194999995496,
+      "input": {
+        "zip_sha256": "8a2cd78537cadb7b6f721dd690087e0281e2060b69e1420def3b10c07eb19e37"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"unsafe path: 'a\\\\\\\\payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_drive",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0340385099998457,
+      "input": {
+        "zip_sha256": "d1c286189d4e22817e89536ca6de8e108705cbf702f97deca54d028627b1e2e2"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_drive",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000368105000234209,
+      "input": {
+        "zip_sha256": "d1c286189d4e22817e89536ca6de8e108705cbf702f97deca54d028627b1e2e2"
+      }
+    },
+    {
+      "case": "zip_drive",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.036828767000315565,
+      "input": {
+        "zip_sha256": "d64a971cbced06b7119bcb669e15037676dfd160331c8434191dd6a461cbe009"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"unsafe path: 'C:/payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_drive",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.031716334000066126,
+      "input": {
+        "zip_sha256": "d1c286189d4e22817e89536ca6de8e108705cbf702f97deca54d028627b1e2e2"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_drive",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0003993110003648326,
+      "input": {
+        "zip_sha256": "d1c286189d4e22817e89536ca6de8e108705cbf702f97deca54d028627b1e2e2"
+      }
+    },
+    {
+      "case": "zip_drive",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.039233883999713726,
+      "input": {
+        "zip_sha256": "d64a971cbced06b7119bcb669e15037676dfd160331c8434191dd6a461cbe009"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"unsafe path: 'C:/payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_drive",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03199826100035352,
+      "input": {
+        "zip_sha256": "d1c286189d4e22817e89536ca6de8e108705cbf702f97deca54d028627b1e2e2"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_drive",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0005261390001578548,
+      "input": {
+        "zip_sha256": "d1c286189d4e22817e89536ca6de8e108705cbf702f97deca54d028627b1e2e2"
+      }
+    },
+    {
+      "case": "zip_drive",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03876684400029262,
+      "input": {
+        "zip_sha256": "d64a971cbced06b7119bcb669e15037676dfd160331c8434191dd6a461cbe009"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"unsafe path: 'C:/payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_alias",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03502167400029066,
+      "input": {
+        "zip_sha256": "8b8b97369cedb4afa1bf1c77b5e386115259c2dae5a5683571e56cd87a8623ff"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_alias",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0005166740002096049,
+      "input": {
+        "zip_sha256": "8b8b97369cedb4afa1bf1c77b5e386115259c2dae5a5683571e56cd87a8623ff"
+      }
+    },
+    {
+      "case": "zip_alias",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04554259099995761,
+      "input": {
+        "zip_sha256": "2e46e95f9fb8f2f7058b4de3afc2651db64b0c3b09caa96e8523caa8061592d6"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"noncanonical path: './payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_alias",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.036728237999795965,
+      "input": {
+        "zip_sha256": "8b8b97369cedb4afa1bf1c77b5e386115259c2dae5a5683571e56cd87a8623ff"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_alias",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0005430629998954828,
+      "input": {
+        "zip_sha256": "8b8b97369cedb4afa1bf1c77b5e386115259c2dae5a5683571e56cd87a8623ff"
+      }
+    },
+    {
+      "case": "zip_alias",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04102623000017047,
+      "input": {
+        "zip_sha256": "2e46e95f9fb8f2f7058b4de3afc2651db64b0c3b09caa96e8523caa8061592d6"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"noncanonical path: './payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_alias",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03549508900005094,
+      "input": {
+        "zip_sha256": "8b8b97369cedb4afa1bf1c77b5e386115259c2dae5a5683571e56cd87a8623ff"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_alias",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.000400011999772687,
+      "input": {
+        "zip_sha256": "8b8b97369cedb4afa1bf1c77b5e386115259c2dae5a5683571e56cd87a8623ff"
+      }
+    },
+    {
+      "case": "zip_alias",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.0405429610000283,
+      "input": {
+        "zip_sha256": "2e46e95f9fb8f2f7058b4de3afc2651db64b0c3b09caa96e8523caa8061592d6"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"noncanonical path: './payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_double_separator",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.05316230300013558,
+      "input": {
+        "zip_sha256": "22131c5b2d6a30940c3163cdec3203262846b26d4b447171531bb74ecc6b9d28"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_double_separator",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004125499999645399,
+      "input": {
+        "zip_sha256": "22131c5b2d6a30940c3163cdec3203262846b26d4b447171531bb74ecc6b9d28"
+      }
+    },
+    {
+      "case": "zip_double_separator",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04667927199989208,
+      "input": {
+        "zip_sha256": "8ff97faf32b778a1d123b8adb7361a6f6fe7edd93362c7d7253e4337c1d9fd11"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"noncanonical path: 'a//payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_double_separator",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.04962751900029616,
+      "input": {
+        "zip_sha256": "22131c5b2d6a30940c3163cdec3203262846b26d4b447171531bb74ecc6b9d28"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_double_separator",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0005402390002018365,
+      "input": {
+        "zip_sha256": "22131c5b2d6a30940c3163cdec3203262846b26d4b447171531bb74ecc6b9d28"
+      }
+    },
+    {
+      "case": "zip_double_separator",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.05340653999974165,
+      "input": {
+        "zip_sha256": "8ff97faf32b778a1d123b8adb7361a6f6fe7edd93362c7d7253e4337c1d9fd11"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"noncanonical path: 'a//payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_double_separator",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.03543803899992781,
+      "input": {
+        "zip_sha256": "22131c5b2d6a30940c3163cdec3203262846b26d4b447171531bb74ecc6b9d28"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_double_separator",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004172369999650982,
+      "input": {
+        "zip_sha256": "22131c5b2d6a30940c3163cdec3203262846b26d4b447171531bb74ecc6b9d28"
+      }
+    },
+    {
+      "case": "zip_double_separator",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.042637498999738455,
+      "input": {
+        "zip_sha256": "8ff97faf32b778a1d123b8adb7361a6f6fe7edd93362c7d7253e4337c1d9fd11"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"noncanonical path: 'a//payload.bin'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_duplicate",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.034786294999776146,
+      "input": {
+        "zip_sha256": "10c3ef6b80d940f90926efebe42a93158a9ee80f643cc802fe851bf1770140a2"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: duplicate ZIP entry\n"
+    },
+    {
+      "case": "zip_duplicate",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004878919999100617,
+      "input": {
+        "zip_sha256": "10c3ef6b80d940f90926efebe42a93158a9ee80f643cc802fe851bf1770140a2"
+      }
+    },
+    {
+      "case": "zip_duplicate",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.051787964000141073,
+      "input": {
+        "zip_sha256": "40b7dbf779b50e1d0d10a87d23ea14be67a14d33388b0104b2012819ed824aa0"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"duplicate/aliased ZIP path: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_duplicate",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03903783499981728,
+      "input": {
+        "zip_sha256": "10c3ef6b80d940f90926efebe42a93158a9ee80f643cc802fe851bf1770140a2"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: duplicate ZIP entry\n"
+    },
+    {
+      "case": "zip_duplicate",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0006115549999776704,
+      "input": {
+        "zip_sha256": "10c3ef6b80d940f90926efebe42a93158a9ee80f643cc802fe851bf1770140a2"
+      }
+    },
+    {
+      "case": "zip_duplicate",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04369112699987454,
+      "input": {
+        "zip_sha256": "40b7dbf779b50e1d0d10a87d23ea14be67a14d33388b0104b2012819ed824aa0"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"duplicate/aliased ZIP path: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "zip_duplicate",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04159879799999544,
+      "input": {
+        "zip_sha256": "10c3ef6b80d940f90926efebe42a93158a9ee80f643cc802fe851bf1770140a2"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: duplicate ZIP entry\n"
+    },
+    {
+      "case": "zip_duplicate",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004515569999057334,
+      "input": {
+        "zip_sha256": "10c3ef6b80d940f90926efebe42a93158a9ee80f643cc802fe851bf1770140a2"
+      }
+    },
+    {
+      "case": "zip_duplicate",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04672237700015103,
+      "input": {
+        "zip_sha256": "40b7dbf779b50e1d0d10a87d23ea14be67a14d33388b0104b2012819ed824aa0"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"duplicate/aliased ZIP path: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_source",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.04277976499997749,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": "9408817bc040328d1c403ff97e94cea3dfd3a361b2fb7ecc7af75ff3a5157139",
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_source",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.05097594400012895,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": "9408817bc040328d1c403ff97e94cea3dfd3a361b2fb7ecc7af75ff3a5157139",
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"file size limit: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_source",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.038754435000100784,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": "9408817bc040328d1c403ff97e94cea3dfd3a361b2fb7ecc7af75ff3a5157139",
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_source",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.039844226999775856,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": "9408817bc040328d1c403ff97e94cea3dfd3a361b2fb7ecc7af75ff3a5157139",
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"file size limit: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_source",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.042988938000235066,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": "9408817bc040328d1c403ff97e94cea3dfd3a361b2fb7ecc7af75ff3a5157139",
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "db41dac3b31be501120590d83ba650b02aed93b632391cd98a7456765672c686",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_source",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04286262799996621,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": "9408817bc040328d1c403ff97e94cea3dfd3a361b2fb7ecc7af75ff3a5157139",
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "c75e540b472fd96ec9316a106f56f69b5edd5068d03295ad825b95bc87dfe8bf",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"file size limit: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_zip",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.035239346000253136,
+      "input": {
+        "zip_sha256": "4da1ec76a5d3147c49488dc0f5b7d29c643249d14189aea740f3963447c97de1"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_zip",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004929600004288659,
+      "input": {
+        "zip_sha256": "4da1ec76a5d3147c49488dc0f5b7d29c643249d14189aea740f3963447c97de1"
+      }
+    },
+    {
+      "case": "oversized_zip",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.046695260999968013,
+      "input": {
+        "zip_sha256": "84f662ff6296dd88b65f189cbdcc1e9de6aaec5ee72172926dcf9e37bd4e331b"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"ZIP file size limit: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_zip",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.04074065299982976,
+      "input": {
+        "zip_sha256": "4da1ec76a5d3147c49488dc0f5b7d29c643249d14189aea740f3963447c97de1"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_zip",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00046493800027747056,
+      "input": {
+        "zip_sha256": "4da1ec76a5d3147c49488dc0f5b7d29c643249d14189aea740f3963447c97de1"
+      }
+    },
+    {
+      "case": "oversized_zip",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.042825803000141605,
+      "input": {
+        "zip_sha256": "84f662ff6296dd88b65f189cbdcc1e9de6aaec5ee72172926dcf9e37bd4e331b"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"ZIP file size limit: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_zip",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.043783650000023044,
+      "input": {
+        "zip_sha256": "4da1ec76a5d3147c49488dc0f5b7d29c643249d14189aea740f3963447c97de1"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "oversized_zip",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0005495120003615739,
+      "input": {
+        "zip_sha256": "4da1ec76a5d3147c49488dc0f5b7d29c643249d14189aea740f3963447c97de1"
+      }
+    },
+    {
+      "case": "oversized_zip",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.037956539999868255,
+      "input": {
+        "zip_sha256": "84f662ff6296dd88b65f189cbdcc1e9de6aaec5ee72172926dcf9e37bd4e331b"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"ZIP file size limit: PROJECT.md\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "python_syntax",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.034660104000067804,
+      "input": {
+        "zip_sha256": "96b5df9fd9b1c1f81a015347c8f6d58167f7db22c32077f4fd48ad0d37cc3eda"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "python_syntax",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0005037850000917388,
+      "input": {
+        "zip_sha256": "96b5df9fd9b1c1f81a015347c8f6d58167f7db22c32077f4fd48ad0d37cc3eda"
+      }
+    },
+    {
+      "case": "python_syntax",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.04132761099981508,
+      "input": {
+        "zip_sha256": "e0a737bbd76f56abc4415c75d8b2ea2b6228759e257c156cd54b87fcec6583d8"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"invalid syntax (<unknown>, line 340)\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "python_syntax",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.030686751999837725,
+      "input": {
+        "zip_sha256": "96b5df9fd9b1c1f81a015347c8f6d58167f7db22c32077f4fd48ad0d37cc3eda"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "python_syntax",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0004364549999991141,
+      "input": {
+        "zip_sha256": "96b5df9fd9b1c1f81a015347c8f6d58167f7db22c32077f4fd48ad0d37cc3eda"
+      }
+    },
+    {
+      "case": "python_syntax",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.046824391999962245,
+      "input": {
+        "zip_sha256": "e0a737bbd76f56abc4415c75d8b2ea2b6228759e257c156cd54b87fcec6583d8"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"invalid syntax (<unknown>, line 340)\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "python_syntax",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.0320467239998834,
+      "input": {
+        "zip_sha256": "96b5df9fd9b1c1f81a015347c8f6d58167f7db22c32077f4fd48ad0d37cc3eda"
+      },
+      "stdout": "Source: <tmp>/input.zip\nPASS 1. Input and archive integrity: ZIP (CRC passed)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "python_syntax",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.00038238599972828524,
+      "input": {
+        "zip_sha256": "96b5df9fd9b1c1f81a015347c8f6d58167f7db22c32077f4fd48ad0d37cc3eda"
+      }
+    },
+    {
+      "case": "python_syntax",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.0444148779997704,
+      "input": {
+        "zip_sha256": "e0a737bbd76f56abc4415c75d8b2ea2b6228759e257c156cd54b87fcec6583d8"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"invalid syntax (<unknown>, line 340)\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "optimized_missing_rule",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.13627042999996775,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "38a9b5160e202813dca741337bd06d148a68a330fd6c9022144acae0ca59e7ad",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "optimized_missing_rule",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.1605019590001575,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "1cf32fe6fe060c080db1694fdeb347138a5aabc0850b3750f213f88ef05de9c3",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing selected marker: TESTING-LEVELS.md: не переносится автоматически\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "optimized_missing_rule",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.12989431400001195,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "38a9b5160e202813dca741337bd06d148a68a330fd6c9022144acae0ca59e7ad",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "optimized_missing_rule",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.16027843800020491,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "1cf32fe6fe060c080db1694fdeb347138a5aabc0850b3750f213f88ef05de9c3",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing selected marker: TESTING-LEVELS.md: не переносится автоматически\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "optimized_missing_rule",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": true,
+      "tool_error": false,
+      "exit": 0,
+      "elapsed_s": 0.13186309599996093,
+      "input": {
+        "AGENTS.md": "b666c2f9888e6ec88aff43994496053647353646302c39ad1433320d58b02b71",
+        "CHANGELOG.md": "07c472225ecd4d428470e1efdb759bda62321d4446c200efd20f42e657bbf780",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "e965c775b945349123f86e5942e3e6b17abf57fd74de2009a7ce66058e2ccc8e",
+        "TESTING-LEVELS.md": "38a9b5160e202813dca741337bd06d148a68a330fd6c9022144acae0ca59e7ad",
+        "VALIDATION.md": "9a343da5717c527510ccfc76a775e03ccd5a1e72c02fa9daaa711a434e567b2e",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "7e556fd301ad94f87a3051857e84035b8ae282548c25a480e44094273be93a75",
+        "templates/VERIFICATION.md": "a0b6c943c5a0bc3cfd1f38e044a7949f68fbf3a3fed31a864fd3d7d021fb46a8",
+        "tools/check_standard.py": "ca3ec217da40179f91fb77c07328eb44b20c23e53bdb7841e57d8f03778217c0"
+      },
+      "stdout": "Source: <tmp>/kit\nPASS 1. Input and archive integrity: directory (ZIP CRC not applicable)\nPASS 2. Preserve original documents: 9 expected files present\nPASS 3. Complete package structure: 15 Markdown documents\nPASS 4. UTF-8 decoding: 16 readable sources\nPASS 5. Local links: 31 local links resolve\nPASS 6. Version consistency\nPASS 7. Core rule markers: selected textual safeguards present (not semantic proof)\nPASS 8. Template and protocol markers: key examples and templates aligned (textual only)\nResult: 8/8 checks passed; no agent behavior evaluated\n",
+      "stderr": ""
+    },
+    {
+      "case": "optimized_missing_rule",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.17701306899971314,
+      "input": {
+        "AGENTS.md": "616184a406c7686714f2eef428168271a342fd1ed6d11cf0c737246cca7a9d06",
+        "CHANGELOG.md": "70b344d0063ad50c63d10863c00d8c541b5ffd973515c547df0955742c77d8a2",
+        "PROJECT.md": "f32188470096402a606707f5109ee2d515c54e82f91d909545325ac256ded9c7",
+        "README.md": "d734efd8a5df2b0ece9a5e72d4dfd628dffd1ea1d59ce726dee40390d7974595",
+        "TESTING-LEVELS.md": "1cf32fe6fe060c080db1694fdeb347138a5aabc0850b3750f213f88ef05de9c3",
+        "VALIDATION.md": "a9190856b2436027f94656e8200491454d894e9e9ff30e064a3fc66246426fe0",
+        "examples/01-light-documentation.md": "125d91905e150127dd6e995d26e835044b179c54634814cfeb2d1e5534057d2a",
+        "examples/02-bug-traceability.md": "544777e8a3611bb3b98155d852e4cfbf19d48e88a3b83ec994ad756f14bcbf90",
+        "examples/03-release-boundary.md": "9da2ace3072cfd3ddd306e849be6a93505b4d3ceb7bf2bd28ebf8399e917f9e3",
+        "examples/README.md": "61a045a58e3a7e6942c78bff4d5126ca3388e9721c0a78886e7e03bfec2cc2c7",
+        "templates/AUDIT.md": "f0cc4790f83c4def63758370e884f961b4446885f3c2e38b9dc1731d9979acea",
+        "templates/CONTINUATION.md": "4b208e2ad3595d3539cb14b34f003912216951bfdc562274253f96eb79c65210",
+        "templates/PLAN.md": "174a38f596191f15870d4b5d87dbccb03575ed170e5d20b7617e3d6038535fea",
+        "templates/RELEASE.md": "9ee0b34f07eef68e83448f27492952aea0d91433da0c09f20d6cebf3dee90b0f",
+        "templates/VERIFICATION.md": "9a16e55689f91eecb3c21fab01028fd03af3ca87434725116166e5b48c5658f0",
+        "tools/check_standard.py": "98d0a96887b80bc4c2f85c7681ec2ed83bc5ef458cad35e86bc5da55ad0358df"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"missing selected marker: TESTING-LEVELS.md: не переносится автоматически\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "crc_corrupt",
+      "repeat": 1,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.029551222000009147,
+      "input": {
+        "zip_sha256": "3ac7e0c5902a5a549da4fa8d5d08aca51f658e832732fd74ce75ea6d1653722c"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: ZIP CRC failed\n"
+    },
+    {
+      "case": "crc_corrupt",
+      "repeat": 1,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.0002486580001459515,
+      "input": {
+        "zip_sha256": "3ac7e0c5902a5a549da4fa8d5d08aca51f658e832732fd74ce75ea6d1653722c"
+      }
+    },
+    {
+      "case": "crc_corrupt",
+      "repeat": 1,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.044541891000335454,
+      "input": {
+        "zip_sha256": "252dbee898187de87ea0f3b4ef4d9ca289317a35f57a8feb71b0e3995add4907"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"Bad CRC-32 for file 'AGENTS.md'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "crc_corrupt",
+      "repeat": 2,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.029976241999975173,
+      "input": {
+        "zip_sha256": "3ac7e0c5902a5a549da4fa8d5d08aca51f658e832732fd74ce75ea6d1653722c"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: ZIP CRC failed\n"
+    },
+    {
+      "case": "crc_corrupt",
+      "repeat": 2,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.00021286499986672425,
+      "input": {
+        "zip_sha256": "3ac7e0c5902a5a549da4fa8d5d08aca51f658e832732fd74ce75ea6d1653722c"
+      }
+    },
+    {
+      "case": "crc_corrupt",
+      "repeat": 2,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03743464600029256,
+      "input": {
+        "zip_sha256": "252dbee898187de87ea0f3b4ef4d9ca289317a35f57a8feb71b0e3995add4907"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"Bad CRC-32 for file 'AGENTS.md'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    },
+    {
+      "case": "crc_corrupt",
+      "repeat": 3,
+      "variant": "rc3",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.037398803000087355,
+      "input": {
+        "zip_sha256": "3ac7e0c5902a5a549da4fa8d5d08aca51f658e832732fd74ce75ea6d1653722c"
+      },
+      "stdout": "",
+      "stderr": "FAIL loading input: ZIP CRC failed\n"
+    },
+    {
+      "case": "crc_corrupt",
+      "repeat": 3,
+      "variant": "crc_only",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.00021761199968750589,
+      "input": {
+        "zip_sha256": "3ac7e0c5902a5a549da4fa8d5d08aca51f658e832732fd74ce75ea6d1653722c"
+      }
+    },
+    {
+      "case": "crc_corrupt",
+      "repeat": 3,
+      "variant": "rc4",
+      "expected_accept": false,
+      "accepted": false,
+      "tool_error": false,
+      "exit": 1,
+      "elapsed_s": 0.03880617499999062,
+      "input": {
+        "zip_sha256": "252dbee898187de87ea0f3b4ef4d9ca289317a35f57a8feb71b0e3995add4907"
+      },
+      "stdout": "FAIL {\"ok\": false, \"error\": \"Bad CRC-32 for file 'AGENTS.md'\", \"agent_behavior_evaluated\": false}\n",
+      "stderr": ""
+    }
+  ],
+  "tokens": null,
+  "cost": null,
+  "ai_model": null
+}
