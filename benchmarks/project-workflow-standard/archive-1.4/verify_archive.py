@@ -17,8 +17,11 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def main(output):
+def main(output, expected_revision=None):
     output.mkdir(parents=True, exist_ok=True)
+    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+    if expected_revision is not None and revision != expected_revision:
+        raise RuntimeError("checkout differs from expected revision: " + revision)
     source = json.loads((ROOT / "SOURCE.json").read_text())
     for folder, key in [("original-v1.4-rc3", "original_files"), ("reference-v1.3", "v1.3_files")]:
         actual = {p.relative_to(ROOT / folder).as_posix(): sha(p.read_bytes()) for p in (ROOT / folder).rglob("*") if p.is_file()}
@@ -59,7 +62,6 @@ def main(output):
     if len(archived) != 16 or archived != tree: raise RuntimeError("artifact tree mismatch")
     run([sys.executable, str(checker), str(path), "--json"], "zip")
     run([sys.executable, "-O", str(checker), str(path), "--json"], "zip-optimized")
-    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     build = {"git_head": revision, "working_diff": subprocess.check_output(["git", "status", "--short"], cwd=ROOT, text=True),
              "python": sys.version, "platform": platform.platform(), "artifact": path.name,
              "artifact_sha256": sha(path.read_bytes()), "artifact_bytes": path.stat().st_size,
@@ -72,4 +74,6 @@ def main(output):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
-    main(parser.parse_args().output.resolve())
+    parser.add_argument("--expected-revision", help="optional exact CI head gate")
+    args = parser.parse_args()
+    main(args.output.resolve(), args.expected_revision)

@@ -27,12 +27,15 @@ jobs:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Verify runtime and revision
         run: |
           python3 --version
           git rev-parse HEAD
       - name: Verify original, tests, mutation corpus and delivered ZIP
-        run: python3 benchmarks/project-workflow-standard/archive-1.4/verify_archive.py --output /tmp/pws-archive-evidence
+        env:
+          PWS_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python3 benchmarks/project-workflow-standard/archive-1.4/verify_archive.py --output /tmp/pws-archive-evidence --expected-revision "$PWS_EXPECTED_SHA"
       - name: Show measured comparison and artifact hash
         run: |
           cat /tmp/pws-archive-evidence/comparison.log
