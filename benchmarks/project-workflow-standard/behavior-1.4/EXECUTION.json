@@ -1,0 +1,98 @@
+{
+  "protocol": "PWS-BEHAVIOR-1",
+  "owner_authorization": "2026-11-01: Ну сделай тогда это только нормально комплексный тест и быстрее без тягомотины",
+  "host_interface": "collaboration.spawn_agent",
+  "fork_turns": "none",
+  "model_override": false,
+  "model_id": null,
+  "sampling_parameters": null,
+  "tokens": null,
+  "cost": null,
+  "independent_contexts": 12,
+  "tasks_per_context": 12,
+  "benchmark_agent_names": {
+    "control-r1": "/root/pws_control_r1",
+    "v13-r1": "/root/pws_v13_r1",
+    "rc3-r1": "/root/pws_rc3_r1",
+    "rc4-r1": "/root/pws_rc4_r1",
+    "control-r2": "/root/pws_control_r2",
+    "v13-r2": "/root/pws_v13_r2",
+    "rc3-r2": "/root/pws_rc3_r2",
+    "rc4-r2": "/root/pws_rc4_r2",
+    "control-r3": "/root/pws_control_r3",
+    "v13-r3": "/root/pws_v13_r3",
+    "rc3-r3": "/root/pws_rc3_r3",
+    "rc4-r3": "/root/pws_rc4_r3"
+  },
+  "observed_command_windows": {
+    "control-r1": {
+      "first": "2026-11-01T20:43:26.988392+00:00",
+      "last": "2026-11-01T20:46:18.261417+00:00",
+      "commands": 77
+    },
+    "v13-r1": {
+      "first": "2026-11-01T20:43:28.864551+00:00",
+      "last": "2026-11-01T20:46:36.294651+00:00",
+      "commands": 71
+    },
+    "rc3-r1": {
+      "first": "2026-11-01T20:43:37.158850+00:00",
+      "last": "2026-11-01T20:46:11.072323+00:00",
+      "commands": 64
+    },
+    "rc4-r1": {
+      "first": "2026-11-01T20:43:35.987367+00:00",
+      "last": "2026-11-01T20:45:56.069772+00:00",
+      "commands": 73
+    },
+    "control-r2": {
+      "first": "2026-11-01T20:47:07.342920+00:00",
+      "last": "2026-11-01T20:50:08.292187+00:00",
+      "commands": 83
+    },
+    "v13-r2": {
+      "first": "2026-11-01T20:47:05.418139+00:00",
+      "last": "2026-11-01T20:49:47.140696+00:00",
+      "commands": 78
+    },
+    "rc3-r2": {
+      "first": "2026-11-01T20:43:45.342882+00:00",
+      "last": "2026-11-01T20:46:27.721442+00:00",
+      "commands": 48
+    },
+    "rc4-r2": {
+      "first": "2026-11-01T20:43:42.434024+00:00",
+      "last": "2026-11-01T20:46:27.363666+00:00",
+      "commands": 56
+    },
+    "control-r3": {
+      "first": "2026-11-01T20:47:11.703557+00:00",
+      "last": "2026-11-01T20:49:45.309525+00:00",
+      "commands": 79
+    },
+    "v13-r3": {
+      "first": "2026-11-01T20:47:14.858876+00:00",
+      "last": "2026-11-01T20:50:15.856591+00:00",
+      "commands": 76
+    },
+    "rc3-r3": {
+      "first": "2026-11-01T20:47:24.409825+00:00",
+      "last": "2026-11-01T20:51:08.789266+00:00",
+      "commands": 78
+    },
+    "rc4-r3": {
+      "first": "2026-11-01T20:47:23.184574+00:00",
+      "last": "2026-11-01T20:50:49.556512+00:00",
+      "commands": 70
+    }
+  },
+  "review_agent": "/root/pws_independent_audit",
+  "review_not_counted_in_benchmark": true,
+  "initial_agent_prompt_template": "Выполни локальные задания в /workspace/scratch/c7b9add9b6d3/pws-runs/{trajectory}. Сначала прочитай RUN_TASKS.md в этой папке, затем следуй ему. Работай только в этой траектории; другие агенты заняты независимыми папками. Не читай соседние траектории и benchmark-код. Все case-команды и изменения выполняй через предоставленный _run.py. Не делегируй. Доведи все 12 заданий до доступного результата, запиши RESULT.json по заданной схеме и кратко сообщи итог. Внешние действия не нужны.",
+  "notes": [
+    "Common host/developer rules were inherited; they are not fully exported in these receipts.",
+    "No performance/latency or paid-provider cost comparison is claimed.",
+    "Final model-authored RESULT.json contents are included verbatim in each receipt.",
+    "Primary and diagnostic results run only in temporary copies, never on live task roots."
+  ]
+}

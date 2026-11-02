@@ -1,0 +1,24 @@
+name: PWS Behavior 1.4 replay
+on:
+  pull_request:
+    paths:
+      - 'benchmarks/project-workflow-standard/behavior-1.4/**'
+      - '.github/workflows/pws-behavior-1-4.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Exact head
+        run: git rev-parse HEAD
+      - name: Frozen oracle controls and saved model submission replay
+        run: python3 benchmarks/project-workflow-standard/behavior-1.4/verify.py
