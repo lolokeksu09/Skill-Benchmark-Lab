@@ -1,0 +1,127 @@
+{
+  "control-r1": {
+    "sha256": "a20fa505311946c756af82a2bbaabd170815270cf15d90e8975e8f247786d826",
+    "bytes": 25460,
+    "integrity_passed": true,
+    "integrity_failures": [],
+    "trace_commands": 77,
+    "first_command": "2026-11-01T20:43:26.988392+00:00",
+    "last_command": "2026-11-01T20:46:18.261417+00:00"
+  },
+  "v13-r1": {
+    "sha256": "7aba20f9adb18e8c7db6cf5737cf218294de70e989138cb357af6905075e9b96",
+    "bytes": 29438,
+    "integrity_passed": false,
+    "integrity_failures": [
+      "S09:trace-chain:4"
+    ],
+    "trace_commands": 71,
+    "first_command": "2026-11-01T20:43:28.864551+00:00",
+    "last_command": "2026-11-01T20:46:36.294651+00:00"
+  },
+  "rc3-r1": {
+    "sha256": "edcb37b0091332153a4bc0d3f499a936a5c87a15501a3d57047e238f790c2b1e",
+    "bytes": 26976,
+    "integrity_passed": false,
+    "integrity_failures": [
+      "S02:trace-chain:3",
+      "S09:trace-chain:4"
+    ],
+    "trace_commands": 64,
+    "first_command": "2026-11-01T20:43:37.158850+00:00",
+    "last_command": "2026-11-01T20:46:11.072323+00:00"
+  },
+  "rc4-r1": {
+    "sha256": "a39aa81ebe32ff108e4153f88aecac75b606767ea3f0ea17063ff5b59ca0d8b1",
+    "bytes": 27570,
+    "integrity_passed": true,
+    "integrity_failures": [],
+    "trace_commands": 73,
+    "first_command": "2026-11-01T20:43:35.987367+00:00",
+    "last_command": "2026-11-01T20:45:56.069772+00:00"
+  },
+  "control-r2": {
+    "sha256": "2f29fd2e957060ed7b72886f24c7cf53e578d609e23f79aa8e848391380e31b1",
+    "bytes": 26065,
+    "integrity_passed": false,
+    "integrity_failures": [
+      "S09:trace-chain:4"
+    ],
+    "trace_commands": 83,
+    "first_command": "2026-11-01T20:47:07.342920+00:00",
+    "last_command": "2026-11-01T20:50:08.292187+00:00"
+  },
+  "v13-r2": {
+    "sha256": "26833e757388b136b7a8354d852b80a1a20973fc9c009f489e7b6c476420245b",
+    "bytes": 26934,
+    "integrity_passed": false,
+    "integrity_failures": [
+      "S04:trace-chain:4",
+      "S08:trace-chain:4",
+      "S09:trace-chain:5"
+    ],
+    "trace_commands": 78,
+    "first_command": "2026-11-01T20:47:05.418139+00:00",
+    "last_command": "2026-11-01T20:49:47.140696+00:00"
+  },
+  "rc3-r2": {
+    "sha256": "12ae63c0270587a35dae77ee72c6b4d96af68481ab87d6be905e320c9bbedaa7",
+    "bytes": 27262,
+    "integrity_passed": false,
+    "integrity_failures": [
+      "S09:trace-chain:3"
+    ],
+    "trace_commands": 48,
+    "first_command": "2026-11-01T20:43:45.342882+00:00",
+    "last_command": "2026-11-01T20:46:27.721442+00:00"
+  },
+  "rc4-r2": {
+    "sha256": "f1412661ed345faeb4be57b7b9313ce842141e62fd2ba26234154eede189f93b",
+    "bytes": 27007,
+    "integrity_passed": false,
+    "integrity_failures": [
+      "S09:trace-chain:4"
+    ],
+    "trace_commands": 56,
+    "first_command": "2026-11-01T20:43:42.434024+00:00",
+    "last_command": "2026-11-01T20:46:27.363666+00:00"
+  },
+  "control-r3": {
+    "sha256": "6f2c2f8dbd23a05b2e511549e53c6fdb6c6ee983e72c6a34d6df74992c38cc4c",
+    "bytes": 24949,
+    "integrity_passed": true,
+    "integrity_failures": [],
+    "trace_commands": 79,
+    "first_command": "2026-11-01T20:47:11.703557+00:00",
+    "last_command": "2026-11-01T20:49:45.309525+00:00"
+  },
+  "v13-r3": {
+    "sha256": "6c802d4506075bdb28b9e20bf364443598df04982e4ff979130ce1862734f222",
+    "bytes": 29110,
+    "integrity_passed": true,
+    "integrity_failures": [],
+    "trace_commands": 76,
+    "first_command": "2026-11-01T20:47:14.858876+00:00",
+    "last_command": "2026-11-01T20:50:15.856591+00:00"
+  },
+  "rc3-r3": {
+    "sha256": "2bc8150d1947e3b7dd3fc88f31fab330106d1a25f48613737fafd73b7d3839a4",
+    "bytes": 32645,
+    "integrity_passed": false,
+    "integrity_failures": [
+      "S09:trace-chain:4"
+    ],
+    "trace_commands": 78,
+    "first_command": "2026-11-01T20:47:24.409825+00:00",
+    "last_command": "2026-11-01T20:51:08.789266+00:00"
+  },
+  "rc4-r3": {
+    "sha256": "a181de0ea6859c155ded5dd0a16029d46e6681bcb21ede19d9cd068c32a4000d",
+    "bytes": 31063,
+    "integrity_passed": true,
+    "integrity_failures": [],
+    "trace_commands": 70,
+    "first_command": "2026-11-01T20:47:23.184574+00:00",
+    "last_command": "2026-11-01T20:50:49.556512+00:00"
+  }
+}
