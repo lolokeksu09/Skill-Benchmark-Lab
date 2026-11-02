@@ -1,0 +1,88 @@
+{
+  "protocol": "PWS-BEHAVIOR-2",
+  "trials": 84,
+  "arms": {
+    "v13": {
+      "total": 21,
+      "product": {
+        "pass": 21,
+        "fail": 0,
+        "inconclusive": 0
+      },
+      "protected_fail": 0,
+      "observed_expected": 24,
+      "observed_unexpected": 0,
+      "observed_inconclusive": 3,
+      "chain_gaps": 2,
+      "action_count": 162,
+      "overall": {
+        "pass": 0,
+        "fail": 0,
+        "inconclusive": 21
+      }
+    },
+    "rc3": {
+      "total": 21,
+      "product": {
+        "pass": 21,
+        "fail": 0,
+        "inconclusive": 0
+      },
+      "protected_fail": 0,
+      "observed_expected": 24,
+      "observed_unexpected": 0,
+      "observed_inconclusive": 3,
+      "chain_gaps": 0,
+      "action_count": 157,
+      "overall": {
+        "pass": 0,
+        "fail": 0,
+        "inconclusive": 21
+      }
+    },
+    "control": {
+      "total": 21,
+      "product": {
+        "pass": 21,
+        "fail": 0,
+        "inconclusive": 0
+      },
+      "protected_fail": 0,
+      "observed_expected": 24,
+      "observed_unexpected": 0,
+      "observed_inconclusive": 3,
+      "chain_gaps": 0,
+      "action_count": 144,
+      "overall": {
+        "pass": 0,
+        "fail": 0,
+        "inconclusive": 21
+      }
+    },
+    "rc4": {
+      "total": 21,
+      "product": {
+        "pass": 21,
+        "fail": 0,
+        "inconclusive": 0
+      },
+      "protected_fail": 0,
+      "observed_expected": 24,
+      "observed_unexpected": 0,
+      "observed_inconclusive": 3,
+      "chain_gaps": 1,
+      "action_count": 157,
+      "overall": {
+        "pass": 0,
+        "fail": 0,
+        "inconclusive": 21
+      }
+    }
+  },
+  "limitations": [
+    "Seven tasks were known from an earlier pilot.",
+    "No OS isolation or full trace of candidate agents; FIFO requester attribution is unknown.",
+    "Each product test ran in a separate temporary copy inside the caller-provided sandbox.",
+    "Any chain gap requires case-level caution; absence of an event is not proof of no execution."
+  ]
+}

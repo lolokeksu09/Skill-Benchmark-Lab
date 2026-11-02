@@ -1,0 +1,55 @@
+name: PWS Behavior 2 preflight and isolated oracle
+on:
+  pull_request:
+    paths:
+      - 'benchmarks/project-workflow-standard/behavior-1.4-next/**'
+      - '.github/workflows/pws-behavior-2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Report tested revision
+        run: git rev-parse HEAD
+      - name: Preflight tests on runner
+        run: python3 -B -m unittest discover -s benchmarks/project-workflow-standard/behavior-1.4-next -p 'tests*.py' -v
+      - name: Isolated dynamic oracle controls
+        run: |
+          docker run --rm --network none --read-only --tmpfs /tmp:rw,nosuid,nodev,size=256m \
+            --cap-drop ALL --security-opt no-new-privileges --pids-limit 128 --memory 768m --cpus 1 \
+            --user 65534:65534 --env HOME=/tmp --env PYTHONDONTWRITEBYTECODE=1 \
+            --mount "type=bind,src=$PWD/benchmarks,dst=/source/benchmarks,readonly" \
+            --workdir /source python:3.12 \
+            python3 -B -m unittest discover -s benchmarks/project-workflow-standard/behavior-1.4-next -p tests_scenario_suite.py -v
+      - name: Replay saved model submissions in isolated container
+        if: ${{ hashFiles('benchmarks/project-workflow-standard/behavior-1.4-next/cohort.json.gz') != '' }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/pws2-results"
+          chmod 777 "$RUNNER_TEMP/pws2-results"
+          docker run --rm --network none --read-only --tmpfs /tmp:rw,nosuid,nodev,size=256m \
+            --cap-drop ALL --security-opt no-new-privileges --pids-limit 128 --memory 768m --cpus 1 \
+            --user 65534:65534 --env HOME=/tmp --env PYTHONDONTWRITEBYTECODE=1 \
+            --mount "type=bind,src=$PWD/benchmarks,dst=/source/benchmarks,readonly" \
+            --mount "type=bind,src=$RUNNER_TEMP/pws2-results,dst=/out" \
+            --workdir /source python:3.12 \
+            python3 -B benchmarks/project-workflow-standard/behavior-1.4-next/isolated_score.py \
+              --archive benchmarks/project-workflow-standard/behavior-1.4-next/cohort.json.gz --output /out
+      - name: Verify frozen inputs and exact saved results
+        if: ${{ hashFiles('benchmarks/project-workflow-standard/behavior-1.4-next/CI-SCORES.JSON') != '' }}
+        run: python3 -B benchmarks/project-workflow-standard/behavior-1.4-next/verify_saved.py --replay "$RUNNER_TEMP/pws2-results"
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('benchmarks/project-workflow-standard/behavior-1.4-next/cohort.json.gz') != '' }}
+        with:
+          name: pws2-isolated-scores
+          path: ${{ runner.temp }}/pws2-results/
+          if-no-files-found: error
