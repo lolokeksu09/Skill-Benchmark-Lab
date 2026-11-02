@@ -44,6 +44,9 @@ jobs:
             --workdir /source python:3.12 \
             python3 -B benchmarks/project-workflow-standard/behavior-1.4-next/isolated_score.py \
               --archive benchmarks/project-workflow-standard/behavior-1.4-next/cohort.json.gz --output /out
+      - name: Verify frozen inputs and exact saved results
+        if: ${{ hashFiles('benchmarks/project-workflow-standard/behavior-1.4-next/CI-SCORES.JSON') != '' }}
+        run: python3 -B benchmarks/project-workflow-standard/behavior-1.4-next/verify_saved.py --replay "$RUNNER_TEMP/pws2-results"
       - uses: actions/upload-artifact@v4
         if: ${{ hashFiles('benchmarks/project-workflow-standard/behavior-1.4-next/cohort.json.gz') != '' }}
         with:
