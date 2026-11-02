@@ -1,0 +1,20 @@
+{
+  "repository": "lolokeksu09/Skill-Benchmark-Lab",
+  "head_repository": "lolokeksu09/Skill-Benchmark-Lab",
+  "head_sha": "f1f4ac11f3859b9934c3b5e6eee67a5e5e2db136",
+  "run_id": 41502465618,
+  "workflow_id": 404128692,
+  "attempt": 1,
+  "jobs": [
+    {
+      "name": "preflight",
+      "steps": [
+        "Report tested revision",
+        "Preflight tests on runner",
+        "Isolated dynamic oracle controls",
+        "Replay saved model submissions in isolated container",
+        "Verify frozen inputs and exact saved results"
+      ]
+    }
+  ]
+}

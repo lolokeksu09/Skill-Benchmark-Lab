@@ -1,0 +1,41 @@
+{
+  "agent_total_runtime": null,
+  "cohort_sha256": "918b55eeb86c2648f84514fe25d386d29aa899ecb73724761a4c8efba7d685fc",
+  "cost": null,
+  "groups": {
+    "control": {
+      "median_command_seconds": 0.267,
+      "median_observed_span_seconds": 11.963,
+      "observed_actions": 144,
+      "timing_unavailable": 0,
+      "trials": 21,
+      "trials_with_chain_gaps": 0
+    },
+    "rc3": {
+      "median_command_seconds": 0.356,
+      "median_observed_span_seconds": 15.35,
+      "observed_actions": 157,
+      "timing_unavailable": 0,
+      "trials": 21,
+      "trials_with_chain_gaps": 0
+    },
+    "rc4": {
+      "median_command_seconds": 0.358,
+      "median_observed_span_seconds": 15.467,
+      "observed_actions": 157,
+      "timing_unavailable": 0,
+      "trials": 21,
+      "trials_with_chain_gaps": 1
+    },
+    "v13": {
+      "median_command_seconds": 0.362,
+      "median_observed_span_seconds": 14.108,
+      "observed_actions": 162,
+      "timing_unavailable": 0,
+      "trials": 21,
+      "trials_with_chain_gaps": 2
+    }
+  },
+  "limitation": "Post-hoc descriptive measurements of recorded commands only. Spans exclude unobserved time before the first and after the last recorded action; missing actions, concurrency and scheduling can affect results. Not causal comparisons.",
+  "tokens": null
+}
