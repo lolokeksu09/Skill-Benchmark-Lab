@@ -31,3 +31,22 @@ jobs:
             --mount "type=bind,src=$PWD/benchmarks,dst=/source/benchmarks,readonly" \
             --workdir /source python:3.12 \
             python3 -B -m unittest discover -s benchmarks/project-workflow-standard/behavior-1.4-next -p tests_scenario_suite.py -v
+      - name: Replay saved model submissions in isolated container
+        if: ${{ hashFiles('benchmarks/project-workflow-standard/behavior-1.4-next/cohort.json.gz') != '' }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/pws2-results"
+          chmod 777 "$RUNNER_TEMP/pws2-results"
+          docker run --rm --network none --read-only --tmpfs /tmp:rw,nosuid,nodev,size=256m \
+            --cap-drop ALL --security-opt no-new-privileges --pids-limit 128 --memory 768m --cpus 1 \
+            --user 65534:65534 --env HOME=/tmp --env PYTHONDONTWRITEBYTECODE=1 \
+            --mount "type=bind,src=$PWD/benchmarks,dst=/source/benchmarks,readonly" \
+            --mount "type=bind,src=$RUNNER_TEMP/pws2-results,dst=/out" \
+            --workdir /source python:3.12 \
+            python3 -B benchmarks/project-workflow-standard/behavior-1.4-next/isolated_score.py \
+              --archive benchmarks/project-workflow-standard/behavior-1.4-next/cohort.json.gz --output /out
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('benchmarks/project-workflow-standard/behavior-1.4-next/cohort.json.gz') != '' }}
+        with:
+          name: pws2-isolated-scores
+          path: ${{ runner.temp }}/pws2-results/
+          if-no-files-found: error
