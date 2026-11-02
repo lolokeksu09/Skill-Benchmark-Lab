@@ -1,0 +1,33 @@
+name: PWS Behavior 2 preflight and isolated oracle
+on:
+  pull_request:
+    paths:
+      - 'benchmarks/project-workflow-standard/behavior-1.4-next/**'
+      - '.github/workflows/pws-behavior-2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Report tested revision
+        run: git rev-parse HEAD
+      - name: Preflight tests on runner
+        run: python3 -B -m unittest discover -s benchmarks/project-workflow-standard/behavior-1.4-next -p 'tests*.py' -v
+      - name: Isolated dynamic oracle controls
+        run: |
+          docker run --rm --network none --read-only --tmpfs /tmp:rw,nosuid,nodev,size=256m \
+            --cap-drop ALL --security-opt no-new-privileges --pids-limit 128 --memory 768m --cpus 1 \
+            --user 65534:65534 --env HOME=/tmp --env PYTHONDONTWRITEBYTECODE=1 \
+            --mount "type=bind,src=$PWD/benchmarks,dst=/source/benchmarks,readonly" \
+            --workdir /source python:3.12 \
+            python3 -B -m unittest discover -s benchmarks/project-workflow-standard/behavior-1.4-next -p tests_scenario_suite.py -v
