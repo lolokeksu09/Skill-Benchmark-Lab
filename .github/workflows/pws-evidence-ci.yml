@@ -1,0 +1,30 @@
+name: PWS evidence metadata checks
+on:
+  pull_request:
+    paths:
+      - 'benchmarks/project-workflow-standard/evidence-ci-v1/**'
+      - '.github/workflows/pws-evidence-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test controls
+        run: python3 -m unittest discover -s benchmarks/project-workflow-standard/evidence-ci-v1 -p 'test*.py' -v
+      - name: Test optimized Python
+        run: python3 -O -m unittest discover -s benchmarks/project-workflow-standard/evidence-ci-v1 -p 'test*.py'
+      - name: Check example metadata
+        run: |
+          cd benchmarks/project-workflow-standard/evidence-ci-v1
+          python3 ci_evidence.py --run fixtures/run.json --jobs fixtures/jobs.json --expect fixtures/expected.json
+      - name: Reproduce historical descriptive timings
+        run: |
+          cd benchmarks/project-workflow-standard/evidence-ci-v1
+          python3 timing.py ../behavior-1.4-next/cohort.json.gz > /tmp/pws-timing.json
+          diff -u timing-descriptive.json /tmp/pws-timing.json
