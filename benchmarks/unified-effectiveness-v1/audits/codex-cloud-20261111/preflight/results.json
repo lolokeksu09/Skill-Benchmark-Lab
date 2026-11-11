@@ -1,0 +1,108 @@
+{
+  "schema": "unified-effectiveness-web-v1",
+  "candidate_path": "/workspace/Skill-Benchmark-Lab/benchmarks/unified-effectiveness-v1/starter",
+  "sha256": {
+    "index.html": "fe41d0e302cd9afbef6411e748a0293ceec07f276f750ff403287d614e7a51b5",
+    "styles.css": "a18ee8053d37b525f300a5db0bf07798ac181d484f3bd80fa151b3d435abf911",
+    "app.js": "dd50257f831d863e3f5f64e015b7e34bb17bf361737a44921e3bec3a96e74c04"
+  },
+  "source_fixture_sha256": "6448c3a05e3d092ae21a96dac808289d0462fa6bc99edc0b47062cb6ede6b463",
+  "checks": [
+    {
+      "name": "initial_six_requests",
+      "status": "pass",
+      "details": "['r1', 'r2', 'r3', 'r4', 'r5', 'r6']"
+    },
+    {
+      "name": "status_filter_done",
+      "status": "fail",
+      "details": "['r1', 'r2', 'r3', 'r4', 'r5', 'r6']"
+    },
+    {
+      "name": "trim_casefold_search",
+      "status": "fail",
+      "details": "['r1', 'r2', 'r3', 'r4', 'r5', 'r6']"
+    },
+    {
+      "name": "combined_filter_and_search",
+      "status": "fail",
+      "details": "['r1', 'r2', 'r3', 'r4', 'r5', 'r6']"
+    },
+    {
+      "name": "no_results_empty_state",
+      "status": "fail",
+      "details": "ids=['r1', 'r2', 'r3', 'r4', 'r5', 'r6'], visible=False"
+    },
+    {
+      "name": "failed_search_preserves_cards",
+      "status": "fail",
+      "details": "['r1', 'r2', 'r3', 'r4', 'r5', 'r6']: 6 requests"
+    },
+    {
+      "name": "stale_search_response_discarded",
+      "status": "fail",
+      "details": "['r1', 'r2', 'r3', 'r4', 'r5', 'r6']"
+    },
+    {
+      "name": "untrusted_data_safe_text",
+      "status": "fail",
+      "details": "img_nodes=1 injected=True title="
+    },
+    {
+      "name": "accessible_bookmarks",
+      "status": "fail",
+      "details": "[{'name': None, 'pressed': 'false'}, {'name': None, 'pressed': 'true'}, {'name': None, 'pressed': 'false'}, {'name': None, 'pressed': 'false'}, {'name': None, 'pressed': 'false'}, {'name': None, 'pressed': 'false'}]"
+    },
+    {
+      "name": "keyboard_space_operates_bookmark",
+      "status": "fail",
+      "details": "false->false"
+    },
+    {
+      "name": "rejected_bookmark_restores_true",
+      "status": "fail",
+      "details": "true->true; 6 requests"
+    },
+    {
+      "name": "retry_after_rejected_bookmark",
+      "status": "fail",
+      "details": "retry pressed=true"
+    },
+    {
+      "name": "touch_target_44px",
+      "status": "fail",
+      "details": "{'w': 23.953125, 'h': 27}"
+    },
+    {
+      "name": "visible_focus_indicator",
+      "status": "fail",
+      "details": "{'style': 'auto', 'width': 1}"
+    },
+    {
+      "name": "responsive_375",
+      "status": "fail",
+      "details": "{'viewport': 375, 'content': 1096}"
+    },
+    {
+      "name": "responsive_768",
+      "status": "fail",
+      "details": "{'viewport': 768, 'content': 1096}"
+    },
+    {
+      "name": "responsive_1280",
+      "status": "pass",
+      "details": "{'viewport': 1280, 'content': 1280}"
+    },
+    {
+      "name": "no_external_assets",
+      "status": "pass",
+      "details": ""
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "total": 18
+  },
+  "agent_trials": 0,
+  "inference": "none: deterministic UI contract only"
+}

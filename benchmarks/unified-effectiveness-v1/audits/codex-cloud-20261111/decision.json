@@ -1,0 +1,26 @@
+{
+  "status": "blocked_before_trial_1",
+  "independent_agent_trials": 0,
+  "planned_trials": 6,
+  "source_sha": "fe1dc4ced57c608bda314ad5d082cdf644361273",
+  "model_id": null,
+  "thinking_effort": null,
+  "exclusive_treatment_verified": false,
+  "plugin_archive_sha256_verified_this_audit": false,
+  "cli_installed_by_audit": false,
+  "cli_executed_by_audit": false,
+  "paid_inference": false,
+  "scorer_preflight": {
+    "candidate": "frozen starter; not an arm",
+    "passed": 3,
+    "total": 18,
+    "exit_code": 1,
+    "selftest_exit_code": 0
+  },
+  "limitations": [
+    "No supported per-child plugin/skill/tool/environment isolation control exposed in current session",
+    "No effective runtime model and thinking-effort attestation exposed",
+    "Plugin metadata confirms v1.0.1 but not exclusive per-trial loading",
+    "Current auditor has seen evaluator and cannot serve as a fresh candidate session"
+  ]
+}
