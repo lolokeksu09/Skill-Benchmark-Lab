@@ -1,0 +1,20 @@
+{
+  "protocol": "unified-ui-independent-v1-proposed",
+  "status": "not-run",
+  "anonymous_artifact_id": null,
+  "task_id": null,
+  "reviewer_id": null,
+  "ratings_1_to_5": {
+    "task_fit": null,
+    "information_hierarchy": null,
+    "typography_readability": null,
+    "mobile_usability": null,
+    "coherence": null,
+    "visual_individuality": null,
+    "accessibility_visible_signals": null
+  },
+  "observed_defects": [],
+  "evidence_screenshot_paths": [],
+  "arm_key_hidden": true,
+  "comment": "Use only after independent random assignment and reviewer blinding. Do not attribute manual-pilot screenshots to an agent arm."
+}
