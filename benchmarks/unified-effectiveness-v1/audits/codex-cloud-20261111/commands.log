@@ -1,0 +1,22 @@
+2026-11-11 UTC
+git clone --no-checkout https://github.com/lolokeksu09/Skill-Benchmark-Lab.git /workspace/Skill-Benchmark-Lab
+  exit 0
+git checkout --detach fe1dc4ced57c608bda314ad5d082cdf644361273
+  exit 0; initially clean worktree
+git switch -c audit/unified-v1.0.1-codex-cloud-20261111
+  exit 0
+python3 benchmarks/unified-effectiveness-v1/score_web.py --candidate benchmarks/unified-effectiveness-v1/starter --out benchmarks/unified-effectiveness-v1/audits/codex-cloud-20261111/preflight --screenshot
+  exit 1 (expected broken starter); summary 3/18
+python3 benchmarks/unified-effectiveness-v1/selftest.py
+  exit 0; five required negative controls rejected
+python3 --version
+  Python 3.12.14
+node --version
+  v24.22.1
+command -v codex
+  /opt/codex/bin/codex (preinstalled; never invoked or installed by this audit)
+skills.list authority=executor
+  skills=[]; warnings=[]; next_cursor=null
+collaboration.list_agents
+  /root running; no child agents created
+No benchmark candidate was generated. No model API or CLI inference was invoked.

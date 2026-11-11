@@ -1,0 +1,1061 @@
+{
+  "source": "skills.list authority=cloud, all pages; executor returned no skills",
+  "total": 237,
+  "counts": {
+    "development-design-skills-p2p": 100,
+    "fal": 15,
+    "sites": 2,
+    "write-like-me": 1,
+    "plugin-management": 1,
+    "work-pets": 3,
+    "cloud-environment": 2,
+    "plugin-creator": 3,
+    "crafting-faqs": 1,
+    "mobile-design-lab-3in1": 2,
+    "unified-development-design": 106,
+    "verify-technical-release": 1
+  },
+  "relevant_skills": [
+    {
+      "name": "development-design-skills-p2p:academy-guide",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/academy-guide",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/academy-guide/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:accessibility-compliance-accessibility-audit",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/accessibility-compliance-accessibility-audit",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/accessibility-compliance-accessibility-audit/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:algorithmic-art",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/algorithmic-art",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/algorithmic-art/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:android-jetpack-compose-expert",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/android-jetpack-compose-expert",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/android-jetpack-compose-expert/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:api-design-principles",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/api-design-principles",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/api-design-principles/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:api-security-best-practices",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/api-security-best-practices",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/api-security-best-practices/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:auth-implementation-patterns",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/auth-implementation-patterns",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/auth-implementation-patterns/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:brainstorming",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/brainstorming",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/brainstorming/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:brand-guidelines",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/brand-guidelines",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/brand-guidelines/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:canvas-design",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/canvas-design",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/canvas-design/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:changelog-generator",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/changelog-generator",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/changelog-generator/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:claude-api",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/claude-api",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/claude-api/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:code-review",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/code-review",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/code-review/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:codebase-design",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/codebase-design",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/codebase-design/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:competitive-ads-extractor",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/competitive-ads-extractor",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/competitive-ads-extractor/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:content-research-writer",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/content-research-writer",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/content-research-writer/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:database-design",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/database-design",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/database-design/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:database-migrations-sql-migrations",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/database-migrations-sql-migrations",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/database-migrations-sql-migrations/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:deploy-to-vercel",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/deploy-to-vercel",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/deploy-to-vercel/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:deployment-procedures",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/deployment-procedures",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/deployment-procedures/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:diagnosing-bugs",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/diagnosing-bugs",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/diagnosing-bugs/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:diagnosing-superpowers",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/diagnosing-superpowers",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/diagnosing-superpowers/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:differential-review",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/differential-review",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/differential-review/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:discernment-nudge",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/discernment-nudge",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/discernment-nudge/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:dispatching-parallel-agents",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/dispatching-parallel-agents",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/dispatching-parallel-agents/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:docker-expert",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/docker-expert",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/docker-expert/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:domain-modeling",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/domain-modeling",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/domain-modeling/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:domain-name-brainstormer",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/domain-name-brainstormer",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/domain-name-brainstormer/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:electron-development",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/electron-development",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/electron-development/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:error-handling-patterns",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/error-handling-patterns",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/error-handling-patterns/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:executing-plans",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/executing-plans",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/executing-plans/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:file-organizer",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/file-organizer",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/file-organizer/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:finishing-a-development-branch",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/finishing-a-development-branch",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/finishing-a-development-branch/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:frontend-api-integration-patterns",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/frontend-api-integration-patterns",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/frontend-api-integration-patterns/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:frontend-design",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/frontend-design",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/frontend-design/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:git-guardrails-claude-code",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/git-guardrails-claude-code",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/git-guardrails-claude-code/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:github-actions-templates",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/github-actions-templates",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/github-actions-templates/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:grilling",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/grilling",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/grilling/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:i18n-localization",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/i18n-localization",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/i18n-localization/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:internal-comms",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/internal-comms",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/internal-comms/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:invoice-organizer",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/invoice-organizer",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/invoice-organizer/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:karpathy-guidelines",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/karpathy-guidelines",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/karpathy-guidelines/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:lead-research-assistant",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/lead-research-assistant",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/lead-research-assistant/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:mcp-builder",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/mcp-builder",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/mcp-builder/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:meeting-insights-analyzer",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/meeting-insights-analyzer",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/meeting-insights-analyzer/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:migrate-to-shoehorn",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/migrate-to-shoehorn",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/migrate-to-shoehorn/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:observability-engineer",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/observability-engineer",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/observability-engineer/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:performance-profiling",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/performance-profiling",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/performance-profiling/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:ponytail",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:ponytail-audit",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail-audit",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail-audit/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:ponytail-debt",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail-debt",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail-debt/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:ponytail-gain",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail-gain",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail-gain/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:ponytail-help",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail-help",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail-help/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:ponytail-review",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail-review",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/ponytail-review/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:pr",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/pr",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/pr/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:property-based-testing",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/property-based-testing",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/property-based-testing/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:prototype",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/prototype",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/prototype/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:raffle-winner-picker",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/raffle-winner-picker",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/raffle-winner-picker/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:react-ui-patterns",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/react-ui-patterns",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/react-ui-patterns/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:receiving-code-review",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/receiving-code-review",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/receiving-code-review/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:requesting-code-review",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/requesting-code-review",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/requesting-code-review/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:research",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/research",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/research/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:rust-async-patterns",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/rust-async-patterns",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/rust-async-patterns/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:scaffold-exercises",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/scaffold-exercises",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/scaffold-exercises/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:security-auditor",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/security-auditor",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/security-auditor/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:seo-audit",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/seo-audit",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/seo-audit/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:setup-pre-commit",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/setup-pre-commit",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/setup-pre-commit/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:sharp-edges",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/sharp-edges",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/sharp-edges/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:skill-creator",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/skill-creator",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/skill-creator/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:skill-router",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/skill-router",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/skill-router/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:slack-gif-creator",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/slack-gif-creator",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/slack-gif-creator/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:sql-optimization-patterns",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/sql-optimization-patterns",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/sql-optimization-patterns/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:subagent-driven-development",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/subagent-driven-development",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/subagent-driven-development/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:systematic-debugging",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/systematic-debugging",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/systematic-debugging/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:tailored-resume-generator",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/tailored-resume-generator",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/tailored-resume-generator/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:tailwind-design-system",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/tailwind-design-system",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/tailwind-design-system/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:tdd",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/tdd",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/tdd/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:test-driven-development",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/test-driven-development",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/test-driven-development/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:theme-factory",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/theme-factory",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/theme-factory/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:twitter-algorithm-optimizer",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/twitter-algorithm-optimizer",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/twitter-algorithm-optimizer/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:typescript-advanced-types",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/typescript-advanced-types",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/typescript-advanced-types/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:ui-ux-pro-max",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/ui-ux-pro-max",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/ui-ux-pro-max/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:using-git-worktrees",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/using-git-worktrees",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/using-git-worktrees/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:using-superpowers",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/using-superpowers",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/using-superpowers/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:vercel-cli-with-tokens",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-cli-with-tokens",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-cli-with-tokens/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:vercel-composition-patterns",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-composition-patterns",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-composition-patterns/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:vercel-optimize",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-optimize",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-optimize/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:vercel-react-best-practices",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-react-best-practices",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-react-best-practices/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:vercel-react-native-skills",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-react-native-skills",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-react-native-skills/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:vercel-react-view-transitions",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-react-view-transitions",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/vercel-react-view-transitions/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:verification-before-completion",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/verification-before-completion",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/verification-before-completion/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:web-artifacts-builder",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/web-artifacts-builder",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/web-artifacts-builder/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:web-design-guidelines",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/web-design-guidelines",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/web-design-guidelines/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:web-performance-optimization",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/web-performance-optimization",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/web-performance-optimization/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:webapp-testing",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/webapp-testing",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/webapp-testing/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:wizard",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/wizard",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/wizard/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:writing-for-agents",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/writing-for-agents",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/writing-for-agents/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:writing-guidelines",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/writing-guidelines",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/writing-guidelines/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:writing-plans",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/writing-plans",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/writing-plans/SKILL.md"
+    },
+    {
+      "name": "development-design-skills-p2p:writing-skills",
+      "package": "skill://Plugin_edd2869c103c8191a52d027263284120/writing-skills",
+      "main_resource": "skill://Plugin_edd2869c103c8191a52d027263284120/writing-skills/SKILL.md"
+    },
+    {
+      "name": "mobile-design-lab-3in1:impeccable",
+      "package": "skill://plugins_6ae16eb2cbbc8191889cdc10646fd834/impeccable",
+      "main_resource": "skill://plugins_6ae16eb2cbbc8191889cdc10646fd834/impeccable/SKILL.md"
+    },
+    {
+      "name": "mobile-design-lab-3in1:ui-ux-pro-max",
+      "package": "skill://plugins_6ae16eb2cbbc8191889cdc10646fd834/ui-ux-pro-max",
+      "main_resource": "skill://plugins_6ae16eb2cbbc8191889cdc10646fd834/ui-ux-pro-max/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:academy-guide",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/academy-guide",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/academy-guide/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:accessibility-compliance-accessibility-audit",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/accessibility-compliance-accessibility-audit",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/accessibility-compliance-accessibility-audit/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:algorithmic-art",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/algorithmic-art",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/algorithmic-art/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:android-jetpack-compose-expert",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/android-jetpack-compose-expert",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/android-jetpack-compose-expert/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:anti-ai-slop",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/anti-ai-slop",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/anti-ai-slop/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:api-design-principles",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/api-design-principles",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/api-design-principles/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:api-security-best-practices",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/api-security-best-practices",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/api-security-best-practices/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:auth-implementation-patterns",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/auth-implementation-patterns",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/auth-implementation-patterns/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:brainstorming",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/brainstorming",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/brainstorming/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:brand-guidelines",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/brand-guidelines",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/brand-guidelines/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:canvas-design",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/canvas-design",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/canvas-design/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:changelog-generator",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/changelog-generator",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/changelog-generator/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:claude-api",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/claude-api",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/claude-api/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:code-review",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/code-review",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/code-review/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:codebase-design",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/codebase-design",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/codebase-design/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:competitive-ads-extractor",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/competitive-ads-extractor",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/competitive-ads-extractor/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:content-research-writer",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/content-research-writer",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/content-research-writer/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:database-design",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/database-design",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/database-design/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:database-migrations-sql-migrations",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/database-migrations-sql-migrations",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/database-migrations-sql-migrations/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:deploy-to-vercel",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/deploy-to-vercel",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/deploy-to-vercel/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:deployment-procedures",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/deployment-procedures",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/deployment-procedures/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:diagnosing-bugs",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/diagnosing-bugs",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/diagnosing-bugs/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:diagnosing-superpowers",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/diagnosing-superpowers",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/diagnosing-superpowers/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:differential-review",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/differential-review",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/differential-review/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:discernment-nudge",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/discernment-nudge",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/discernment-nudge/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:dispatching-parallel-agents",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/dispatching-parallel-agents",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/dispatching-parallel-agents/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:docker-expert",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/docker-expert",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/docker-expert/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:domain-modeling",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/domain-modeling",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/domain-modeling/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:domain-name-brainstormer",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/domain-name-brainstormer",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/domain-name-brainstormer/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:electron-development",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/electron-development",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/electron-development/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:error-handling-patterns",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/error-handling-patterns",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/error-handling-patterns/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:executing-plans",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/executing-plans",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/executing-plans/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:file-organizer",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/file-organizer",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/file-organizer/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:finishing-a-development-branch",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/finishing-a-development-branch",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/finishing-a-development-branch/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:frontend-api-integration-patterns",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/frontend-api-integration-patterns",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/frontend-api-integration-patterns/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:frontend-design",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/frontend-design",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/frontend-design/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:git-guardrails-claude-code",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/git-guardrails-claude-code",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/git-guardrails-claude-code/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:github-actions-templates",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/github-actions-templates",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/github-actions-templates/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:grilling",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/grilling",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/grilling/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:i18n-localization",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/i18n-localization",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/i18n-localization/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:impeccable",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/impeccable",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/impeccable/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:internal-comms",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/internal-comms",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/internal-comms/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:invoice-organizer",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/invoice-organizer",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/invoice-organizer/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:karpathy-guidelines",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/karpathy-guidelines",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/karpathy-guidelines/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:lead-research-assistant",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/lead-research-assistant",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/lead-research-assistant/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:mcp-builder",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/mcp-builder",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/mcp-builder/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:meeting-insights-analyzer",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/meeting-insights-analyzer",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/meeting-insights-analyzer/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:migrate-to-shoehorn",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/migrate-to-shoehorn",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/migrate-to-shoehorn/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:observability-engineer",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/observability-engineer",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/observability-engineer/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:performance-profiling",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/performance-profiling",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/performance-profiling/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:ponytail",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:ponytail-audit",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail-audit",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail-audit/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:ponytail-debt",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail-debt",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail-debt/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:ponytail-gain",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail-gain",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail-gain/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:ponytail-help",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail-help",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail-help/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:ponytail-review",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail-review",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ponytail-review/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:pr",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/pr",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/pr/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:property-based-testing",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/property-based-testing",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/property-based-testing/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:prototype",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/prototype",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/prototype/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:raffle-winner-picker",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/raffle-winner-picker",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/raffle-winner-picker/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:react-ui-patterns",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/react-ui-patterns",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/react-ui-patterns/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:receiving-code-review",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/receiving-code-review",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/receiving-code-review/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:requesting-code-review",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/requesting-code-review",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/requesting-code-review/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:research",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/research",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/research/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:rust-async-patterns",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/rust-async-patterns",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/rust-async-patterns/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:scaffold-exercises",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/scaffold-exercises",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/scaffold-exercises/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:security-auditor",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/security-auditor",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/security-auditor/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:seo-audit",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/seo-audit",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/seo-audit/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:setup-pre-commit",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/setup-pre-commit",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/setup-pre-commit/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:sharp-edges",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/sharp-edges",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/sharp-edges/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:skill-creator",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/skill-creator",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/skill-creator/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:skill-router",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/skill-router",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/skill-router/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:slack-gif-creator",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/slack-gif-creator",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/slack-gif-creator/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:sql-optimization-patterns",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/sql-optimization-patterns",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/sql-optimization-patterns/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:subagent-driven-development",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/subagent-driven-development",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/subagent-driven-development/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:systematic-debugging",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/systematic-debugging",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/systematic-debugging/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:tailored-resume-generator",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/tailored-resume-generator",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/tailored-resume-generator/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:tailwind-design-system",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/tailwind-design-system",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/tailwind-design-system/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:tdd",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/tdd",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/tdd/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:test-driven-development",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/test-driven-development",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/test-driven-development/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:theme-factory",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/theme-factory",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/theme-factory/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:twitter-algorithm-optimizer",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/twitter-algorithm-optimizer",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/twitter-algorithm-optimizer/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:typescript-advanced-types",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/typescript-advanced-types",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/typescript-advanced-types/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:ui-ux-pro-max",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ui-ux-pro-max",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/ui-ux-pro-max/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:unified-design-direction",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/unified-design-direction",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/unified-design-direction/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:unified-engineering",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/unified-engineering",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/unified-engineering/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:unified-orchestrator",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/unified-orchestrator",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/unified-orchestrator/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:unified-ui-audit",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/unified-ui-audit",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/unified-ui-audit/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:using-git-worktrees",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/using-git-worktrees",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/using-git-worktrees/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:using-superpowers",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/using-superpowers",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/using-superpowers/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:vercel-cli-with-tokens",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-cli-with-tokens",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-cli-with-tokens/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:vercel-composition-patterns",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-composition-patterns",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-composition-patterns/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:vercel-optimize",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-optimize",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-optimize/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:vercel-react-best-practices",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-react-best-practices",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-react-best-practices/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:vercel-react-native-skills",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-react-native-skills",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-react-native-skills/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:vercel-react-view-transitions",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-react-view-transitions",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/vercel-react-view-transitions/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:verification-before-completion",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/verification-before-completion",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/verification-before-completion/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:web-artifacts-builder",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/web-artifacts-builder",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/web-artifacts-builder/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:web-design-guidelines",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/web-design-guidelines",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/web-design-guidelines/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:web-performance-optimization",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/web-performance-optimization",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/web-performance-optimization/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:webapp-testing",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/webapp-testing",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/webapp-testing/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:wizard",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/wizard",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/wizard/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:writing-for-agents",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/writing-for-agents",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/writing-for-agents/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:writing-guidelines",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/writing-guidelines",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/writing-guidelines/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:writing-plans",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/writing-plans",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/writing-plans/SKILL.md"
+    },
+    {
+      "name": "unified-development-design:writing-skills",
+      "package": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/writing-skills",
+      "main_resource": "skill://plugins_6af49b4f754c8191829e46f38f979c8a/writing-skills/SKILL.md"
+    }
+  ],
+  "interpretation": "Metadata is exposed to this audit session. This is not proof that every skill body was read or a per-trial host attestation."
+}

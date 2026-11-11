@@ -1,0 +1,7 @@
+trial,arm,starter_sha,model,effort,submitted_sha,contract_pass,contract_total,status,limitations
+A1,control,fe1dc4ced57c608bda314ad5d082cdf644361273,,,,,18,blocked_before_trial_1,plugin isolation and runtime identity not attestable
+B1,unified-1.0.1,fe1dc4ced57c608bda314ad5d082cdf644361273,,,,,18,blocked_before_trial_1,plugin isolation and runtime identity not attestable
+A2,control,fe1dc4ced57c608bda314ad5d082cdf644361273,,,,,18,blocked_before_trial_1,plugin isolation and runtime identity not attestable
+B2,unified-1.0.1,fe1dc4ced57c608bda314ad5d082cdf644361273,,,,,18,blocked_before_trial_1,plugin isolation and runtime identity not attestable
+A3,control,fe1dc4ced57c608bda314ad5d082cdf644361273,,,,,18,blocked_before_trial_1,plugin isolation and runtime identity not attestable
+B3,unified-1.0.1,fe1dc4ced57c608bda314ad5d082cdf644361273,,,,,18,blocked_before_trial_1,plugin isolation and runtime identity not attestable
