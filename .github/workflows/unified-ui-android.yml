@@ -31,9 +31,7 @@ jobs:
           arch: x86_64
           profile: pixel_2
           disable-animations: true
-          script: |
-            cd benchmarks/unified-ui-ab-pilot/android
-            gradle --no-daemon :app:connectedDebugAndroidTest
+          script: gradle --no-daemon -p benchmarks/unified-ui-ab-pilot/android :app:connectedDebugAndroidTest
       - name: Archive test reports
         if: always()
         uses: actions/upload-artifact@v4
