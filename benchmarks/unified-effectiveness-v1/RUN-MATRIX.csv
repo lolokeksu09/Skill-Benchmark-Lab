@@ -1,0 +1,7 @@
+trial,arm,task,starter_sha,plugin_sha,model,effort,skill_evidence,submitted_sha,contract_pass,contract_total,visual_review_1,visual_review_2,ci_run,status,limitations
+A1,control,web-v1,,,,,,,,18,,,,not_run,
+B1,unified-1.0.1,web-v1,,,,,,,,18,,,,not_run,
+A2,control,web-v1,,,,,,,,18,,,,not_run,
+B2,unified-1.0.1,web-v1,,,,,,,,18,,,,not_run,
+A3,control,web-v1,,,,,,,,18,,,,not_run,
+B3,unified-1.0.1,web-v1,,,,,,,,18,,,,not_run,

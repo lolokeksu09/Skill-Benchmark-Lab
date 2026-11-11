@@ -1,0 +1,7 @@
+:root{font:16px system-ui,sans-serif;color:#172032;background:#f2f4f5}
+body{margin:0}
+.shell{width:1040px;margin:auto;padding:28px}
+.controls{display:flex;gap:12px;margin:28px 0}
+#queue{display:grid;grid-template-columns:repeat(3,340px);gap:18px}
+.card{background:white;padding:18px;border-radius:12px}
+.bookmark{padding:6px;border:0;background:#e8e8e8;cursor:pointer}
