@@ -37,6 +37,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--archive', type=Path, required=True)
     ap.add_argument('--out', type=Path, required=True)
+    ap.add_argument('--expected-version', default='1.0.0', help='Manifest version, default preserves original Lab v1.0.0 run')
     args = ap.parse_args()
     archive = args.archive.resolve()
     out = args.out.resolve()
@@ -72,7 +73,7 @@ def main():
         skills = list((root/'skills').glob('*/SKILL.md'))
         names = [p.parent.name for p in skills]
         report['checks']['plugin'] = {
-            'passed': manifest.get('version')=='1.0.0' and len(skills)==122 and len(names)==len(set(names))
+            'passed': manifest.get('version')==args.expected_version and len(skills)==122 and len(names)==len(set(names))
                 and (root/'skills/impeccable/SKILL.md').exists()
                 and (root/'skills/anti-ai-slop/SKILL.md').exists(),
             'version': manifest.get('version'), 'skills': len(skills),
