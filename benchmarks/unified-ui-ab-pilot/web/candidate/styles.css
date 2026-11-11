@@ -1,0 +1,25 @@
+:root { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #19212c; background: #f5f5f2; font-size: 16px; line-height: 1.55; }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+.shell { width: min(1064px, calc(100% - 32px)); margin: 0 auto; padding: 40px 0 64px; }
+.hero { padding: clamp(24px, 4vw, 48px) 0 32px; border-bottom: 2px solid #19212c; }
+.hero h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.035em; line-height: 1.1; }
+.hero p:last-child { margin: 0; color: #425061; }
+.eyebrow { color: #4d5765; margin: 0 0 12px; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.toolbar { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 14px; align-items: center; margin-top: 32px; }
+.toolbar label { font-weight: 650; }
+.toolbar input { min-width: 0; width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid #677284; border-radius: 4px; font: inherit; background: white; color: inherit; }
+#status { min-height: 1.5em; color: #394958; margin: 22px 0; }
+.board { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr)); gap: 16px; }
+.card { min-width: 0; padding: 20px; background: white; border: 1px solid #d6d9db; border-top: 3px solid #263953; border-radius: 4px; display: grid; align-content: start; gap: 12px; }
+.card h2 { font-size: 1.2rem; line-height: 1.35; letter-spacing: -.015em; overflow-wrap: anywhere; margin: 0; }
+.card p { color: #4a5360; overflow-wrap: anywhere; margin: 0; }
+.bookmark { justify-self: start; min-height: 44px; min-width: 44px; padding: 9px 14px; border-radius: 4px; border: 1px solid #30445f; background: transparent; color: #21364f; font-size: 1.2rem; cursor: pointer; }
+.bookmark[aria-pressed="true"] { background: #1e3149; color: #fff; }
+.bookmark:hover:not(:disabled) { background: #dce7ed; color: #1e3149; }
+.bookmark:disabled { opacity: .7; cursor: wait; }
+:focus-visible { outline: 3px solid #bb5c0c; outline-offset: 3px; }
+#more { min-height: 44px; padding: 10px 18px; margin-top: 24px; border-radius: 4px; border: 1px solid #263953; color: #263953; font: inherit; background: transparent; cursor: pointer; }
+[hidden] { display: none !important; }
+@media (max-width: 540px) { .shell { padding-top: 20px; } .hero { padding: 12px 0 24px; } .toolbar { grid-template-columns: 1fr; gap: 6px; margin-top: 22px; } }
+@media (prefers-reduced-motion: no-preference) { .bookmark { transition: background-color 140ms ease; } }
