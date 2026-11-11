@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Service requests — Lab task</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<main class="shell">
+  <header><p>Maintenance / Request queue</p><h1>Service requests</h1><p>Review field work and keep saved requests close.</p></header>
+  <section class="controls" aria-label="Request filters">
+    <label for="search">Find requests</label><input id="search" type="search" placeholder="Search requests">
+    <label for="filter">Status</label><select id="filter"><option value="all">All requests</option><option value="open">Open</option><option value="done">Done</option></select>
+  </section>
+  <p id="feedback" role="status" aria-live="polite">Loading requests…</p>
+  <section id="queue" aria-label="Request queue"></section>
+  <p id="empty" hidden>No matching requests.</p>
+</main>
+</body>
+</html>
