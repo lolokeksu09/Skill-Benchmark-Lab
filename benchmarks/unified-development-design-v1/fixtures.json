@@ -1,0 +1,87 @@
+{
+  "fixture_version": "0.1.0",
+  "benchmark_repo": "lolokeksu09/Skill-Benchmark-Lab",
+  "source_protocol": {
+    "ref": "bench/v4-hard-base",
+    "path": "docs/PROTOCOL.md",
+    "github_blob_sha": "54accbc09f5167cadff8315cc0823d05cc3c812d"
+  },
+  "source_task": {
+    "ref": "bench/v4-hard-base",
+    "path": "TASK.md",
+    "github_blob_sha": "eb05392482ab0a2bc933a8f41488e28e34da2212"
+  },
+  "purpose": "Local deterministic plugin integration smoke derived from the Lab V4 task family; not an isolated AI-agent trial or V4 score",
+  "cases": [
+    {
+      "id": "lab-v4-object-privacy",
+      "task": "Fix authorization privacy issue in a Node HTTP API: only owners can read private posts; return 404 for another user's hidden post.",
+      "stack": "node,api",
+      "must_include": ["auth-implementation-patterns", "api-security-best-practices"],
+      "must_exclude": ["frontend-design", "android-jetpack-compose-expert"]
+    },
+    {
+      "id": "lab-v4-etag-concurrency",
+      "task": "Fix If-Match ETag version concurrency in PUT bookmark API. Stale updates must return 412 and no-op writes must not increment the version.",
+      "stack": "node,api",
+      "must_include": ["systematic-debugging", "test-driven-development"],
+      "must_exclude": ["frontend-design", "android-jetpack-compose-expert"]
+    },
+    {
+      "id": "lab-v4-browser-a11y",
+      "task": "Audit web feed at 375px viewport for horizontal overflow, keyboard focus accessibility and screen reader labels.",
+      "stack": "web",
+      "must_include": ["accessibility-compliance-accessibility-audit"],
+      "must_exclude": ["android-jetpack-compose-expert"]
+    },
+    {
+      "id": "lab-v4-request-recovery",
+      "task": "Fix malformed HTTP bookmark response in vanilla JavaScript: cancel stale searches with AbortController and restore optimistic saved state after a failed request.",
+      "stack": "web,api,javascript",
+      "must_include": ["frontend-api-integration-patterns", "systematic-debugging"],
+      "must_exclude": ["android-jetpack-compose-expert"]
+    },
+    {
+      "id": "native-android-compose",
+      "task": "Create a native Android Jetpack Compose settings screen with readable typography, screen reader support and responsive safe areas.",
+      "stack": "android,compose",
+      "must_include": ["android-jetpack-compose-expert"],
+      "must_exclude": ["vercel-react-native-skills", "observability-engineer"]
+    },
+    {
+      "id": "negative-react-request",
+      "task": "Do not use React. Build a native Kotlin Jetpack Compose screen for Android.",
+      "stack": "android,compose",
+      "must_include": ["android-jetpack-compose-expert"],
+      "must_exclude": ["vercel-react-native-skills", "react-ui-patterns"]
+    },
+    {
+      "id": "backend-no-design",
+      "task": "Fix Docker container deployment health checks. No UI or frontend changes are allowed.",
+      "stack": "docker",
+      "must_include": ["systematic-debugging"],
+      "must_exclude": ["frontend-design", "ui-ux-pro-max", "impeccable"]
+    },
+    {
+      "id": "genuine-slo-monitoring",
+      "task": "Implement service-level objective SLO monitoring and alerts with Prometheus for a backend service.",
+      "stack": "api",
+      "must_include": ["observability-engineer"],
+      "must_exclude": ["frontend-design"]
+    },
+    {
+      "id": "ai-slop-false-positive",
+      "task": "Create a distinctive website landing page design with original visual hierarchy; avoid generic AI-slop layouts.",
+      "stack": "web",
+      "must_include": ["frontend-design"],
+      "must_exclude": ["observability-engineer"]
+    },
+    {
+      "id": "ui-skill-activation",
+      "task": "Audit a mobile app UI for AI-slop, ineffective repeated cards and weak visual identity using Impeccable critique.",
+      "stack": "android",
+      "must_include": ["anti-ai-slop", "impeccable"],
+      "must_exclude": ["observability-engineer"]
+    }
+  ]
+}
