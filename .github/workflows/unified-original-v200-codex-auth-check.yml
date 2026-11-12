@@ -1,0 +1,32 @@
+name: Unified v2 Codex A/B credential gate
+
+on:
+  push:
+    branches:
+      - bench/unified-original-v200-instruction-ab-20261112
+
+permissions:
+  contents: read
+
+jobs:
+  codex-credentials:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Check availability of Codex API credentials without exposing key
+        shell: bash
+        env:
+          HAS_OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY != '' }}
+        run: |
+          set -euo pipefail
+          if [ "$HAS_OPENAI_API_KEY" = "true" ]; then
+            echo "READY: OPENAI_API_KEY is configured for GitHub Actions."
+            echo "Codex A/B agent execution is eligible for the next gated step."
+            echo "- Credential gate: READY" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "BLOCKED: OPENAI_API_KEY is not configured for this GitHub Actions branch."
+            echo "The ChatGPT/Codex subscription cannot be used as an Actions API key."
+            echo "- Credential gate: BLOCKED (OPENAI_API_KEY missing)" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Independent Codex agent trials: 0 / 6" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
