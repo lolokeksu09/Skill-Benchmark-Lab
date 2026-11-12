@@ -1,0 +1,50 @@
+name: Unified 1.1.0 pinned Impeccable engine smoke
+
+on:
+  push:
+    branches:
+      - audit/unified-v110-runtime-20261112
+  pull_request:
+    paths:
+      - .github/workflows/unified-v110-impeccable-smoke.yml
+      - audits/unified-v110-runtime/**
+
+permissions:
+  contents: read
+
+jobs:
+  pinned-engine-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Download, verify, execute official pinned engine and check rule listing
+        shell: bash
+        run: |
+          set -euo pipefail
+          asset=impeccable-linux-x64
+          tempdir="$RUNNER_TEMP/unified-impeccable-pin"
+          mkdir -p "$tempdir"
+          binary="$tempdir/$asset"
+          url="https://github.com/pbakaus/impeccable/releases/download/engine-v0.1.18/$asset"
+          curl --fail --location --silent --show-error --retry 3 --connect-timeout 20 --max-time 120 --output "$binary" "$url"
+          printf '%s  %s\n' '736ed785e74ae2344d3036127f614ddde5ab520a527d8bc82a891612ef71f648' "$binary" | sha256sum --check --status
+          chmod +x "$binary"
+          "$binary" engine-probe | tee "$tempdir/engine-probe.txt"
+          grep -Eq '^impeccable-engine[[:space:]]+0[.]1[.]18([[:space:]]|$)' "$tempdir/engine-probe.txt"
+          "$binary" detect --list-rules --json > "$tempdir/rules.json"
+          python3 - "$tempdir/rules.json" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          content = json.loads(Path(sys.argv[1]).read_text())
+          if not content:
+              raise SystemExit("Empty rule list")
+          print("Engine rule list: valid nonempty JSON")
+          PY
+          {
+            echo "## Official external engine 0.1.18 smoke"
+            echo "- Public asset SHA-256: verified before execution"
+            echo "- Engine handshake: verified"
+            echo "- Rule listing: valid nonempty JSON"
+            echo "- Not a private plugin or A/B agent test"
+          } >> "$GITHUB_STEP_SUMMARY"
