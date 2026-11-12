@@ -1,0 +1,45 @@
+name: Unified original v1.9.0 Lab negative controls
+
+on:
+  push:
+    branches:
+      - bench/unified-original-v190-guards-20261112
+  pull_request:
+    paths:
+      - benchmarks/unified-original-v190/**
+      - .github/workflows/unified-original-v190-lab.yml
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-regression-suite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate task specifications and four corrupted metadata cases
+        run: python3 benchmarks/unified-original-v190/validate_suite.py
+      - name: Confirm stripped-manifest bypass is caught by negative test
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd benchmarks/unified-original-v190/fixtures
+          set +e
+          python3 -m unittest -v test_unsafe_preflight.py > "$RUNNER_TEMP/unsafe-preflight.log" 2>&1
+          code=$?
+          set -e
+          cat "$RUNNER_TEMP/unsafe-preflight.log"
+          if [ "$code" -eq 0 ]; then
+            echo "Unexpected pass of deliberately vulnerable fixture" >&2
+            exit 1
+          fi
+          grep -q 'test_all_missing_markers_rejected' "$RUNNER_TEMP/unsafe-preflight.log"
+          grep -q 'FAILED (failures=1)' "$RUNNER_TEMP/unsafe-preflight.log"
+          {
+            echo "## Unified original v1.9.0 Lab preflight"
+            echo "- Frozen tasks and four negative mutations: PASS"
+            echo "- Unsafe missing-manifest fixture correctly rejected: PASS"
+            echo "- Independent LLM trials performed: 0"
+            echo "- Model effectiveness established: NO"
+          } >> "$GITHUB_STEP_SUMMARY"
