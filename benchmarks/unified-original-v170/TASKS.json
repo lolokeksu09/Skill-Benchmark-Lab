@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "version": "v1.7.0",
+  "kind": "targeted-regression-not-blind-efficacy",
+  "candidate_sha256": "af88453b165389fde97b8762be255548b9e9b95455c01be683d02ac76b60f4bc",
+  "tasks": [
+    {
+      "id": "U170-01",
+      "domain": "cache-isolation",
+      "prompt": "An invoices API caches a tenant-specific invoice summary by numeric invoice ID only. Two tenants can have the same numeric ID. Fix the cache so one tenant never receives another tenant's data, including after eviction and concurrent requests.",
+      "acceptance": [
+        "Model tenant and authorization scope in the cache key and server-side retrieval",
+        "Prove two tenants with the same invoice ID remain isolated under alternating reads",
+        "Describe cache invalidation and stale entry handling after ownership or permission changes"
+      ],
+      "negative_controls": [
+        "A client-side visibility check without server cache separation is rejected",
+        "Returning a cached cross-tenant record with an HTTP 403 status is rejected"
+      ]
+    },
+    {
+      "id": "U170-02",
+      "domain": "task-vs-context",
+      "prompt": "An AI development planner is given a task that explicitly says 'Do not modify the Android app; update the backend API only', while stale saved context says platform=android. Define how the planner should handle this contradiction without silently executing the Android workflow.",
+      "acceptance": [
+        "Identify the conflict between explicit task and stale platform context",
+        "Reject or request revalidation of the contradiction rather than silently choosing Android",
+        "Propose two opposite-direction regression cases including a later explicit positive request"
+      ],
+      "negative_controls": [
+        "Ignoring the user's explicit exclusion is rejected",
+        "Replacing typed context secretly without recording the conflict is rejected"
+      ]
+    },
+    {
+      "id": "U170-03",
+      "domain": "integrity",
+      "prompt": "A team distributes skill instruction files in a ZIP and discovers a file can be altered after release without invalidating the structural check. Design a deterministic offline integrity check that catches byte changes but does not misrepresent an unsigned manifest as a digital signature.",
+      "acceptance": [
+        "Specify a canonical covered-file list and SHA-256 digest comparison",
+        "Reject missing manifest records, unexpected records and changed files",
+        "Distinguish accidental corruption checks from authenticated publisher signatures"
+      ],
+      "negative_controls": [
+        "A checksum copied from the same untrusted attacker-controlled manifest is not proof of identity",
+        "Requiring paid network access or external AI inference for offline integrity is rejected"
+      ]
+    },
+    {
+      "id": "U170-04",
+      "domain": "read-only-preview",
+      "prompt": "A Python skill installer promises preview by default. It imports a local router module during preview and quietly creates __pycache__ in the source package. Stop disk writes during preview, retain explicit apply-only copying and preserve existing user's skill directories.",
+      "acceptance": [
+        "Prevent Python bytecode creation in source package during ordinary preview",
+        "Prove preview never creates a destination directory and apply is explicit",
+        "Reject overwriting existing skill directories even when source names collide"
+      ],
+      "negative_controls": [
+        "Only invoking python -B in the test runner is not sufficient to fix normal users",
+        "Fixing preview by deleting user data or existing directories is rejected"
+      ]
+    }
+  ],
+  "actual_agent_runs": 0
+}
