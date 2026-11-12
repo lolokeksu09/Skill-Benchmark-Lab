@@ -1,0 +1,31 @@
+name: Unified original v1.11.0 project-context Lab preflight
+
+on:
+  push:
+    branches:
+      - bench/unified-original-v1110-project-context-20261112
+  pull_request:
+    paths:
+      - benchmarks/unified-original-v1110/**
+      - .github/workflows/unified-original-v1110-lab.yml
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-specification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate five frozen tasks and four corrupt-data negative controls
+        run: python3 benchmarks/unified-original-v1110/validate_suite.py
+      - name: Summarize evidence boundary
+        shell: bash
+        run: |
+          {
+            echo "## Unified original v1.11.0"
+            echo "- Five scenario specifications and four negative metadata tests: checked"
+            echo "- Independent agent trials: 0"
+            echo "- Model efficacy measured: NO"
+          } >> "$GITHUB_STEP_SUMMARY"
