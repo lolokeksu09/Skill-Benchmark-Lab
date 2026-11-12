@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "subject": "Unified Development & Design original v1.8.0",
+  "kind": "independent-agent-task-specifications-not-runs",
+  "candidate_zip_sha256": "beb1455e2737cf41c5508816b14f57c5a98f60a83a9e89f8add40ad8903338cf",
+  "agent_runs": 0,
+  "tasks": [
+    {
+      "id": "U180-01",
+      "domain": "installer-integrity",
+      "prompt": "An offline skill installer copies 122 SKILL.md directories successfully but ignores an altered install_skills.py in the same release. Improve the release preflight so a changed executable is detected before target files are created.",
+      "acceptance": [
+        "Make an explicit list of all release files covered by integrity checks",
+        "Demonstrate one-byte script change causes preflight failure before any writes",
+        "State that unsigned SHA-256 manifests do not authenticate a hostile publisher"
+      ],
+      "negative_controls": [
+        "Checking only SKILL.md content while trusting executable scripts must fail",
+        "Writing any destination directory before an integrity mismatch is rejected"
+      ]
+    },
+    {
+      "id": "U180-02",
+      "domain": "extra-file",
+      "prompt": "A release archive adds an unlisted shell helper after the manifest is computed. The plugin still passes its initial checks. Detect this unexpected addition without rejecting harmless local Python bytecode caches during read-only diagnostics.",
+      "acceptance": [
+        "Compare actual release paths against frozen manifest paths in both directions",
+        "Reject unexpected noncache files and missing manifest entries",
+        "Explain why runtime cache exceptions must be narrowly scoped"
+      ],
+      "negative_controls": [
+        "Ignoring every file outside the old manifest must fail",
+        "Treating unknown executable files as safe runtime caches must fail"
+      ]
+    },
+    {
+      "id": "U180-03",
+      "domain": "license-integrity",
+      "prompt": "A publicly distributed plugin claims one top-level MIT LICENSE. An accidental edit replaces a sentence in the LICENSE after release. The reviewer must catch it while preserving all 122 existing skill instructions unchanged.",
+      "acceptance": [
+        "Include the root LICENSE in the release integrity ledger",
+        "Reject accidental byte changes to the LICENSE using an exact checksum",
+        "Confirm all 122 skill entrypoints and the single root license remain present"
+      ],
+      "negative_controls": [
+        "Only checking that a LICENSE path exists must fail",
+        "Claiming a local unsigned hash alone is legal provenance must fail"
+      ]
+    },
+    {
+      "id": "U180-04",
+      "domain": "forbidden-pipeline",
+      "prompt": "A workflow planner is called with --pipeline android-feature and task 'No Android, build backend API'. It currently produces an Android execution checklist. Fix the conflict without blocking a later explicit positive Android request in the same prompt.",
+      "acceptance": [
+        "Reject an explicitly forbidden Android workflow even when requested by flag",
+        "Allow a later positive Android clause that reverses the earlier exclusion",
+        "Return a clear diagnostic without executing any actions"
+      ],
+      "negative_controls": [
+        "Treating the pipeline flag as authority over user task exclusions must fail",
+        "Banning Android globally if the user later positively re-requests it must fail"
+      ]
+    },
+    {
+      "id": "U180-05",
+      "domain": "context-intent",
+      "prompt": "A planner sees context platform=web and focus=security, but the user's task reads 'No security audit, build web responsive UI'. It should preserve web UI workflow instead of secretly inserting a security audit.",
+      "acceptance": [
+        "Detect explicit local negation of the security focus",
+        "Select the web workflow when web UI remains positively requested",
+        "Document that context hints have lower priority than current task constraints"
+      ],
+      "negative_controls": [
+        "A stale security focus must not silently override the task exclusion",
+        "Discarding all web UI work because security is excluded must fail"
+      ]
+    }
+  ]
+}
