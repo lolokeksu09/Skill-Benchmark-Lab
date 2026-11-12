@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "release": "1.9.0",
+  "candidate_zip_sha256": "4bd709d5c5797966a4242eb20ac46cfdd03fe9abf69a2f52ee272320b9f0c47d",
+  "agent_runs": 0,
+  "kind": "frozen-benchmark-specifications-not-agent-results",
+  "tasks": [
+    {
+      "id": "U190-01",
+      "domain": "installer-fail-closed",
+      "prompt": "A local SKILL.md package installer validates its checksum ledger before copying, but a user can delete both plugin manifests and the checksum ledger to bypass the gate. Fix this fail-open behavior so a stripped release cannot apply files, while a complete clean release still installs normally.",
+      "acceptance": [
+        "Require the complete mandatory metadata set for every apply request, even when a nondefault source root is supplied",
+        "Reject the stripped package before creating any target directory or skill file",
+        "Retain successful installation and idempotent verification for an intact package"
+      ],
+      "negative_controls": [
+        "Treating an archive without all metadata as a development fixture during apply must fail",
+        "Reporting an integrity error after files were already copied must fail"
+      ]
+    },
+    {
+      "id": "U190-02",
+      "domain": "explicit-no-web",
+      "prompt": "A development task says 'No web, build Android UI', but saved context contains platform=web and focus=ui. The router suggests web-ui, and a forced web-feature pipeline is accepted. Implement explicit task-first platform exclusion and preserve later positive web requests.",
+      "acceptance": [
+        "Report web as an explicitly excluded technology family while still permitting Android UI",
+        "Reject an explicitly forced web-feature pipeline and stale web platform context",
+        "Allow the later clause in 'No web for CLI, but build web UI' to re-enable web workflows"
+      ],
+      "negative_controls": [
+        "Allowing stale context or command flags to override a current explicit user exclusion must fail",
+        "Banning web unconditionally even after a later positive request must fail"
+      ]
+    },
+    {
+      "id": "U190-03",
+      "domain": "security-plan-guard",
+      "prompt": "An engineer requests 'No security audit, build responsive web UI', but an automation passes --pipeline security-fix. The old planner builds a security audit checklist anyway. Keep the plan read-only and reject the forbidden pipeline without blocking later explicitly requested security work.",
+      "acceptance": [
+        "Reject the explicitly forbidden security-fix pipeline with a meaningful diagnostic",
+        "Continue to select web UI for the main task without the forbidden audit",
+        "Allow a later explicit request for a security audit to supersede the earlier negative clause"
+      ],
+      "negative_controls": [
+        "Treating pipeline command arguments as authority over explicit user constraints must fail",
+        "Claiming the planner has run or validated a security audit must fail"
+      ]
+    },
+    {
+      "id": "U190-04",
+      "domain": "russian-routing",
+      "prompt": "A Russian engineering request such as 'Без веба: сделай Android навигацию' should route to a navigation skill, while 'Не нужен веб, исправь API контракты' should route to a contract skill. Distinguish case forms from unrelated words such as 'вебинар'.",
+      "acceptance": [
+        "Handle common Russian grammatical forms and transliterated platform terms without broad irrelevant matches",
+        "Route Android navigation to the specialized navigation skill while excluding web-specific skills",
+        "Route API contracts to the specialized contract skill and preserve deterministic output"
+      ],
+      "negative_controls": [
+        "Matching 'вебинар' as a ban on web tooling without a real web mention must fail",
+        "Always selecting only the generic Android UI or API design skill must fail"
+      ]
+    }
+  ]
+}

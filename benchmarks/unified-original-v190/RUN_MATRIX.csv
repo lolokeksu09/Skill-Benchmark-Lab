@@ -1,0 +1,9 @@
+task_id,arm,repeat,status,artifact_sha256,score,notes
+U190-01,control-v1.8.0,1,not_run,,,
+U190-01,candidate-v1.9.0,1,not_run,,,
+U190-02,control-v1.8.0,1,not_run,,,
+U190-02,candidate-v1.9.0,1,not_run,,,
+U190-03,control-v1.8.0,1,not_run,,,
+U190-03,candidate-v1.9.0,1,not_run,,,
+U190-04,control-v1.8.0,1,not_run,,,
+U190-04,candidate-v1.9.0,1,not_run,,,
