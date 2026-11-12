@@ -1,0 +1,45 @@
+name: Unified original v1.7.0 targeted Lab preflight
+
+on:
+  push:
+    branches:
+      - bench/unified-original-v170-20261112
+  pull_request:
+    paths:
+      - benchmarks/unified-original-v170/**
+      - .github/workflows/unified-original-v170-lab.yml
+
+permissions:
+  contents: read
+
+jobs:
+  integrity-and-negative-control:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate four targeted tasks and three negative metadata controls
+        run: python3 benchmarks/unified-original-v170/validate_suite.py
+      - name: Confirm seeded cache tenant-leak bug is rejected
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd benchmarks/unified-original-v170/fixtures
+          set +e
+          python3 -m unittest -v test_invoice_cache.py > "$RUNNER_TEMP/cache-negative.log" 2>&1
+          status=$?
+          set -e
+          cat "$RUNNER_TEMP/cache-negative.log"
+          if [ "$status" -eq 0 ]; then
+            echo "The intentionally vulnerable baseline unexpectedly passed" >&2
+            exit 1
+          fi
+          grep -q 'test_cross_tenant_same_id_is_isolated' "$RUNNER_TEMP/cache-negative.log"
+          grep -q 'FAILED (failures=1)' "$RUNNER_TEMP/cache-negative.log"
+          {
+            echo "## Targeted Lab preflight"
+            echo "- Task schema and three negative checks: PASS"
+            echo "- Intentionally broken tenant cache correctly rejected: PASS"
+            echo "- Independent LLM agents used: 0"
+            echo "- Model efficacy established: NO"
+          } >> "$GITHUB_STEP_SUMMARY"
