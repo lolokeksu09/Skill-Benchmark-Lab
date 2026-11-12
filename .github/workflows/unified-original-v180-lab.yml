@@ -1,0 +1,45 @@
+name: Unified original v1.8.0 Lab negative controls
+
+on:
+  push:
+    branches:
+      - bench/unified-original-v180-20261112
+  pull_request:
+    paths:
+      - benchmarks/unified-original-v180/**
+      - .github/workflows/unified-original-v180-lab.yml
+
+permissions:
+  contents: read
+
+jobs:
+  lab-preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate five frozen tasks and four metadata negative tests
+        run: python3 benchmarks/unified-original-v180/validate_suite.py
+      - name: Confirm seeded unsafe release verifier fails its extra-file negative control
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd benchmarks/unified-original-v180/fixtures
+          set +e
+          python3 -m unittest -v test_unsafe_release_check.py > "$RUNNER_TEMP/integrity-negative.log" 2>&1
+          code=$?
+          set -e
+          cat "$RUNNER_TEMP/integrity-negative.log"
+          if [ "$code" -eq 0 ]; then
+            echo "Unexpected pass: seeded unsafe baseline did not fail" >&2
+            exit 1
+          fi
+          grep -q 'test_unlisted_extra_file_fails' "$RUNNER_TEMP/integrity-negative.log"
+          grep -q 'FAILED (failures=1)' "$RUNNER_TEMP/integrity-negative.log"
+          {
+            echo "## Lab v1.8 preflight"
+            echo "- Frozen tasks and metadata negative controls: PASS"
+            echo "- Deliberately unsafe release baseline correctly rejected: PASS"
+            echo "- Independent agent runs: 0"
+            echo "- Quality effect measured: NO"
+          } >> "$GITHUB_STEP_SUMMARY"
