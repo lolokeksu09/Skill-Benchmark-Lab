@@ -1,0 +1,11 @@
+task_id,arm,repeat,status,artifact_sha256,score
+U1110-01,control-v1.10.0,1,not_run,,
+U1110-01,candidate-v1.11.0,1,not_run,,
+U1110-02,control-v1.10.0,1,not_run,,
+U1110-02,candidate-v1.11.0,1,not_run,,
+U1110-03,control-v1.10.0,1,not_run,,
+U1110-03,candidate-v1.11.0,1,not_run,,
+U1110-04,control-v1.10.0,1,not_run,,
+U1110-04,candidate-v1.11.0,1,not_run,,
+U1110-05,control-v1.10.0,1,not_run,,
+U1110-05,candidate-v1.11.0,1,not_run,,
