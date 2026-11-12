@@ -1,0 +1,57 @@
+name: Unified original v2.0.0 instruction A/B preflight
+
+on:
+  push:
+    branches:
+      - bench/unified-original-v200-instruction-ab-20261112
+  pull_request:
+    paths:
+      - benchmarks/unified-original-v200-instruction-ab/**
+      - .github/workflows/unified-original-v200-ab.yml
+
+permissions:
+  contents: read
+
+jobs:
+  offline-harness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Freeze original Lab PR 52 source commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin bench/unified-effectiveness-v1-web-20261111
+          git cat-file -e fe1dc4ced57c608bda314ad5d082cdf644361273^{commit}
+      - name: Verify frozen scorer, task and starter blob identities
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          import subprocess
+          runner=Path('benchmarks/unified-original-v200-instruction-ab/run_codex_ab.py')
+          spec=importlib.util.spec_from_file_location('ab',runner)
+          module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+          sha='fe1dc4ced57c608bda314ad5d082cdf644361273'
+          for rel,expected in module.FROZEN_BLOBS.items():
+              path='benchmarks/unified-effectiveness-v1/'+rel
+              content=subprocess.check_output(['git','show',sha+':'+path])
+              assert module.git_blob_sha(content)==expected,rel
+          print('PASS: six frozen input and scorer hashes match PR #52')
+          PY
+      - name: Test prompt-pack A/B harness without model invocation
+        run: python3 -B -m unittest discover -s benchmarks/unified-original-v200-instruction-ab -p test_runner.py -v
+      - name: State evidence boundary
+        shell: bash
+        run: |
+          {
+            echo '## Unified original v2 instruction A/B'
+            echo '- Frozen web task/scorer checks: PASS'
+            echo '- Harness unit tests: PASS (candidate ZIP check skipped when ZIP not bundled)'
+            echo '- Independent Codex agent trials: 0'
+            echo '- Improved model performance proven: NO'
+          } >> "$GITHUB_STEP_SUMMARY"

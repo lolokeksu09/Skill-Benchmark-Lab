@@ -1,0 +1,7 @@
+trial,arm,repeat,status,model_requested,effort_requested,prompt_sha256,output_sha256,points_out_of_18,comment
+A1,control,1,not_run,,,,,,
+B1,unified-v2-packet,1,not_run,,,,,,
+A2,control,2,not_run,,,,,,
+B2,unified-v2-packet,2,not_run,,,,,,
+A3,control,3,not_run,,,,,,
+B3,unified-v2-packet,3,not_run,,,,,,
