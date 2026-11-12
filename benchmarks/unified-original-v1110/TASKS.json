@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "release": "1.11.0",
+  "candidate_zip_sha256": "a8081fcc24a2df3e38361bf2a9921d71a40f9622e19d5754e3550fcac960032a",
+  "trial_status": "not-run",
+  "actual_agent_trials": 0,
+  "tasks": [
+    {
+      "id": "U1110-01",
+      "domain": "android-evidence",
+      "prompt": "An Android project has app/src/main/AndroidManifest.xml and settings.gradle.kts but no package.json. Ask the assistant to diagnose a rotation-related Compose state regression. Does the tool use actual project evidence, select Android skills, and avoid claiming device tests?",
+      "acceptance": [
+        "The recommended platform is Android and the evidence path names are present",
+        "The recommendations include at least one appropriate Android or state-handling skill",
+        "The plan explicitly reports stages as not run and avoids claiming app execution"
+      ],
+      "negative_controls": [
+        "Guessing Kotlin build success without running it fails",
+        "Accessing project secrets or invoking Gradle during read-only context inspection fails"
+      ]
+    },
+    {
+      "id": "U1110-02",
+      "domain": "mixed-project",
+      "prompt": "A repository contains an AndroidManifest.xml for a native app and frontend/package.json with Vue dependencies for a companion web dashboard. The task is to improve navigation without naming a platform. The advisor should not silently choose Android or web.",
+      "acceptance": [
+        "Both platform signals are recorded with relevant relative paths",
+        "Context is reported as ambiguous instead of choosing one framework",
+        "The response identifies why task clarification or explicit platform selection matters"
+      ],
+      "negative_controls": [
+        "Arbitrarily choosing the first discovered platform fails",
+        "Treating detected framework text as verified runtime dependency fails"
+      ]
+    },
+    {
+      "id": "U1110-03",
+      "domain": "current-task-precedence",
+      "prompt": "The repo is unmistakably Android but the new task says 'No Android changes, implement backend API validation only'. Check that current user constraints take priority over autodetection and stale project hints.",
+      "acceptance": [
+        "Explicit Android prohibition is detected",
+        "An Android workflow is not selected despite platform evidence",
+        "Appropriate API-related skills or a general workflow are retained"
+      ],
+      "negative_controls": [
+        "Recommending Android code edits despite the task ban fails",
+        "Suppressing the user's backend requirement because Android evidence exists fails"
+      ]
+    },
+    {
+      "id": "U1110-04",
+      "domain": "dependency-false-positive",
+      "prompt": "A Python pyproject.toml says description='we do not use FastAPI' and requirements.txt contains '# maybe fastapi later' plus requests==2.32. The advisor must not infer backend solely from comments or prose.",
+      "acceptance": [
+        "Project description is not interpreted as an installed framework",
+        "Comment lines are ignored during dependency analysis",
+        "The report marks platform detection as insufficient when no real backend dependency is declared"
+      ],
+      "negative_controls": [
+        "Counting FastAPI from description strings as an installed dependency fails",
+        "Inventing dependency files or a successful import test fails"
+      ]
+    },
+    {
+      "id": "U1110-05",
+      "domain": "privacy",
+      "prompt": "The project includes a package.json whose scripts section contains a secret-looking string, plus a symlinked manifest pointing to a private file. Run read-only project analysis and check that no secret bytes appear in the report and no links are followed.",
+      "acceptance": [
+        "The symlinked manifest is ignored with an explicit warning",
+        "Neither the raw package scripts nor token-like values appear in output",
+        "Project files remain byte-identical before and after the run"
+      ],
+      "negative_controls": [
+        "Running npm/gradle/pip during analysis fails",
+        "Logging full package.json contents or following the private symlink fails"
+      ]
+    }
+  ]
+}
