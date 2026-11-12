@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "title": "Unified Development & Design original v1.6.0 effectiveness tasks",
+  "status": "scenario-specifications-not-agent-runs",
+  "tasks": [
+    {
+      "id": "U160-01",
+      "domain": "android-state",
+      "prompt": "In an Android Jetpack Compose settings screen, text typed into an editable display-name field disappears on rotation. The screen also sends its profile GET request twice after the device rotates. Keep the existing theme, preserve Back behavior and explain state ownership.",
+      "acceptance": [
+        "Specify what belongs to ViewModel, SavedStateHandle and rememberSaveable",
+        "Prevent the duplicated network call with a lifecycle-safe source of truth",
+        "Specify an automated rotation/recreation regression test and an exact manual check"
+      ],
+      "negative_controls": [
+        "A screenshot-only fix must fail",
+        "Saving a password in SavedStateHandle is not acceptable"
+      ]
+    },
+    {
+      "id": "U160-02",
+      "domain": "android-permissions",
+      "prompt": "An Android photo attachment control repeatedly requests a broad storage permission and becomes unusable after the user denies it twice. Support recent Android SDKs and provide a path that does not need broad storage access.",
+      "acceptance": [
+        "Choose least-privilege platform photo access",
+        "Model denied, permanently denied and revoked states",
+        "Specify a test matrix for denial, system Settings and activity recreation"
+      ],
+      "negative_controls": [
+        "Permission request loop must fail",
+        "Claim that permission is always necessary must fail"
+      ]
+    },
+    {
+      "id": "U160-03",
+      "domain": "web-responsive",
+      "prompt": "A checkout form overflows horizontally at a 375px viewport. Long localized product names make the submit control unreachable. Keep the real checkout validation and error messages and make the form usable at 375, 768 and 1280px.",
+      "acceptance": [
+        "Propose a non-clipping responsive layout constraint",
+        "Preserve label/error associations and keyboard flow",
+        "Specify same-content overflow and functional regression checks at all three widths"
+      ],
+      "negative_controls": [
+        "Hiding overflow on the body is not an accepted fix",
+        "Removing checkout validation to fit the page is not accepted"
+      ]
+    },
+    {
+      "id": "U160-04",
+      "domain": "accessibility",
+      "prompt": "A product filter modal has an icon-only close action, opening the modal steals focus, and focus does not return to the opener when closed. Audit keyboard and screen-reader behavior at 200 percent zoom.",
+      "acceptance": [
+        "Identify accessible naming and focus trapping/return requirements",
+        "Specify Escape and keyboard-only acceptance cases",
+        "Differentiate an automated heuristic from a screen-reader validation"
+      ],
+      "negative_controls": [
+        "Adding only a visual tooltip must fail",
+        "Claiming full WCAG conformance from automated scan must fail"
+      ]
+    },
+    {
+      "id": "U160-05",
+      "domain": "api-idempotency",
+      "prompt": "An HTTP POST /payments endpoint sometimes charges twice after a mobile client times out and retries. Specify a backward-compatible idempotency contract and demonstrate how to prove that failed input cannot partially write a payment.",
+      "acceptance": [
+        "Define uniqueness and replay behavior of an idempotency key",
+        "Separate transient errors from validation and conflict responses",
+        "Define tests for repeated concurrent requests and retry after timeout"
+      ],
+      "negative_controls": [
+        "Blind retries of all POST requests must fail",
+        "A duplicate payment counted as success must fail"
+      ]
+    },
+    {
+      "id": "U160-06",
+      "domain": "authorization",
+      "prompt": "A GET /invoices/{id} API retrieves a row by invoice ID but does not filter by the authenticated user's tenant. Fix the cross-tenant data leak without exposing whether another tenant's invoice exists.",
+      "acceptance": [
+        "Enforce tenant ownership at the data retrieval boundary",
+        "Keep an indistinguishable not-found response for inaccessible resources",
+        "Prove same-tenant access and cross-tenant denial with negative tests"
+      ],
+      "negative_controls": [
+        "Hiding another tenant's invoice in the UI must fail",
+        "Returning the forbidden invoice data with a 403 code must fail"
+      ]
+    },
+    {
+      "id": "U160-07",
+      "domain": "database",
+      "prompt": "A paginated order history query WHERE customer_id = ? ORDER BY created_at DESC LIMIT 20 becomes slow at millions of rows. Show how to measure the plan, choose an index and account for the cost of writes.",
+      "acceptance": [
+        "Request actual row counts and query plan before tuning",
+        "Consider a composite index aligned with filter and order",
+        "Define before/after latency measurements and rollback"
+      ],
+      "negative_controls": [
+        "Adding an index with no plan comparison must fail",
+        "Claiming production speedup from a tiny mock table must fail"
+      ]
+    },
+    {
+      "id": "U160-08",
+      "domain": "deployment",
+      "prompt": "A containerized service requires a zero-downtime deployment but the database needs a new non-null column used by the next API version. Design a reversible multi-stage rollout for existing clients.",
+      "acceptance": [
+        "Separate expand, backfill and contract schema steps",
+        "Define canary health and rollback stop conditions",
+        "Record digest, CI and migration validation requirements"
+      ],
+      "negative_controls": [
+        "An irreversible breaking migration before rollout must fail",
+        "A rollback that cannot read the new schema must fail"
+      ]
+    },
+    {
+      "id": "U160-09",
+      "domain": "debugging",
+      "prompt": "An Android app's release APK compiles and installs, but the first cold launch crashes on one target SDK while Debug builds work. Identify the minimum evidence needed before changing code and propose a testable fix sequence.",
+      "acceptance": [
+        "Require the crash stack trace and exact release build identity",
+        "Distinguish build success from runtime validation",
+        "Specify a regression that reproduces the cold-start scenario"
+      ],
+      "negative_controls": [
+        "Changing UI styling before inspecting the crash must fail",
+        "Calling the APK production-ready after compilation must fail"
+      ]
+    },
+    {
+      "id": "U160-10",
+      "domain": "code-review",
+      "prompt": "Review a backend PR that changes from parameterized SQL to string-built WHERE filters and adds a cached user record shared between tenants. Focus on exploitability, functional regression and minimal corrective changes.",
+      "acceptance": [
+        "Give file-line-specific security findings when actual diff is supplied",
+        "Require parameterized predicates and tenant-scoped cache keys",
+        "Document tests for injection input and cross-tenant cache access"
+      ],
+      "negative_controls": [
+        "Generic style-only review must fail",
+        "Claiming confirmed exploit without reproducer or code access must fail"
+      ]
+    }
+  ]
+}
