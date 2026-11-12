@@ -1,0 +1,44 @@
+name: Unified original v1.6.0 Lab preflight
+
+on:
+  push:
+    branches: [bench/unified-original-v160-20261112]
+  pull_request:
+    paths:
+      - benchmarks/unified-original-v160/**
+      - .github/workflows/unified-original-v160-lab.yml
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-suite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate task specifications and three negative controls
+        run: python3 benchmarks/unified-original-v160/validate_suite.py --selftest
+      - name: Verify intentionally broken invoice seed is rejected
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd benchmarks/unified-original-v160/fixtures
+          set +e
+          python3 -m unittest -v test_invoice_service.py > "$RUNNER_TEMP/invoice-baseline.log" 2>&1
+          status=$?
+          set -e
+          cat "$RUNNER_TEMP/invoice-baseline.log"
+          if [ "$status" -eq 0 ]; then
+            echo "FAIL: deliberately vulnerable baseline unexpectedly passed" >&2
+            exit 1
+          fi
+          grep -q 'test_cross_tenant_is_not_found' "$RUNNER_TEMP/invoice-baseline.log"
+          grep -q 'FAILED (failures=1)' "$RUNNER_TEMP/invoice-baseline.log"
+          {
+            echo "## Lab preflight"
+            echo "- Suite structure and negative-control self-tests: PASS"
+            echo "- Deliberately vulnerable invoice seed: correctly REJECTED"
+            echo "- Independent LLM agents invoked: 0"
+            echo "- Plugin effectiveness measured: NO"
+          } >> "$GITHUB_STEP_SUMMARY"
