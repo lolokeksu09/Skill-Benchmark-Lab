@@ -15,6 +15,8 @@ from PIL import Image,ImageDraw
 
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT/'vendor'))
+sys.path.insert(0,str(ROOT/'vendor/skills/manga-page/scripts'))
+from retouch_workbench import prepare as prepare_retouch, apply as apply_retouch
 from build_page_review import make_review
 from build_transcription_review import build
 from check_page_review import check
@@ -32,6 +34,8 @@ def fixtures(out):
     guesses={'source_sha256':inv['source_sha256'],'regions':[{'box':[400,330,360,90],'source_text_candidate':'ORIG1NAL','alternatives':[{'source_text_candidate':'ORIGINAL'}]}]}
     build(out/'source.png',out/'inventory.json',out/'transcription.html',guesses)
     phone_reading(out/'final.png',out/'page-report.json',[{'id':'focus','label':'Focused reading window','box':[320,280,510,200]},{'id':'context','label':'Full context','box':[0,0,1280,960]}],out/'phone-reading.html')
+    local=Image.new('RGB',(600,400),'#c9d6e3');ImageDraw.Draw(local).rectangle((296,196,304,204),fill='black');local.save(out/'clone-source.png')
+    prepare_retouch(out/'clone-source.png',out/'workbench')
     return report
 
 def run(out,prepare_only=False):
@@ -96,6 +100,50 @@ def run(out,prepare_only=False):
                 assert page.locator('.reading').first.evaluate('(im)=>im.complete && im.naturalWidth===510 && im.naturalHeight===200');assert round(page.locator('.reading').first.bounding_box()['width'])==390;passed('Ordered phone reading windows load exact final-image crops at 390px')
                 page.locator('#reading-native').click();assert round(page.locator('.reading').first.bounding_box()['width'])==510;assert page.locator('#reading-native').get_attribute('aria-pressed')=='true';page.locator('#reading-phone').click();assert page.locator('#reading-phone').get_attribute('aria-pressed')=='true'
                 page.set_viewport_size({'width':414,'height':896});assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth');page.screenshot(path=str(out/'phone-reading-mobile.png'),full_page=True);passed('Reading windows switch native/phone scale without mobile document overflow')
+                # Exercise native mask drawing and downloaded clone plans through the actual Python runner.
+                page.set_viewport_size({'width':1100,'height':900});page.goto(base+'/workbench/retouch.html',wait_until='load')
+                page.wait_for_function("!document.getElementById('export').disabled")
+                assert not page.locator('#reviewed').is_checked()
+                pending_plan=download('#export','workbench/pending-plan.json')
+                try:apply_retouch(pending_plan,out/'blocked-unreviewed')
+                except ValueError as e:assert 'Reviewed mask' in str(e)
+                else:raise AssertionError('Unreviewed UI export was accepted')
+                passed('Workbench starts unreviewed and its actual downloaded plan cannot execute')
+                def click_native(x,y):
+                    page.locator('#page').scroll_into_view_if_needed();box=page.locator('#page').bounding_box()
+                    page.mouse.click(box['x']+(x+.5)*box['width']/600,box['y']+(y+.5)*box['height']/400)
+                page.locator('#radius').fill('12');click_native(300,200)
+                page.locator('#tool').select_option('protect');page.locator('#radius').fill('4');click_native(400,100)
+                page.locator('#tool').select_option('donor');click_native(250,150)
+                page.locator('#tool').select_option('clone');page.locator('#radius').fill('8');click_native(300,200)
+                page.locator('#show-masks').uncheck()
+                assert page.locator('#page').evaluate('(c)=>Array.from(c.getContext("2d").getImageData(300,200,1,1).data)')==[201,214,227,255]
+                page.locator('#show-clones').uncheck()
+                assert page.locator('#page').evaluate('(c)=>Array.from(c.getContext("2d").getImageData(300,200,1,1).data)')==[0,0,0,255]
+                page.locator('#show-clones').check();passed('Mask, protection, immutable donor and clone controls change the actual canvas preview')
+                page.locator('#reviewed').check();page.locator('#evidence').fill('Synthetic browser fixture, no real art review')
+                exported=download('#export','workbench/retouch-plan.json');plan=json.loads(exported.read_bytes())
+                assert plan['operations'][0]['target']==[300,200] and plan['operations'][0]['source']==[250,150]
+                actual=apply_retouch(exported,out/'workbench-result')
+                assert actual['outside_mask_changes']==0 and actual['protected_artwork_changes']==0 and actual['manual_art_review']=='pending'
+                with Image.open(out/'workbench-result/result/cleaned.png') as im:assert im.size==(600,400) and im.getpixel((300,200))==(201,214,227,255)
+                dump(out/'workbench-result/browser-roundtrip.json',actual);passed('Browser-exported plan replays to native binary masks and an exact protected-pixel check')
+                page.locator('#phone').click();assert round(page.locator('#page').bounding_box()['width'])==390
+                page.locator('#tool').select_option('protect');page.locator('#radius').fill('1');click_native(300,200)
+                assert not page.locator('#reviewed').is_checked();page.locator('#reviewed').check()
+                collision=download('#export','workbench/collision-plan.json');colliding=json.loads(collision.read_bytes())
+                assert colliding['protected_strokes'][-1]['points']==[[300,200]],colliding
+                try:apply_retouch(collision,out/'blocked-protected')
+                except ValueError as e:assert 'changes protected artwork' in str(e)
+                else:raise AssertionError('Protected damage accepted')
+                passed('390px pointer coordinates remain native and exported protected damage is rejected')
+                page.locator('#undo').click();assert not page.locator('#reviewed').is_checked()
+                undone=download('#export','workbench/undone-plan.json');assert len(json.loads(undone.read_bytes())['protected_strokes'])==1
+                passed('Undo restores the actual prior plan and invalidates old mask review')
+                page.locator('#native').click();assert round(page.locator('#page').bounding_box()['width'])==600
+                page.set_viewport_size({'width':414,'height':896});assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
+                page.locator('#fit').click();assert page.locator('#page').bounding_box()['width']<390
+                page.screenshot(path=str(out/'workbench-mobile.png'),full_page=True);passed('Native workbench scrolling and mobile fit stay inside the document width')
                 assert not errors,errors;assert not external,external;passed('No JavaScript errors or external resource requests')
                 result['status']='passed'
             finally:

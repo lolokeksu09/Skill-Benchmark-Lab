@@ -1,0 +1,66 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Локальная ретушь — Manga Translation Studio</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#14171c;color:#eee;font:15px/1.5 system-ui}main{max-width:1100px;padding:20px;margin:auto}h1{font-size:23px}p{overflow-wrap:anywhere;color:#b8c0ca}.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}button,select,input,textarea{font:inherit}button,select{padding:9px;background:#292f37;color:#fff;border:1px solid #657080;border-radius:6px}textarea{display:block;width:100%;min-height:70px;background:#1e242d;color:white}#pan{width:100%;overflow:auto;border:1px solid #657080;max-height:70vh}canvas{display:block;touch-action:none;max-width:none}label{display:inline-block}#status{min-height:25px;color:#f0c782}button:disabled{opacity:.5}input[type=number]{width:70px}#binding{font-size:12px}
+</style><main>
+<h1>Маски и локальное клонирование</h1>
+<p>Красная маска разрешает правки. Синяя защищает рисунок. Выберите донор на неизменённом исходнике, затем ставьте клонирующие отпечатки. Подбирайте фактуру и направление линий вручную. Маски не восстанавливают скрытый рисунок.</p>
+<div class="tools"><label>Инструмент <select id="tool"><option value="mask">Маска правки</option><option value="protect">Защита рисунка</option><option value="donor">Выбрать донор</option><option value="clone">Клонировать</option></select></label>
+<label>Радиус, px <input id="radius" type="number" min="1" max="128" value="16"></label>
+<button id="undo">Отменить действие</button><button id="fit">Вписать</button><button id="native">100%</button><button id="phone">390 px</button>
+<label><input id="show-masks" type="checkbox" checked> Маски</label><label><input id="show-clones" type="checkbox" checked> Эскиз ретуши</label></div>
+<div id="pan"><canvas id="page" aria-label="Исходник, маски и эскиз локальной ретуши"></canvas></div>
+<p id="status" role="status">Загрузка исходника…</p><p id="binding"></p>
+<p>Эскиз в браузере приблизительный. Итоговые бинарные маски и пиксели создаёт retouch_workbench.py apply. Защищённые изменения будут отклонены. После выполнения осмотрите result/cleaned.png в масштабе 100%.</p>
+<label><input id="reviewed" type="checkbox"> Сверил маски и доноры с исходником</label>
+<label for="evidence">Что проверено и какие участки требуют доработки</label><textarea id="evidence"></textarea>
+<div class="tools"><button id="export" disabled>Сохранить план ретуши</button></div>
+<p>Положите retouch-plan.json рядом с source.png из этой папки. Затем выполните apply. Экспорт не подтверждает художественное качество и независимую проверку.</p>
+<script>
+const baseline=__PLAN__, original=new Image(), canvas=document.getElementById('page'), ctx=canvas.getContext('2d');
+const $=id=>document.getElementById(id);let plan=structuredClone(baseline), donor=null, history=[], active=null, ready=false;
+canvas.width=baseline.source_dimensions[0];canvas.height=baseline.source_dimensions[1];
+const edit=document.createElement('canvas'), protectedCanvas=document.createElement('canvas'), sketch=document.createElement('canvas');
+for(const c of [edit,protectedCanvas,sketch]){c.width=canvas.width;c.height=canvas.height}
+function status(s){$('status').textContent=s}
+function invalid(){plan.mask_reviewed=false;$('reviewed').checked=false}
+function checkpoint(){history.push(structuredClone(plan));if(history.length>30)history.shift();invalid()}
+function radius(){const r=Number($('radius').value);if(!Number.isInteger(r)||r<1||r>128)throw Error('Радиус должен быть целым числом 1–128');return r}
+function point(e){const b=canvas.getBoundingClientRect();return [Math.min(canvas.width-1,Math.max(0,Math.floor((e.clientX-b.left)*canvas.width/b.width))),Math.min(canvas.height-1,Math.max(0,Math.floor((e.clientY-b.top)*canvas.height/b.height)))]}
+function stroke(c,s,color){const d=c.getContext('2d');d.strokeStyle=color;d.fillStyle=color;d.lineWidth=2*s.radius+1;d.lineCap='round';d.lineJoin='round';d.beginPath();s.points.forEach((p,i)=>i?d.lineTo(...p):d.moveTo(...p));d.stroke();for(const p of s.points){d.beginPath();d.arc(...p,s.radius+.5,0,Math.PI*2);d.fill()}}
+function maskCanvas(c,strokes){c.getContext('2d').clearRect(0,0,c.width,c.height);for(const s of strokes)stroke(c,s,'#fff')}
+function render(){
+ maskCanvas(edit,plan.mask_strokes);maskCanvas(protectedCanvas,plan.protected_strokes);
+ ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(original,0,0);
+ const sc=sketch.getContext('2d');sc.clearRect(0,0,canvas.width,canvas.height);
+ if($('show-clones').checked){for(const op of plan.operations){sc.save();sc.beginPath();sc.arc(...op.target,op.radius+.5,0,Math.PI*2);sc.clip();sc.drawImage(original,op.source[0]-op.radius,op.source[1]-op.radius,2*op.radius+1,2*op.radius+1,op.target[0]-op.radius,op.target[1]-op.radius,2*op.radius+1,2*op.radius+1);sc.restore()}sc.globalCompositeOperation='destination-in';sc.drawImage(edit,0,0);sc.globalCompositeOperation='source-over';ctx.drawImage(sketch,0,0)}
+ if($('show-masks').checked){for(const [m,color] of [[edit,'#ff413c'],[protectedCanvas,'#3e9eff']]){sc.clearRect(0,0,canvas.width,canvas.height);sc.fillStyle=color;sc.fillRect(0,0,canvas.width,canvas.height);sc.globalCompositeOperation='destination-in';sc.drawImage(m,0,0);sc.globalCompositeOperation='source-over';ctx.globalAlpha=.35;ctx.drawImage(sketch,0,0);ctx.globalAlpha=1}}
+ if(donor){ctx.strokeStyle='#00ffb3';ctx.lineWidth=2;ctx.strokeRect(donor[0]-5,donor[1]-5,10,10)}
+}
+function fit(width){canvas.style.width=Math.max(1,Math.min(width,canvas.width))+'px';canvas.style.height='auto'}
+canvas.addEventListener('pointerdown',e=>{
+ if(!ready||e.button!==0)return;e.preventDefault();
+ try{const p=point(e),r=radius(),tool=$('tool').value;
+ if(tool==='donor'){donor=p;status('Донор исходника: '+p.join(', '));render();return}
+ if(tool==='clone'){
+  if(!donor)throw Error('Сначала выберите донор');
+  for(const a of [p,donor])if(a[0]-r<0||a[1]-r<0||a[0]+r>=canvas.width||a[1]+r>=canvas.height)throw Error('Отпечаток выходит за исходник');
+  if(plan.operations.length>=2000)throw Error('Достигнут предел 2000 отпечатков');
+  checkpoint();plan.operations.push({kind:'clone',source:[...donor],target:p,radius:r});status('Отпечатков: '+plan.operations.length+'. Подтвердите маски заново после правок.');render();return
+ }
+ const key=tool==='protect'?'protected_strokes':'mask_strokes';
+ if(plan[key].length>=1000)throw Error('Достигнут предел штрихов');
+ checkpoint();active={key,stroke:{radius:r,points:[p]}};plan[key].push(active.stroke);canvas.setPointerCapture(e.pointerId);render();
+ }catch(err){status(err.message)}
+});
+canvas.addEventListener('pointermove',e=>{if(!active)return;const p=point(e),pts=active.stroke.points;if(pts.length>=2000)return;if(pts.at(-1).join()!==p.join()){pts.push(p);render()}});
+function end(){if(active){active=null;status('Маска изменена. Проверьте границы и защищённые детали.')}}
+canvas.addEventListener('pointerup',end);canvas.addEventListener('pointercancel',end);
+$('undo').onclick=()=>{if(history.length){plan=history.pop();active=null;invalid();render();status('Действие отменено. Проверка масок сброшена.')}};
+$('fit').onclick=()=>fit($('pan').clientWidth);$('native').onclick=()=>fit(canvas.width);$('phone').onclick=()=>fit(390);
+$('show-masks').onchange=render;$('show-clones').onchange=render;
+$('export').onclick=()=>{plan.mask_reviewed=$('reviewed').checked;plan.mask_evidence=$('evidence').value.trim();
+ const blob=new Blob([JSON.stringify(plan,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='retouch-plan.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status('План экспортирован. Качество ретуши ещё требует проверки после apply.')};
+original.onload=()=>{ready=true;fit($('pan').clientWidth);render();$('export').disabled=false;status('Исходник загружен. Начните с маски правки.');$('binding').textContent=canvas.width+' × '+canvas.height+' · SHA-256 '+baseline.source_sha256};
+original.onerror=()=>status('Исходник не загрузился; экспорт недоступен');original.src='__SOURCE__';
+</script></main></html>
