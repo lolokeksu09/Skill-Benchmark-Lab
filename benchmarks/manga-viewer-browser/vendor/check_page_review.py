@@ -11,7 +11,7 @@ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def check(report_path,evidence_path,source,cleaned,final):
     report=json.loads(report_path.read_bytes());review=json.loads(evidence_path.read_bytes());problems=[]
     if not isinstance(review,dict) or review.get('schema_version')!=1:raise ValueError('Invalid review evidence')
-    binding={k:report.get(k) for k in ['source_image_sha256','cleaned_image_sha256','rendered_page_sha256','inventory_sha256']};binding['review_regions']=report.get('review_regions',[])
+    binding={k:report.get(k) for k in ['source_image_sha256','cleaned_image_sha256','rendered_page_sha256','inventory_sha256','reading_regions','dialogue_reading_regions']};binding['review_regions']=report.get('review_regions',[])
     if review.get('binding')!=binding:problems.append('review_binding_changed; repeat review for current images/inventory/regions')
     ledger=report.get('inventory_review_status')
     if not isinstance(ledger,list) or not ledger:problems.append('inventory_review_status_unavailable; regenerate current page report')
