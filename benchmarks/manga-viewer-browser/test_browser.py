@@ -18,6 +18,7 @@ sys.path.insert(0,str(ROOT/'vendor'))
 from build_page_review import make_review
 from build_transcription_review import build
 from check_page_review import check
+from build_phone_reading import build as phone_reading
 
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def dump(p,data):p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -30,6 +31,7 @@ def fixtures(out):
     make_review(out/'source.png',out/'cleaned.png',out/'final.png',out/'page-report.json',out/'review.html')
     guesses={'source_sha256':inv['source_sha256'],'regions':[{'box':[400,330,360,90],'source_text_candidate':'ORIG1NAL','alternatives':[{'source_text_candidate':'ORIGINAL'}]}]}
     build(out/'source.png',out/'inventory.json',out/'transcription.html',guesses)
+    phone_reading(out/'final.png',out/'page-report.json',[{'id':'focus','label':'Focused reading window','box':[320,280,510,200]},{'id':'context','label':'Full context','box':[0,0,1280,960]}],out/'phone-reading.html')
     return report
 
 def run(out,prepare_only=False):
@@ -90,6 +92,10 @@ def run(out,prepare_only=False):
                 assert ledger['source_sha256']==report['source_image_sha256'];assert ledger['regions'][0]['source_text']=='ORIGINAL';assert ledger['regions'][0]['target_text']=='ПЕРЕВОД';assert ledger['regions'][0]['source_reviewed'] and ledger['regions'][0]['translation_approved'];assert ledger['inventory_complete']is False and ledger['independent_review']is False
                 page.locator('#actual-source').click();assert page.locator('#whole').evaluate('(im)=>im.style.maxWidth')=='none';page.locator('#actual-source').click();assert page.locator('#whole').evaluate('(im)=>im.style.maxWidth')=='100%'
                 page.screenshot(path=str(out/'transcription-mobile.png'),full_page=True);passed('Source crop/OCR alternatives, actual-size toggle, editing and exported ledger preserve review limits')
+                page.set_viewport_size({'width':1100,'height':900});page.goto(base+'/phone-reading.html',wait_until='load');assert page.locator('.reading').count()==2
+                assert page.locator('.reading').first.evaluate('(im)=>im.complete && im.naturalWidth===510 && im.naturalHeight===200');assert round(page.locator('.reading').first.bounding_box()['width'])==390;passed('Ordered phone reading windows load exact final-image crops at 390px')
+                page.locator('#reading-native').click();assert round(page.locator('.reading').first.bounding_box()['width'])==510;assert page.locator('#reading-native').get_attribute('aria-pressed')=='true';page.locator('#reading-phone').click();assert page.locator('#reading-phone').get_attribute('aria-pressed')=='true'
+                page.set_viewport_size({'width':414,'height':896});assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth');page.screenshot(path=str(out/'phone-reading-mobile.png'),full_page=True);passed('Reading windows switch native/phone scale without mobile document overflow')
                 assert not errors,errors;assert not external,external;passed('No JavaScript errors or external resource requests')
                 result['status']='passed'
             finally:

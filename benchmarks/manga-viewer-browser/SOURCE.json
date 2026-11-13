@@ -1,12 +1,15 @@
 {
   "plugin_name": "Manga Translation Studio",
-  "plugin_version": "1.16.0",
+  "plugin_version": "1.17.0-candidate",
   "plugin_id": "plugins_6af540cfa3608191a3bf9c5e1ed12b34",
-  "release_id": "pluginrel_6af6c23186c881918bee01140e0b7463",
+  "release_id": null,
   "sha256": {
     "vendor/build_page_review.py": "926190f5d610332034836ef2ad8de8f9d6683bd98c0bc2956bca04423a40c1bf",
     "vendor/build_transcription_review.py": "31d832d1e347df18648759bc3de6a005e04a391db786bd792bea6e40bfd3f724",
-    "vendor/check_page_review.py": "6d8149e915b076ac325908d0905611fbb51b8a5bbad92c1b2d8f3c5969d273b8"
+    "vendor/check_page_review.py": "6d8149e915b076ac325908d0905611fbb51b8a5bbad92c1b2d8f3c5969d273b8",
+    "vendor/build_phone_reading.py": "c61ccaf5ef567e95f30e4b6c5765fda117be17516b110c9c7d3227609b4ddd10"
   },
-  "scope": "Exact viewer/transcription/review-validator source snapshot; synthetic page assets only. No user scans, fonts, models, secrets or AI execution."
+  "scope": "Exact viewer/transcription/review-validator source snapshot; synthetic page assets only. No user scans, fonts, models, secrets or AI execution.",
+  "base_plugin_version": "1.16.1",
+  "base_release_id": "pluginrel_6af6c4a1d7a481918125027d8e924efc"
 }
