@@ -1,0 +1,22 @@
+{
+  "plugin_name": "Manga Translation Studio",
+  "plugin_version": "1.19.0-candidate",
+  "plugin_id": "plugins_6af540cfa3608191a3bf9c5e1ed12b34",
+  "release_id": null,
+  "sha256": {
+    "vendor/build_page_review.py": "baaeea03102d235408256dfba00e200c844fdc279ae2a87cf4c73604a46b08e8",
+    "vendor/build_transcription_review.py": "31d832d1e347df18648759bc3de6a005e04a391db786bd792bea6e40bfd3f724",
+    "vendor/check_page_review.py": "bab4cb7f9f88fe9971c4e3bd695acc7623e3a873832627313243f13efdaefae7",
+    "vendor/build_phone_reading.py": "c61ccaf5ef567e95f30e4b6c5765fda117be17516b110c9c7d3227609b4ddd10",
+    "vendor/skills/manga-page/scripts/retouch_page.py": "e7909a1a7535b58e63977d3054d72dfde5a1ee30a5bd12b7bca142158798a8a6",
+    "vendor/skills/manga-cleaning/scripts/check_cleaning.py": "fe76a8f2e275be0b8212da43a260ee9472738177675244d85bcd8a0020608c42",
+    "test_retouch.py": "abec460ec5d0e1a88390a9e5d268e92a62f1ec88d7b4d5b22cb85bb1368cac1a",
+    "vendor/skills/manga-page/scripts/retouch_workbench.py": "f3c166f230db4efb4fd6a82e0702789414f85c1b1498219e0a29b81bb2af113e",
+    "vendor/skills/manga-page/scripts/retouch_workbench.html": "267d79ff48ac57b18f45741aecdfba77b06de09c1b0ac0761cbc6a13a0307d73",
+    "test_workbench.py": "d1ac6b8c85bab255d6b1a33798bf05fa663ccbb91b5128294892b58b3ab44c77",
+    "test_browser.py": "68767771f0caf52d002a4f8ce279657ed2b71a5b950357698e70b1307e93f47a"
+  },
+  "scope": "Exact viewer, review, local retouch and mask/clone workbench source snapshots; synthetic fixtures only. No user scans, fonts, models, secrets or AI execution.",
+  "base_plugin_version": "1.18.0",
+  "base_release_id": "pluginrel_6af6d5af7fcc819180d03b3ae3dc15b5"
+}

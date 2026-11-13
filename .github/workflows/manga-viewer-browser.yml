@@ -1,0 +1,46 @@
+name: Manga viewer browser
+
+on:
+  pull_request:
+    paths:
+      - 'benchmarks/manga-viewer-browser/**'
+      - '.github/workflows/manga-viewer-browser.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manga-viewer-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromium:
+    name: manga-viewer-chromium
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install pinned browser test dependencies
+        run: python -m pip install -r benchmarks/manga-viewer-browser/requirements.txt
+      - name: Reject protected-art cleanup changes and validate review bindings
+        run: PYTHONPATH=benchmarks/manga-viewer-browser/vendor:benchmarks/manga-viewer-browser/vendor/skills/manga-page/scripts python benchmarks/manga-viewer-browser/test_retouch.py
+      - name: Validate source-bound mask and clone workbench plans
+        run: PYTHONPATH=benchmarks/manga-viewer-browser/vendor:benchmarks/manga-viewer-browser/vendor/skills/manga-page/scripts python benchmarks/manga-viewer-browser/test_workbench.py
+      - name: Install Chromium and OS dependencies
+        run: python -m playwright install --with-deps chromium
+      - name: Verify source snapshot and exercise real browser controls
+        run: python benchmarks/manga-viewer-browser/test_browser.py --out browser-artifacts
+      - name: Preserve screenshots, HTML, exports, report and trace
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: manga-viewer-browser-${{ github.run_attempt }}
+          path: browser-artifacts/
+          if-no-files-found: warn
+          retention-days: 7
